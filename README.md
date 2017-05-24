@@ -54,7 +54,7 @@ You can find more examples with live demos [here](/examples).
 
 ## How does it work?
 
-Under the hood it uses the [@nx-js/observer-util](https://github.com/nx-js/observer-util) library, which relies on ES6 proxies to observe state changes. Thanks to the Proxies it doesn't have edge cases or limitations. You can write any JS code without worrying about the render function. [This blog post](https://blog.risingstack.com/writing-a-javascript-framework-data-binding-es6-proxy/) gives a little sneak peek under the hood of the `observer-util`.
+Under the hood it uses the [@nx-js/observer-util](https://github.com/nx-js/observer-util) library, which relies on ES6 Proxies to observe state changes. Thanks to the Proxies it doesn't have edge cases or limitations. You can write any JS code without worrying about the render function. [This blog post](https://blog.risingstack.com/writing-a-javascript-framework-data-binding-es6-proxy/) gives a little sneak peek under the hood of the `observer-util`.
 
 ## Contributing
 
@@ -62,4 +62,4 @@ Contributions are always welcome. Just send a PR against the master branch or op
 
 ## The NX Framework
 
-This library is the side effect of a front-end framework I have been working on in the past year. Please take a look at the [NX Framework](https://nx-framework.com/) if you have some time. Have a nice day!
+This library is a side effect of the front-end framework I have been working on in the past year. Please take a look at the [NX Framework](https://nx-framework.com/) if you have some time. Have a nice day!
