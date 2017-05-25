@@ -3,7 +3,6 @@
 Easy State aims to make React's state management simpler without adding new syntax. To achieve this it makes the following modifications.
 
 - It replaces React's `setState()` with plain native JavaScript.
-- It bypasses the asynchronity and performance issues of `setState`.
 - It auto binds your component's methods.
 
 ## Installation
@@ -35,7 +34,7 @@ export default class App extends Component {
 }
 ```
 
-You can find more examples with live demos [here](/examples).
+**You can find [more examples with live demos here](/examples).**
 
 ### About decorators
 
@@ -51,6 +50,24 @@ You can find more examples with live demos [here](/examples).
 - Opera: 36 and above
 - React native is not yet supported
 - IE is not supported
+
+## Key features
+
+- Your state can use any valid JavaScript. Feel free to use nested objects, arrays, expando properties, getters/setters, inheritance and ES6 collections directly.
+
+- State mutations are picked up and they trigger the render method when appropriate.
+
+- The render method is only triggered if it is affected by state mutations. If it doesn't use the mutated part of the state or the mutation doesn't change the state, the render method is not triggered.
+
+- The render method is never executed immediately. Triggered renders are collected in a batch and executed in one go after a small delay.
+
+- Duplicates renders are removed. A render never runs twice in one batch - no matter how many times it got triggered. Renders run in first trigger order.
+
+- Renders may trigger others renders by mutating the state. In this case loops are automatically resolved.
+
+- Renders always run before the next repaint.
+
+As a result a stable and fresh state and view is always achieved before the next repaint with the minimal number of required renders.
 
 ## How does it work?
 
