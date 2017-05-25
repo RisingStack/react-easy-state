@@ -42,11 +42,13 @@ export default class App extends Component {
 
 - Your state can use any valid JavaScript. Feel free to use nested objects, arrays, expando properties, getters/setters, inheritance and ES6 collections directly.
 
+- The state is just an object, which updates synchronously when you update it. You don't have to worry about the asynchronous nature of `setState`.
+
 - State mutations are picked up and they trigger the render method when appropriate.
 
 - The render method is only triggered if it is affected by state mutations. If it doesn't use the mutated part of the state or the mutation doesn't change the state, the render method is not triggered.
 
-- The render method is never executed immediately. Triggered renders are collected in a batch and executed in one go after a small delay.
+- The render method is never executed immediately. Triggered renders are collected and executed asynchronously in one batch.
 
 - Duplicates renders are removed. A render never runs twice in one batch - no matter how many times it got triggered. Renders run in first trigger order.
 
@@ -54,7 +56,7 @@ export default class App extends Component {
 
 - Renders always run before the next repaint.
 
-As a result a stable and fresh state and view is always achieved before the next repaint with the minimal number of required renders.
+As a result the state is always fresh and a stable and fresh view is always achieved before the next repaint with the minimal number of required renders.
 
 ## Examples with live demos
 
