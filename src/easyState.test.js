@@ -51,13 +51,6 @@ describe('easyState', () => {
     expect(observer.isObservable(comp.state)).to.be.true
   })
 
-  it('should overwrite shouldComponentUpdate with an always false method', () => {
-    const comp = new (easyState(TestComp))
-
-    expect(comp.shouldComponentUpdate).to.be.a('function')
-    expect(comp.shouldComponentUpdate()).to.be.false
-  })
-
   it('should overwrite the render method', () => {
     const comp = new (easyState(TestComp))
 

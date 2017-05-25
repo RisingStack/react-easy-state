@@ -1,4 +1,4 @@
-import { observable, observe, unobserve } from '@nx-js/observer-util'
+import { observable, observe } from '@nx-js/observer-util'
 import autoBind from './autoBind'
 
 const OBSERVED_RENDER = Symbol('observed render')
@@ -27,13 +27,20 @@ export default function easyStateHOC (WrappedComp) {
       return result
     }
 
-    componentWillUnmount () {
-      unobserve(this[OBSERVED_RENDER])
-      this[OBSERVED_RENDER] = undefined
-      super.componentWillUnmount && super.componentWillUnmount()
-    }
+    shouldComponentUpdate (nextProps) {
+      const { props } = this
+      const keys = Object.keys(props)
+      const nextKeys = Object.keys(nextProps)
 
-    shouldComponentUpdate () {
+      if (keys.length !== nextKeys.length) {
+        return true
+      }
+
+      for (let key of keys) {
+        if (props[key] !== nextProps[key]) {
+          return true
+        }
+      }
       return false
     }
   }
