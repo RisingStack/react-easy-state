@@ -34,22 +34,9 @@ export default class App extends Component {
 }
 ```
 
-**You can find [more examples with live demos here](/examples).**
-
 ### About decorators
 
 `@easyState` is a decorator, which is not yet part of the JS language. You can learn how to enable decorators with babel [here](https://github.com/loganfsmyth/babel-plugin-transform-decorators-legacy) or you can use the older `export default easyState(Comp)` syntax.
-
-## Platform support
-
-- Node: 6 and above
-- Chrome: 49 and above
-- Firefox: 38 and above
-- Safari: 10 and above
-- Edge: 12 and above
-- Opera: 36 and above
-- React native is not yet supported
-- IE is not supported
 
 ## Key features
 
@@ -68,6 +55,23 @@ export default class App extends Component {
 - Renders always run before the next repaint.
 
 As a result a stable and fresh state and view is always achieved before the next repaint with the minimal number of required renders.
+
+## Examples with live demos
+
+- [Hello World](https://solkimicreb.github.io/react-easy-state/examples/helloWorld/) ([source](/examples/helloWorld/))
+- [Simple Todos](https://solkimicreb.github.io/react-easy-state/examples/simpleTodos/) ([source](/examples/simpleTodos/))
+- [TodoMVC](https://solkimicreb.github.io/react-easy-state/examples/todoMVC/) ([source](/examples/todoMVC/))
+
+## Platform support
+
+- Node: 6 and above
+- Chrome: 49 and above
+- Firefox: 38 and above
+- Safari: 10 and above
+- Edge: 12 and above
+- Opera: 36 and above
+- React native is not yet supported
+- IE is not supported
 
 ## How does it work?
 
