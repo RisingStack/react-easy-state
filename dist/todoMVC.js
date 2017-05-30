@@ -2918,7 +2918,7 @@ function has (value) {
   if (!rawContext) {
     return proto.has.apply(this, arguments)
   }
-  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* registerObserver */])(rawContext, value)
+  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["c" /* registerObserver */])(rawContext, value)
   return proto.has.apply(rawContext, arguments)
 }
 
@@ -2928,7 +2928,7 @@ function get (value) {
   if (!rawContext) {
     return proto.get.apply(this, arguments)
   }
-  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* registerObserver */])(rawContext, value)
+  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["c" /* registerObserver */])(rawContext, value)
   return proto.get.apply(rawContext, arguments)
 }
 
@@ -2939,8 +2939,8 @@ function add (value) {
     return proto.add.apply(this, arguments)
   }
   if (!proto.has.call(rawContext, value)) {
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["e" /* queueObservers */])(rawContext, value)
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["e" /* queueObservers */])(rawContext, ITERATE)
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* queueObservers */])(rawContext, value)
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* queueObservers */])(rawContext, ITERATE)
   }
   return proto.add.apply(rawContext, arguments)
 }
@@ -2952,8 +2952,8 @@ function set (key, value) {
     return proto.set.apply(this, arguments)
   }
   if (proto.get.call(rawContext, key) !== value) {
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["e" /* queueObservers */])(rawContext, key)
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["e" /* queueObservers */])(rawContext, ITERATE)
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* queueObservers */])(rawContext, key)
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* queueObservers */])(rawContext, ITERATE)
   }
   return proto.set.apply(rawContext, arguments)
 }
@@ -2965,8 +2965,8 @@ function deleteFn (value) {
     return proto.delete.apply(this, arguments)
   }
   if (proto.has.call(rawContext, value)) {
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["e" /* queueObservers */])(rawContext, value)
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["e" /* queueObservers */])(rawContext, ITERATE)
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* queueObservers */])(rawContext, value)
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* queueObservers */])(rawContext, ITERATE)
   }
   return proto.delete.apply(rawContext, arguments)
 }
@@ -2978,7 +2978,7 @@ function clear () {
     return proto.clear.apply(this, arguments)
   }
   if (rawContext.size) {
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["e" /* queueObservers */])(rawContext, ITERATE)
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* queueObservers */])(rawContext, ITERATE)
   }
   return proto.clear.apply(rawContext, arguments)
 }
@@ -2989,7 +2989,7 @@ function forEach () {
   if (!rawContext) {
     return proto.forEach.apply(this, arguments)
   }
-  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* registerObserver */])(rawContext, ITERATE)
+  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["c" /* registerObserver */])(rawContext, ITERATE)
   return proto.forEach.apply(rawContext, arguments)
 }
 
@@ -2999,7 +2999,7 @@ function keys () {
   if (!rawContext) {
     return proto.keys.apply(this, arguments)
   }
-  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* registerObserver */])(rawContext, ITERATE)
+  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["c" /* registerObserver */])(rawContext, ITERATE)
   return proto.keys.apply(rawContext, arguments)
 }
 
@@ -3009,7 +3009,7 @@ function values () {
   if (!rawContext) {
     return proto.values.apply(this, arguments)
   }
-  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* registerObserver */])(rawContext, ITERATE)
+  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["c" /* registerObserver */])(rawContext, ITERATE)
   return proto.values.apply(rawContext, arguments)
 }
 
@@ -3019,7 +3019,7 @@ function entries () {
   if (!rawContext) {
     return proto.entries.apply(this, arguments)
   }
-  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* registerObserver */])(rawContext, ITERATE)
+  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["c" /* registerObserver */])(rawContext, ITERATE)
   return proto.entries.apply(rawContext, arguments)
 }
 
@@ -3029,7 +3029,7 @@ function iterator () {
   if (!rawContext) {
     return proto[Symbol.iterator].apply(this, arguments)
   }
-  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* registerObserver */])(rawContext, ITERATE)
+  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["c" /* registerObserver */])(rawContext, ITERATE)
   return proto[Symbol.iterator].apply(rawContext, arguments)
 }
 
@@ -3039,7 +3039,7 @@ function getSize () {
   if (!rawContext) {
     return Reflect.get(proto, 'size', this)
   }
-  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* registerObserver */])(rawContext, ITERATE)
+  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["c" /* registerObserver */])(rawContext, ITERATE)
   return Reflect.get(proto, 'size', rawContext)
 }
 
@@ -4802,13 +4802,13 @@ module.exports = canDefineProperty;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__store__ = __webpack_require__(94);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__internals__ = __webpack_require__(26);
 /* harmony export (immutable) */ __webpack_exports__["b"] = observe;
-/* harmony export (immutable) */ __webpack_exports__["c"] = unobserve;
+/* unused harmony export unobserve */
 /* unused harmony export unqueue */
 /* unused harmony export exec */
 /* unused harmony export isObservable */
 /* harmony export (immutable) */ __webpack_exports__["a"] = observable;
-/* harmony export (immutable) */ __webpack_exports__["d"] = registerObserver;
-/* harmony export (immutable) */ __webpack_exports__["e"] = queueObservers;
+/* harmony export (immutable) */ __webpack_exports__["c"] = registerObserver;
+/* harmony export (immutable) */ __webpack_exports__["d"] = queueObservers;
 
 
 
@@ -7042,13 +7042,20 @@ function easyStateHOC (WrappedComp) {
       return result
     }
 
-    componentWillUnmount () {
-      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__nx_js_observer_util__["c" /* unobserve */])(this[OBSERVED_RENDER])
-      this[OBSERVED_RENDER] = undefined
-      super.componentWillUnmount && super.componentWillUnmount()
-    }
+    shouldComponentUpdate (nextProps) {
+      const { props } = this
+      const keys = Object.keys(props)
+      const nextKeys = Object.keys(nextProps)
 
-    shouldComponentUpdate () {
+      if (keys.length !== nextKeys.length) {
+        return true
+      }
+
+      for (let key of keys) {
+        if (props[key] !== nextProps[key]) {
+          return true
+        }
+      }
       return false
     }
   }
@@ -9922,7 +9929,7 @@ module.exports = getIteratorFn;
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__observer__["a"]; });
 /* unused harmony reexport isObservable */
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__observer__["b"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_0__observer__["c"]; });
+/* unused harmony reexport unobserve */
 /* unused harmony reexport unqueue */
 /* unused harmony reexport exec */
 
@@ -22693,352 +22700,227 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 /* 195 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_classnames__ = __webpack_require__(194);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_classnames__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__src_easyState__ = __webpack_require__(53);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TodoItem; });
 var _class;
 
-var _react = __webpack_require__(55);
 
-var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(54);
 
-var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _classnames = __webpack_require__(194);
 
-var _classnames2 = _interopRequireDefault(_classnames);
+let TodoItem = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__src_easyState__["default"])(_class = class TodoItem extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
+  render() {
+    const { toggle, remove } = this;
+    const { todo } = this.props;
 
-var _easyState = __webpack_require__(53);
+    const itemClass = __WEBPACK_IMPORTED_MODULE_2_classnames___default()({
+      view: true,
+      completed: todo.completed
+    });
 
-var _easyState2 = _interopRequireDefault(_easyState);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var TodoItem = (0, _easyState2.default)(_class = function (_Component) {
-  _inherits(TodoItem, _Component);
-
-  function TodoItem() {
-    _classCallCheck(this, TodoItem);
-
-    return _possibleConstructorReturn(this, (TodoItem.__proto__ || Object.getPrototypeOf(TodoItem)).apply(this, arguments));
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'li',
+      { className: itemClass },
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { className: 'toggle', type: 'checkbox', checked: todo.completed, onChange: toggle }),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'label',
+        null,
+        todo.title
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('button', { onClick: remove, className: 'destroy' })
+    );
   }
 
-  _createClass(TodoItem, [{
-    key: 'render',
-    value: function render() {
-      var toggle = this.toggle,
-          remove = this.remove;
-      var todo = this.props.todo;
+  remove() {
+    const { todos, todo } = this.props;
+    todos.splice(todos.indexOf(todo), 1);
+  }
+
+  toggle() {
+    const { todo } = this.props;
+    todo.completed = !todo.completed;
+  }
+}) || _class;
 
 
-      var itemClass = (0, _classnames2.default)({
-        view: true,
-        completed: todo.completed
-      });
-
-      return _react2.default.createElement(
-        'li',
-        { className: itemClass },
-        _react2.default.createElement('input', { className: 'toggle', type: 'checkbox', checked: todo.completed, onChange: toggle }),
-        _react2.default.createElement(
-          'label',
-          null,
-          todo.title
-        ),
-        _react2.default.createElement('button', { onClick: remove, className: 'destroy' })
-      );
-    }
-  }, {
-    key: 'remove',
-    value: function remove() {
-      var _props = this.props,
-          todos = _props.todos,
-          todo = _props.todo;
-
-      todos.splice(todos.indexOf(todo), 1);
-    }
-  }, {
-    key: 'toggle',
-    value: function toggle() {
-      var todo = this.props.todo;
-
-      todo.completed = !todo.completed;
-    }
-  }]);
-
-  return TodoItem;
-}(_react.Component)) || _class;
-
-exports.default = TodoItem;
 
 /***/ }),
 /* 196 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var State = function () {
-  function State() {
-    _classCallCheck(this, State);
-
+class State {
+  constructor() {
     this.filter = 'todos';
     this.todos = [];
   }
 
-  _createClass(State, [{
-    key: 'hasTodos',
-    get: function get() {
-      return this.todos.length !== 0;
+  get hasTodos() {
+    return this.todos.length !== 0;
+  }
+  get completed() {
+    return this.todos.filter(todo => todo.completed);
+  }
+  get hasCompleted() {
+    return this.completed.length !== 0;
+  }
+  get allCompleted() {
+    return this.todos.every(todo => todo.completed);
+  }
+  set allCompleted(completed) {
+    if (completed) {
+      this.todos.forEach(todo => todo.completed = true);
+    } else {
+      this.todos.forEach(todo => todo.completed = false);
     }
-  }, {
-    key: 'completed',
-    get: function get() {
-      return this.todos.filter(function (todo) {
-        return todo.completed;
-      });
-    }
-  }, {
-    key: 'hasCompleted',
-    get: function get() {
-      return this.completed.length !== 0;
-    }
-  }, {
-    key: 'allCompleted',
-    get: function get() {
-      return this.todos.every(function (todo) {
-        return todo.completed;
-      });
-    },
-    set: function set(completed) {
-      if (completed) {
-        this.todos.forEach(function (todo) {
-          return todo.completed = true;
-        });
-      } else {
-        this.todos.forEach(function (todo) {
-          return todo.completed = false;
-        });
-      }
-    }
-  }, {
-    key: 'active',
-    get: function get() {
-      return this.todos.filter(function (todo) {
-        return !todo.completed;
-      });
-    }
-  }]);
+  }
+  get active() {
+    return this.todos.filter(todo => !todo.completed);
+  }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = State;
 
-  return State;
-}();
-
-exports.default = State;
 
 /***/ }),
 /* 197 */,
 /* 198 */,
 /* 199 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_classnames__ = __webpack_require__(194);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_classnames__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__src_easyState__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__TodoItem_jsx__ = __webpack_require__(195);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__State__ = __webpack_require__(196);
 var _class;
 
-var _react = __webpack_require__(55);
 
-var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(54);
 
-var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _classnames = __webpack_require__(194);
 
-var _classnames2 = _interopRequireDefault(_classnames);
 
-var _easyState = __webpack_require__(53);
 
-var _easyState2 = _interopRequireDefault(_easyState);
-
-var _TodoItem = __webpack_require__(195);
-
-var _TodoItem2 = _interopRequireDefault(_TodoItem);
-
-var _State = __webpack_require__(196);
-
-var _State2 = _interopRequireDefault(_State);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var App = (0, _easyState2.default)(_class = function (_Component) {
-  _inherits(App, _Component);
-
-  function App() {
-    _classCallCheck(this, App);
-
-    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
-
-    _this.state = new _State2.default();
-    return _this;
+let App = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__src_easyState__["default"])(_class = class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
+  constructor() {
+    super();
+    this.state = new __WEBPACK_IMPORTED_MODULE_5__State__["a" /* default */]();
   }
 
-  _createClass(App, [{
-    key: 'render',
-    value: function render() {
-      var create = this.create,
-          changeFilter = this.changeFilter,
-          clearCompleted = this.clearCompleted,
-          toggleAll = this.toggleAll,
-          state = this.state;
-      var todos = state.todos,
-          hasTodos = state.hasTodos,
-          completed = state.completed,
-          hasCompleted = state.hasCompleted,
-          allCompleted = state.allCompleted,
-          active = state.active,
-          filter = state.filter;
+  render() {
+    const { create, changeFilter, clearCompleted, toggleAll, state } = this;
+    const { todos, hasTodos, completed, hasCompleted, allCompleted, active, filter } = state;
 
+    const todosClass = __WEBPACK_IMPORTED_MODULE_2_classnames___default()({ selected: filter === 'todos' });
+    const completedClass = __WEBPACK_IMPORTED_MODULE_2_classnames___default()({ selected: filter === 'completed' });
+    const activeClass = __WEBPACK_IMPORTED_MODULE_2_classnames___default()({ selected: filter === 'active' });
 
-      var todosClass = (0, _classnames2.default)({ selected: filter === 'todos' });
-      var completedClass = (0, _classnames2.default)({ selected: filter === 'completed' });
-      var activeClass = (0, _classnames2.default)({ selected: filter === 'active' });
-
-      return _react2.default.createElement(
-        'div',
-        { className: 'todoapp' },
-        _react2.default.createElement(
-          'header',
-          { className: 'header' },
-          _react2.default.createElement(
-            'h1',
-            null,
-            'todos'
-          ),
-          _react2.default.createElement('input', { onKeyDown: create, className: 'new-todo',
-            placeholder: 'What needs to be done?', autoFocus: true })
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'div',
+      { className: 'todoapp' },
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'header',
+        { className: 'header' },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'h1',
+          null,
+          'todos'
         ),
-        hasTodos && _react2.default.createElement(
-          'section',
-          { className: 'main' },
-          _react2.default.createElement('input', { className: 'toggle-all', type: 'checkbox',
-            checked: allCompleted, onChange: toggleAll }),
-          _react2.default.createElement(
-            'label',
-            { htmlFor: 'toggle-all' },
-            'Mark all as complete'
-          ),
-          _react2.default.createElement(
-            'ul',
-            { className: 'todo-list' },
-            state[filter].map(function (todo) {
-              return _react2.default.createElement(_TodoItem2.default, { key: todo.title, todo: todo, todos: todos });
-            })
-          )
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { onKeyDown: create, className: 'new-todo',
+          placeholder: 'What needs to be done?', autoFocus: true })
+      ),
+      hasTodos && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'section',
+        { className: 'main' },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { className: 'toggle-all', type: 'checkbox',
+          checked: allCompleted, onChange: toggleAll }),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'label',
+          { htmlFor: 'toggle-all' },
+          'Mark all as complete'
         ),
-        hasTodos && _react2.default.createElement(
-          'footer',
-          { className: 'footer' },
-          _react2.default.createElement(
-            'span',
-            { className: 'todo-count' },
-            active.length,
-            ' items left'
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'filters' },
-            _react2.default.createElement(
-              'button',
-              { className: todosClass, value: 'todos', onClick: changeFilter },
-              'All'
-            ),
-            _react2.default.createElement(
-              'button',
-              { className: activeClass, value: 'active', onClick: changeFilter },
-              'Active'
-            ),
-            _react2.default.createElement(
-              'button',
-              { className: completedClass, value: 'completed', onClick: changeFilter },
-              'Completed'
-            )
-          ),
-          hasCompleted && _react2.default.createElement(
-            'button',
-            { className: 'clear-completed', onClick: clearCompleted },
-            'Clear completed'
-          )
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'ul',
+          { className: 'todo-list' },
+          state[filter].map(todo => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__TodoItem_jsx__["a" /* default */], { key: todo.title, todo: todo, todos: todos }))
         )
-      );
-    }
-  }, {
-    key: 'create',
-    value: function create(ev) {
-      if (ev.keyCode === 13) {
-        this.state.todos.push({ title: ev.target.value });
-        ev.target.value = '';
-      }
-    }
-  }, {
-    key: 'clearCompleted',
-    value: function clearCompleted() {
-      var state = this.state;
+      ),
+      hasTodos && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'footer',
+        { className: 'footer' },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'span',
+          { className: 'todo-count' },
+          active.length,
+          ' items left'
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          { className: 'filters' },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'button',
+            { className: todosClass, value: 'todos', onClick: changeFilter },
+            'All'
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'button',
+            { className: activeClass, value: 'active', onClick: changeFilter },
+            'Active'
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'button',
+            { className: completedClass, value: 'completed', onClick: changeFilter },
+            'Completed'
+          )
+        ),
+        hasCompleted && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'button',
+          { className: 'clear-completed', onClick: clearCompleted },
+          'Clear completed'
+        )
+      )
+    );
+  }
 
-      state.todos = state.active;
+  create(ev) {
+    if (ev.keyCode === 13) {
+      this.state.todos.push({ title: ev.target.value });
+      ev.target.value = '';
     }
-  }, {
-    key: 'toggleAll',
-    value: function toggleAll() {
-      var state = this.state;
+  }
 
-      state.allCompleted = !state.allCompleted;
-    }
-  }, {
-    key: 'changeFilter',
-    value: function changeFilter(ev) {
-      this.state.filter = ev.target.value;
-    }
-  }]);
+  clearCompleted() {
+    const { state } = this;
+    state.todos = state.active;
+  }
 
-  return App;
-}(_react.Component)) || _class;
+  toggleAll() {
+    const { state } = this;
+    state.allCompleted = !state.allCompleted;
+  }
 
-_reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('react-root'));
+  changeFilter(ev) {
+    this.state.filter = ev.target.value;
+  }
+}) || _class;
+
+__WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(App, null), document.getElementById('react-root'));
 
 /***/ })
 /******/ ]);

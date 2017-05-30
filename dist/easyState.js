@@ -98,7 +98,7 @@ function has (value) {
   if (!rawContext) {
     return proto.has.apply(this, arguments)
   }
-  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* registerObserver */])(rawContext, value)
+  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["c" /* registerObserver */])(rawContext, value)
   return proto.has.apply(rawContext, arguments)
 }
 
@@ -108,7 +108,7 @@ function get (value) {
   if (!rawContext) {
     return proto.get.apply(this, arguments)
   }
-  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* registerObserver */])(rawContext, value)
+  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["c" /* registerObserver */])(rawContext, value)
   return proto.get.apply(rawContext, arguments)
 }
 
@@ -119,8 +119,8 @@ function add (value) {
     return proto.add.apply(this, arguments)
   }
   if (!proto.has.call(rawContext, value)) {
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["e" /* queueObservers */])(rawContext, value)
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["e" /* queueObservers */])(rawContext, ITERATE)
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* queueObservers */])(rawContext, value)
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* queueObservers */])(rawContext, ITERATE)
   }
   return proto.add.apply(rawContext, arguments)
 }
@@ -132,8 +132,8 @@ function set (key, value) {
     return proto.set.apply(this, arguments)
   }
   if (proto.get.call(rawContext, key) !== value) {
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["e" /* queueObservers */])(rawContext, key)
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["e" /* queueObservers */])(rawContext, ITERATE)
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* queueObservers */])(rawContext, key)
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* queueObservers */])(rawContext, ITERATE)
   }
   return proto.set.apply(rawContext, arguments)
 }
@@ -145,8 +145,8 @@ function deleteFn (value) {
     return proto.delete.apply(this, arguments)
   }
   if (proto.has.call(rawContext, value)) {
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["e" /* queueObservers */])(rawContext, value)
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["e" /* queueObservers */])(rawContext, ITERATE)
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* queueObservers */])(rawContext, value)
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* queueObservers */])(rawContext, ITERATE)
   }
   return proto.delete.apply(rawContext, arguments)
 }
@@ -158,7 +158,7 @@ function clear () {
     return proto.clear.apply(this, arguments)
   }
   if (rawContext.size) {
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["e" /* queueObservers */])(rawContext, ITERATE)
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* queueObservers */])(rawContext, ITERATE)
   }
   return proto.clear.apply(rawContext, arguments)
 }
@@ -169,7 +169,7 @@ function forEach () {
   if (!rawContext) {
     return proto.forEach.apply(this, arguments)
   }
-  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* registerObserver */])(rawContext, ITERATE)
+  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["c" /* registerObserver */])(rawContext, ITERATE)
   return proto.forEach.apply(rawContext, arguments)
 }
 
@@ -179,7 +179,7 @@ function keys () {
   if (!rawContext) {
     return proto.keys.apply(this, arguments)
   }
-  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* registerObserver */])(rawContext, ITERATE)
+  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["c" /* registerObserver */])(rawContext, ITERATE)
   return proto.keys.apply(rawContext, arguments)
 }
 
@@ -189,7 +189,7 @@ function values () {
   if (!rawContext) {
     return proto.values.apply(this, arguments)
   }
-  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* registerObserver */])(rawContext, ITERATE)
+  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["c" /* registerObserver */])(rawContext, ITERATE)
   return proto.values.apply(rawContext, arguments)
 }
 
@@ -199,7 +199,7 @@ function entries () {
   if (!rawContext) {
     return proto.entries.apply(this, arguments)
   }
-  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* registerObserver */])(rawContext, ITERATE)
+  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["c" /* registerObserver */])(rawContext, ITERATE)
   return proto.entries.apply(rawContext, arguments)
 }
 
@@ -209,7 +209,7 @@ function iterator () {
   if (!rawContext) {
     return proto[Symbol.iterator].apply(this, arguments)
   }
-  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* registerObserver */])(rawContext, ITERATE)
+  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["c" /* registerObserver */])(rawContext, ITERATE)
   return proto[Symbol.iterator].apply(rawContext, arguments)
 }
 
@@ -219,7 +219,7 @@ function getSize () {
   if (!rawContext) {
     return Reflect.get(proto, 'size', this)
   }
-  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* registerObserver */])(rawContext, ITERATE)
+  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["c" /* registerObserver */])(rawContext, ITERATE)
   return Reflect.get(proto, 'size', rawContext)
 }
 
@@ -252,13 +252,13 @@ const rawToProxy = new WeakMap()
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__store__ = __webpack_require__(94);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__internals__ = __webpack_require__(26);
 /* harmony export (immutable) */ __webpack_exports__["b"] = observe;
-/* harmony export (immutable) */ __webpack_exports__["c"] = unobserve;
+/* unused harmony export unobserve */
 /* unused harmony export unqueue */
 /* unused harmony export exec */
 /* unused harmony export isObservable */
 /* harmony export (immutable) */ __webpack_exports__["a"] = observable;
-/* harmony export (immutable) */ __webpack_exports__["d"] = registerObserver;
-/* harmony export (immutable) */ __webpack_exports__["e"] = queueObservers;
+/* harmony export (immutable) */ __webpack_exports__["c"] = registerObserver;
+/* harmony export (immutable) */ __webpack_exports__["d"] = queueObservers;
 
 
 
@@ -447,13 +447,20 @@ function easyStateHOC (WrappedComp) {
       return result
     }
 
-    componentWillUnmount () {
-      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__nx_js_observer_util__["c" /* unobserve */])(this[OBSERVED_RENDER])
-      this[OBSERVED_RENDER] = undefined
-      super.componentWillUnmount && super.componentWillUnmount()
-    }
+    shouldComponentUpdate (nextProps) {
+      const { props } = this
+      const keys = Object.keys(props)
+      const nextKeys = Object.keys(nextProps)
 
-    shouldComponentUpdate () {
+      if (keys.length !== nextKeys.length) {
+        return true
+      }
+
+      for (let key of keys) {
+        if (props[key] !== nextProps[key]) {
+          return true
+        }
+      }
       return false
     }
   }
@@ -470,7 +477,7 @@ function easyStateHOC (WrappedComp) {
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__observer__["a"]; });
 /* unused harmony reexport isObservable */
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__observer__["b"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_0__observer__["c"]; });
+/* unused harmony reexport unobserve */
 /* unused harmony reexport unqueue */
 /* unused harmony reexport exec */
 

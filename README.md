@@ -64,6 +64,14 @@ As a result the state is always fresh and a stable and fresh view is always achi
 - [Simple Todos](https://solkimicreb.github.io/react-easy-state/examples/simpleTodos/) ([source](/examples/simpleTodos/))
 - [TodoMVC](https://solkimicreb.github.io/react-easy-state/examples/todoMVC/) ([source](/examples/todoMVC/))
 
+## Performance
+
+You can compare Easy State with plain React and other state management libraries with the below benchmarks. Generally it seems like Easy State performs a bit better than MobX, a bit worse than plain optimized React and similarly to Redux.
+
+- [js-framework-benchmark](https://github.com/krausest/js-framework-benchmark) ([source](https://github.com/krausest/js-framework-benchmark/tree/master/react-v15.5.4-easy-state-v1.0.3)) ([results](https://rawgit.com/krausest/js-framework-benchmark/master/webdriver-ts-results/table.html))
+
+The list of benchmarks will expand in the future.
+
 ## Platform support
 
 - Node: 6 and above

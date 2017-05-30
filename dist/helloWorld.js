@@ -2918,7 +2918,7 @@ function has (value) {
   if (!rawContext) {
     return proto.has.apply(this, arguments)
   }
-  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* registerObserver */])(rawContext, value)
+  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["c" /* registerObserver */])(rawContext, value)
   return proto.has.apply(rawContext, arguments)
 }
 
@@ -2928,7 +2928,7 @@ function get (value) {
   if (!rawContext) {
     return proto.get.apply(this, arguments)
   }
-  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* registerObserver */])(rawContext, value)
+  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["c" /* registerObserver */])(rawContext, value)
   return proto.get.apply(rawContext, arguments)
 }
 
@@ -2939,8 +2939,8 @@ function add (value) {
     return proto.add.apply(this, arguments)
   }
   if (!proto.has.call(rawContext, value)) {
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["e" /* queueObservers */])(rawContext, value)
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["e" /* queueObservers */])(rawContext, ITERATE)
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* queueObservers */])(rawContext, value)
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* queueObservers */])(rawContext, ITERATE)
   }
   return proto.add.apply(rawContext, arguments)
 }
@@ -2952,8 +2952,8 @@ function set (key, value) {
     return proto.set.apply(this, arguments)
   }
   if (proto.get.call(rawContext, key) !== value) {
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["e" /* queueObservers */])(rawContext, key)
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["e" /* queueObservers */])(rawContext, ITERATE)
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* queueObservers */])(rawContext, key)
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* queueObservers */])(rawContext, ITERATE)
   }
   return proto.set.apply(rawContext, arguments)
 }
@@ -2965,8 +2965,8 @@ function deleteFn (value) {
     return proto.delete.apply(this, arguments)
   }
   if (proto.has.call(rawContext, value)) {
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["e" /* queueObservers */])(rawContext, value)
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["e" /* queueObservers */])(rawContext, ITERATE)
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* queueObservers */])(rawContext, value)
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* queueObservers */])(rawContext, ITERATE)
   }
   return proto.delete.apply(rawContext, arguments)
 }
@@ -2978,7 +2978,7 @@ function clear () {
     return proto.clear.apply(this, arguments)
   }
   if (rawContext.size) {
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["e" /* queueObservers */])(rawContext, ITERATE)
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* queueObservers */])(rawContext, ITERATE)
   }
   return proto.clear.apply(rawContext, arguments)
 }
@@ -2989,7 +2989,7 @@ function forEach () {
   if (!rawContext) {
     return proto.forEach.apply(this, arguments)
   }
-  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* registerObserver */])(rawContext, ITERATE)
+  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["c" /* registerObserver */])(rawContext, ITERATE)
   return proto.forEach.apply(rawContext, arguments)
 }
 
@@ -2999,7 +2999,7 @@ function keys () {
   if (!rawContext) {
     return proto.keys.apply(this, arguments)
   }
-  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* registerObserver */])(rawContext, ITERATE)
+  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["c" /* registerObserver */])(rawContext, ITERATE)
   return proto.keys.apply(rawContext, arguments)
 }
 
@@ -3009,7 +3009,7 @@ function values () {
   if (!rawContext) {
     return proto.values.apply(this, arguments)
   }
-  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* registerObserver */])(rawContext, ITERATE)
+  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["c" /* registerObserver */])(rawContext, ITERATE)
   return proto.values.apply(rawContext, arguments)
 }
 
@@ -3019,7 +3019,7 @@ function entries () {
   if (!rawContext) {
     return proto.entries.apply(this, arguments)
   }
-  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* registerObserver */])(rawContext, ITERATE)
+  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["c" /* registerObserver */])(rawContext, ITERATE)
   return proto.entries.apply(rawContext, arguments)
 }
 
@@ -3029,7 +3029,7 @@ function iterator () {
   if (!rawContext) {
     return proto[Symbol.iterator].apply(this, arguments)
   }
-  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* registerObserver */])(rawContext, ITERATE)
+  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["c" /* registerObserver */])(rawContext, ITERATE)
   return proto[Symbol.iterator].apply(rawContext, arguments)
 }
 
@@ -3039,7 +3039,7 @@ function getSize () {
   if (!rawContext) {
     return Reflect.get(proto, 'size', this)
   }
-  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* registerObserver */])(rawContext, ITERATE)
+  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__observer__["c" /* registerObserver */])(rawContext, ITERATE)
   return Reflect.get(proto, 'size', rawContext)
 }
 
@@ -4802,13 +4802,13 @@ module.exports = canDefineProperty;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__store__ = __webpack_require__(94);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__internals__ = __webpack_require__(26);
 /* harmony export (immutable) */ __webpack_exports__["b"] = observe;
-/* harmony export (immutable) */ __webpack_exports__["c"] = unobserve;
+/* unused harmony export unobserve */
 /* unused harmony export unqueue */
 /* unused harmony export exec */
 /* unused harmony export isObservable */
 /* harmony export (immutable) */ __webpack_exports__["a"] = observable;
-/* harmony export (immutable) */ __webpack_exports__["d"] = registerObserver;
-/* harmony export (immutable) */ __webpack_exports__["e"] = queueObservers;
+/* harmony export (immutable) */ __webpack_exports__["c"] = registerObserver;
+/* harmony export (immutable) */ __webpack_exports__["d"] = queueObservers;
 
 
 
@@ -7042,13 +7042,20 @@ function easyStateHOC (WrappedComp) {
       return result
     }
 
-    componentWillUnmount () {
-      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__nx_js_observer_util__["c" /* unobserve */])(this[OBSERVED_RENDER])
-      this[OBSERVED_RENDER] = undefined
-      super.componentWillUnmount && super.componentWillUnmount()
-    }
+    shouldComponentUpdate (nextProps) {
+      const { props } = this
+      const keys = Object.keys(props)
+      const nextKeys = Object.keys(nextProps)
 
-    shouldComponentUpdate () {
+      if (keys.length !== nextKeys.length) {
+        return true
+      }
+
+      for (let key of keys) {
+        if (props[key] !== nextProps[key]) {
+          return true
+        }
+      }
       return false
     }
   }
@@ -9922,7 +9929,7 @@ module.exports = getIteratorFn;
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__observer__["a"]; });
 /* unused harmony reexport isObservable */
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__observer__["b"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_0__observer__["c"]; });
+/* unused harmony reexport unobserve */
 /* unused harmony reexport unqueue */
 /* unused harmony reexport exec */
 
@@ -22641,78 +22648,49 @@ module.exports = traverseAllChildren;
 /* 195 */,
 /* 196 */,
 /* 197 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__src_easyState__ = __webpack_require__(53);
 var _class;
 
-var _react = __webpack_require__(55);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactDom = __webpack_require__(54);
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
-var _easyState = __webpack_require__(53);
-
-var _easyState2 = _interopRequireDefault(_easyState);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var App = (0, _easyState2.default)(_class = function (_Component) {
-  _inherits(App, _Component);
-
-  function App() {
-    _classCallCheck(this, App);
-
-    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
-  }
-
-  _createClass(App, [{
-    key: 'render',
-    value: function render() {
-      var name = this.state.name;
 
 
-      return _react2.default.createElement(
+
+
+let App = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__src_easyState__["default"])(_class = class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
+  render() {
+    const { name } = this.state;
+
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'div',
+      null,
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
         null,
-        _react2.default.createElement(
-          'div',
-          null,
-          'Name: ',
-          _react2.default.createElement('input', { onChange: this.updateName })
-        ),
-        _react2.default.createElement(
-          'p',
-          null,
-          'Your name is: ',
-          name
-        )
-      );
-    }
-  }, {
-    key: 'updateName',
-    value: function updateName(ev) {
-      this.state.name = ev.target.value;
-    }
-  }]);
+        'Name: ',
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { onChange: this.updateName })
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'p',
+        null,
+        'Your name is: ',
+        name
+      )
+    );
+  }
 
-  return App;
-}(_react.Component)) || _class;
+  updateName(ev) {
+    this.state.name = ev.target.value;
+  }
+}) || _class;
 
-_reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('react-root'));
+__WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(App, null), document.getElementById('react-root'));
 
 /***/ })
 /******/ ]);
