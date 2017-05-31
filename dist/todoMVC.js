@@ -22723,10 +22723,7 @@ let TodoItem = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__src_easyState_
     const { toggle, remove } = this;
     const { todo } = this.props;
 
-    const itemClass = __WEBPACK_IMPORTED_MODULE_2_classnames___default()({
-      view: true,
-      completed: todo.completed
-    });
+    const itemClass = __WEBPACK_IMPORTED_MODULE_2_classnames___default()({ view: true, completed: todo.completed });
 
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'li',
@@ -22842,14 +22839,12 @@ let App = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__src_easyState__["de
           null,
           'todos'
         ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { onKeyDown: create, className: 'new-todo',
-          placeholder: 'What needs to be done?', autoFocus: true })
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { onKeyDown: create, className: 'new-todo', placeholder: 'What needs to be done?', autoFocus: true })
       ),
       hasTodos && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'section',
         { className: 'main' },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { className: 'toggle-all', type: 'checkbox',
-          checked: allCompleted, onChange: toggleAll }),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { className: 'toggle-all', type: 'checkbox', checked: allCompleted, onChange: toggleAll }),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'label',
           { htmlFor: 'toggle-all' },

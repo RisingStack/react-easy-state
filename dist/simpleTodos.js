@@ -22679,15 +22679,11 @@ let App = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__src_easyState__["de
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'div',
       null,
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { value: todo, onChange: this.updateTodo }),
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'div',
-        null,
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { value: todo, onChange: this.updateTodo }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'button',
-          { onClick: this.addTodo },
-          'Add Todo'
-        )
+        'button',
+        { onClick: this.addTodo },
+        'Add Todo'
       ),
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'ul',

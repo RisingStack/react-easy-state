@@ -9,17 +9,14 @@ export default class TodoItem extends Component {
     const { toggle, remove } = this
     const { todo } = this.props
 
-    const itemClass = classNames({
-      view: true,
-      completed: todo.completed
-    })
+    const itemClass = classNames({ view: true, completed: todo.completed })
 
     return (
-			<li className={itemClass}>
-				<input className="toggle" type="checkbox" checked={todo.completed} onChange={toggle} />
-				<label>{todo.title}</label>
-				<button onClick={remove} className="destroy" />
-			</li>
+      <li className={itemClass}>
+        <input className="toggle" type="checkbox" checked={todo.completed} onChange={toggle}/>
+        <label>{todo.title}</label>
+        <button onClick={remove} className="destroy"/>
+      </li>
     )
   }
 

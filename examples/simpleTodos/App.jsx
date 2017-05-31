@@ -17,10 +17,8 @@ class App extends Component {
 
     return (
       <div>
-        <div>
-          <input value={todo} onChange={this.updateTodo} />
-          <button onClick={this.addTodo}>Add Todo</button>
-        </div>
+        <input value={todo} onChange={this.updateTodo} />
+        <button onClick={this.addTodo}>Add Todo</button>
         <ul>
           {todos.map(todo => <li key={todo}>{todo}</li>)}
         </ul>
