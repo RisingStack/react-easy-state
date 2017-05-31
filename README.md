@@ -11,25 +11,32 @@ Easy State aims to make React's state management simpler without adding new synt
 
 ## Usage
 
+Add the `@easyState` decorator to all of your components - except stateless (function) components - and enjoy the benefits.
+
 ```js
 import React, { Component } from 'react'
 import easyState from 'react-easy-state'
 
 @easyState
 export default class App extends Component {
-  render() {
-    const { name } = this.state
+  constructor () {
+    super()
+    this.state = { counter: 0 }
+  }
+
+  render () {
+    const { counter } = this.state
 
     return (
       <div>
-        <div>Name: <input onChange={this.updateName}/></div>
-        <p>Hello {name}!</p>
+        <span>Counter: {counter}</span>
+        <button onClick={this.increment}>Increment</button>
       </div>
     )
   }
 
-  updateName (ev) {
-    this.state.name = ev.target.value
+  increment () {
+    this.state.counter++
   }
 }
 ```
@@ -55,6 +62,8 @@ export default class App extends Component {
 - Renders may trigger others renders by mutating the state. In this case loops are automatically resolved.
 
 - Renders always run before the next repaint.
+
+- Easy State implements an optimal `shouldComponentUpdate` for your components, so you don't have to worry about doing it by hand.
 
 As a result the state is always fresh and a stable and fresh view is always achieved before the next repaint with the minimal number of required renders.
 
