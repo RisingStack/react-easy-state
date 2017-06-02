@@ -18,25 +18,25 @@ import React, { Component } from 'react'
 import easyState from 'react-easy-state'
 
 @easyState
-export default class App extends Component {
-  constructor () {
-    super()
-    this.state = { counter: 0 }
+class Counter extends Component {
+  state = { value: 0 }
+
+  increment () {
+    this.state++
+  }
+
+  decrement () {
+    this.state--
   }
 
   render () {
-    const { counter } = this.state
-
     return (
       <div>
-        <span>Counter: {counter}</span>
-        <button onClick={this.increment}>Increment</button>
+        {this.state.value}
+        <button onClick={this.increment}>+</button>
+        <button onClick={this.decrement}>-</button>
       </div>
     )
-  }
-
-  increment () {
-    this.state.counter++
   }
 }
 ```
