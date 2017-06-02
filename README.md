@@ -22,11 +22,11 @@ class Counter extends Component {
   state = { value: 0 }
 
   increment () {
-    this.state++
+    this.state.value++
   }
 
   decrement () {
-    this.state--
+    this.state.value--
   }
 
   render () {
