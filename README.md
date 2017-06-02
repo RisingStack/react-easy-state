@@ -43,7 +43,7 @@ class Counter extends Component {
 
 ### About decorators
 
-`@easyState` is a decorator, which is not yet part of the JS language. You can learn how to enable decorators with babel [here](https://github.com/loganfsmyth/babel-plugin-transform-decorators-legacy) or you can use the older `export default easyState(Comp)` syntax.
+`@easyState` is a decorator, which is not yet part of the JS language. You can learn how to enable decorators with babel [here](https://github.com/loganfsmyth/babel-plugin-transform-decorators-legacy) or you can use the older `easyState(Comp)` function syntax.
 
 ## Key features
 
