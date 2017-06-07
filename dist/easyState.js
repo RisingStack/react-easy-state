@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 34);
+/******/ 	return __webpack_require__(__webpack_require__.s = 53);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -72,7 +72,7 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__observer__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__observer__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__internals__ = __webpack_require__(26);
 /* harmony export (immutable) */ __webpack_exports__["a"] = has;
 /* harmony export (immutable) */ __webpack_exports__["d"] = get;
@@ -247,73 +247,6 @@ const rawToProxy = new WeakMap()
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__nx_js_observer_util__ = __webpack_require__(86);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__autoBind__ = __webpack_require__(87);
-/* harmony export (immutable) */ __webpack_exports__["default"] = easyStateHOC;
-
-
-
-const OBSERVED_RENDER = Symbol('observed render')
-const IS_DIRECT_RENDER = Symbol('is direct render')
-const RENDER_RESULT = Symbol('render result')
-
-function easyStateHOC (WrappedComp) {
-  return class EasyStateWrapper extends WrappedComp {
-    constructor (props) {
-      super(props)
-      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__autoBind__["a" /* default */])(this, WrappedComp.prototype)
-      this.state = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__nx_js_observer_util__["a" /* observable */])(this.state)
-    }
-
-    render () {
-      if (!this[OBSERVED_RENDER]) {
-        this[OBSERVED_RENDER] = () => {
-          if (this[IS_DIRECT_RENDER]) {
-            this[RENDER_RESULT] = super.render()
-          } else {
-            super.forceUpdate()
-          }
-        }
-      }
-
-      this[IS_DIRECT_RENDER] = true
-      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__nx_js_observer_util__["b" /* observe */])(this[OBSERVED_RENDER])
-      this[IS_DIRECT_RENDER] = false
-
-      return this[RENDER_RESULT]
-    }
-
-    shouldComponentUpdate (nextProps) {
-      if (super.shouldComponentUpdate) {
-        return super.shouldComponentUpdate()
-      }
-
-      const { props } = this
-      const keys = Object.keys(props)
-      const nextKeys = Object.keys(nextProps)
-
-      if (keys.length !== nextKeys.length) {
-        return true
-      }
-
-      for (let key of keys) {
-        if (props[key] !== nextProps[key]) {
-          return true
-        }
-      }
-      return false
-    }
-  }
-}
-
-
-/***/ }),
-
-/***/ 53:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__nextTick__ = __webpack_require__(93);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__builtIns_index__ = __webpack_require__(92);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__store__ = __webpack_require__(94);
@@ -477,11 +410,78 @@ function runObserver (observer) {
 
 /***/ }),
 
+/***/ 53:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__nx_js_observer_util__ = __webpack_require__(86);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__autoBind__ = __webpack_require__(87);
+/* harmony export (immutable) */ __webpack_exports__["default"] = easyStateHOC;
+
+
+
+const OBSERVED_RENDER = Symbol('observed render')
+const IS_DIRECT_RENDER = Symbol('is direct render')
+const RENDER_RESULT = Symbol('render result')
+
+function easyStateHOC (WrappedComp) {
+  return class EasyStateWrapper extends WrappedComp {
+    constructor (props) {
+      super(props)
+      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__autoBind__["a" /* default */])(this, WrappedComp.prototype)
+      this.state = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__nx_js_observer_util__["a" /* observable */])(this.state)
+    }
+
+    render () {
+      if (!this[OBSERVED_RENDER]) {
+        this[OBSERVED_RENDER] = () => {
+          if (this[IS_DIRECT_RENDER]) {
+            this[RENDER_RESULT] = super.render()
+          } else {
+            super.forceUpdate()
+          }
+        }
+      }
+
+      this[IS_DIRECT_RENDER] = true
+      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__nx_js_observer_util__["b" /* observe */])(this[OBSERVED_RENDER])
+      this[IS_DIRECT_RENDER] = false
+
+      return this[RENDER_RESULT]
+    }
+
+    shouldComponentUpdate (nextProps) {
+      if (super.shouldComponentUpdate) {
+        return super.shouldComponentUpdate()
+      }
+
+      const { props } = this
+      const keys = Object.keys(props)
+      const nextKeys = Object.keys(nextProps)
+
+      if (keys.length !== nextKeys.length) {
+        return true
+      }
+
+      for (let key of keys) {
+        if (props[key] !== nextProps[key]) {
+          return true
+        }
+      }
+      return false
+    }
+  }
+}
+
+
+/***/ }),
+
 /***/ 86:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__observer__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__observer__ = __webpack_require__(34);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__observer__["a"]; });
 /* unused harmony reexport isObservable */
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__observer__["b"]; });
