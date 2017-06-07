@@ -285,6 +285,10 @@ function easyStateHOC (WrappedComp) {
     }
 
     shouldComponentUpdate (nextProps) {
+      if (super.shouldComponentUpdate) {
+        return super.shouldComponentUpdate()
+      }
+
       const { props } = this
       const keys = Object.keys(props)
       const nextKeys = Object.keys(nextProps)
