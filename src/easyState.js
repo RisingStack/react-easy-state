@@ -2,6 +2,8 @@ import { observable, observe } from '@nx-js/observer-util'
 import autoBind from './autoBind'
 
 const OBSERVED_RENDER = Symbol('observed render')
+const IS_DIRECT_RENDER = Symbol('is direct render')
+const RENDER_RESULT = Symbol('render result')
 
 export default function easyStateHOC (WrappedComp) {
   return class EasyStateWrapper extends WrappedComp {
@@ -12,19 +14,21 @@ export default function easyStateHOC (WrappedComp) {
     }
 
     render () {
-      if (this[OBSERVED_RENDER]) {
-        return super.render()
+      if (!this[OBSERVED_RENDER]) {
+        this[OBSERVED_RENDER] = () => {
+          if (this[IS_DIRECT_RENDER]) {
+            this[RENDER_RESULT] = super.render()
+          } else {
+            super.forceUpdate()
+          }
+        }
       }
 
-      let result
-      this[OBSERVED_RENDER] = observe(() => {
-        if (!this[OBSERVED_RENDER]) {
-          result = super.render()
-        } else {
-          super.forceUpdate()
-        }
-      })
-      return result
+      this[IS_DIRECT_RENDER] = true
+      observe(this[OBSERVED_RENDER])
+      this[IS_DIRECT_RENDER] = false
+
+      return this[RENDER_RESULT]
     }
 
     shouldComponentUpdate (nextProps) {
