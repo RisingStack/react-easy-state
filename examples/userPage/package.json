@@ -1,0 +1,74 @@
+{
+  "name": "easy-state-user-page-demo",
+  "version": "1.0.3",
+  "description": "Easy State replaces React's setState with plain native JavaScript",
+  "main": "dist/easyState.js",
+  "module": "src/easyState.js",
+  "scripts": {
+    "build": "webpack",
+    "test": "nyc --reporter=lcov --reporter=text mocha src/*.test.js",
+    "lint": "standard src/*"
+  },
+  "author": {
+    "name": "Miklos Bertalan",
+    "email": "miklos.bertalan@risingstack.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:solkimicreb/react-easy-state.git"
+  },
+  "bugs": {
+    "url": "https://github.com/solkimicreb/react-easy-state/issues"
+  },
+  "homepage": "https://github.com/solkimicreb/react-easy-state#readme",
+  "license": "MIT",
+  "keywords": [
+    "observable",
+    "react-component",
+    "react",
+    "reactjs",
+    "reactive",
+    "model",
+    "frp",
+    "functional-reactive-programming",
+    "state management",
+    "es6 proxy"
+  ],
+  "dependencies": {
+    "@nx-js/observer-util": "3"
+  },
+  "devDependencies": {
+    "babel-core": "6.24.1",
+    "babel-loader": "7.0.0",
+    "babel-plugin-transform-decorators-legacy": "1.3.4",
+    "babel-preset-es2015": "6.24.1",
+    "babel-preset-react": "6.24.1",
+    "babel-preset-stage-0": "6.24.1",
+    "chai": "3.5.0",
+    "classnames": "^2.2.5",
+    "enzyme": "^2.8.2",
+    "mocha": "2.5.3",
+    "nyc": "10.3.2",
+    "pre-push": "0.1.1",
+    "react": "15.5.4",
+    "react-easy-state": "1",
+    "reify": "0.11.0",
+    "sinon": "2.3.1",
+    "sinon-chai": "2.10.0",
+    "standard": "7.1.2",
+    "webpack": "2.4.1"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "standard": {
+    "ignore": [
+      "src/*.test.js"
+    ]
+  },
+  "pre-push": [
+    "lint",
+    "test",
+    "build"
+  ]
+}

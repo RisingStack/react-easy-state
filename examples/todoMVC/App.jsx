@@ -8,8 +8,9 @@ import store from './store'
 @easyComp
 class App extends Component {
   render () {
-    const { create, changeFilter, clearCompleted, toggleAll } = this
-    const { todos, hasTodos, hasCompleted, allCompleted, active, filter } = store
+    const { create, changeFilter } = this
+    const { todos, hasTodos, hasCompleted, allCompleted, active, filter,
+            toggleAll, clearCompleted } = store
 
     const todosClass = classNames({ selected: filter === 'todos' })
     const completedClass = classNames({ selected: filter === 'completed' })
@@ -47,21 +48,13 @@ class App extends Component {
 
   create (ev) {
     if (ev.keyCode === 13) {
-      store.todos.push({ title: ev.target.value })
+      store.create(ev.target.value)
       ev.target.value = ''
     }
   }
 
-  clearCompleted () {
-    store.todos = store.active
-  }
-
-  toggleAll () {
-    store.allCompleted = !store.allCompleted
-  }
-
   changeFilter (ev) {
-    store.filter = ev.target.value
+    store.changeFilter(ev.target.value)
   }
 }
 

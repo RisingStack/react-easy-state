@@ -1,3 +1,3 @@
 import easyComp from './easyComp'
-import { observable as easyStore } from '@nx-js/observer-util'
+import easyStore from './easyStore'
 export { easyComp, easyStore }

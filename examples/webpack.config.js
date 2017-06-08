@@ -5,11 +5,12 @@ module.exports = {
   entry: {
     helloWorld: './examples/helloWorld/App.jsx',
     simpleTodos: './examples/simpleTodos/App.jsx',
-    todoMVC: './examples/todoMVC/App.jsx'
+    todoMVC: './examples/todoMVC/App.jsx',
+    userPage: './examples/userPage/App.jsx'
   },
   output: {
-    path: path.join(__dirname, 'dist'),
-    filename: '[name].js',
+    path: __dirname,
+    filename: '[name]/bundle.js',
   },
   module: {
     rules: [

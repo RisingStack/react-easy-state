@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import classNames from 'classnames'
 import { easyComp } from 'react-easy-state'
+import store from './store'
 
 @easyComp
 export default class TodoItem extends Component {
@@ -21,8 +22,7 @@ export default class TodoItem extends Component {
   }
 
   remove () {
-    const { todos, todo } = this.props
-    todos.splice(todos.indexOf(todo), 1)
+    store.remove(this.props.todo)
   }
 
   toggle () {

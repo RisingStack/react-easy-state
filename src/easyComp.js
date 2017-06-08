@@ -1,4 +1,4 @@
-import { observable, observe } from '@nx-js/observer-util'
+import { observable, observe} from '@nx-js/observer-util'
 import autoBind from './autoBind'
 
 const OBSERVED_RENDER = Symbol('observed render')
@@ -9,7 +9,7 @@ export default function easyStateHOC (WrappedComp) {
   return class EasyStateWrapper extends WrappedComp {
     constructor (props) {
       super(props)
-      autoBind(this, WrappedComp.prototype)
+      autoBind(this, WrappedComp.prototype, true)
       this.state = observable(this.state)
     }
 
