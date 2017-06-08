@@ -3,11 +3,14 @@
   "version": "1.0.4",
   "description": "Easy State replaces React's setState with plain native JavaScript",
   "main": "dist/easyState.js",
-  "module": "src/easyState.js",
+  "module": "src/index.js",
   "scripts": {
-    "build": "webpack",
     "test": "nyc --reporter=lcov --reporter=text mocha src/*.test.js",
-    "lint": "standard src/*"
+    "lint": "standard src/*",
+    "build": "webpack",
+    "build-examples": "webpack --config ./examples/webpack.config.js",
+    "build-examples-dev": "webpack --config ./examples/webpack.config.js --watch",
+    "build-all": "npm run build && npm run build-examples"
   },
   "author": {
     "name": "Miklos Bertalan",
@@ -38,19 +41,11 @@
     "@nx-js/observer-util": "3"
   },
   "devDependencies": {
-    "babel-core": "6.24.1",
-    "babel-loader": "7.0.0",
-    "babel-plugin-transform-decorators-legacy": "1.3.4",
-    "babel-preset-es2015": "6.24.1",
-    "babel-preset-react": "6.24.1",
-    "babel-preset-stage-0": "6.24.1",
     "chai": "3.5.0",
-    "classnames": "^2.2.5",
     "enzyme": "^2.8.2",
     "mocha": "2.5.3",
     "nyc": "10.3.2",
     "pre-push": "0.1.1",
-    "react": "15.5.4",
     "reify": "0.11.0",
     "sinon": "2.3.1",
     "sinon-chai": "2.10.0",
@@ -67,7 +62,6 @@
   },
   "pre-push": [
     "lint",
-    "test",
-    "build"
+    "test"
   ]
 }

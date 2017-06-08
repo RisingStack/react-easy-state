@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import classNames from 'classnames'
-import easyState from '../../src/easyState'
+import { easyComp } from 'react-easy-state'
 
-@easyState
+@easyComp
 export default class TodoItem extends Component {
   render () {
     const { toggle, remove } = this

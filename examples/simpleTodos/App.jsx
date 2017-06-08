@@ -1,15 +1,12 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import easyState from '../../src/easyState'
+import { easyComp } from 'react-easy-state'
 
-@easyState
+@easyComp
 class App extends Component {
-  constructor () {
-    super()
-    this.state = {
-      todo: '',
-      todos: []
-    }
+  state = {
+    todo: '',
+    todos: []
   }
 
   render() {

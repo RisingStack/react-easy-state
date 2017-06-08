@@ -1,16 +1,14 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import easyState from '../../src/easyState'
+import { easyComp } from 'react-easy-state'
 
-@easyState
+@easyComp
 class App extends Component {
   render() {
-    const { name } = this.state
-
     return (
       <div>
         <div>Name: <input onChange={this.updateName}/></div>
-        <p>Your name is: {name}</p>
+        <p>Your name is: {this.state.name}</p>
       </div>
     )
   }

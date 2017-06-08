@@ -1,20 +1,15 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import classNames from 'classnames'
-import easyState from '../../src/easyState'
-import TodoItem from './TodoItem.jsx'
-import State from './State'
+import { easyComp } from 'react-easy-state'
+import TodoItem from './TodoItem'
+import store from './store'
 
-@easyState
+@easyComp
 class App extends Component {
-  constructor () {
-    super()
-    this.state = new State()
-  }
-
   render () {
-    const { create, changeFilter, clearCompleted, toggleAll, state } = this
-    const { todos, hasTodos, completed, hasCompleted, allCompleted, active, filter } = state
+    const { create, changeFilter, clearCompleted, toggleAll } = this
+    const { todos, hasTodos, hasCompleted, allCompleted, active, filter } = store
 
     const todosClass = classNames({ selected: filter === 'todos' })
     const completedClass = classNames({ selected: filter === 'completed' })
@@ -31,7 +26,7 @@ class App extends Component {
           <input className="toggle-all" type="checkbox" checked={allCompleted} onChange={toggleAll}/>
           <label htmlFor="toggle-all">Mark all as complete</label>
           <ul className="todo-list">
-            {state[filter].map(todo => <TodoItem key={todo.title} todo={todo} todos={todos}/>)}
+            {store[filter].map(todo => <TodoItem key={todo.title} todo={todo} todos={todos}/>)}
           </ul>
         </section>}
 
@@ -52,23 +47,21 @@ class App extends Component {
 
   create (ev) {
     if (ev.keyCode === 13) {
-      this.state.todos.push({ title: ev.target.value })
+      store.todos.push({ title: ev.target.value })
       ev.target.value = ''
     }
   }
 
   clearCompleted () {
-    const { state } = this
-    state.todos = state.active
+    store.todos = store.active
   }
 
   toggleAll () {
-    const { state } = this
-    state.allCompleted = !state.allCompleted
+    store.allCompleted = !store.allCompleted
   }
 
   changeFilter (ev) {
-    this.state.filter = ev.target.value
+    store.filter = ev.target.value
   }
 }
 
