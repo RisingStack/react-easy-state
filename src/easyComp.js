@@ -6,6 +6,10 @@ const IS_DIRECT_RENDER = Symbol('is direct render')
 const RENDER_RESULT = Symbol('render result')
 
 export default function easyStateHOC (WrappedComp) {
+  if (typeof WrappedComp !== 'function') {
+    throw new TypeError('easyComp expects a class component as argument.')
+  }
+
   return class EasyStateWrapper extends WrappedComp {
     constructor (props) {
       super(props)

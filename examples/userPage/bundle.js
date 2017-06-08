@@ -22762,6 +22762,10 @@ const IS_DIRECT_RENDER = Symbol('is direct render')
 const RENDER_RESULT = Symbol('render result')
 
 function easyStateHOC (WrappedComp) {
+  if (typeof WrappedComp !== 'function') {
+    throw new TypeError('easyComp expects a class component as argument.')
+  }
+
   return class EasyStateWrapper extends WrappedComp {
     constructor (props) {
       super(props)
@@ -22823,6 +22827,10 @@ function easyStateHOC (WrappedComp) {
 
 
 function easyStore (store) {
+  if (typeof store !== 'object') {
+    throw new TypeError('easyStore expects an object as argument.')
+  }
+
   const observableStore = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__nx_js_observer_util__["a" /* observable */])(store)
   __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__autoBind__["a" /* default */])(observableStore, store, false)
   return observableStore
