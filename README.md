@@ -45,6 +45,14 @@ class Counter extends Component {
 
 `@easyState` is a decorator, which is not yet part of the JS language. You can learn how to enable decorators with babel [here](https://github.com/loganfsmyth/babel-plugin-transform-decorators-legacy) or you can use the older `easyState(Comp)` function syntax.
 
+### With CommonJS modules
+
+You can import `react-easy-state` with the older module format in the following way:
+
+```js
+const easyState = require('react-easy-state').default
+```
+
 ## Key features
 
 - Your state can use any valid JavaScript. Feel free to use nested objects, arrays, expando properties, getters/setters, inheritance and ES6 collections directly.
