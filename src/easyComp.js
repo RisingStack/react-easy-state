@@ -1,4 +1,4 @@
-import { observable, observe} from '@nx-js/observer-util'
+import { observable, unobserve, observe } from '@nx-js/observer-util'
 import autoBind from './autoBind'
 
 const OBSERVED_RENDER = Symbol('observed render')
@@ -29,7 +29,7 @@ export default function easyStateHOC (WrappedComp) {
       }
 
       this[IS_DIRECT_RENDER] = true
-      observe(this[OBSERVED_RENDER])
+      this[OBSERVED_RENDER] = observe(this[OBSERVED_RENDER])
       this[IS_DIRECT_RENDER] = false
 
       return this[RENDER_RESULT]
@@ -54,6 +54,13 @@ export default function easyStateHOC (WrappedComp) {
         }
       }
       return false
+    }
+
+    componentWillUnmount () {
+      if (super.componentWillUnmount) {
+        return super.componentWillUnmount()
+      }
+      unobserve(this[OBSERVED_RENDER])
     }
   }
 }

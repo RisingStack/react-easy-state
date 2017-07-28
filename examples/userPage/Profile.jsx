@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import { easyComp } from 'react-easy-state'
 import store from './store'
 
-@easyComp
-export default class Profile extends Component {
+class Profile extends Component {
   state = {
     editing: false,
     newProfile: Object.assign({ name: '' }, store.user)
@@ -54,3 +53,5 @@ export default class Profile extends Component {
     this.state.editing = false
   }
 }
+
+export default easyComp(Profile)
