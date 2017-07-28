@@ -23714,14 +23714,11 @@ Route.childContextTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_easy_state__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__store__ = __webpack_require__(210);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContactList; });
-var _class;
 
 
 
 
-
-let ContactList = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_react_easy_state__["a" /* easyComp */])(_class = class ContactList extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
+let ContactList = class ContactList extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
   constructor(...args) {
     var _temp;
 
@@ -23790,9 +23787,10 @@ let ContactList = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_react_easy_s
     __WEBPACK_IMPORTED_MODULE_2__store__["a" /* default */].contacts.push(state.newContact);
     state.newContact = {};
   }
-}) || _class;
+};
 
 
+/* harmony default export */ __webpack_exports__["a"] = (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_react_easy_state__["a" /* easyComp */])(ContactList));
 
 /***/ }),
 /* 214 */

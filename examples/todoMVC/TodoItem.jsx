@@ -4,8 +4,7 @@ import classNames from 'classnames'
 import { easyComp } from 'react-easy-state'
 import store from './store'
 
-@easyComp
-export default class TodoItem extends Component {
+class TodoItem extends Component {
   render () {
     const { toggle, remove } = this
     const { todo } = this.props
@@ -30,3 +29,5 @@ export default class TodoItem extends Component {
     todo.completed = !todo.completed
   }
 }
+
+export default easyComp(TodoItem)

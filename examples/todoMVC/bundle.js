@@ -22832,16 +22832,13 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_classnames__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_easy_state__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__store__ = __webpack_require__(206);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TodoItem; });
-var _class;
 
 
 
 
 
 
-
-let TodoItem = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3_react_easy_state__["a" /* easyComp */])(_class = class TodoItem extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
+let TodoItem = class TodoItem extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
   render() {
     const { toggle, remove } = this;
     const { todo } = this.props;
@@ -22869,9 +22866,10 @@ let TodoItem = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3_react_easy_stat
     const { todo } = this.props;
     todo.completed = !todo.completed;
   }
-}) || _class;
+};
 
 
+/* harmony default export */ __webpack_exports__["a"] = (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3_react_easy_state__["a" /* easyComp */])(TodoItem));
 
 /***/ }),
 /* 213 */,
@@ -22919,7 +22917,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_easy_state__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__TodoItem__ = __webpack_require__(212);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__store__ = __webpack_require__(206);
-var _class;
 
 
 
@@ -22927,8 +22924,7 @@ var _class;
 
 
 
-
-let App = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3_react_easy_state__["a" /* easyComp */])(_class = class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
+let App = class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
   render() {
     const { create, changeFilter } = this;
     const { todos, hasTodos, hasCompleted, allCompleted, active, filter,
@@ -23013,9 +23009,11 @@ let App = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3_react_easy_state__["
   changeFilter(ev) {
     __WEBPACK_IMPORTED_MODULE_5__store__["a" /* default */].changeFilter(ev.target.value);
   }
-}) || _class;
+};
 
-__WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(App, null), document.getElementById('react-root'));
+
+const app = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3_react_easy_state__["a" /* easyComp */])(App));
+__WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(app, document.getElementById('react-root'));
 
 /***/ })
 /******/ ]);

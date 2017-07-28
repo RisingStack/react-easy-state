@@ -18,4 +18,5 @@ class App extends Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('react-root'))
+const app = React.createElement(easyComp(App))
+ReactDOM.render(app, document.getElementById('react-root'))

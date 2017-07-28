@@ -5,7 +5,6 @@ import { easyComp } from 'react-easy-state'
 import TodoItem from './TodoItem'
 import store from './store'
 
-@easyComp
 class App extends Component {
   render () {
     const { create, changeFilter } = this
@@ -58,4 +57,5 @@ class App extends Component {
   }
 }
 
-ReactDOM.render(<App/>, document.getElementById('react-root'))
+const app = React.createElement(easyComp(App))
+ReactDOM.render(app, document.getElementById('react-root'))

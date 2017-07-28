@@ -22755,13 +22755,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_easy_state__ = __webpack_require__(34);
-var _class;
 
 
 
 
-
-let App = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_react_easy_state__["a" /* easyComp */])(_class = class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
+let App = class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
   constructor(...args) {
     var _temp;
 
@@ -22804,9 +22802,11 @@ let App = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_react_easy_state__["
     state.todos.push(state.todo);
     state.todo = '';
   }
-}) || _class;
+};
 
-__WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(App, null), document.getElementById('react-root'));
+
+const app = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_react_easy_state__["a" /* easyComp */])(App));
+__WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(app, document.getElementById('react-root'));
 
 /***/ })
 /******/ ]);

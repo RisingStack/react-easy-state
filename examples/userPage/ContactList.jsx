@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import { easyComp } from 'react-easy-state'
 import store from './store'
 
-@easyComp
-export default class ContactList extends Component {
+class ContactList extends Component {
   state = {
     newContact: {}
   }
@@ -42,3 +41,5 @@ export default class ContactList extends Component {
     state.newContact = {}
   }
 }
+
+export default easyComp(ContactList)

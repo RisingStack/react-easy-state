@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import { easyComp } from 'react-easy-state'
 
-@easyComp
 class App extends Component {
   state = {
     todo: '',
@@ -34,4 +33,5 @@ class App extends Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('react-root'))
+const app = React.createElement(easyComp(App))
+ReactDOM.render(app, document.getElementById('react-root'))

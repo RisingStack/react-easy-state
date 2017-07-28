@@ -22785,7 +22785,8 @@ let App = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_react_easy_state__["
   }
 }) || _class;
 
-__WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(App, null), document.getElementById('react-root'));
+const app = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_react_easy_state__["a" /* easyComp */])(App));
+__WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(app, document.getElementById('react-root'));
 
 /***/ })
 /******/ ]);
