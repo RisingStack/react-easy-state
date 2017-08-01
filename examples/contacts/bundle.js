@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 355);
+/******/ 	return __webpack_require__(__webpack_require__.s = 354);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -26875,63 +26875,7 @@ function easyStore (store) {
 
 
 /***/ }),
-/* 231 */,
-/* 232 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
-  Copyright (c) 2016 Jed Watson.
-  Licensed under the MIT License (MIT), see
-  http://jedwatson.github.io/classnames
-*/
-/* global define */
-
-(function () {
-	'use strict';
-
-	var hasOwn = {}.hasOwnProperty;
-
-	function classNames () {
-		var classes = [];
-
-		for (var i = 0; i < arguments.length; i++) {
-			var arg = arguments[i];
-			if (!arg) continue;
-
-			var argType = typeof arg;
-
-			if (argType === 'string' || argType === 'number') {
-				classes.push(arg);
-			} else if (Array.isArray(arg)) {
-				classes.push(classNames.apply(null, arg));
-			} else if (argType === 'object') {
-				for (var key in arg) {
-					if (hasOwn.call(arg, key) && arg[key]) {
-						classes.push(key);
-					}
-				}
-			}
-		}
-
-		return classes.join(' ');
-	}
-
-	if (typeof module !== 'undefined' && module.exports) {
-		module.exports = classNames;
-	} else if (true) {
-		// register as 'classnames', consistent with npm package name
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
-			return classNames;
-		}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	} else {
-		window.classNames = classNames;
-	}
-}());
-
-
-/***/ }),
-/* 233 */
+/* 231 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -26939,52 +26883,23 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 
 /* harmony default export */ __webpack_exports__["a"] = (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_react_easy_state__["b" /* easyStore */])({
-  filter: 'todos',
-  todos: [],
-  get hasTodos () {
-    return this.todos.length !== 0
-  },
-  get completed () {
-    return this.todos.filter(todo => todo.completed)
-  },
-  get hasCompleted () {
-    return this.completed.length !== 0
-  },
-  get allCompleted () {
-    return this.todos.every(todo => todo.completed)
-  },
-  set allCompleted (completed) {
-    if (completed) {
-      this.todos.forEach(todo => todo.completed = true)
-    } else {
-      this.todos.forEach(todo => todo.completed = false)
+  contacts: [],
+  addContact (contact) {
+    if (!contact.name || !contact.email) {
+      throw new Error('Invalid Contact')
     }
+    this.contacts.push(contact)
   },
-  get active () {
-    return this.todos.filter(todo => !todo.completed)
-  },
-  create (ev) {
-    if (ev.keyCode === 13) {
-      this.todos.push({ title: ev.target.value, completed: false })
-      ev.target.value = ''
-    }
-  },
-  changeFilter (ev) {
-    this.filter = ev.target.value
-  },
-  remove (todo) {
-    this.todos.splice(this.todos.indexOf(todo), 1)
-  },
-  clearCompleted () {
-    this.todos = this.active
-  },
-  toggleAll () {
-    this.allCompleted = !this.allCompleted
+  deleteContact (contact) {
+    const idx = this.contacts.indexOf(contact)
+    this.contacts.splice(idx, 1)
   }
 }));
 
 
 /***/ }),
+/* 232 */,
+/* 233 */,
 /* 234 */,
 /* 235 */,
 /* 236 */,
@@ -27100,63 +27015,193 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 /* 346 */,
 /* 347 */,
 /* 348 */,
-/* 349 */,
-/* 350 */,
-/* 351 */
+/* 349 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(66);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(67);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_classnames__ = __webpack_require__(232);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_classnames__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_easy_state__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__store__ = __webpack_require__(233);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_easy_state__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__store__ = __webpack_require__(231);
 
 
 
 
+class Contact extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
+  constructor({ contact }) {
+    super();
 
+    this.state = {
+      contact,
+      currentContact: Object.assign({}, contact),
+      editing: false
+    };
+  }
 
-class TodoItem extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
+  onEdit() {
+    this.state.editing = true;
+  }
+
+  onDelete() {
+    const { contact } = this.props;
+    __WEBPACK_IMPORTED_MODULE_2__store__["a" /* default */].deleteContact(contact);
+  }
+
+  onSave() {
+    const { contact, currentContact } = this.state;
+    Object.assign(contact, currentContact);
+    this.state.editing = false;
+  }
+
+  onCancel() {
+    const { contact, currentContact } = this.state;
+    Object.assign(currentContact, contact);
+    this.state.editing = false;
+  }
+
+  onChange(ev) {
+    const { currentContact } = this.state;
+    currentContact[ev.target.name] = ev.target.value;
+  }
+
   render() {
-    const { toggle, remove } = this;
-    const { todo } = this.props;
+    const { onChange, onSave, onCancel, onEdit, onDelete } = this;
+    const { contact, currentContact, editing } = this.state;
 
-    const itemClass = __WEBPACK_IMPORTED_MODULE_2_classnames___default()({ view: true, completed: todo.completed });
+    if (!editing) {
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'tr',
+        null,
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'td',
+          null,
+          contact.name
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'td',
+          null,
+          contact.email
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'td',
+          null,
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'button',
+            { onClick: onEdit },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'zmdi zmdi-edit' })
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'button',
+            { onClick: onDelete },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'zmdi zmdi-delete' })
+          )
+        )
+      );
+    }
 
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-      'li',
-      { className: itemClass },
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { className: 'toggle', type: 'checkbox', checked: todo.completed, onChange: toggle }),
+      'tr',
+      null,
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'label',
+        'td',
         null,
-        todo.title
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { name: 'name', value: currentContact.name, onChange: onChange, autoFocus: true })
       ),
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('button', { onClick: remove, className: 'destroy' })
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'td',
+        null,
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { name: 'email', value: currentContact.email, onChange: onChange })
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'td',
+        null,
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'button',
+          { onClick: onSave },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'zmdi zmdi-save' })
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'button',
+          { onClick: onCancel },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'zmdi zmdi-close' })
+        )
+      )
     );
-  }
-
-  remove() {
-    __WEBPACK_IMPORTED_MODULE_4__store__["a" /* default */].remove(this.props.todo);
-  }
-
-  toggle() {
-    const { todo } = this.props;
-    todo.completed = !todo.completed;
   }
 }
 
-/* harmony default export */ __webpack_exports__["a"] = (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3_react_easy_state__["a" /* easyComp */])(TodoItem));
+/* harmony default export */ __webpack_exports__["a"] = (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_react_easy_state__["a" /* easyComp */])(Contact));
 
 /***/ }),
+/* 350 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_easy_state__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__store__ = __webpack_require__(231);
+
+
+
+
+class ContactCreator extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
+  constructor(...args) {
+    var _temp;
+
+    return _temp = super(...args), this.state = {
+      newContact: { name: '', email: '' }
+    }, _temp;
+  }
+
+  addContact() {
+    const { state } = this;
+    __WEBPACK_IMPORTED_MODULE_2__store__["a" /* default */].addContact(state.newContact);
+    state.newContact = { name: '', email: '' };
+  }
+
+  onChange(ev) {
+    const { newContact } = this.state;
+    newContact[ev.target.name] = ev.target.value;
+  }
+
+  render() {
+    const { addContact, onChange } = this;
+    const { newContact } = this.state;
+
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'tr',
+      null,
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'td',
+        null,
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { name: 'name', value: newContact.name, onChange: onChange, placeholder: 'Contact name...' })
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'td',
+        null,
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { name: 'email', value: newContact.email, onChange: onChange, placeholder: 'Contact email...' })
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'td',
+        null,
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'button',
+          { onClick: addContact },
+          'Add Contact'
+        )
+      )
+    );
+  }
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_react_easy_state__["a" /* easyComp */])(ContactCreator));
+
+/***/ }),
+/* 351 */,
 /* 352 */,
 /* 353 */,
-/* 354 */,
-/* 355 */
+/* 354 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -27165,11 +27210,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(67);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_classnames__ = __webpack_require__(232);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_classnames__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_easy_state__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__TodoItem__ = __webpack_require__(351);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__store__ = __webpack_require__(233);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_easy_state__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Contact__ = __webpack_require__(349);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ContactCreator__ = __webpack_require__(350);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__store__ = __webpack_require__(231);
 
 
 
@@ -27178,79 +27222,42 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 function App() {
-  const { todos, hasTodos, hasCompleted, allCompleted, active, filter,
-    create, changeFilter, toggleAll, clearCompleted } = __WEBPACK_IMPORTED_MODULE_5__store__["a" /* default */];
-
-  const todosClass = __WEBPACK_IMPORTED_MODULE_2_classnames___default()({ selected: filter === 'todos' });
-  const completedClass = __WEBPACK_IMPORTED_MODULE_2_classnames___default()({ selected: filter === 'completed' });
-  const activeClass = __WEBPACK_IMPORTED_MODULE_2_classnames___default()({ selected: filter === 'active' });
-
   return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-    'div',
-    { className: 'todoapp' },
+    'table',
+    null,
     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-      'header',
-      { className: 'header' },
+      'thead',
+      null,
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'h1',
+        'tr',
         null,
-        'todos'
-      ),
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { onKeyUp: create, className: 'new-todo', placeholder: 'What needs to be done?', autoFocus: true })
-    ),
-    hasTodos && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-      'section',
-      { className: 'main' },
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { className: 'toggle-all', type: 'checkbox', checked: allCompleted, onChange: toggleAll }),
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'label',
-        { htmlFor: 'toggle-all' },
-        'Mark all as complete'
-      ),
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'ul',
-        { className: 'todo-list' },
-        __WEBPACK_IMPORTED_MODULE_5__store__["a" /* default */][filter].map(todo => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__TodoItem__["a" /* default */], { key: todo.title, todo: todo, todos: todos }))
-      )
-    ),
-    hasTodos && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-      'footer',
-      { className: 'footer' },
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'span',
-        { className: 'todo-count' },
-        active.length,
-        ' items left'
-      ),
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'div',
-        { className: 'filters' },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'button',
-          { className: todosClass, value: 'todos', onClick: changeFilter },
-          'All'
+          'th',
+          null,
+          'Name'
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'button',
-          { className: activeClass, value: 'active', onClick: changeFilter },
-          'Active'
+          'th',
+          null,
+          'Email'
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'button',
-          { className: completedClass, value: 'completed', onClick: changeFilter },
-          'Completed'
+          'th',
+          null,
+          'Action'
         )
-      ),
-      hasCompleted && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'button',
-        { className: 'clear-completed', onClick: clearCompleted },
-        'Clear completed'
       )
+    ),
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'tbody',
+      null,
+      __WEBPACK_IMPORTED_MODULE_5__store__["a" /* default */].contacts.map(contact => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Contact__["a" /* default */], { contact: contact, key: contact.name })),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__ContactCreator__["a" /* default */], null)
     )
   );
 }
 
-const app = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3_react_easy_state__["a" /* easyComp */])(App));
+const app = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_react_easy_state__["a" /* easyComp */])(App));
 __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(app, document.getElementById('react-root'));
 
 /***/ })

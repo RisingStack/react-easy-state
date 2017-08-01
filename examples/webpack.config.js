@@ -3,10 +3,10 @@ const webpack = require('webpack')
 
 module.exports = {
   entry: {
-    helloWorld: './examples/helloWorld/App.jsx',
-    simpleTodos: './examples/simpleTodos/App.jsx',
+    clock: './examples/clock/App.jsx',
     todoMVC: './examples/todoMVC/App.jsx',
-    userPage: './examples/userPage/App.jsx'
+    contacts: './examples/contacts/App.jsx',
+
   },
   output: {
     path: __dirname,

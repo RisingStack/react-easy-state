@@ -3,7 +3,6 @@ import { easyStore } from 'react-easy-state'
 export default easyStore({
   filter: 'todos',
   todos: [],
-
   get hasTodos () {
     return this.todos.length !== 0
   },
@@ -26,9 +25,14 @@ export default easyStore({
   get active () {
     return this.todos.filter(todo => !todo.completed)
   },
-
-  create (title) {
-    this.todos.push({ title, completed: false })
+  create (ev) {
+    if (ev.keyCode === 13) {
+      this.todos.push({ title: ev.target.value, completed: false })
+      ev.target.value = ''
+    }
+  },
+  changeFilter (ev) {
+    this.filter = ev.target.value
   },
   remove (todo) {
     this.todos.splice(this.todos.indexOf(todo), 1)
@@ -38,8 +42,5 @@ export default easyStore({
   },
   toggleAll () {
     this.allCompleted = !this.allCompleted
-  },
-  changeFilter (filter) {
-    this.filter = filter
   }
 })

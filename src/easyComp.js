@@ -1,3 +1,4 @@
+import React, { Component } from 'react'
 import { observable, unobserve, observe } from '@nx-js/observer-util'
 import autoBind from './autoBind'
 
@@ -7,7 +8,20 @@ const RENDER_RESULT = Symbol('render result')
 
 export default function easyStateHOC (WrappedComp) {
   if (typeof WrappedComp !== 'function') {
-    throw new TypeError('easyComp expects a class component as argument.')
+    throw new TypeError('easyComp expects a component class or function as argument.')
+  }
+
+  if ((!WrappedComp.prototype || !WrappedComp.prototype.render) && !WrappedComp.isReactClass && !Component.isPrototypeOf(WrappedComp)) {
+    const renderer = WrappedComp
+    WrappedComp = class extends Component {
+      render () {
+        return renderer.call(this, this.props, this.context)
+      }
+    }
+    WrappedComp.displayName = renderer.displayName || renderer.name
+    WrappedComp.contextTypes = renderer.contextTypes
+    WrappedComp.propTypes = renderer.propTypes
+    WrappedComp.defaultProps = renderer.defaultProps
   }
 
   return class EasyStateWrapper extends WrappedComp {

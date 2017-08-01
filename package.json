@@ -52,6 +52,9 @@
     "standard": "7.1.2",
     "webpack": "2.4.1"
   },
+  "peerDependencies": {
+    "react": "*"
+  },
   "engines": {
     "node": ">=6.0.0"
   },
