@@ -3,14 +3,16 @@ import { easyComp } from 'react-easy-state'
 import store from './store'
 
 class ContactCreator extends Component {
+  // save internal utility data in component state, instead of the global store
+  // newContact is the skeleton for the next contact before it is added to the list
   state = {
     newContact: { name: '', email: '' }
   }
 
+  // transfer finalized contact from the component state to the main store
   addContact () {
-    const { state } = this
-    store.addContact(state.newContact)
-    state.newContact = { name: '', email: '' }
+    store.addContact(this.state.newContact)
+    this.state.newContact = { name: '', email: '' }
   }
 
   onChange (ev) {
@@ -18,6 +20,7 @@ class ContactCreator extends Component {
     newContact[ev.target.name] = ev.target.value
   }
 
+  // render is triggered whenever the relevant parts of the component state or global store change
   render () {
     const { addContact, onChange } = this
     const { newContact } = this.state
@@ -32,4 +35,5 @@ class ContactCreator extends Component {
   }
 }
 
+// wrap the component with easyComp before exporting it
 export default easyComp(ContactCreator)

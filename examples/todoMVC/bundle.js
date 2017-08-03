@@ -26938,6 +26938,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_easy_state__ = __webpack_require__(41);
 
 
+// a complex global store with a lot of derived data (getters and setters)
 /* harmony default export */ __webpack_exports__["a"] = (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_react_easy_state__["b" /* easyStore */])({
   filter: 'todos',
   todos: [],
@@ -27121,6 +27122,16 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 
 class TodoItem extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
+  remove() {
+    __WEBPACK_IMPORTED_MODULE_4__store__["a" /* default */].remove(this.props.todo);
+  }
+
+  toggle() {
+    const { todo } = this.props;
+    todo.completed = !todo.completed;
+  }
+
+  // render is triggered whenever the relevant parts of the component props or global store change
   render() {
     const { toggle, remove } = this;
     const { todo } = this.props;
@@ -27139,17 +27150,9 @@ class TodoItem extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('button', { onClick: remove, className: 'destroy' })
     );
   }
-
-  remove() {
-    __WEBPACK_IMPORTED_MODULE_4__store__["a" /* default */].remove(this.props.todo);
-  }
-
-  toggle() {
-    const { todo } = this.props;
-    todo.completed = !todo.completed;
-  }
 }
 
+// wrap the component with easyComp exporting it
 /* harmony default export */ __webpack_exports__["a"] = (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3_react_easy_state__["a" /* easyComp */])(TodoItem));
 
 /***/ }),
@@ -27177,6 +27180,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+// render is triggered whenever the relevant parts of the global store change
 function App() {
   const { todos, hasTodos, hasCompleted, allCompleted, active, filter,
     create, changeFilter, toggleAll, clearCompleted } = __WEBPACK_IMPORTED_MODULE_5__store__["a" /* default */];
@@ -27250,6 +27254,7 @@ function App() {
   );
 }
 
+// wrap the component with easyComp before mounting it as root
 const app = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3_react_easy_state__["a" /* easyComp */])(App));
 __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(app, document.getElementById('react-root'));
 

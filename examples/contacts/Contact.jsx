@@ -6,8 +6,10 @@ class Contact extends Component {
   constructor ({ contact }) {
     super()
 
+    // save internal utility data in component state, instead of the global store
+    // editing is boolean meta flag, which indicates if the contact is currently edited
+    // currentContact is a temporary state of the contact during editing, which can be saved or cancelled
     this.state = {
-      contact,
       currentContact: Object.assign({}, contact),
       editing: false
     }
@@ -18,30 +20,30 @@ class Contact extends Component {
   }
 
   onDelete () {
-    const { contact } = this.props
-    store.deleteContact(contact)
+    store.deleteContact(this.props.contact)
   }
 
+  // transfer finalized changes from the component state to the main store
   onSave () {
-    const { contact, currentContact } = this.state
-    Object.assign(contact, currentContact)
+    Object.assign(this.props.contact, this.state.currentContact)
     this.state.editing = false
   }
 
+  // cancel changes by reverting to data from the main store
   onCancel () {
-    const { contact, currentContact } = this.state
-    Object.assign(currentContact, contact)
+    Object.assign(this.state.currentContact, this.props.contact)
     this.state.editing = false
   }
 
   onChange (ev) {
-    const { currentContact } = this.state
-    currentContact[ev.target.name] = ev.target.value
+    this.state.currentContact[ev.target.name] = ev.target.value
   }
 
+  // render is triggered whenever the relevant parts of the component state, props or global store change
   render () {
     const { onChange, onSave, onCancel, onEdit, onDelete } = this
-    const { contact, currentContact, editing } = this.state
+    const { currentContact, editing } = this.state
+    const { contact } = this.props
 
     if (!editing) {
       return (
@@ -69,4 +71,5 @@ class Contact extends Component {
   }
 }
 
+// wrap the component with easyComp before exporting it
 export default easyComp(Contact)

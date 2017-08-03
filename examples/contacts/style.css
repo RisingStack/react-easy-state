@@ -1,7 +1,11 @@
+* {
+  font: 16px "Open Sans", sans-serif;
+  color: #2c3e50;
+}
+
 th {
   width: 200px;
   font-weight: bold;
-  cursor: pointer;
 }
 
 th, td {
@@ -17,6 +21,8 @@ table, th, td {
 
 table {
   border-collapse: collapse;
+  margin: 50px auto;
+  box-shadow: 4px 4px 12px lightgrey;
 }
 
 input, span {
@@ -42,8 +48,4 @@ button {
 
 button {
   cursor: pointer;
-}
-
-* {
-  font: 16px "Open Sans", sans-serif;
 }

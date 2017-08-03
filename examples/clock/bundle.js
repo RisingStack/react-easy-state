@@ -42709,14 +42709,17 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
     this.setTime();
   }
 
+  // state can be manipulated as a plain JS object, instead of setState
   setTime() {
     this.state.time = __WEBPACK_IMPORTED_MODULE_2_moment___default()().format('hh:mm:ss A');
   }
 
+  // clean up the timer before the component is unmounted
   componentWillUnmount() {
     clearInterval(this.state.clock);
   }
 
+  // render is automatically triggered whenever this.state.time changes
   render() {
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'div',
@@ -42726,6 +42729,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
   }
 }
 
+// wrap the component with easyComp before mounting it as root
 const app = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3_react_easy_state__["a" /* easyComp */])(App));
 __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(app, document.getElementById('react-root'));
 

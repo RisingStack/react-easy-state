@@ -5,6 +5,16 @@ import { easyComp } from 'react-easy-state'
 import store from './store'
 
 class TodoItem extends Component {
+  remove () {
+    store.remove(this.props.todo)
+  }
+
+  toggle () {
+    const { todo } = this.props
+    todo.completed = !todo.completed
+  }
+
+  // render is triggered whenever the relevant parts of the component props or global store change
   render () {
     const { toggle, remove } = this
     const { todo } = this.props
@@ -19,15 +29,7 @@ class TodoItem extends Component {
       </li>
     )
   }
-
-  remove () {
-    store.remove(this.props.todo)
-  }
-
-  toggle () {
-    const { todo } = this.props
-    todo.completed = !todo.completed
-  }
 }
 
+// wrap the component with easyComp exporting it
 export default easyComp(TodoItem)

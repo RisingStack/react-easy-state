@@ -5,6 +5,7 @@ import Contact from './Contact'
 import ContactCreator from './ContactCreator'
 import store from './store'
 
+// this rerenders whenever the store.contacts array changes (elements pushed or deleted)
 function App () {
   return (
     <table>
@@ -25,5 +26,6 @@ function App () {
   )
 }
 
+// wrap the component with easyComp before mounting it as root
 const app = React.createElement(easyComp(App))
 ReactDOM.render(app, document.getElementById('react-root'))

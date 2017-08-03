@@ -5,6 +5,7 @@ import { easyComp } from 'react-easy-state'
 import TodoItem from './TodoItem'
 import store from './store'
 
+// render is triggered whenever the relevant parts of the global store change
 function App () {
   const { todos, hasTodos, hasCompleted, allCompleted, active, filter,
           create, changeFilter, toggleAll, clearCompleted } = store
@@ -43,5 +44,6 @@ function App () {
   )
 }
 
+// wrap the component with easyComp before mounting it as root
 const app = React.createElement(easyComp(App))
 ReactDOM.render(app, document.getElementById('react-root'))

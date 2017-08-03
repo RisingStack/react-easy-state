@@ -1,5 +1,6 @@
 import { easyStore } from 'react-easy-state'
 
+// a complex global store with a lot of derived data (getters and setters)
 export default easyStore({
   filter: 'todos',
   todos: [],

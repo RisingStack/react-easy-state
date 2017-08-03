@@ -1,9 +1,6 @@
 # React Easy State
 
-Easy State aims to make React's state management simpler without adding new syntax. To achieve this it makes the following modifications.
-
-- It replaces React's `setState()` with plain native JavaScript.
-- It auto binds your component's methods.
+Easy State a tiny state management solution for React with a strong focus on simplicity.
 
 ## Installation
 
@@ -11,43 +8,50 @@ Easy State aims to make React's state management simpler without adding new synt
 
 ## Usage
 
-Add the `@easyState` decorator to all of your components - except stateless (function) components - and enjoy the benefits.
+Easy State consists of two functions: `easyComp` and `easyStore`.
+
+### easyComp
+
+Wrapping your components with the `easyComp` function simplifies React's own state management in the following ways.
+
+- It allows you to mutate the component's state directly, without calling `setState`.
+
+- It binds your component's methods to the component, to allow them to be passed as callbacks.
 
 ```js
 import React, { Component } from 'react'
-import easyState from 'react-easy-state'
+import { easyComp } from 'react-easy-state'
 
-@easyState
-class Counter extends Component {
-  state = { value: 0 }
-
-  increment () {
-    this.state.value++
+class Hello extends Component {
+  state = {
+    name: 'World!'
   }
 
-  decrement () {
-    this.state.value--
+  // this is bound to the component, so it can be safely passed as a callback
+  onChange (ev) {
+    // the state can be modified directly
+    this.state.name = ev.target.value  
   }
 
+  // the render is triggered whenever state.name changes
   render () {
+    const { onChange } = this
+    const { name } = this.state
+
     return (
       <div>
-        {this.state.value}
-        <button onClick={this.increment}>+</button>
-        <button onClick={this.decrement}>-</button>
+        <input value={name} onChange={onChange} />
+        <div>Hello {name}!</div>
       </div>
     )
   }
 }
+
+// the component must be wrapped with easyComp
+export default easyComp(Hello)
 ```
 
-### About decorators
-
-`@easyState` is a decorator, which is not yet part of the JS language. You can learn how to enable decorators with babel [here](https://github.com/loganfsmyth/babel-plugin-transform-decorators-legacy) or you can use the older `easyState(Comp)` function syntax.
-
-## Key features
-
-- Your state can use any valid JavaScript. Feel free to use nested objects, arrays, expando properties, getters/setters, inheritance and ES6 collections directly.
+Apart from the simplified syntax wrapping your component's with `EasyComp` provides the following benefits.
 
 - The state is just an object, which updates synchronously when you update it. You don't have to worry about the asynchronous nature of `setState`.
 
@@ -67,15 +71,78 @@ class Counter extends Component {
 
 As a result the state is always fresh and a stable and fresh view is always achieved before the next repaint with the minimal number of required renders.
 
+### easyStore
+
+`EasyStore` creates global state stores, to handle data that do not fit into component state. Wrapping an object with `easyStore` has to following effects.
+
+- It transforms the object into a reactive data store, which triggers appropriate renders on mutations.
+
+- It binds your object's methods to the object, to allow them to be passed as callbacks.
+
+```js
+import React, { Component } from 'react'
+import { easyComp, easyStore } from 'react-easy-state'
+
+// this creates a global state store
+const store = easyStore({
+  name: 'Hello'
+})
+
+class Hello extends Component {
+  // this is bound to the component, so it can be safely passed as a callback
+  onChange (ev) {
+    store.name = ev.target.value  
+  }
+
+  // the render is triggered whenever store.name changes
+  render () {
+    return (
+      <div>
+        <input value={store.name} onChange={this.onChange} />
+        <div>Hello {store.name}!</div>
+      </div>
+    )
+  }
+}
+
+// the component must be wrapped with easyComp
+export default easyComp(Hello)
+```
+
+`easyStore` creates global state stores. A store is just an object and it behaves much like the component state from `easyComp`. It can be handled like a normal JavaScript object and it automatically triggers the appropriate render methods when it is mutated.
+
+## State management tutorial
+
+Easy State promotes a healthy balance between local and global state. The following use cases will give a rough guide when to use which.
+
+### Widgets and libraries
+
+This is an easy decision. Always use local component state for reusable components. They should be robust and versatile without implicit dependencies. Check out the introductory [clock example]() for some code.
+
+### Application state
+
+Most application state is usually persistent and singleton. It should be managed in global stores.
+
+- A good example is the currently logged in user. There is only one user at a time and user data should be easily available anywhere anytime. Perfect candidate for singleton global state.
+
+- Another nice example is user inputs, which should go into the URL or change the browser history. These are inherently global because they affect global concepts (URL and browser history). Some example for these are filters, date ranges and sorting primitives.
+
+
+### Application pages
+
+A typical app has several independent pages. There is only one active page at a time, which makes them a nice candidate for singleton global state stores. However pages are not as persistent as the app user for example, which makes them lean towards local state management.
+
+Page state usually has filters and inputs, which goes into the URL and browser history. In this case it is inherently global and it should be handled in a global state store. These stores persist between page transitions, but this is perfectly fine. As a bonus you get a faster transition, because you don't always have to re-fetch all of the data. If you do not want data to linger around clean up the relevant parts in `componentWillUnmount`.
+
 ## Examples with live demos
 
-- [Hello World](https://solkimicreb.github.io/react-easy-state/examples/helloWorld/) ([source](/examples/helloWorld/))
-- [Simple Todos](https://solkimicreb.github.io/react-easy-state/examples/simpleTodos/) ([source](/examples/simpleTodos/))
+- [Clock Widget](https://solkimicreb.github.io/react-easy-state/examples/clock/) ([source](/examples/clock/))
 - [TodoMVC](https://solkimicreb.github.io/react-easy-state/examples/todoMVC/) ([source](/examples/todoMVC/))
+- [Contacts Table](https://solkimicreb.github.io/react-easy-state/examples/contacts/) ([source](/examples/contacts/))
 
 ## Performance
 
-You can compare Easy State with plain React and other state management libraries with the below benchmarks. Generally it seems like Easy State performs a bit better than MobX, a bit worse than plain optimized React and similarly to Redux.
+You can compare Easy State with plain React and other state management libraries with the below benchmarks. Easy State performs a bit better than MobX, a bit worse than plain optimized React and similarly to Redux.
 
 - [js-framework-benchmark](https://github.com/krausest/js-framework-benchmark) ([source](https://github.com/krausest/js-framework-benchmark/tree/master/react-v15.5.4-easy-state-v1.0.3)) ([results](https://rawgit.com/krausest/js-framework-benchmark/master/webdriver-ts-results/table.html))
 

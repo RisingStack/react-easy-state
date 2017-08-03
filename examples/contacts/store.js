@@ -1,11 +1,11 @@
 import { easyStore } from 'react-easy-state'
 
+// store the central data and logic of the application in a global store
 export default easyStore({
   contacts: [],
   addContact (contact) {
-    if (!contact.name || !contact.email) {
-      throw new Error('Invalid Contact')
-    }
+    contact.name = contact.name || 'Placeholder'
+    contact.email = contact.email || 'Placeholder'
     this.contacts.push(contact)
   },
   deleteContact (contact) {

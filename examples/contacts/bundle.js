@@ -26882,12 +26882,12 @@ function easyStore (store) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_easy_state__ = __webpack_require__(41);
 
 
+// store the central data and logic of the application in a global store
 /* harmony default export */ __webpack_exports__["a"] = (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_react_easy_state__["b" /* easyStore */])({
   contacts: [],
   addContact (contact) {
-    if (!contact.name || !contact.email) {
-      throw new Error('Invalid Contact')
-    }
+    contact.name = contact.name || 'Placeholder'
+    contact.email = contact.email || 'Placeholder'
     this.contacts.push(contact)
   },
   deleteContact (contact) {
@@ -27031,8 +27031,10 @@ class Contact extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
   constructor({ contact }) {
     super();
 
+    // save internal utility data in component state, instead of the global store
+    // editing is boolean meta flag, which indicates if the contact is currently edited
+    // currentContact is a temporary state of the contact during editing, which can be saved or cancelled
     this.state = {
-      contact,
       currentContact: Object.assign({}, contact),
       editing: false
     };
@@ -27043,30 +27045,30 @@ class Contact extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
   }
 
   onDelete() {
-    const { contact } = this.props;
-    __WEBPACK_IMPORTED_MODULE_2__store__["a" /* default */].deleteContact(contact);
+    __WEBPACK_IMPORTED_MODULE_2__store__["a" /* default */].deleteContact(this.props.contact);
   }
 
+  // transfer finalized changes from the component state to the main store
   onSave() {
-    const { contact, currentContact } = this.state;
-    Object.assign(contact, currentContact);
+    Object.assign(this.props.contact, this.state.currentContact);
     this.state.editing = false;
   }
 
+  // cancel changes by reverting to data from the main store
   onCancel() {
-    const { contact, currentContact } = this.state;
-    Object.assign(currentContact, contact);
+    Object.assign(this.state.currentContact, this.props.contact);
     this.state.editing = false;
   }
 
   onChange(ev) {
-    const { currentContact } = this.state;
-    currentContact[ev.target.name] = ev.target.value;
+    this.state.currentContact[ev.target.name] = ev.target.value;
   }
 
+  // render is triggered whenever the relevant parts of the component state, props or global store change
   render() {
     const { onChange, onSave, onCancel, onEdit, onDelete } = this;
-    const { contact, currentContact, editing } = this.state;
+    const { currentContact, editing } = this.state;
+    const { contact } = this.props;
 
     if (!editing) {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -27130,6 +27132,7 @@ class Contact extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
   }
 }
 
+// wrap the component with easyComp before exporting it
 /* harmony default export */ __webpack_exports__["a"] = (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_react_easy_state__["a" /* easyComp */])(Contact));
 
 /***/ }),
@@ -27153,11 +27156,14 @@ class ContactCreator extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
       newContact: { name: '', email: '' }
     }, _temp;
   }
+  // save internal utility data in component state, instead of the global store
+  // newContact is the skeleton for the next contact before it is added to the list
 
+
+  // transfer finalized contact from the component state to the main store
   addContact() {
-    const { state } = this;
-    __WEBPACK_IMPORTED_MODULE_2__store__["a" /* default */].addContact(state.newContact);
-    state.newContact = { name: '', email: '' };
+    __WEBPACK_IMPORTED_MODULE_2__store__["a" /* default */].addContact(this.state.newContact);
+    this.state.newContact = { name: '', email: '' };
   }
 
   onChange(ev) {
@@ -27165,6 +27171,7 @@ class ContactCreator extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
     newContact[ev.target.name] = ev.target.value;
   }
 
+  // render is triggered whenever the relevant parts of the component state or global store change
   render() {
     const { addContact, onChange } = this;
     const { newContact } = this.state;
@@ -27195,6 +27202,7 @@ class ContactCreator extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
   }
 }
 
+// wrap the component with easyComp before exporting it
 /* harmony default export */ __webpack_exports__["a"] = (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_react_easy_state__["a" /* easyComp */])(ContactCreator));
 
 /***/ }),
@@ -27221,6 +27229,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+// this rerenders whenever the store.contacts array changes (elements pushed or deleted)
 function App() {
   return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
     'table',
@@ -27257,6 +27266,7 @@ function App() {
   );
 }
 
+// wrap the component with easyComp before mounting it as root
 const app = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_react_easy_state__["a" /* easyComp */])(App));
 __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(app, document.getElementById('react-root'));
 

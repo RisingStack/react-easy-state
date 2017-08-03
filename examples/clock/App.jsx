@@ -13,18 +13,22 @@ class App extends Component {
     this.setTime()
   }
 
+  // state can be manipulated as a plain JS object, instead of setState
   setTime () {
     this.state.time = moment().format('hh:mm:ss A')
   }
 
+  // clean up the timer before the component is unmounted
   componentWillUnmount () {
     clearInterval(this.state.clock)
   }
 
+  // render is automatically triggered whenever this.state.time changes
   render() {
     return <div>{this.state.time}</div>
   }
 }
 
+// wrap the component with easyComp before mounting it as root
 const app = React.createElement(easyComp(App))
 ReactDOM.render(app, document.getElementById('react-root'))
