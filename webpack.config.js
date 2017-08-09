@@ -6,5 +6,8 @@ module.exports = {
     path: path.join(__dirname, 'dist'),
     filename: 'easyState.js',
     libraryTarget: 'umd'
+  },
+  externals: {
+    react: 'react'
   }
 }
