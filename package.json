@@ -72,6 +72,7 @@
     "pre-push": "0.1.1",
     "react": "15.6.1",
     "react-dom": "15.6.1",
+    "react-test-renderer": "^15.6.1",
     "sinon": "3.1.0",
     "standard": "10.0.3",
     "webpack": "^3.5.2"
