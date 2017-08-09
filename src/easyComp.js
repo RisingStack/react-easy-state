@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import { observable, unobserve, observe } from '@nx-js/observer-util'
 import autoBind from './autoBind'
 

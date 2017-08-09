@@ -6,7 +6,7 @@ import App from '../examples/clock/App'
 
 describe('Clock App', () => {
   const clock = sinon.useFakeTimers()
-  const app = mount(<App/>)
+  const app = mount(<App />)
   const clearIntervalSpy = sinon.spy(global, 'clearInterval')
 
   afterAll(() => {

@@ -23,7 +23,7 @@ class App extends Component {
   }
 
   // render is automatically triggered whenever this.state.time changes
-  render() {
+  render () {
     return <div>{this.state.time}</div>
   }
 }

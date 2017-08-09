@@ -18,9 +18,13 @@ export default easyStore({
   },
   set allCompleted (completed) {
     if (completed) {
-      this.todos.forEach(todo => todo.completed = true)
+      this.todos.forEach(todo => {
+        todo.completed = true
+      })
     } else {
-      this.todos.forEach(todo => todo.completed = false)
+      this.todos.forEach(todo => {
+        todo.completed = false
+      })
     }
   },
   get active () {

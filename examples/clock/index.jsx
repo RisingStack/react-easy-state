@@ -1,5 +1,5 @@
+import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 
-const app = React.createElement(easyComp(App))
-ReactDOM.render(app, document.getElementById('react-root'))
+ReactDOM.render(<App />, document.getElementById('react-root'))

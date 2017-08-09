@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
 import classNames from 'classnames'
 import { easyComp } from 'react-easy-state'
 import store from './store'
@@ -23,9 +22,9 @@ class TodoItem extends Component {
 
     return (
       <li className={itemClass}>
-        <input className="toggle" type="checkbox" checked={todo.completed} onChange={toggle}/>
+        <input className='toggle' type='checkbox' checked={todo.completed} onChange={toggle} />
         <label>{todo.title}</label>
-        <button onClick={remove} className="destroy"/>
+        <button onClick={remove} className='destroy' />
       </li>
     )
   }

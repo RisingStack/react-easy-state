@@ -4,7 +4,7 @@ import toJSON from 'enzyme-to-json'
 import App from '../examples/todoMVC/App'
 
 describe('TodoMVC App', () => {
-  const app = mount(<App/>)
+  const app = mount(<App />)
 
   test('should add todos', async () => {
     expect(toJSON(app)).toMatchSnapshot('01. Initial state')

@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
+import React from 'react'
 import classNames from 'classnames'
 import { easyComp } from 'react-easy-state'
 import TodoItem from './TodoItem'
 import store from './store'
 
 // render is triggered whenever the relevant parts of the global store change
-function App() {
-  const { todos, hasTodos, hasCompleted, allCompleted, active, filter,
+function App () {
+  const { hasTodos, hasCompleted, allCompleted, active, filter,
           create, changeFilter, toggleAll, clearCompleted } = store
 
   const todosClass = classNames({ selected: filter === 'todos' })
@@ -14,28 +14,28 @@ function App() {
   const activeClass = classNames({ selected: filter === 'active' })
 
   return (
-    <div className="todoapp">
-      <header className="header">
+    <div className='todoapp'>
+      <header className='header'>
         <h1>todos</h1>
-        <input onKeyUp={create} className="new-todo" placeholder="What needs to be done?" autoFocus={true}/>
+        <input onKeyUp={create} className='new-todo' placeholder='What needs to be done?' autoFocus />
       </header>
 
-      {hasTodos && <section className="main">
-        <input className="toggle-all" type="checkbox" checked={allCompleted} onChange={toggleAll}/>
-        <label htmlFor="toggle-all">Mark all as complete</label>
-        <ul className="todo-list">
+      {hasTodos && <section className='main'>
+        <input className='toggle-all' type='checkbox' checked={allCompleted} onChange={toggleAll} />
+        <label htmlFor='toggle-all'>Mark all as complete</label>
+        <ul className='todo-list'>
           {store[filter].map(todo => <TodoItem key={todo.title} todo={todo} />)}
         </ul>
       </section>}
 
-      {hasTodos && <footer className="footer">
-        <span className="todo-count">{active.length} items left</span>
-        <div className="filters">
-          <button className={todosClass} value="todos" onClick={changeFilter}>All</button>
-          <button className={activeClass} value="active" onClick={changeFilter}>Active</button>
-          <button className={completedClass} value="completed" onClick={changeFilter}>Completed</button>
+      {hasTodos && <footer className='footer'>
+        <span className='todo-count'>{active.length} items left</span>
+        <div className='filters'>
+          <button className={todosClass} value='todos' onClick={changeFilter}>All</button>
+          <button className={activeClass} value='active' onClick={changeFilter}>Active</button>
+          <button className={completedClass} value='completed' onClick={changeFilter}>Completed</button>
         </div>
-        {hasCompleted && <button className="clear-completed" onClick={clearCompleted}>
+        {hasCompleted && <button className='clear-completed' onClick={clearCompleted}>
           Clear completed
         </button>}
       </footer>}

@@ -47,24 +47,24 @@ class Contact extends Component {
 
     if (!editing) {
       return (
-        <tr className="contact-display">
+        <tr className='contact-display'>
           <td>{contact.name}</td>
           <td>{contact.email}</td>
           <td>
-            <button onClick={onEdit}><i className="zmdi zmdi-edit"></i></button>
-            <button onClick={onDelete}><i className="zmdi zmdi-delete"></i></button>
+            <button onClick={onEdit}><i className='zmdi zmdi-edit' /></button>
+            <button onClick={onDelete}><i className='zmdi zmdi-delete' /></button>
           </td>
         </tr>
       )
     }
 
     return (
-      <tr className="contact-editor">
-        <td><input name="name" value={currentContact.name} onChange={onChange} autoFocus={true}/></td>
-        <td><input name="email" value={currentContact.email} onChange={onChange}/></td>
+      <tr className='contact-editor'>
+        <td><input name='name' value={currentContact.name} onChange={onChange} autoFocus /></td>
+        <td><input name='email' value={currentContact.email} onChange={onChange} /></td>
         <td>
-          <button onClick={onSave}><i className="zmdi zmdi-save"></i></button>
-          <button onClick={onCancel}><i className="zmdi zmdi-close"></i></button>
+          <button onClick={onSave}><i className='zmdi zmdi-save' /></button>
+          <button onClick={onCancel}><i className='zmdi zmdi-close' /></button>
         </td>
       </tr>
     )
