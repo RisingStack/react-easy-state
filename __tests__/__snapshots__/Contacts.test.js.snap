@@ -17,7 +17,7 @@ exports[`01. Initial state 1`] = `
       </tr>
     </thead>
     <tbody>
-      <EasyStateWrapper>
+      <EasyCompWrapper>
         <tr
           className="contact-creator"
         >
@@ -45,7 +45,7 @@ exports[`01. Initial state 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
+      </EasyCompWrapper>
     </tbody>
   </table>
 </App>
@@ -66,7 +66,7 @@ exports[`01. Initial state 1`] = `
       </tr>
     </thead>
     <tbody>
-      <EasyStateWrapper>
+      <EasyCompWrapper>
         <tr class="contact-creator">
           <td>
             <input
@@ -88,7 +88,7 @@ exports[`01. Initial state 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
+      </EasyCompWrapper>
     </tbody>
   </table>
 </App>
@@ -111,7 +111,7 @@ exports[`02. Create Test Contact name 1`] = `
       </tr>
     </thead>
     <tbody>
-      <EasyStateWrapper>
+      <EasyCompWrapper>
         <tr
           className="contact-creator"
         >
@@ -139,7 +139,7 @@ exports[`02. Create Test Contact name 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
+      </EasyCompWrapper>
     </tbody>
   </table>
 </App>
@@ -160,7 +160,7 @@ exports[`02. Create Test Contact name 1`] = `
       </tr>
     </thead>
     <tbody>
-      <EasyStateWrapper>
+      <EasyCompWrapper>
         <tr class="contact-creator">
           <td>
             <input
@@ -182,7 +182,7 @@ exports[`02. Create Test Contact name 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
+      </EasyCompWrapper>
     </tbody>
   </table>
 </App>
@@ -205,7 +205,7 @@ exports[`03. Create Test Contact email 1`] = `
       </tr>
     </thead>
     <tbody>
-      <EasyStateWrapper>
+      <EasyCompWrapper>
         <tr
           className="contact-creator"
         >
@@ -233,7 +233,7 @@ exports[`03. Create Test Contact email 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
+      </EasyCompWrapper>
     </tbody>
   </table>
 </App>
@@ -254,7 +254,7 @@ exports[`03. Create Test Contact email 1`] = `
       </tr>
     </thead>
     <tbody>
-      <EasyStateWrapper>
+      <EasyCompWrapper>
         <tr class="contact-creator">
           <td>
             <input
@@ -276,7 +276,7 @@ exports[`03. Create Test Contact email 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
+      </EasyCompWrapper>
     </tbody>
   </table>
 </App>
@@ -299,7 +299,7 @@ exports[`04. Add Test Contact 1`] = `
       </tr>
     </thead>
     <tbody>
-      <EasyStateWrapper
+      <EasyCompWrapper
         contact={
           Object {
             "email": "test.contact@gmail.com",
@@ -333,8 +333,8 @@ exports[`04. Add Test Contact 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
-      <EasyStateWrapper>
+      </EasyCompWrapper>
+      <EasyCompWrapper>
         <tr
           className="contact-creator"
         >
@@ -362,7 +362,7 @@ exports[`04. Add Test Contact 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
+      </EasyCompWrapper>
     </tbody>
   </table>
 </App>
@@ -383,7 +383,7 @@ exports[`04. Add Test Contact 1`] = `
       </tr>
     </thead>
     <tbody>
-      <EasyStateWrapper>
+      <EasyCompWrapper>
         <tr class="contact-display">
           <td>
             Test Contact
@@ -400,8 +400,8 @@ exports[`04. Add Test Contact 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
-      <EasyStateWrapper>
+      </EasyCompWrapper>
+      <EasyCompWrapper>
         <tr class="contact-creator">
           <td>
             <input
@@ -423,7 +423,7 @@ exports[`04. Add Test Contact 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
+      </EasyCompWrapper>
     </tbody>
   </table>
 </App>
@@ -446,7 +446,7 @@ exports[`05. Add Other Contact 1`] = `
       </tr>
     </thead>
     <tbody>
-      <EasyStateWrapper
+      <EasyCompWrapper
         contact={
           Object {
             "email": "test.contact@gmail.com",
@@ -480,8 +480,8 @@ exports[`05. Add Other Contact 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
-      <EasyStateWrapper
+      </EasyCompWrapper>
+      <EasyCompWrapper
         contact={
           Object {
             "email": "other.contact@gmail.com",
@@ -515,8 +515,8 @@ exports[`05. Add Other Contact 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
-      <EasyStateWrapper>
+      </EasyCompWrapper>
+      <EasyCompWrapper>
         <tr
           className="contact-creator"
         >
@@ -544,7 +544,7 @@ exports[`05. Add Other Contact 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
+      </EasyCompWrapper>
     </tbody>
   </table>
 </App>
@@ -565,7 +565,7 @@ exports[`05. Add Other Contact 1`] = `
       </tr>
     </thead>
     <tbody>
-      <EasyStateWrapper>
+      <EasyCompWrapper>
         <tr class="contact-display">
           <td>
             Test Contact
@@ -582,8 +582,8 @@ exports[`05. Add Other Contact 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
-      <EasyStateWrapper>
+      </EasyCompWrapper>
+      <EasyCompWrapper>
         <tr class="contact-display">
           <td>
             Other Contact
@@ -600,8 +600,8 @@ exports[`05. Add Other Contact 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
-      <EasyStateWrapper>
+      </EasyCompWrapper>
+      <EasyCompWrapper>
         <tr class="contact-creator">
           <td>
             <input
@@ -623,7 +623,7 @@ exports[`05. Add Other Contact 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
+      </EasyCompWrapper>
     </tbody>
   </table>
 </App>
@@ -646,7 +646,7 @@ exports[`06. Switch Test Contact to Edit Mode 1`] = `
       </tr>
     </thead>
     <tbody>
-      <EasyStateWrapper
+      <EasyCompWrapper
         contact={
           Object {
             "email": "test.contact@gmail.com",
@@ -689,8 +689,8 @@ exports[`06. Switch Test Contact to Edit Mode 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
-      <EasyStateWrapper
+      </EasyCompWrapper>
+      <EasyCompWrapper
         contact={
           Object {
             "email": "other.contact@gmail.com",
@@ -724,8 +724,8 @@ exports[`06. Switch Test Contact to Edit Mode 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
-      <EasyStateWrapper>
+      </EasyCompWrapper>
+      <EasyCompWrapper>
         <tr
           className="contact-creator"
         >
@@ -753,7 +753,7 @@ exports[`06. Switch Test Contact to Edit Mode 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
+      </EasyCompWrapper>
     </tbody>
   </table>
 </App>
@@ -774,7 +774,7 @@ exports[`06. Switch Test Contact to Edit Mode 1`] = `
       </tr>
     </thead>
     <tbody>
-      <EasyStateWrapper>
+      <EasyCompWrapper>
         <tr class="contact-editor">
           <td>
             <input
@@ -798,8 +798,8 @@ exports[`06. Switch Test Contact to Edit Mode 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
-      <EasyStateWrapper>
+      </EasyCompWrapper>
+      <EasyCompWrapper>
         <tr class="contact-display">
           <td>
             Other Contact
@@ -816,8 +816,8 @@ exports[`06. Switch Test Contact to Edit Mode 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
-      <EasyStateWrapper>
+      </EasyCompWrapper>
+      <EasyCompWrapper>
         <tr class="contact-creator">
           <td>
             <input
@@ -839,7 +839,7 @@ exports[`06. Switch Test Contact to Edit Mode 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
+      </EasyCompWrapper>
     </tbody>
   </table>
 </App>
@@ -862,7 +862,7 @@ exports[`07. Edit Test Contact name 1`] = `
       </tr>
     </thead>
     <tbody>
-      <EasyStateWrapper
+      <EasyCompWrapper
         contact={
           Object {
             "email": "test.contact@gmail.com",
@@ -905,8 +905,8 @@ exports[`07. Edit Test Contact name 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
-      <EasyStateWrapper
+      </EasyCompWrapper>
+      <EasyCompWrapper
         contact={
           Object {
             "email": "other.contact@gmail.com",
@@ -940,8 +940,8 @@ exports[`07. Edit Test Contact name 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
-      <EasyStateWrapper>
+      </EasyCompWrapper>
+      <EasyCompWrapper>
         <tr
           className="contact-creator"
         >
@@ -969,7 +969,7 @@ exports[`07. Edit Test Contact name 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
+      </EasyCompWrapper>
     </tbody>
   </table>
 </App>
@@ -990,7 +990,7 @@ exports[`07. Edit Test Contact name 1`] = `
       </tr>
     </thead>
     <tbody>
-      <EasyStateWrapper>
+      <EasyCompWrapper>
         <tr class="contact-editor">
           <td>
             <input
@@ -1014,8 +1014,8 @@ exports[`07. Edit Test Contact name 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
-      <EasyStateWrapper>
+      </EasyCompWrapper>
+      <EasyCompWrapper>
         <tr class="contact-display">
           <td>
             Other Contact
@@ -1032,8 +1032,8 @@ exports[`07. Edit Test Contact name 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
-      <EasyStateWrapper>
+      </EasyCompWrapper>
+      <EasyCompWrapper>
         <tr class="contact-creator">
           <td>
             <input
@@ -1055,7 +1055,7 @@ exports[`07. Edit Test Contact name 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
+      </EasyCompWrapper>
     </tbody>
   </table>
 </App>
@@ -1078,7 +1078,7 @@ exports[`08. Cancel Test Contact edit 1`] = `
       </tr>
     </thead>
     <tbody>
-      <EasyStateWrapper
+      <EasyCompWrapper
         contact={
           Object {
             "email": "test.contact@gmail.com",
@@ -1112,8 +1112,8 @@ exports[`08. Cancel Test Contact edit 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
-      <EasyStateWrapper
+      </EasyCompWrapper>
+      <EasyCompWrapper
         contact={
           Object {
             "email": "other.contact@gmail.com",
@@ -1147,8 +1147,8 @@ exports[`08. Cancel Test Contact edit 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
-      <EasyStateWrapper>
+      </EasyCompWrapper>
+      <EasyCompWrapper>
         <tr
           className="contact-creator"
         >
@@ -1176,7 +1176,7 @@ exports[`08. Cancel Test Contact edit 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
+      </EasyCompWrapper>
     </tbody>
   </table>
 </App>
@@ -1197,7 +1197,7 @@ exports[`08. Cancel Test Contact edit 1`] = `
       </tr>
     </thead>
     <tbody>
-      <EasyStateWrapper>
+      <EasyCompWrapper>
         <tr class="contact-display">
           <td>
             Test Contact
@@ -1214,8 +1214,8 @@ exports[`08. Cancel Test Contact edit 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
-      <EasyStateWrapper>
+      </EasyCompWrapper>
+      <EasyCompWrapper>
         <tr class="contact-display">
           <td>
             Other Contact
@@ -1232,8 +1232,8 @@ exports[`08. Cancel Test Contact edit 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
-      <EasyStateWrapper>
+      </EasyCompWrapper>
+      <EasyCompWrapper>
         <tr class="contact-creator">
           <td>
             <input
@@ -1255,7 +1255,7 @@ exports[`08. Cancel Test Contact edit 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
+      </EasyCompWrapper>
     </tbody>
   </table>
 </App>
@@ -1278,7 +1278,7 @@ exports[`09. Switch Test Contact to edit Mode 1`] = `
       </tr>
     </thead>
     <tbody>
-      <EasyStateWrapper
+      <EasyCompWrapper
         contact={
           Object {
             "email": "test.contact@gmail.com",
@@ -1321,8 +1321,8 @@ exports[`09. Switch Test Contact to edit Mode 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
-      <EasyStateWrapper
+      </EasyCompWrapper>
+      <EasyCompWrapper
         contact={
           Object {
             "email": "other.contact@gmail.com",
@@ -1356,8 +1356,8 @@ exports[`09. Switch Test Contact to edit Mode 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
-      <EasyStateWrapper>
+      </EasyCompWrapper>
+      <EasyCompWrapper>
         <tr
           className="contact-creator"
         >
@@ -1385,7 +1385,7 @@ exports[`09. Switch Test Contact to edit Mode 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
+      </EasyCompWrapper>
     </tbody>
   </table>
 </App>
@@ -1406,7 +1406,7 @@ exports[`09. Switch Test Contact to edit Mode 1`] = `
       </tr>
     </thead>
     <tbody>
-      <EasyStateWrapper>
+      <EasyCompWrapper>
         <tr class="contact-editor">
           <td>
             <input
@@ -1430,8 +1430,8 @@ exports[`09. Switch Test Contact to edit Mode 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
-      <EasyStateWrapper>
+      </EasyCompWrapper>
+      <EasyCompWrapper>
         <tr class="contact-display">
           <td>
             Other Contact
@@ -1448,8 +1448,8 @@ exports[`09. Switch Test Contact to edit Mode 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
-      <EasyStateWrapper>
+      </EasyCompWrapper>
+      <EasyCompWrapper>
         <tr class="contact-creator">
           <td>
             <input
@@ -1471,7 +1471,7 @@ exports[`09. Switch Test Contact to edit Mode 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
+      </EasyCompWrapper>
     </tbody>
   </table>
 </App>
@@ -1494,7 +1494,7 @@ exports[`10. Edit Test Contact email 1`] = `
       </tr>
     </thead>
     <tbody>
-      <EasyStateWrapper
+      <EasyCompWrapper
         contact={
           Object {
             "email": "test.contact@gmail.com",
@@ -1537,8 +1537,8 @@ exports[`10. Edit Test Contact email 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
-      <EasyStateWrapper
+      </EasyCompWrapper>
+      <EasyCompWrapper
         contact={
           Object {
             "email": "other.contact@gmail.com",
@@ -1572,8 +1572,8 @@ exports[`10. Edit Test Contact email 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
-      <EasyStateWrapper>
+      </EasyCompWrapper>
+      <EasyCompWrapper>
         <tr
           className="contact-creator"
         >
@@ -1601,7 +1601,7 @@ exports[`10. Edit Test Contact email 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
+      </EasyCompWrapper>
     </tbody>
   </table>
 </App>
@@ -1622,7 +1622,7 @@ exports[`10. Edit Test Contact email 1`] = `
       </tr>
     </thead>
     <tbody>
-      <EasyStateWrapper>
+      <EasyCompWrapper>
         <tr class="contact-editor">
           <td>
             <input
@@ -1646,8 +1646,8 @@ exports[`10. Edit Test Contact email 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
-      <EasyStateWrapper>
+      </EasyCompWrapper>
+      <EasyCompWrapper>
         <tr class="contact-display">
           <td>
             Other Contact
@@ -1664,8 +1664,8 @@ exports[`10. Edit Test Contact email 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
-      <EasyStateWrapper>
+      </EasyCompWrapper>
+      <EasyCompWrapper>
         <tr class="contact-creator">
           <td>
             <input
@@ -1687,7 +1687,7 @@ exports[`10. Edit Test Contact email 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
+      </EasyCompWrapper>
     </tbody>
   </table>
 </App>
@@ -1710,7 +1710,7 @@ exports[`11. Save Test Contact edit 1`] = `
       </tr>
     </thead>
     <tbody>
-      <EasyStateWrapper
+      <EasyCompWrapper
         contact={
           Object {
             "email": "test.contact.edited@gmail.com",
@@ -1744,8 +1744,8 @@ exports[`11. Save Test Contact edit 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
-      <EasyStateWrapper
+      </EasyCompWrapper>
+      <EasyCompWrapper
         contact={
           Object {
             "email": "other.contact@gmail.com",
@@ -1779,8 +1779,8 @@ exports[`11. Save Test Contact edit 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
-      <EasyStateWrapper>
+      </EasyCompWrapper>
+      <EasyCompWrapper>
         <tr
           className="contact-creator"
         >
@@ -1808,7 +1808,7 @@ exports[`11. Save Test Contact edit 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
+      </EasyCompWrapper>
     </tbody>
   </table>
 </App>
@@ -1829,7 +1829,7 @@ exports[`11. Save Test Contact edit 1`] = `
       </tr>
     </thead>
     <tbody>
-      <EasyStateWrapper>
+      <EasyCompWrapper>
         <tr class="contact-display">
           <td>
             Test Contact
@@ -1846,8 +1846,8 @@ exports[`11. Save Test Contact edit 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
-      <EasyStateWrapper>
+      </EasyCompWrapper>
+      <EasyCompWrapper>
         <tr class="contact-display">
           <td>
             Other Contact
@@ -1864,8 +1864,8 @@ exports[`11. Save Test Contact edit 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
-      <EasyStateWrapper>
+      </EasyCompWrapper>
+      <EasyCompWrapper>
         <tr class="contact-creator">
           <td>
             <input
@@ -1887,7 +1887,7 @@ exports[`11. Save Test Contact edit 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
+      </EasyCompWrapper>
     </tbody>
   </table>
 </App>
@@ -1910,7 +1910,7 @@ exports[`12. Delete Other Contact 1`] = `
       </tr>
     </thead>
     <tbody>
-      <EasyStateWrapper
+      <EasyCompWrapper
         contact={
           Object {
             "email": "test.contact.edited@gmail.com",
@@ -1944,8 +1944,8 @@ exports[`12. Delete Other Contact 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
-      <EasyStateWrapper>
+      </EasyCompWrapper>
+      <EasyCompWrapper>
         <tr
           className="contact-creator"
         >
@@ -1973,7 +1973,7 @@ exports[`12. Delete Other Contact 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
+      </EasyCompWrapper>
     </tbody>
   </table>
 </App>
@@ -1994,7 +1994,7 @@ exports[`12. Delete Other Contact 1`] = `
       </tr>
     </thead>
     <tbody>
-      <EasyStateWrapper>
+      <EasyCompWrapper>
         <tr class="contact-display">
           <td>
             Test Contact
@@ -2011,8 +2011,8 @@ exports[`12. Delete Other Contact 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
-      <EasyStateWrapper>
+      </EasyCompWrapper>
+      <EasyCompWrapper>
         <tr class="contact-creator">
           <td>
             <input
@@ -2034,7 +2034,7 @@ exports[`12. Delete Other Contact 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
+      </EasyCompWrapper>
     </tbody>
   </table>
 </App>
@@ -2057,7 +2057,7 @@ exports[`13. Delete Test Contact 1`] = `
       </tr>
     </thead>
     <tbody>
-      <EasyStateWrapper>
+      <EasyCompWrapper>
         <tr
           className="contact-creator"
         >
@@ -2085,7 +2085,7 @@ exports[`13. Delete Test Contact 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
+      </EasyCompWrapper>
     </tbody>
   </table>
 </App>
@@ -2106,7 +2106,7 @@ exports[`13. Delete Test Contact 1`] = `
       </tr>
     </thead>
     <tbody>
-      <EasyStateWrapper>
+      <EasyCompWrapper>
         <tr class="contact-creator">
           <td>
             <input
@@ -2128,7 +2128,7 @@ exports[`13. Delete Test Contact 1`] = `
             </button>
           </td>
         </tr>
-      </EasyStateWrapper>
+      </EasyCompWrapper>
     </tbody>
   </table>
 </App>
