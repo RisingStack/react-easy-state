@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import { easyComp } from 'react-easy-state'
 import Contact from './Contact'
 import ContactCreator from './ContactCreator'
@@ -18,7 +17,7 @@ function App () {
       </thead>
       <tbody>
         {store.contacts.map(
-          contact => <Contact contact={contact} key={contact.name} />
+          contact => <Contact contact={contact} key={contact.email} />
         )}
         <ContactCreator />
       </tbody>
@@ -26,6 +25,5 @@ function App () {
   )
 }
 
-// wrap the component with easyComp before mounting it as root
-const app = React.createElement(easyComp(App))
-ReactDOM.render(app, document.getElementById('react-root'))
+// wrap the component with easyComp before exporting it
+export default easyComp(App)

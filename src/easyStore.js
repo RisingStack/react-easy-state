@@ -2,7 +2,7 @@ import { observable } from '@nx-js/observer-util'
 import autoBind from './autoBind'
 
 export default function easyStore (store) {
-  if (typeof store !== 'object') {
+  if (typeof store !== 'object' || store === null) {
     throw new TypeError('easyStore expects an object as argument.')
   }
 

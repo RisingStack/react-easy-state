@@ -1,0 +1,54 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css');
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+
+* {
+  font: 16px "Open Sans", sans-serif;
+  color: #2c3e50;
+}
+
+th {
+  width: 200px;
+  font-weight: bold;
+}
+
+th, td {
+  height: 30px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+table, th, td {
+  padding: 5px;
+  border: 1px solid black;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 50px auto;
+  box-shadow: 4px 4px 12px lightgrey;
+}
+
+input, span {
+  padding: 0;
+  margin: 0;
+  border: none !important;
+  outline: none !important;
+  display: inline-block;
+  text-align: center;
+  background: white;
+  height: 100%;
+}
+
+button {
+  padding: 0 10px;
+  margin: 0 5px;
+  border: none !important;
+  outline: none !important;
+  display: inline-block;
+  text-align: center;
+  background: white;
+}
+
+button {
+  cursor: pointer;
+}

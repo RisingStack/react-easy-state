@@ -1,0 +1,2135 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`01. Initial state 1`] = `
+<App>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Email
+        </th>
+        <th>
+          Action
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <EasyStateWrapper>
+        <tr
+          className="contact-creator"
+        >
+          <td>
+            <input
+              name="name"
+              onChange={[Function]}
+              placeholder="Contact name..."
+              value=""
+            />
+          </td>
+          <td>
+            <input
+              name="email"
+              onChange={[Function]}
+              placeholder="Contact email..."
+              value=""
+            />
+          </td>
+          <td>
+            <button
+              onClick={[Function]}
+            >
+              Add Contact
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+    </tbody>
+  </table>
+</App>
+------------HTML PREVIEW---------------
+<App>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Email
+        </th>
+        <th>
+          Action
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <EasyStateWrapper>
+        <tr class="contact-creator">
+          <td>
+            <input
+              name="name"
+              placeholder="Contact name..."
+              value=""
+            >
+          </td>
+          <td>
+            <input
+              name="email"
+              placeholder="Contact email..."
+              value=""
+            >
+          </td>
+          <td>
+            <button>
+              Add Contact
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+    </tbody>
+  </table>
+</App>
+`;
+
+exports[`02. Create Test Contact name 1`] = `
+<App>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Email
+        </th>
+        <th>
+          Action
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <EasyStateWrapper>
+        <tr
+          className="contact-creator"
+        >
+          <td>
+            <input
+              name="name"
+              onChange={[Function]}
+              placeholder="Contact name..."
+              value="Test Contact"
+            />
+          </td>
+          <td>
+            <input
+              name="email"
+              onChange={[Function]}
+              placeholder="Contact email..."
+              value=""
+            />
+          </td>
+          <td>
+            <button
+              onClick={[Function]}
+            >
+              Add Contact
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+    </tbody>
+  </table>
+</App>
+------------HTML PREVIEW---------------
+<App>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Email
+        </th>
+        <th>
+          Action
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <EasyStateWrapper>
+        <tr class="contact-creator">
+          <td>
+            <input
+              name="name"
+              placeholder="Contact name..."
+              value="Test Contact"
+            >
+          </td>
+          <td>
+            <input
+              name="email"
+              placeholder="Contact email..."
+              value=""
+            >
+          </td>
+          <td>
+            <button>
+              Add Contact
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+    </tbody>
+  </table>
+</App>
+`;
+
+exports[`03. Create Test Contact email 1`] = `
+<App>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Email
+        </th>
+        <th>
+          Action
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <EasyStateWrapper>
+        <tr
+          className="contact-creator"
+        >
+          <td>
+            <input
+              name="name"
+              onChange={[Function]}
+              placeholder="Contact name..."
+              value="Test Contact"
+            />
+          </td>
+          <td>
+            <input
+              name="email"
+              onChange={[Function]}
+              placeholder="Contact email..."
+              value="test.contact@gmail.com"
+            />
+          </td>
+          <td>
+            <button
+              onClick={[Function]}
+            >
+              Add Contact
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+    </tbody>
+  </table>
+</App>
+------------HTML PREVIEW---------------
+<App>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Email
+        </th>
+        <th>
+          Action
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <EasyStateWrapper>
+        <tr class="contact-creator">
+          <td>
+            <input
+              name="name"
+              placeholder="Contact name..."
+              value="Test Contact"
+            >
+          </td>
+          <td>
+            <input
+              name="email"
+              placeholder="Contact email..."
+              value="test.contact@gmail.com"
+            >
+          </td>
+          <td>
+            <button>
+              Add Contact
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+    </tbody>
+  </table>
+</App>
+`;
+
+exports[`04. Add Test Contact 1`] = `
+<App>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Email
+        </th>
+        <th>
+          Action
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <EasyStateWrapper
+        contact={
+          Object {
+            "email": "test.contact@gmail.com",
+            "name": "Test Contact",
+          }
+        }
+      >
+        <tr
+          className="contact-display"
+        >
+          <td>
+            Test Contact
+          </td>
+          <td>
+            test.contact@gmail.com
+          </td>
+          <td>
+            <button
+              onClick={[Function]}
+            >
+              <i
+                className="zmdi zmdi-edit"
+              />
+            </button>
+            <button
+              onClick={[Function]}
+            >
+              <i
+                className="zmdi zmdi-delete"
+              />
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+      <EasyStateWrapper>
+        <tr
+          className="contact-creator"
+        >
+          <td>
+            <input
+              name="name"
+              onChange={[Function]}
+              placeholder="Contact name..."
+              value=""
+            />
+          </td>
+          <td>
+            <input
+              name="email"
+              onChange={[Function]}
+              placeholder="Contact email..."
+              value=""
+            />
+          </td>
+          <td>
+            <button
+              onClick={[Function]}
+            >
+              Add Contact
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+    </tbody>
+  </table>
+</App>
+------------HTML PREVIEW---------------
+<App>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Email
+        </th>
+        <th>
+          Action
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <EasyStateWrapper>
+        <tr class="contact-display">
+          <td>
+            Test Contact
+          </td>
+          <td>
+            test.contact@gmail.com
+          </td>
+          <td>
+            <button>
+              <i class="zmdi zmdi-edit"></i>
+            </button>
+            <button>
+              <i class="zmdi zmdi-delete"></i>
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+      <EasyStateWrapper>
+        <tr class="contact-creator">
+          <td>
+            <input
+              name="name"
+              placeholder="Contact name..."
+              value=""
+            >
+          </td>
+          <td>
+            <input
+              name="email"
+              placeholder="Contact email..."
+              value=""
+            >
+          </td>
+          <td>
+            <button>
+              Add Contact
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+    </tbody>
+  </table>
+</App>
+`;
+
+exports[`05. Add Other Contact 1`] = `
+<App>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Email
+        </th>
+        <th>
+          Action
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <EasyStateWrapper
+        contact={
+          Object {
+            "email": "test.contact@gmail.com",
+            "name": "Test Contact",
+          }
+        }
+      >
+        <tr
+          className="contact-display"
+        >
+          <td>
+            Test Contact
+          </td>
+          <td>
+            test.contact@gmail.com
+          </td>
+          <td>
+            <button
+              onClick={[Function]}
+            >
+              <i
+                className="zmdi zmdi-edit"
+              />
+            </button>
+            <button
+              onClick={[Function]}
+            >
+              <i
+                className="zmdi zmdi-delete"
+              />
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+      <EasyStateWrapper
+        contact={
+          Object {
+            "email": "other.contact@gmail.com",
+            "name": "Other Contact",
+          }
+        }
+      >
+        <tr
+          className="contact-display"
+        >
+          <td>
+            Other Contact
+          </td>
+          <td>
+            other.contact@gmail.com
+          </td>
+          <td>
+            <button
+              onClick={[Function]}
+            >
+              <i
+                className="zmdi zmdi-edit"
+              />
+            </button>
+            <button
+              onClick={[Function]}
+            >
+              <i
+                className="zmdi zmdi-delete"
+              />
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+      <EasyStateWrapper>
+        <tr
+          className="contact-creator"
+        >
+          <td>
+            <input
+              name="name"
+              onChange={[Function]}
+              placeholder="Contact name..."
+              value=""
+            />
+          </td>
+          <td>
+            <input
+              name="email"
+              onChange={[Function]}
+              placeholder="Contact email..."
+              value=""
+            />
+          </td>
+          <td>
+            <button
+              onClick={[Function]}
+            >
+              Add Contact
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+    </tbody>
+  </table>
+</App>
+------------HTML PREVIEW---------------
+<App>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Email
+        </th>
+        <th>
+          Action
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <EasyStateWrapper>
+        <tr class="contact-display">
+          <td>
+            Test Contact
+          </td>
+          <td>
+            test.contact@gmail.com
+          </td>
+          <td>
+            <button>
+              <i class="zmdi zmdi-edit"></i>
+            </button>
+            <button>
+              <i class="zmdi zmdi-delete"></i>
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+      <EasyStateWrapper>
+        <tr class="contact-display">
+          <td>
+            Other Contact
+          </td>
+          <td>
+            other.contact@gmail.com
+          </td>
+          <td>
+            <button>
+              <i class="zmdi zmdi-edit"></i>
+            </button>
+            <button>
+              <i class="zmdi zmdi-delete"></i>
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+      <EasyStateWrapper>
+        <tr class="contact-creator">
+          <td>
+            <input
+              name="name"
+              placeholder="Contact name..."
+              value=""
+            >
+          </td>
+          <td>
+            <input
+              name="email"
+              placeholder="Contact email..."
+              value=""
+            >
+          </td>
+          <td>
+            <button>
+              Add Contact
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+    </tbody>
+  </table>
+</App>
+`;
+
+exports[`06. Switch Test Contact to Edit Mode 1`] = `
+<App>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Email
+        </th>
+        <th>
+          Action
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <EasyStateWrapper
+        contact={
+          Object {
+            "email": "test.contact@gmail.com",
+            "name": "Test Contact",
+          }
+        }
+      >
+        <tr
+          className="contact-editor"
+        >
+          <td>
+            <input
+              autoFocus={true}
+              name="name"
+              onChange={[Function]}
+              value="Test Contact"
+            />
+          </td>
+          <td>
+            <input
+              name="email"
+              onChange={[Function]}
+              value="test.contact@gmail.com"
+            />
+          </td>
+          <td>
+            <button
+              onClick={[Function]}
+            >
+              <i
+                className="zmdi zmdi-save"
+              />
+            </button>
+            <button
+              onClick={[Function]}
+            >
+              <i
+                className="zmdi zmdi-close"
+              />
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+      <EasyStateWrapper
+        contact={
+          Object {
+            "email": "other.contact@gmail.com",
+            "name": "Other Contact",
+          }
+        }
+      >
+        <tr
+          className="contact-display"
+        >
+          <td>
+            Other Contact
+          </td>
+          <td>
+            other.contact@gmail.com
+          </td>
+          <td>
+            <button
+              onClick={[Function]}
+            >
+              <i
+                className="zmdi zmdi-edit"
+              />
+            </button>
+            <button
+              onClick={[Function]}
+            >
+              <i
+                className="zmdi zmdi-delete"
+              />
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+      <EasyStateWrapper>
+        <tr
+          className="contact-creator"
+        >
+          <td>
+            <input
+              name="name"
+              onChange={[Function]}
+              placeholder="Contact name..."
+              value=""
+            />
+          </td>
+          <td>
+            <input
+              name="email"
+              onChange={[Function]}
+              placeholder="Contact email..."
+              value=""
+            />
+          </td>
+          <td>
+            <button
+              onClick={[Function]}
+            >
+              Add Contact
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+    </tbody>
+  </table>
+</App>
+------------HTML PREVIEW---------------
+<App>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Email
+        </th>
+        <th>
+          Action
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <EasyStateWrapper>
+        <tr class="contact-editor">
+          <td>
+            <input
+              autoFocus
+              name="name"
+              value="Test Contact"
+            >
+          </td>
+          <td>
+            <input
+              name="email"
+              value="test.contact@gmail.com"
+            >
+          </td>
+          <td>
+            <button>
+              <i class="zmdi zmdi-save"></i>
+            </button>
+            <button>
+              <i class="zmdi zmdi-close"></i>
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+      <EasyStateWrapper>
+        <tr class="contact-display">
+          <td>
+            Other Contact
+          </td>
+          <td>
+            other.contact@gmail.com
+          </td>
+          <td>
+            <button>
+              <i class="zmdi zmdi-edit"></i>
+            </button>
+            <button>
+              <i class="zmdi zmdi-delete"></i>
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+      <EasyStateWrapper>
+        <tr class="contact-creator">
+          <td>
+            <input
+              name="name"
+              placeholder="Contact name..."
+              value=""
+            >
+          </td>
+          <td>
+            <input
+              name="email"
+              placeholder="Contact email..."
+              value=""
+            >
+          </td>
+          <td>
+            <button>
+              Add Contact
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+    </tbody>
+  </table>
+</App>
+`;
+
+exports[`07. Edit Test Contact name 1`] = `
+<App>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Email
+        </th>
+        <th>
+          Action
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <EasyStateWrapper
+        contact={
+          Object {
+            "email": "test.contact@gmail.com",
+            "name": "Test Contact",
+          }
+        }
+      >
+        <tr
+          className="contact-editor"
+        >
+          <td>
+            <input
+              autoFocus={true}
+              name="name"
+              onChange={[Function]}
+              value="Edited Test Contact"
+            />
+          </td>
+          <td>
+            <input
+              name="email"
+              onChange={[Function]}
+              value="test.contact@gmail.com"
+            />
+          </td>
+          <td>
+            <button
+              onClick={[Function]}
+            >
+              <i
+                className="zmdi zmdi-save"
+              />
+            </button>
+            <button
+              onClick={[Function]}
+            >
+              <i
+                className="zmdi zmdi-close"
+              />
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+      <EasyStateWrapper
+        contact={
+          Object {
+            "email": "other.contact@gmail.com",
+            "name": "Other Contact",
+          }
+        }
+      >
+        <tr
+          className="contact-display"
+        >
+          <td>
+            Other Contact
+          </td>
+          <td>
+            other.contact@gmail.com
+          </td>
+          <td>
+            <button
+              onClick={[Function]}
+            >
+              <i
+                className="zmdi zmdi-edit"
+              />
+            </button>
+            <button
+              onClick={[Function]}
+            >
+              <i
+                className="zmdi zmdi-delete"
+              />
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+      <EasyStateWrapper>
+        <tr
+          className="contact-creator"
+        >
+          <td>
+            <input
+              name="name"
+              onChange={[Function]}
+              placeholder="Contact name..."
+              value=""
+            />
+          </td>
+          <td>
+            <input
+              name="email"
+              onChange={[Function]}
+              placeholder="Contact email..."
+              value=""
+            />
+          </td>
+          <td>
+            <button
+              onClick={[Function]}
+            >
+              Add Contact
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+    </tbody>
+  </table>
+</App>
+------------HTML PREVIEW---------------
+<App>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Email
+        </th>
+        <th>
+          Action
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <EasyStateWrapper>
+        <tr class="contact-editor">
+          <td>
+            <input
+              autoFocus
+              name="name"
+              value="Edited Test Contact"
+            >
+          </td>
+          <td>
+            <input
+              name="email"
+              value="test.contact@gmail.com"
+            >
+          </td>
+          <td>
+            <button>
+              <i class="zmdi zmdi-save"></i>
+            </button>
+            <button>
+              <i class="zmdi zmdi-close"></i>
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+      <EasyStateWrapper>
+        <tr class="contact-display">
+          <td>
+            Other Contact
+          </td>
+          <td>
+            other.contact@gmail.com
+          </td>
+          <td>
+            <button>
+              <i class="zmdi zmdi-edit"></i>
+            </button>
+            <button>
+              <i class="zmdi zmdi-delete"></i>
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+      <EasyStateWrapper>
+        <tr class="contact-creator">
+          <td>
+            <input
+              name="name"
+              placeholder="Contact name..."
+              value=""
+            >
+          </td>
+          <td>
+            <input
+              name="email"
+              placeholder="Contact email..."
+              value=""
+            >
+          </td>
+          <td>
+            <button>
+              Add Contact
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+    </tbody>
+  </table>
+</App>
+`;
+
+exports[`08. Cancel Test Contact edit 1`] = `
+<App>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Email
+        </th>
+        <th>
+          Action
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <EasyStateWrapper
+        contact={
+          Object {
+            "email": "test.contact@gmail.com",
+            "name": "Test Contact",
+          }
+        }
+      >
+        <tr
+          className="contact-display"
+        >
+          <td>
+            Test Contact
+          </td>
+          <td>
+            test.contact@gmail.com
+          </td>
+          <td>
+            <button
+              onClick={[Function]}
+            >
+              <i
+                className="zmdi zmdi-edit"
+              />
+            </button>
+            <button
+              onClick={[Function]}
+            >
+              <i
+                className="zmdi zmdi-delete"
+              />
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+      <EasyStateWrapper
+        contact={
+          Object {
+            "email": "other.contact@gmail.com",
+            "name": "Other Contact",
+          }
+        }
+      >
+        <tr
+          className="contact-display"
+        >
+          <td>
+            Other Contact
+          </td>
+          <td>
+            other.contact@gmail.com
+          </td>
+          <td>
+            <button
+              onClick={[Function]}
+            >
+              <i
+                className="zmdi zmdi-edit"
+              />
+            </button>
+            <button
+              onClick={[Function]}
+            >
+              <i
+                className="zmdi zmdi-delete"
+              />
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+      <EasyStateWrapper>
+        <tr
+          className="contact-creator"
+        >
+          <td>
+            <input
+              name="name"
+              onChange={[Function]}
+              placeholder="Contact name..."
+              value=""
+            />
+          </td>
+          <td>
+            <input
+              name="email"
+              onChange={[Function]}
+              placeholder="Contact email..."
+              value=""
+            />
+          </td>
+          <td>
+            <button
+              onClick={[Function]}
+            >
+              Add Contact
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+    </tbody>
+  </table>
+</App>
+------------HTML PREVIEW---------------
+<App>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Email
+        </th>
+        <th>
+          Action
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <EasyStateWrapper>
+        <tr class="contact-display">
+          <td>
+            Test Contact
+          </td>
+          <td>
+            test.contact@gmail.com
+          </td>
+          <td>
+            <button>
+              <i class="zmdi zmdi-edit"></i>
+            </button>
+            <button>
+              <i class="zmdi zmdi-delete"></i>
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+      <EasyStateWrapper>
+        <tr class="contact-display">
+          <td>
+            Other Contact
+          </td>
+          <td>
+            other.contact@gmail.com
+          </td>
+          <td>
+            <button>
+              <i class="zmdi zmdi-edit"></i>
+            </button>
+            <button>
+              <i class="zmdi zmdi-delete"></i>
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+      <EasyStateWrapper>
+        <tr class="contact-creator">
+          <td>
+            <input
+              name="name"
+              placeholder="Contact name..."
+              value=""
+            >
+          </td>
+          <td>
+            <input
+              name="email"
+              placeholder="Contact email..."
+              value=""
+            >
+          </td>
+          <td>
+            <button>
+              Add Contact
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+    </tbody>
+  </table>
+</App>
+`;
+
+exports[`09. Switch Test Contact to edit Mode 1`] = `
+<App>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Email
+        </th>
+        <th>
+          Action
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <EasyStateWrapper
+        contact={
+          Object {
+            "email": "test.contact@gmail.com",
+            "name": "Test Contact",
+          }
+        }
+      >
+        <tr
+          className="contact-editor"
+        >
+          <td>
+            <input
+              autoFocus={true}
+              name="name"
+              onChange={[Function]}
+              value="Test Contact"
+            />
+          </td>
+          <td>
+            <input
+              name="email"
+              onChange={[Function]}
+              value="test.contact@gmail.com"
+            />
+          </td>
+          <td>
+            <button
+              onClick={[Function]}
+            >
+              <i
+                className="zmdi zmdi-save"
+              />
+            </button>
+            <button
+              onClick={[Function]}
+            >
+              <i
+                className="zmdi zmdi-close"
+              />
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+      <EasyStateWrapper
+        contact={
+          Object {
+            "email": "other.contact@gmail.com",
+            "name": "Other Contact",
+          }
+        }
+      >
+        <tr
+          className="contact-display"
+        >
+          <td>
+            Other Contact
+          </td>
+          <td>
+            other.contact@gmail.com
+          </td>
+          <td>
+            <button
+              onClick={[Function]}
+            >
+              <i
+                className="zmdi zmdi-edit"
+              />
+            </button>
+            <button
+              onClick={[Function]}
+            >
+              <i
+                className="zmdi zmdi-delete"
+              />
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+      <EasyStateWrapper>
+        <tr
+          className="contact-creator"
+        >
+          <td>
+            <input
+              name="name"
+              onChange={[Function]}
+              placeholder="Contact name..."
+              value=""
+            />
+          </td>
+          <td>
+            <input
+              name="email"
+              onChange={[Function]}
+              placeholder="Contact email..."
+              value=""
+            />
+          </td>
+          <td>
+            <button
+              onClick={[Function]}
+            >
+              Add Contact
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+    </tbody>
+  </table>
+</App>
+------------HTML PREVIEW---------------
+<App>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Email
+        </th>
+        <th>
+          Action
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <EasyStateWrapper>
+        <tr class="contact-editor">
+          <td>
+            <input
+              autoFocus
+              name="name"
+              value="Test Contact"
+            >
+          </td>
+          <td>
+            <input
+              name="email"
+              value="test.contact@gmail.com"
+            >
+          </td>
+          <td>
+            <button>
+              <i class="zmdi zmdi-save"></i>
+            </button>
+            <button>
+              <i class="zmdi zmdi-close"></i>
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+      <EasyStateWrapper>
+        <tr class="contact-display">
+          <td>
+            Other Contact
+          </td>
+          <td>
+            other.contact@gmail.com
+          </td>
+          <td>
+            <button>
+              <i class="zmdi zmdi-edit"></i>
+            </button>
+            <button>
+              <i class="zmdi zmdi-delete"></i>
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+      <EasyStateWrapper>
+        <tr class="contact-creator">
+          <td>
+            <input
+              name="name"
+              placeholder="Contact name..."
+              value=""
+            >
+          </td>
+          <td>
+            <input
+              name="email"
+              placeholder="Contact email..."
+              value=""
+            >
+          </td>
+          <td>
+            <button>
+              Add Contact
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+    </tbody>
+  </table>
+</App>
+`;
+
+exports[`10. Edit Test Contact email 1`] = `
+<App>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Email
+        </th>
+        <th>
+          Action
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <EasyStateWrapper
+        contact={
+          Object {
+            "email": "test.contact@gmail.com",
+            "name": "Test Contact",
+          }
+        }
+      >
+        <tr
+          className="contact-editor"
+        >
+          <td>
+            <input
+              autoFocus={true}
+              name="name"
+              onChange={[Function]}
+              value="Test Contact"
+            />
+          </td>
+          <td>
+            <input
+              name="email"
+              onChange={[Function]}
+              value="test.contact.edited@gmail.com"
+            />
+          </td>
+          <td>
+            <button
+              onClick={[Function]}
+            >
+              <i
+                className="zmdi zmdi-save"
+              />
+            </button>
+            <button
+              onClick={[Function]}
+            >
+              <i
+                className="zmdi zmdi-close"
+              />
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+      <EasyStateWrapper
+        contact={
+          Object {
+            "email": "other.contact@gmail.com",
+            "name": "Other Contact",
+          }
+        }
+      >
+        <tr
+          className="contact-display"
+        >
+          <td>
+            Other Contact
+          </td>
+          <td>
+            other.contact@gmail.com
+          </td>
+          <td>
+            <button
+              onClick={[Function]}
+            >
+              <i
+                className="zmdi zmdi-edit"
+              />
+            </button>
+            <button
+              onClick={[Function]}
+            >
+              <i
+                className="zmdi zmdi-delete"
+              />
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+      <EasyStateWrapper>
+        <tr
+          className="contact-creator"
+        >
+          <td>
+            <input
+              name="name"
+              onChange={[Function]}
+              placeholder="Contact name..."
+              value=""
+            />
+          </td>
+          <td>
+            <input
+              name="email"
+              onChange={[Function]}
+              placeholder="Contact email..."
+              value=""
+            />
+          </td>
+          <td>
+            <button
+              onClick={[Function]}
+            >
+              Add Contact
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+    </tbody>
+  </table>
+</App>
+------------HTML PREVIEW---------------
+<App>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Email
+        </th>
+        <th>
+          Action
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <EasyStateWrapper>
+        <tr class="contact-editor">
+          <td>
+            <input
+              autoFocus
+              name="name"
+              value="Test Contact"
+            >
+          </td>
+          <td>
+            <input
+              name="email"
+              value="test.contact.edited@gmail.com"
+            >
+          </td>
+          <td>
+            <button>
+              <i class="zmdi zmdi-save"></i>
+            </button>
+            <button>
+              <i class="zmdi zmdi-close"></i>
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+      <EasyStateWrapper>
+        <tr class="contact-display">
+          <td>
+            Other Contact
+          </td>
+          <td>
+            other.contact@gmail.com
+          </td>
+          <td>
+            <button>
+              <i class="zmdi zmdi-edit"></i>
+            </button>
+            <button>
+              <i class="zmdi zmdi-delete"></i>
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+      <EasyStateWrapper>
+        <tr class="contact-creator">
+          <td>
+            <input
+              name="name"
+              placeholder="Contact name..."
+              value=""
+            >
+          </td>
+          <td>
+            <input
+              name="email"
+              placeholder="Contact email..."
+              value=""
+            >
+          </td>
+          <td>
+            <button>
+              Add Contact
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+    </tbody>
+  </table>
+</App>
+`;
+
+exports[`11. Save Test Contact edit 1`] = `
+<App>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Email
+        </th>
+        <th>
+          Action
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <EasyStateWrapper
+        contact={
+          Object {
+            "email": "test.contact.edited@gmail.com",
+            "name": "Test Contact",
+          }
+        }
+      >
+        <tr
+          className="contact-display"
+        >
+          <td>
+            Test Contact
+          </td>
+          <td>
+            test.contact.edited@gmail.com
+          </td>
+          <td>
+            <button
+              onClick={[Function]}
+            >
+              <i
+                className="zmdi zmdi-edit"
+              />
+            </button>
+            <button
+              onClick={[Function]}
+            >
+              <i
+                className="zmdi zmdi-delete"
+              />
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+      <EasyStateWrapper
+        contact={
+          Object {
+            "email": "other.contact@gmail.com",
+            "name": "Other Contact",
+          }
+        }
+      >
+        <tr
+          className="contact-display"
+        >
+          <td>
+            Other Contact
+          </td>
+          <td>
+            other.contact@gmail.com
+          </td>
+          <td>
+            <button
+              onClick={[Function]}
+            >
+              <i
+                className="zmdi zmdi-edit"
+              />
+            </button>
+            <button
+              onClick={[Function]}
+            >
+              <i
+                className="zmdi zmdi-delete"
+              />
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+      <EasyStateWrapper>
+        <tr
+          className="contact-creator"
+        >
+          <td>
+            <input
+              name="name"
+              onChange={[Function]}
+              placeholder="Contact name..."
+              value=""
+            />
+          </td>
+          <td>
+            <input
+              name="email"
+              onChange={[Function]}
+              placeholder="Contact email..."
+              value=""
+            />
+          </td>
+          <td>
+            <button
+              onClick={[Function]}
+            >
+              Add Contact
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+    </tbody>
+  </table>
+</App>
+------------HTML PREVIEW---------------
+<App>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Email
+        </th>
+        <th>
+          Action
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <EasyStateWrapper>
+        <tr class="contact-display">
+          <td>
+            Test Contact
+          </td>
+          <td>
+            test.contact.edited@gmail.com
+          </td>
+          <td>
+            <button>
+              <i class="zmdi zmdi-edit"></i>
+            </button>
+            <button>
+              <i class="zmdi zmdi-delete"></i>
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+      <EasyStateWrapper>
+        <tr class="contact-display">
+          <td>
+            Other Contact
+          </td>
+          <td>
+            other.contact@gmail.com
+          </td>
+          <td>
+            <button>
+              <i class="zmdi zmdi-edit"></i>
+            </button>
+            <button>
+              <i class="zmdi zmdi-delete"></i>
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+      <EasyStateWrapper>
+        <tr class="contact-creator">
+          <td>
+            <input
+              name="name"
+              placeholder="Contact name..."
+              value=""
+            >
+          </td>
+          <td>
+            <input
+              name="email"
+              placeholder="Contact email..."
+              value=""
+            >
+          </td>
+          <td>
+            <button>
+              Add Contact
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+    </tbody>
+  </table>
+</App>
+`;
+
+exports[`12. Delete Other Contact 1`] = `
+<App>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Email
+        </th>
+        <th>
+          Action
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <EasyStateWrapper
+        contact={
+          Object {
+            "email": "test.contact.edited@gmail.com",
+            "name": "Test Contact",
+          }
+        }
+      >
+        <tr
+          className="contact-display"
+        >
+          <td>
+            Test Contact
+          </td>
+          <td>
+            test.contact.edited@gmail.com
+          </td>
+          <td>
+            <button
+              onClick={[Function]}
+            >
+              <i
+                className="zmdi zmdi-edit"
+              />
+            </button>
+            <button
+              onClick={[Function]}
+            >
+              <i
+                className="zmdi zmdi-delete"
+              />
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+      <EasyStateWrapper>
+        <tr
+          className="contact-creator"
+        >
+          <td>
+            <input
+              name="name"
+              onChange={[Function]}
+              placeholder="Contact name..."
+              value=""
+            />
+          </td>
+          <td>
+            <input
+              name="email"
+              onChange={[Function]}
+              placeholder="Contact email..."
+              value=""
+            />
+          </td>
+          <td>
+            <button
+              onClick={[Function]}
+            >
+              Add Contact
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+    </tbody>
+  </table>
+</App>
+------------HTML PREVIEW---------------
+<App>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Email
+        </th>
+        <th>
+          Action
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <EasyStateWrapper>
+        <tr class="contact-display">
+          <td>
+            Test Contact
+          </td>
+          <td>
+            test.contact.edited@gmail.com
+          </td>
+          <td>
+            <button>
+              <i class="zmdi zmdi-edit"></i>
+            </button>
+            <button>
+              <i class="zmdi zmdi-delete"></i>
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+      <EasyStateWrapper>
+        <tr class="contact-creator">
+          <td>
+            <input
+              name="name"
+              placeholder="Contact name..."
+              value=""
+            >
+          </td>
+          <td>
+            <input
+              name="email"
+              placeholder="Contact email..."
+              value=""
+            >
+          </td>
+          <td>
+            <button>
+              Add Contact
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+    </tbody>
+  </table>
+</App>
+`;
+
+exports[`13. Delete Test Contact 1`] = `
+<App>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Email
+        </th>
+        <th>
+          Action
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <EasyStateWrapper>
+        <tr
+          className="contact-creator"
+        >
+          <td>
+            <input
+              name="name"
+              onChange={[Function]}
+              placeholder="Contact name..."
+              value=""
+            />
+          </td>
+          <td>
+            <input
+              name="email"
+              onChange={[Function]}
+              placeholder="Contact email..."
+              value=""
+            />
+          </td>
+          <td>
+            <button
+              onClick={[Function]}
+            >
+              Add Contact
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+    </tbody>
+  </table>
+</App>
+------------HTML PREVIEW---------------
+<App>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Email
+        </th>
+        <th>
+          Action
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <EasyStateWrapper>
+        <tr class="contact-creator">
+          <td>
+            <input
+              name="name"
+              placeholder="Contact name..."
+              value=""
+            >
+          </td>
+          <td>
+            <input
+              name="email"
+              placeholder="Contact email..."
+              value=""
+            >
+          </td>
+          <td>
+            <button>
+              Add Contact
+            </button>
+          </td>
+        </tr>
+      </EasyStateWrapper>
+    </tbody>
+  </table>
+</App>
+`;

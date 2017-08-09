@@ -1,12 +1,11 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React, { Component } from 'react'
 import classNames from 'classnames'
 import { easyComp } from 'react-easy-state'
 import TodoItem from './TodoItem'
 import store from './store'
 
 // render is triggered whenever the relevant parts of the global store change
-function App () {
+function App() {
   const { todos, hasTodos, hasCompleted, allCompleted, active, filter,
           create, changeFilter, toggleAll, clearCompleted } = store
 
@@ -25,7 +24,7 @@ function App () {
         <input className="toggle-all" type="checkbox" checked={allCompleted} onChange={toggleAll}/>
         <label htmlFor="toggle-all">Mark all as complete</label>
         <ul className="todo-list">
-          {store[filter].map(todo => <TodoItem key={todo.title} todo={todo} todos={todos}/>)}
+          {store[filter].map(todo => <TodoItem key={todo.title} todo={todo} />)}
         </ul>
       </section>}
 
@@ -44,6 +43,5 @@ function App () {
   )
 }
 
-// wrap the component with easyComp before mounting it as root
-const app = React.createElement(easyComp(App))
-ReactDOM.render(app, document.getElementById('react-root'))
+// wrap the component with easyComp before exporting it
+export default easyComp(App)

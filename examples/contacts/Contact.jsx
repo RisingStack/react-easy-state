@@ -47,7 +47,7 @@ class Contact extends Component {
 
     if (!editing) {
       return (
-        <tr>
+        <tr className="contact-display">
           <td>{contact.name}</td>
           <td>{contact.email}</td>
           <td>
@@ -59,7 +59,7 @@ class Contact extends Component {
     }
 
     return (
-      <tr>
+      <tr className="contact-editor">
         <td><input name="name" value={currentContact.name} onChange={onChange} autoFocus={true}/></td>
         <td><input name="email" value={currentContact.email} onChange={onChange}/></td>
         <td>

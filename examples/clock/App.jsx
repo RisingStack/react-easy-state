@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
 import moment from 'moment'
 import { easyComp } from 'react-easy-state'
 
@@ -29,6 +28,5 @@ class App extends Component {
   }
 }
 
-// wrap the component with easyComp before mounting it as root
-const app = React.createElement(easyComp(App))
-ReactDOM.render(app, document.getElementById('react-root'))
+// wrap the component with easyComp before exporting it
+export default easyComp(App)

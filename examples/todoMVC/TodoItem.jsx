@@ -31,5 +31,5 @@ class TodoItem extends Component {
   }
 }
 
-// wrap the component with easyComp exporting it
+// wrap the component with easyComp before exporting it
 export default easyComp(TodoItem)

@@ -26,7 +26,7 @@ class ContactCreator extends Component {
     const { newContact } = this.state
 
     return (
-      <tr>
+      <tr className="contact-creator">
         <td><input name="name" value={newContact.name} onChange={onChange} placeholder="Contact name..."/></td>
         <td><input name="email" value={newContact.email} onChange={onChange} placeholder="Contact email..."/></td>
         <td><button onClick={addContact}>Add Contact</button></td>
