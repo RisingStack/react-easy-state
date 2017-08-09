@@ -6,7 +6,7 @@ const OBSERVED_RENDER = Symbol('observed render')
 const IS_DIRECT_RENDER = Symbol('is direct render')
 const RENDER_RESULT = Symbol('render result')
 
-export default function easyStateHOC (WrappedComp) {
+export default function easyCompHOC (WrappedComp) {
   if (typeof WrappedComp !== 'function') {
     throw new TypeError('easyComp expects a component class or function as argument.')
   }
@@ -24,7 +24,7 @@ export default function easyStateHOC (WrappedComp) {
     WrappedComp.defaultProps = renderer.defaultProps
   }
 
-  return class EasyStateWrapper extends WrappedComp {
+  return class EasyCompWrapper extends WrappedComp {
     constructor (props) {
       super(props)
       autoBind(this, WrappedComp.prototype, true)
