@@ -19,7 +19,7 @@
   },
   "jest": {
     "snapshotSerializers": [
-      "<rootDir>/node_modules/jest-html"
+      "./node_modules/jest-html"
     ],
     "collectCoverageFrom": [
       "**/src/**"
