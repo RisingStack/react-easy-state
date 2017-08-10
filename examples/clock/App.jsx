@@ -14,7 +14,7 @@ class App extends Component {
 
   // state can be manipulated as a plain JS object, instead of setState
   setTime () {
-    this.state.time = moment().format('hh:mm:ss A')
+    this.state.time = moment().utc().format('hh:mm:ss A')
   }
 
   // clean up the timer before the component is unmounted

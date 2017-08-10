@@ -3,13 +3,13 @@
 exports[`01. Initial state 1`] = `
 <EasyCompWrapper>
   <div>
-    01:00:00 AM
+    12:00:00 AM
   </div>
 </EasyCompWrapper>
 ------------HTML PREVIEW---------------
 <EasyCompWrapper>
   <div>
-    01:00:00 AM
+    12:00:00 AM
   </div>
 </EasyCompWrapper>
 `;
@@ -17,13 +17,13 @@ exports[`01. Initial state 1`] = `
 exports[`02. After 2 seconds 1`] = `
 <EasyCompWrapper>
   <div>
-    01:00:02 AM
+    12:00:02 AM
   </div>
 </EasyCompWrapper>
 ------------HTML PREVIEW---------------
 <EasyCompWrapper>
   <div>
-    01:00:02 AM
+    12:00:02 AM
   </div>
 </EasyCompWrapper>
 `;
@@ -31,13 +31,13 @@ exports[`02. After 2 seconds 1`] = `
 exports[`03. After 10.5 seconds 1`] = `
 <EasyCompWrapper>
   <div>
-    01:00:10 AM
+    12:00:10 AM
   </div>
 </EasyCompWrapper>
 ------------HTML PREVIEW---------------
 <EasyCompWrapper>
   <div>
-    01:00:10 AM
+    12:00:10 AM
   </div>
 </EasyCompWrapper>
 `;
