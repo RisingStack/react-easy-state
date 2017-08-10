@@ -7,6 +7,16 @@ module.exports = {
     filename: 'easyState.js',
     libraryTarget: 'umd'
   },
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        use: {
+          loader: 'babel-loader'
+        }
+      }
+    ]
+  },
   externals: {
     react: 'react'
   }

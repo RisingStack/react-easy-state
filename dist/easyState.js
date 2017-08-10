@@ -95,155 +95,153 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 
-const ITERATE = Symbol('iterate')
-const getPrototypeOf = Object.getPrototypeOf
+const ITERATE = Symbol('iterate');
+const getPrototypeOf = Object.getPrototypeOf;
 
-function has (value) {
-  const rawContext = __WEBPACK_IMPORTED_MODULE_1__internals__["b" /* proxyToRaw */].get(this)
-  const proto = getPrototypeOf(this)
+function has(value) {
+  const rawContext = __WEBPACK_IMPORTED_MODULE_1__internals__["b" /* proxyToRaw */].get(this);
+  const proto = getPrototypeOf(this);
   if (!rawContext) {
-    return proto.has.apply(this, arguments)
+    return proto.has.apply(this, arguments);
   }
-  Object(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* registerObserver */])(rawContext, value)
-  return proto.has.apply(rawContext, arguments)
+  Object(__WEBPACK_IMPORTED_MODULE_0__observer__["f" /* registerObserver */])(rawContext, value);
+  return proto.has.apply(rawContext, arguments);
 }
 
-function get (value) {
-  const rawContext = __WEBPACK_IMPORTED_MODULE_1__internals__["b" /* proxyToRaw */].get(this)
-  const proto = getPrototypeOf(this)
+function get(value) {
+  const rawContext = __WEBPACK_IMPORTED_MODULE_1__internals__["b" /* proxyToRaw */].get(this);
+  const proto = getPrototypeOf(this);
   if (!rawContext) {
-    return proto.get.apply(this, arguments)
+    return proto.get.apply(this, arguments);
   }
-  Object(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* registerObserver */])(rawContext, value)
-  return proto.get.apply(rawContext, arguments)
+  Object(__WEBPACK_IMPORTED_MODULE_0__observer__["f" /* registerObserver */])(rawContext, value);
+  return proto.get.apply(rawContext, arguments);
 }
 
-function add (value) {
-  const rawContext = __WEBPACK_IMPORTED_MODULE_1__internals__["b" /* proxyToRaw */].get(this)
-  const proto = getPrototypeOf(this)
+function add(value) {
+  const rawContext = __WEBPACK_IMPORTED_MODULE_1__internals__["b" /* proxyToRaw */].get(this);
+  const proto = getPrototypeOf(this);
   if (!rawContext) {
-    return proto.add.apply(this, arguments)
+    return proto.add.apply(this, arguments);
   }
   if (!proto.has.call(rawContext, value)) {
-    Object(__WEBPACK_IMPORTED_MODULE_0__observer__["c" /* queueObservers */])(rawContext, value)
-    Object(__WEBPACK_IMPORTED_MODULE_0__observer__["c" /* queueObservers */])(rawContext, ITERATE)
+    Object(__WEBPACK_IMPORTED_MODULE_0__observer__["e" /* queueObservers */])(rawContext, value);
+    Object(__WEBPACK_IMPORTED_MODULE_0__observer__["e" /* queueObservers */])(rawContext, ITERATE);
   }
-  return proto.add.apply(rawContext, arguments)
+  return proto.add.apply(rawContext, arguments);
 }
 
-function set (key, value) {
-  const rawContext = __WEBPACK_IMPORTED_MODULE_1__internals__["b" /* proxyToRaw */].get(this)
-  const proto = getPrototypeOf(this)
+function set(key, value) {
+  const rawContext = __WEBPACK_IMPORTED_MODULE_1__internals__["b" /* proxyToRaw */].get(this);
+  const proto = getPrototypeOf(this);
   if (!rawContext) {
-    return proto.set.apply(this, arguments)
+    return proto.set.apply(this, arguments);
   }
   if (proto.get.call(rawContext, key) !== value) {
-    Object(__WEBPACK_IMPORTED_MODULE_0__observer__["c" /* queueObservers */])(rawContext, key)
-    Object(__WEBPACK_IMPORTED_MODULE_0__observer__["c" /* queueObservers */])(rawContext, ITERATE)
+    Object(__WEBPACK_IMPORTED_MODULE_0__observer__["e" /* queueObservers */])(rawContext, key);
+    Object(__WEBPACK_IMPORTED_MODULE_0__observer__["e" /* queueObservers */])(rawContext, ITERATE);
   }
-  return proto.set.apply(rawContext, arguments)
+  return proto.set.apply(rawContext, arguments);
 }
 
-function deleteFn (value) {
-  const rawContext = __WEBPACK_IMPORTED_MODULE_1__internals__["b" /* proxyToRaw */].get(this)
-  const proto = getPrototypeOf(this)
+function deleteFn(value) {
+  const rawContext = __WEBPACK_IMPORTED_MODULE_1__internals__["b" /* proxyToRaw */].get(this);
+  const proto = getPrototypeOf(this);
   if (!rawContext) {
-    return proto.delete.apply(this, arguments)
+    return proto.delete.apply(this, arguments);
   }
   if (proto.has.call(rawContext, value)) {
-    Object(__WEBPACK_IMPORTED_MODULE_0__observer__["c" /* queueObservers */])(rawContext, value)
-    Object(__WEBPACK_IMPORTED_MODULE_0__observer__["c" /* queueObservers */])(rawContext, ITERATE)
+    Object(__WEBPACK_IMPORTED_MODULE_0__observer__["e" /* queueObservers */])(rawContext, value);
+    Object(__WEBPACK_IMPORTED_MODULE_0__observer__["e" /* queueObservers */])(rawContext, ITERATE);
   }
-  return proto.delete.apply(rawContext, arguments)
+  return proto.delete.apply(rawContext, arguments);
 }
 
-function clear () {
-  const rawContext = __WEBPACK_IMPORTED_MODULE_1__internals__["b" /* proxyToRaw */].get(this)
-  const proto = getPrototypeOf(this)
+function clear() {
+  const rawContext = __WEBPACK_IMPORTED_MODULE_1__internals__["b" /* proxyToRaw */].get(this);
+  const proto = getPrototypeOf(this);
   if (!rawContext) {
-    return proto.clear.apply(this, arguments)
+    return proto.clear.apply(this, arguments);
   }
   if (rawContext.size) {
-    Object(__WEBPACK_IMPORTED_MODULE_0__observer__["c" /* queueObservers */])(rawContext, ITERATE)
+    Object(__WEBPACK_IMPORTED_MODULE_0__observer__["e" /* queueObservers */])(rawContext, ITERATE);
   }
-  return proto.clear.apply(rawContext, arguments)
+  return proto.clear.apply(rawContext, arguments);
 }
 
-function forEach () {
-  const rawContext = __WEBPACK_IMPORTED_MODULE_1__internals__["b" /* proxyToRaw */].get(this)
-  const proto = getPrototypeOf(this)
+function forEach() {
+  const rawContext = __WEBPACK_IMPORTED_MODULE_1__internals__["b" /* proxyToRaw */].get(this);
+  const proto = getPrototypeOf(this);
   if (!rawContext) {
-    return proto.forEach.apply(this, arguments)
+    return proto.forEach.apply(this, arguments);
   }
-  Object(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* registerObserver */])(rawContext, ITERATE)
-  return proto.forEach.apply(rawContext, arguments)
+  Object(__WEBPACK_IMPORTED_MODULE_0__observer__["f" /* registerObserver */])(rawContext, ITERATE);
+  return proto.forEach.apply(rawContext, arguments);
 }
 
-function keys () {
-  const rawContext = __WEBPACK_IMPORTED_MODULE_1__internals__["b" /* proxyToRaw */].get(this)
-  const proto = getPrototypeOf(this)
+function keys() {
+  const rawContext = __WEBPACK_IMPORTED_MODULE_1__internals__["b" /* proxyToRaw */].get(this);
+  const proto = getPrototypeOf(this);
   if (!rawContext) {
-    return proto.keys.apply(this, arguments)
+    return proto.keys.apply(this, arguments);
   }
-  Object(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* registerObserver */])(rawContext, ITERATE)
-  return proto.keys.apply(rawContext, arguments)
+  Object(__WEBPACK_IMPORTED_MODULE_0__observer__["f" /* registerObserver */])(rawContext, ITERATE);
+  return proto.keys.apply(rawContext, arguments);
 }
 
-function values () {
-  const rawContext = __WEBPACK_IMPORTED_MODULE_1__internals__["b" /* proxyToRaw */].get(this)
-  const proto = getPrototypeOf(this)
+function values() {
+  const rawContext = __WEBPACK_IMPORTED_MODULE_1__internals__["b" /* proxyToRaw */].get(this);
+  const proto = getPrototypeOf(this);
   if (!rawContext) {
-    return proto.values.apply(this, arguments)
+    return proto.values.apply(this, arguments);
   }
-  Object(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* registerObserver */])(rawContext, ITERATE)
-  return proto.values.apply(rawContext, arguments)
+  Object(__WEBPACK_IMPORTED_MODULE_0__observer__["f" /* registerObserver */])(rawContext, ITERATE);
+  return proto.values.apply(rawContext, arguments);
 }
 
-function entries () {
-  const rawContext = __WEBPACK_IMPORTED_MODULE_1__internals__["b" /* proxyToRaw */].get(this)
-  const proto = getPrototypeOf(this)
+function entries() {
+  const rawContext = __WEBPACK_IMPORTED_MODULE_1__internals__["b" /* proxyToRaw */].get(this);
+  const proto = getPrototypeOf(this);
   if (!rawContext) {
-    return proto.entries.apply(this, arguments)
+    return proto.entries.apply(this, arguments);
   }
-  Object(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* registerObserver */])(rawContext, ITERATE)
-  return proto.entries.apply(rawContext, arguments)
+  Object(__WEBPACK_IMPORTED_MODULE_0__observer__["f" /* registerObserver */])(rawContext, ITERATE);
+  return proto.entries.apply(rawContext, arguments);
 }
 
-function iterator () {
-  const rawContext = __WEBPACK_IMPORTED_MODULE_1__internals__["b" /* proxyToRaw */].get(this)
-  const proto = getPrototypeOf(this)
+function iterator() {
+  const rawContext = __WEBPACK_IMPORTED_MODULE_1__internals__["b" /* proxyToRaw */].get(this);
+  const proto = getPrototypeOf(this);
   if (!rawContext) {
-    return proto[Symbol.iterator].apply(this, arguments)
+    return proto[Symbol.iterator].apply(this, arguments);
   }
-  Object(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* registerObserver */])(rawContext, ITERATE)
-  return proto[Symbol.iterator].apply(rawContext, arguments)
+  Object(__WEBPACK_IMPORTED_MODULE_0__observer__["f" /* registerObserver */])(rawContext, ITERATE);
+  return proto[Symbol.iterator].apply(rawContext, arguments);
 }
 
-function getSize () {
-  const rawContext = __WEBPACK_IMPORTED_MODULE_1__internals__["b" /* proxyToRaw */].get(this)
-  const proto = getPrototypeOf(this)
+function getSize() {
+  const rawContext = __WEBPACK_IMPORTED_MODULE_1__internals__["b" /* proxyToRaw */].get(this);
+  const proto = getPrototypeOf(this);
   if (!rawContext) {
-    return Reflect.get(proto, 'size', this)
+    return Reflect.get(proto, 'size', this);
   }
-  Object(__WEBPACK_IMPORTED_MODULE_0__observer__["d" /* registerObserver */])(rawContext, ITERATE)
-  return Reflect.get(proto, 'size', rawContext)
+  Object(__WEBPACK_IMPORTED_MODULE_0__observer__["f" /* registerObserver */])(rawContext, ITERATE);
+  return Reflect.get(proto, 'size', rawContext);
 }
-
 
 /***/ }),
 /* 1 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-const UNOBSERVED = Symbol('unobserved')
+const UNOBSERVED = Symbol('unobserved');
 /* harmony export (immutable) */ __webpack_exports__["a"] = UNOBSERVED;
 
-const proxyToRaw = new WeakMap()
+const proxyToRaw = new WeakMap();
 /* harmony export (immutable) */ __webpack_exports__["b"] = proxyToRaw;
 
-const rawToProxy = new WeakMap()
+const rawToProxy = new WeakMap();
 /* harmony export (immutable) */ __webpack_exports__["c"] = rawToProxy;
-
 
 
 /***/ }),
@@ -251,14 +249,14 @@ const rawToProxy = new WeakMap()
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__observer__ = __webpack_require__(3);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__observer__["a"]; });
-/* unused harmony reexport isObservable */
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__observer__["b"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_0__observer__["e"]; });
-/* unused harmony reexport unqueue */
-/* unused harmony reexport exec */
-
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "observable", function() { return __WEBPACK_IMPORTED_MODULE_0__observer__["c"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "isObservable", function() { return __WEBPACK_IMPORTED_MODULE_0__observer__["b"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "observe", function() { return __WEBPACK_IMPORTED_MODULE_0__observer__["d"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "unobserve", function() { return __WEBPACK_IMPORTED_MODULE_0__observer__["g"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "unqueue", function() { return __WEBPACK_IMPORTED_MODULE_0__observer__["h"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "exec", function() { return __WEBPACK_IMPORTED_MODULE_0__observer__["a"]; });
 
 
 /***/ }),
@@ -266,14 +264,14 @@ const rawToProxy = new WeakMap()
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["b"] = observe;
-/* harmony export (immutable) */ __webpack_exports__["e"] = unobserve;
-/* unused harmony export unqueue */
-/* unused harmony export exec */
-/* unused harmony export isObservable */
-/* harmony export (immutable) */ __webpack_exports__["a"] = observable;
-/* harmony export (immutable) */ __webpack_exports__["d"] = registerObserver;
-/* harmony export (immutable) */ __webpack_exports__["c"] = queueObservers;
+/* harmony export (immutable) */ __webpack_exports__["d"] = observe;
+/* harmony export (immutable) */ __webpack_exports__["g"] = unobserve;
+/* harmony export (immutable) */ __webpack_exports__["h"] = unqueue;
+/* harmony export (immutable) */ __webpack_exports__["a"] = exec;
+/* harmony export (immutable) */ __webpack_exports__["b"] = isObservable;
+/* harmony export (immutable) */ __webpack_exports__["c"] = observable;
+/* harmony export (immutable) */ __webpack_exports__["f"] = registerObserver;
+/* harmony export (immutable) */ __webpack_exports__["e"] = queueObservers;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__nextTick__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__builtIns_index__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__store__ = __webpack_require__(14);
@@ -283,285 +281,424 @@ const rawToProxy = new WeakMap()
 
 
 
-const ENUMERATE = Symbol('enumerate')
-const queuedObservers = new Set()
-let queued = false
-let currentObserver
-const handlers = { get, ownKeys, set, deleteProperty }
+const ENUMERATE = Symbol('enumerate');
+const queuedObservers = new Set();
+let queued = false;
+let currentObserver;
+const handlers = { get, ownKeys, set, deleteProperty };
 
-function observe (observer) {
+function observe(observer) {
   if (typeof observer !== 'function') {
-    throw new TypeError('Observer must be a function.')
+    throw new TypeError('Observer must be a function.');
   }
-  observer[__WEBPACK_IMPORTED_MODULE_3__internals__["a" /* UNOBSERVED */]] = false
-  runObserver(observer)
-  return observer
+  observer[__WEBPACK_IMPORTED_MODULE_3__internals__["a" /* UNOBSERVED */]] = false;
+  runObserver(observer);
+  return observer;
 }
 
-function unobserve (observer) {
-  queuedObservers.delete(observer)
-  observer[__WEBPACK_IMPORTED_MODULE_3__internals__["a" /* UNOBSERVED */]] = true
-  Object(__WEBPACK_IMPORTED_MODULE_2__store__["b" /* releaseObserver */])(observer)
+function unobserve(observer) {
+  queuedObservers.delete(observer);
+  observer[__WEBPACK_IMPORTED_MODULE_3__internals__["a" /* UNOBSERVED */]] = true;
+  Object(__WEBPACK_IMPORTED_MODULE_2__store__["b" /* releaseObserver */])(observer);
 }
 
-function unqueue (observer) {
-  queuedObservers.delete(observer)
+function unqueue(observer) {
+  queuedObservers.delete(observer);
 }
 
-function exec (observer) {
-  runObserver(observer)
+function exec(observer) {
+  runObserver(observer);
 }
 
-function isObservable (obj) {
+function isObservable(obj) {
   if (typeof obj !== 'object') {
-    throw new TypeError('first argument must be an object')
+    throw new TypeError('first argument must be an object');
   }
-  return __WEBPACK_IMPORTED_MODULE_3__internals__["b" /* proxyToRaw */].has(obj)
+  return __WEBPACK_IMPORTED_MODULE_3__internals__["b" /* proxyToRaw */].has(obj);
 }
 
-function observable (obj) {
-  obj = obj || {}
+function observable(obj) {
+  obj = obj || {};
   if (typeof obj !== 'object') {
-    throw new TypeError('first argument must be an object or undefined')
+    throw new TypeError('first argument must be an object or undefined');
   }
   if (__WEBPACK_IMPORTED_MODULE_3__internals__["b" /* proxyToRaw */].has(obj)) {
-    return obj
+    return obj;
   }
-  return __WEBPACK_IMPORTED_MODULE_3__internals__["c" /* rawToProxy */].get(obj) || instrumentObservable(obj) || createObservable(obj)
+  return __WEBPACK_IMPORTED_MODULE_3__internals__["c" /* rawToProxy */].get(obj) || instrumentObservable(obj) || createObservable(obj);
 }
 
-function instrumentObservable (obj) {
-  const instrument = __WEBPACK_IMPORTED_MODULE_1__builtIns_index__["a" /* default */].get(Object.getPrototypeOf(obj))
+function instrumentObservable(obj) {
+  const instrument = __WEBPACK_IMPORTED_MODULE_1__builtIns_index__["a" /* default */].get(Object.getPrototypeOf(obj));
   if (typeof instrument === 'function') {
-    instrument(obj)
+    instrument(obj);
   }
   if (instrument === false) {
-    return obj
+    return obj;
   }
 }
 
-function createObservable (obj) {
-  const observable = new Proxy(obj, handlers)
-  Object(__WEBPACK_IMPORTED_MODULE_2__store__["c" /* storeObservable */])(obj)
-  __WEBPACK_IMPORTED_MODULE_3__internals__["b" /* proxyToRaw */].set(observable, obj)
-  __WEBPACK_IMPORTED_MODULE_3__internals__["c" /* rawToProxy */].set(obj, observable)
-  return observable
+function createObservable(obj) {
+  const observable = new Proxy(obj, handlers);
+  Object(__WEBPACK_IMPORTED_MODULE_2__store__["c" /* storeObservable */])(obj);
+  __WEBPACK_IMPORTED_MODULE_3__internals__["b" /* proxyToRaw */].set(observable, obj);
+  __WEBPACK_IMPORTED_MODULE_3__internals__["c" /* rawToProxy */].set(obj, observable);
+  return observable;
 }
 
-function get (target, key, receiver) {
-  const rawTarget = __WEBPACK_IMPORTED_MODULE_3__internals__["b" /* proxyToRaw */].get(target) || target
+function get(target, key, receiver) {
+  const rawTarget = __WEBPACK_IMPORTED_MODULE_3__internals__["b" /* proxyToRaw */].get(target) || target;
   if (key === '$raw') {
-    return rawTarget
+    return rawTarget;
   }
-  const result = Reflect.get(target, key, receiver)
+  const result = Reflect.get(target, key, receiver);
   if (typeof key === 'symbol' || typeof result === 'function') {
-    return result
+    return result;
   }
-  registerObserver(rawTarget, key)
+  registerObserver(rawTarget, key);
   if (currentObserver && typeof result === 'object' && result !== null) {
-    return observable(result)
+    return observable(result);
   }
-  return __WEBPACK_IMPORTED_MODULE_3__internals__["c" /* rawToProxy */].get(result) || result
+  return __WEBPACK_IMPORTED_MODULE_3__internals__["c" /* rawToProxy */].get(result) || result;
 }
 
-function registerObserver (target, key) {
+function registerObserver(target, key) {
   if (currentObserver) {
-    Object(__WEBPACK_IMPORTED_MODULE_2__store__["d" /* storeObserver */])(target, key, currentObserver)
+    Object(__WEBPACK_IMPORTED_MODULE_2__store__["d" /* storeObserver */])(target, key, currentObserver);
   }
 }
 
-function ownKeys (target) {
-  registerObserver(target, ENUMERATE)
-  return Reflect.ownKeys(target)
+function ownKeys(target) {
+  registerObserver(target, ENUMERATE);
+  return Reflect.ownKeys(target);
 }
 
-function set (target, key, value, receiver) {
+function set(target, key, value, receiver) {
   if (typeof value === 'object' && value !== null) {
-    value = __WEBPACK_IMPORTED_MODULE_3__internals__["b" /* proxyToRaw */].get(value) || value
+    value = __WEBPACK_IMPORTED_MODULE_3__internals__["b" /* proxyToRaw */].get(value) || value;
   }
   if (typeof key === 'symbol' || target !== __WEBPACK_IMPORTED_MODULE_3__internals__["b" /* proxyToRaw */].get(receiver)) {
-    return Reflect.set(target, key, value, receiver)
+    return Reflect.set(target, key, value, receiver);
   }
   if (key === 'length' || value !== target[key]) {
-    queueObservers(target, key)
-    queueObservers(target, ENUMERATE)
+    queueObservers(target, key);
+    queueObservers(target, ENUMERATE);
   }
-  return Reflect.set(target, key, value, receiver)
+  return Reflect.set(target, key, value, receiver);
 }
 
-function deleteProperty (target, key) {
-  if (typeof key !== 'symbol' && (key in target)) {
-    queueObservers(target, key)
-    queueObservers(target, ENUMERATE)
+function deleteProperty(target, key) {
+  if (typeof key !== 'symbol' && key in target) {
+    queueObservers(target, key);
+    queueObservers(target, ENUMERATE);
   }
-  return Reflect.deleteProperty(target, key)
+  return Reflect.deleteProperty(target, key);
 }
 
-function queueObservers (target, key) {
+function queueObservers(target, key) {
   if (!queued) {
-    Object(__WEBPACK_IMPORTED_MODULE_0__nextTick__["a" /* default */])(runObservers)
-    queued = true
+    Object(__WEBPACK_IMPORTED_MODULE_0__nextTick__["a" /* default */])(runObservers);
+    queued = true;
   }
-  Object(__WEBPACK_IMPORTED_MODULE_2__store__["a" /* iterateObservers */])(target, key, queueObserver)
+  Object(__WEBPACK_IMPORTED_MODULE_2__store__["a" /* iterateObservers */])(target, key, queueObserver);
 }
 
-function queueObserver (observer) {
+function queueObserver(observer) {
   if (!observer[__WEBPACK_IMPORTED_MODULE_3__internals__["a" /* UNOBSERVED */]]) {
-    queuedObservers.add(observer)
+    queuedObservers.add(observer);
   }
 }
 
-function runObservers () {
-  queuedObservers.forEach(runObserver)
-  queuedObservers.clear()
-  queued = false
+function runObservers() {
+  queuedObservers.forEach(runObserver);
+  queuedObservers.clear();
+  queued = false;
 }
 
-function runObserver (observer) {
+function runObserver(observer) {
   try {
-    currentObserver = observer
-    observer()
+    currentObserver = observer;
+    observer();
   } finally {
-    currentObserver = undefined
+    currentObserver = undefined;
   }
 }
-
 
 /***/ }),
 /* 4 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = autoBind;
-const reactInternals = new Set([
-  'constructor',
-  'render',
-  'componentWillMount',
-  'componentDidMount',
-  'componentWillReceiveProps',
-  'shouldComponentUpdate',
-  'componentWillUpdate',
-  'componentDidUpdate',
-  'componentWillUnmount'
-])
 
-function autoBind (context, proto, isReact) {
-  for (let key of Object.getOwnPropertyNames(proto)) {
-    const value = proto[key]
 
-    if (typeof value === 'function' && !(isReact && reactInternals.has(key))) {
-      context[key] = value.bind(context)
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = autoBind;
+// do not bind these, they should not be directly invoked or passed as callbacks by the user
+var reactInternals = new Set(['constructor', 'render', 'componentWillMount', 'componentDidMount', 'componentWillReceiveProps', 'shouldComponentUpdate', 'componentWillUpdate', 'componentDidUpdate', 'componentWillUnmount']);
+
+// bind the methods from proto to the passed context object and assign them to the context
+function autoBind(context, proto, isReact) {
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
+
+  try {
+    for (var _iterator = Object.getOwnPropertyNames(proto)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      var key = _step.value;
+
+      var value = proto[key];
+
+      if (typeof value === 'function' && !(isReact && reactInternals.has(key))) {
+        context[key] = value.bind(context);
+      }
+    }
+  } catch (err) {
+    _didIteratorError = true;
+    _iteratorError = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion && _iterator.return) {
+        _iterator.return();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
+      }
     }
   }
 }
-
 
 /***/ }),
 /* 5 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__easyComp__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__easyStore__ = __webpack_require__(15);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "easyComp", function() { return __WEBPACK_IMPORTED_MODULE_0__easyComp__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "easyStore", function() { return __WEBPACK_IMPORTED_MODULE_1__easyStore__["a"]; });
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.easyStore = exports.easyComp = undefined;
 
+var _easyComp = __webpack_require__(6);
 
+var _easyComp2 = _interopRequireDefault(_easyComp);
+
+var _easyStore = __webpack_require__(15);
+
+var _easyStore2 = _interopRequireDefault(_easyStore);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.easyComp = _easyComp2.default;
+exports.easyStore = _easyStore2.default;
 
 /***/ }),
 /* 6 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = easyCompHOC;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__nx_js_observer_util__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__autoBind__ = __webpack_require__(4);
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
+var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-const OBSERVED_RENDER = Symbol('observed render')
-const IS_DIRECT_RENDER = Symbol('is direct render')
-const RENDER_RESULT = Symbol('render result')
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-function easyCompHOC (WrappedComp) {
-  if (typeof WrappedComp !== 'function') {
-    throw new TypeError('easyComp expects a component class or function as argument.')
+exports.default = easyComp;
+
+var _react = __webpack_require__(7);
+
+var _observerUtil = __webpack_require__(2);
+
+var _autoBind = __webpack_require__(4);
+
+var _autoBind2 = _interopRequireDefault(_autoBind);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var REACTIVE_RENDER = Symbol('reactive render');
+
+function easyComp(Comp) {
+  if (typeof Comp !== 'function') {
+    throw new TypeError('easyComp expects a component as argument.');
   }
 
-  if ((!WrappedComp.prototype || !WrappedComp.prototype.render) && !WrappedComp.isReactClass && !__WEBPACK_IMPORTED_MODULE_0_react__["Component"].isPrototypeOf(WrappedComp)) {
-    const renderer = WrappedComp
-    WrappedComp = class extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
-      render () {
-        return renderer.call(this, this.props, this.context)
-      }
-    }
-    WrappedComp.displayName = renderer.displayName || renderer.name
-    WrappedComp.contextTypes = renderer.contextTypes
-    WrappedComp.propTypes = renderer.propTypes
-    WrappedComp.defaultProps = renderer.defaultProps
+  // wrap stateless components in a class
+  if (isStatelessComp(Comp)) {
+    Comp = statelessToStatefulComp(Comp);
+  } else if (hasComponentShouldUpdate(Comp)) {
+    // shouldComponentUpdate is optimized by easyState, overwriting it would add zero or less value
+    throw new Error('easyState optimizes shouldComponentUpdate, do not implement it.');
   }
 
-  if (typeof WrappedComp.prototype.shouldComponentUpdate === 'function') {
-    throw new Error('Do not implement shouldComponentUpdate, easyState already optimizes it for you!')
-  }
-
-  return class EasyCompWrapper extends WrappedComp {
-    constructor (props) {
-      super(props)
-      Object(__WEBPACK_IMPORTED_MODULE_2__autoBind__["a" /* default */])(this, WrappedComp.prototype, true)
-      this.state = Object(__WEBPACK_IMPORTED_MODULE_1__nx_js_observer_util__["a" /* observable */])(this.state)
-    }
-
-    render () {
-      if (!this[OBSERVED_RENDER]) {
-        this[OBSERVED_RENDER] = () => {
-          if (this[IS_DIRECT_RENDER]) {
-            this[RENDER_RESULT] = super.render()
-          } else {
-            super.forceUpdate()
-          }
-        }
-      }
-
-      this[IS_DIRECT_RENDER] = true
-      this[OBSERVED_RENDER] = Object(__WEBPACK_IMPORTED_MODULE_1__nx_js_observer_util__["b" /* observe */])(this[OBSERVED_RENDER])
-      this[IS_DIRECT_RENDER] = false
-
-      return this[RENDER_RESULT]
-    }
-
-    shouldComponentUpdate (nextProps, nextState) {
-      const { props } = this
-      const keys = Object.keys(props)
-      const nextKeys = Object.keys(nextProps)
-
-      if (keys.length !== nextKeys.length) {
-        return true
-      }
-
-      for (let key of keys) {
-        if (props[key] !== nextProps[key]) {
-          return true
-        }
-      }
-      return false
-    }
-
-    componentWillUnmount () {
-      if (super.componentWillUnmount) {
-        return super.componentWillUnmount()
-      }
-      Object(__WEBPACK_IMPORTED_MODULE_1__nx_js_observer_util__["c" /* unobserve */])(this[OBSERVED_RENDER])
-    }
-  }
+  return toReactiveComp(Comp);
 }
 
+function isStatelessComp(Comp) {
+  return !(Comp.prototype && Comp.prototype.render) && !_react.Component.isPrototypeOf(Comp);
+}
+
+function statelessToStatefulComp(StatelessComp) {
+  var _class, _temp;
+
+  return _temp = _class = function (_Component) {
+    _inherits(StatefulComp, _Component);
+
+    function StatefulComp() {
+      _classCallCheck(this, StatefulComp);
+
+      return _possibleConstructorReturn(this, (StatefulComp.__proto__ || Object.getPrototypeOf(StatefulComp)).apply(this, arguments));
+    }
+
+    _createClass(StatefulComp, [{
+      key: 'render',
+
+
+      // call the original function component inside the render method
+
+      // proxy react specific static variables to the stateful component
+      // from the stateless component
+      value: function render() {
+        return StatelessComp.call(this, this.props, this.context);
+      }
+    }]);
+
+    return StatefulComp;
+  }(_react.Component), _class.displayName = StatelessComp.displayName || StatelessComp.name, _class.contextTypes = StatelessComp.contextTypes, _class.propTypes = StatelessComp.propTypes, _class.defaultProps = StatelessComp.defaultProps, _temp;
+}
+
+function hasComponentShouldUpdate(Comp) {
+  return typeof Comp.prototype.shouldComponentUpdate === 'function';
+}
+
+function toReactiveComp(Comp) {
+  var _class2, _temp2;
+
+  // return a HOC which overwrites render, shouldComponentUpdate and componentWillUnmount
+  // it decides when to run the new reactive methods and when to proxy to the original methods
+  return _temp2 = _class2 = function (_Comp) {
+    _inherits(EasyHOC, _Comp);
+
+    // proxy react specific static variables to the HOC from the component
+    function EasyHOC(props) {
+      _classCallCheck(this, EasyHOC);
+
+      // auto bind non react specific original methods to the component instance
+      var _this2 = _possibleConstructorReturn(this, (EasyHOC.__proto__ || Object.getPrototypeOf(EasyHOC)).call(this, props));
+
+      (0, _autoBind2.default)(_this2, Comp.prototype, true);
+
+      // turn the state into an observable object, which triggers rendering on mutations
+      _this2.state = (0, _observerUtil.observable)(_this2.state);
+      return _this2;
+    }
+
+    _createClass(EasyHOC, [{
+      key: 'render',
+      value: function render() {
+        var _this3 = this;
+
+        // if it is the first direct render from react call there is no reactive render yet
+        if (!this[REACTIVE_RENDER]) {
+          var result = void 0;
+          // create a reactive render, which is automatically called by easyState on relevant state and store mutations
+          // the passed function is executed right away synchronously once by easyState
+          this[REACTIVE_RENDER] = (0, _observerUtil.observe)(function () {
+            // if it is the first (synchronous) execution, call the original component's render
+            // this is necessary because forceUpdate can not be called synchronously inside render functions
+            if (!_this3[REACTIVE_RENDER]) {
+              result = _get(EasyHOC.prototype.__proto__ || Object.getPrototypeOf(EasyHOC.prototype), 'render', _this3).call(_this3);
+            } else {
+              // if it is a later reactive, asynchronous execution - triggered by easyState - forceUpdate the original component
+              // this is necessary, because calling render would require the result to be returned
+              // which is not possible from this asynchronous context
+              _get(EasyHOC.prototype.__proto__ || Object.getPrototypeOf(EasyHOC.prototype), 'forceUpdate', _this3).call(_this3);
+            }
+          });
+          // return the result from super.render() inside the reactive render on the first render execution
+          return result;
+        } else {
+          // return the original component's render result on direct calls from react
+          return _get(EasyHOC.prototype.__proto__ || Object.getPrototypeOf(EasyHOC.prototype), 'render', this).call(this);
+        }
+      }
+
+      // react should trigger updates on prop changes, while easyState handles state changes
+
+    }, {
+      key: 'shouldComponentUpdate',
+      value: function shouldComponentUpdate(nextProps) {
+        var props = this.props;
+
+        var keys = Object.keys(props);
+        var nextKeys = Object.keys(nextProps);
+
+        // component should update if the number of its props changed
+        if (keys.length !== nextKeys.length) {
+          return true;
+        }
+
+        // component should update if any of its props changed value
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+          for (var _iterator = keys[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var key = _step.value;
+
+            if (props[key] !== nextProps[key]) {
+              return true;
+            }
+          }
+
+          // do not let react update the comp otherwise, leave state triggered updates to easyState
+        } catch (err) {
+          _didIteratorError = true;
+          _iteratorError = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion && _iterator.return) {
+              _iterator.return();
+            }
+          } finally {
+            if (_didIteratorError) {
+              throw _iteratorError;
+            }
+          }
+        }
+
+        return false;
+      }
+    }, {
+      key: 'componentWillUnmount',
+      value: function componentWillUnmount() {
+        // clean up memory used by easyState
+        (0, _observerUtil.unobserve)(this[REACTIVE_RENDER]);
+
+        // also call user defined componentWillUnmount to allow the user
+        // to clean up additional memory
+        if (_get(EasyHOC.prototype.__proto__ || Object.getPrototypeOf(EasyHOC.prototype), 'componentWillUnmount', this)) {
+          _get(EasyHOC.prototype.__proto__ || Object.getPrototypeOf(EasyHOC.prototype), 'componentWillUnmount', this).call(this);
+        }
+      }
+    }]);
+
+    return EasyHOC;
+  }(Comp), _class2.displayName = Comp.displayName || Comp.name, _class2.contextTypes = Comp.contextTypes, _class2.propTypes = Comp.propTypes, _class2.defaultProps = Comp.defaultProps, _temp2;
+}
 
 /***/ }),
 /* 7 */
@@ -575,37 +712,36 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_7__;
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = nextTick;
-const promise = Promise.resolve()
-let mutateWithTask
-let currTask
+const promise = Promise.resolve();
+let mutateWithTask;
+let currTask;
 
-function nextTick (task) {
-  currTask = task
+function nextTick(task) {
+  currTask = task;
   if (mutateWithTask) {
-    mutateWithTask()
+    mutateWithTask();
   } else {
-    promise.then(task)
+    promise.then(task);
   }
 }
 
 if (typeof MutationObserver !== 'undefined') {
-  let counter = 0
-  const observer = new MutationObserver(onTask)
-  const textNode = document.createTextNode(String(counter))
-  observer.observe(textNode, {characterData: true})
+  let counter = 0;
+  const observer = new MutationObserver(onTask);
+  const textNode = document.createTextNode(String(counter));
+  observer.observe(textNode, { characterData: true });
 
-  mutateWithTask = function mutateWithTask () {
-    counter = (counter + 1) % 2
-    textNode.textContent = counter
-  }
+  mutateWithTask = function mutateWithTask() {
+    counter = (counter + 1) % 2;
+    textNode.textContent = counter;
+  };
 }
 
-function onTask () {
+function onTask() {
   if (currTask) {
-    currTask()
+    currTask();
   }
 }
-
 
 /***/ }),
 /* 9 */
@@ -621,15 +757,7 @@ function onTask () {
 
 
 
-/* harmony default export */ __webpack_exports__["a"] = (new Map([
-  [Map.prototype, __WEBPACK_IMPORTED_MODULE_0__Map__["a" /* default */]],
-  [Set.prototype, __WEBPACK_IMPORTED_MODULE_1__Set__["a" /* default */]],
-  [WeakMap.prototype, __WEBPACK_IMPORTED_MODULE_2__WeakMap__["a" /* default */]],
-  [WeakSet.prototype, __WEBPACK_IMPORTED_MODULE_3__WeakSet__["a" /* default */]],
-  [Date.prototype, false],
-  [RegExp.prototype, false]
-]));
-
+/* harmony default export */ __webpack_exports__["a"] = (new Map([[Map.prototype, __WEBPACK_IMPORTED_MODULE_0__Map__["a" /* default */]], [Set.prototype, __WEBPACK_IMPORTED_MODULE_1__Set__["a" /* default */]], [WeakMap.prototype, __WEBPACK_IMPORTED_MODULE_2__WeakMap__["a" /* default */]], [WeakSet.prototype, __WEBPACK_IMPORTED_MODULE_3__WeakSet__["a" /* default */]], [Date.prototype, false], [RegExp.prototype, false]]));
 
 /***/ }),
 /* 10 */
@@ -640,20 +768,19 @@ function onTask () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__collections__ = __webpack_require__(0);
 
 
-function instrumentMap (target) {
-  target.has = __WEBPACK_IMPORTED_MODULE_0__collections__["h" /* has */]
-  target.get = __WEBPACK_IMPORTED_MODULE_0__collections__["f" /* get */]
-  target.set = __WEBPACK_IMPORTED_MODULE_0__collections__["k" /* set */]
-  target.delete = __WEBPACK_IMPORTED_MODULE_0__collections__["c" /* deleteFn */]
-  target.clear = __WEBPACK_IMPORTED_MODULE_0__collections__["b" /* clear */]
-  target.forEach = __WEBPACK_IMPORTED_MODULE_0__collections__["e" /* forEach */]
-  target.keys = __WEBPACK_IMPORTED_MODULE_0__collections__["j" /* keys */]
-  target.values = __WEBPACK_IMPORTED_MODULE_0__collections__["l" /* values */]
-  target.entries = __WEBPACK_IMPORTED_MODULE_0__collections__["d" /* entries */]
-  target[Symbol.iterator] = __WEBPACK_IMPORTED_MODULE_0__collections__["i" /* iterator */]
-  Object.defineProperty(target, 'size', { get: __WEBPACK_IMPORTED_MODULE_0__collections__["g" /* getSize */] })
+function instrumentMap(target) {
+  target.has = __WEBPACK_IMPORTED_MODULE_0__collections__["h" /* has */];
+  target.get = __WEBPACK_IMPORTED_MODULE_0__collections__["f" /* get */];
+  target.set = __WEBPACK_IMPORTED_MODULE_0__collections__["k" /* set */];
+  target.delete = __WEBPACK_IMPORTED_MODULE_0__collections__["c" /* deleteFn */];
+  target.clear = __WEBPACK_IMPORTED_MODULE_0__collections__["b" /* clear */];
+  target.forEach = __WEBPACK_IMPORTED_MODULE_0__collections__["e" /* forEach */];
+  target.keys = __WEBPACK_IMPORTED_MODULE_0__collections__["j" /* keys */];
+  target.values = __WEBPACK_IMPORTED_MODULE_0__collections__["l" /* values */];
+  target.entries = __WEBPACK_IMPORTED_MODULE_0__collections__["d" /* entries */];
+  target[Symbol.iterator] = __WEBPACK_IMPORTED_MODULE_0__collections__["i" /* iterator */];
+  Object.defineProperty(target, 'size', { get: __WEBPACK_IMPORTED_MODULE_0__collections__["g" /* getSize */] });
 }
-
 
 /***/ }),
 /* 11 */
@@ -664,19 +791,18 @@ function instrumentMap (target) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__collections__ = __webpack_require__(0);
 
 
-function instrumentSet (target) {
-  target.has = __WEBPACK_IMPORTED_MODULE_0__collections__["h" /* has */]
-  target.add = __WEBPACK_IMPORTED_MODULE_0__collections__["a" /* add */]
-  target.delete = __WEBPACK_IMPORTED_MODULE_0__collections__["c" /* deleteFn */]
-  target.clear = __WEBPACK_IMPORTED_MODULE_0__collections__["b" /* clear */]
-  target.forEach = __WEBPACK_IMPORTED_MODULE_0__collections__["e" /* forEach */]
-  target.keys = __WEBPACK_IMPORTED_MODULE_0__collections__["j" /* keys */]
-  target.values = __WEBPACK_IMPORTED_MODULE_0__collections__["l" /* values */]
-  target.entries = __WEBPACK_IMPORTED_MODULE_0__collections__["d" /* entries */]
-  target[Symbol.iterator] = __WEBPACK_IMPORTED_MODULE_0__collections__["i" /* iterator */]
-  Object.defineProperty(target, 'size', { get: __WEBPACK_IMPORTED_MODULE_0__collections__["g" /* getSize */] })
+function instrumentSet(target) {
+  target.has = __WEBPACK_IMPORTED_MODULE_0__collections__["h" /* has */];
+  target.add = __WEBPACK_IMPORTED_MODULE_0__collections__["a" /* add */];
+  target.delete = __WEBPACK_IMPORTED_MODULE_0__collections__["c" /* deleteFn */];
+  target.clear = __WEBPACK_IMPORTED_MODULE_0__collections__["b" /* clear */];
+  target.forEach = __WEBPACK_IMPORTED_MODULE_0__collections__["e" /* forEach */];
+  target.keys = __WEBPACK_IMPORTED_MODULE_0__collections__["j" /* keys */];
+  target.values = __WEBPACK_IMPORTED_MODULE_0__collections__["l" /* values */];
+  target.entries = __WEBPACK_IMPORTED_MODULE_0__collections__["d" /* entries */];
+  target[Symbol.iterator] = __WEBPACK_IMPORTED_MODULE_0__collections__["i" /* iterator */];
+  Object.defineProperty(target, 'size', { get: __WEBPACK_IMPORTED_MODULE_0__collections__["g" /* getSize */] });
 }
-
 
 /***/ }),
 /* 12 */
@@ -687,13 +813,12 @@ function instrumentSet (target) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__collections__ = __webpack_require__(0);
 
 
-function instrumentWeakMap (target) {
-  target.has = __WEBPACK_IMPORTED_MODULE_0__collections__["h" /* has */]
-  target.get = __WEBPACK_IMPORTED_MODULE_0__collections__["f" /* get */]
-  target.set = __WEBPACK_IMPORTED_MODULE_0__collections__["k" /* set */]
-  target.delete = __WEBPACK_IMPORTED_MODULE_0__collections__["c" /* deleteFn */]
+function instrumentWeakMap(target) {
+  target.has = __WEBPACK_IMPORTED_MODULE_0__collections__["h" /* has */];
+  target.get = __WEBPACK_IMPORTED_MODULE_0__collections__["f" /* get */];
+  target.set = __WEBPACK_IMPORTED_MODULE_0__collections__["k" /* set */];
+  target.delete = __WEBPACK_IMPORTED_MODULE_0__collections__["c" /* deleteFn */];
 }
-
 
 /***/ }),
 /* 13 */
@@ -704,12 +829,11 @@ function instrumentWeakMap (target) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__collections__ = __webpack_require__(0);
 
 
-function instrumentWeakSet (target) {
-  target.has = __WEBPACK_IMPORTED_MODULE_0__collections__["h" /* has */]
-  target.add = __WEBPACK_IMPORTED_MODULE_0__collections__["a" /* add */]
-  target.delete = __WEBPACK_IMPORTED_MODULE_0__collections__["c" /* deleteFn */]
+function instrumentWeakSet(target) {
+  target.has = __WEBPACK_IMPORTED_MODULE_0__collections__["h" /* has */];
+  target.add = __WEBPACK_IMPORTED_MODULE_0__collections__["a" /* add */];
+  target.delete = __WEBPACK_IMPORTED_MODULE_0__collections__["c" /* deleteFn */];
 }
-
 
 /***/ }),
 /* 14 */
@@ -723,65 +847,77 @@ function instrumentWeakSet (target) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__internals__ = __webpack_require__(1);
 
 
-const observerStore = new WeakMap()
+const observerStore = new WeakMap();
 
-function storeObservable (target) {
-  observerStore.set(target, Object.create(null))
+function storeObservable(target) {
+  observerStore.set(target, Object.create(null));
 }
 
-function storeObserver (target, key, observer) {
-  const observers = observerStore.get(target)
-  const observersForKey = observers[key]
+function storeObserver(target, key, observer) {
+  const observers = observerStore.get(target);
+  const observersForKey = observers[key];
   if (observersForKey !== observer) {
     if (typeof observersForKey === 'object' && observersForKey.size > 0) {
-      observersForKey.add(observer)
-      observer[`_${key}_observers`] = observersForKey
+      observersForKey.add(observer);
+      observer[`_${key}_observers`] = observersForKey;
     } else if (typeof observersForKey === 'function' && !observersForKey[__WEBPACK_IMPORTED_MODULE_0__internals__["a" /* UNOBSERVED */]]) {
-      observers[key] = new Set().add(observer).add(observersForKey)
+      observers[key] = new Set().add(observer).add(observersForKey);
     } else {
-      observers[key] = observer
+      observers[key] = observer;
     }
   }
 }
 
-function iterateObservers (target, key, fn) {
-  const observers = observerStore.get(target)
-  const observersForKey = observers[key]
+function iterateObservers(target, key, fn) {
+  const observers = observerStore.get(target);
+  const observersForKey = observers[key];
   if (observersForKey instanceof Set) {
-    observersForKey.forEach(fn)
+    observersForKey.forEach(fn);
   } else if (observersForKey) {
-    fn(observersForKey)
+    fn(observersForKey);
   }
 }
 
-function releaseObserver (observer) {
+function releaseObserver(observer) {
   for (let key in observer) {
-    observer[key].delete(observer)
+    observer[key].delete(observer);
   }
 }
-
 
 /***/ }),
 /* 15 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = easyStore;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__nx_js_observer_util__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__autoBind__ = __webpack_require__(4);
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-function easyStore (store) {
-  if (typeof store !== 'object' || store === null) {
-    throw new TypeError('easyStore expects an object as argument.')
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+exports.default = easyStore;
+
+var _observerUtil = __webpack_require__(2);
+
+var _autoBind = __webpack_require__(4);
+
+var _autoBind2 = _interopRequireDefault(_autoBind);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function easyStore(store) {
+  if ((typeof store === 'undefined' ? 'undefined' : _typeof(store)) !== 'object' || store === null) {
+    throw new TypeError('easyStore expects an object as argument');
   }
 
-  const observableStore = Object(__WEBPACK_IMPORTED_MODULE_0__nx_js_observer_util__["a" /* observable */])(store)
-  Object(__WEBPACK_IMPORTED_MODULE_1__autoBind__["a" /* default */])(observableStore, store, false)
-  return observableStore
+  // create an observable object from the passed store
+  // and bind all of its methods to the created observable
+  var observableStore = (0, _observerUtil.observable)(store);
+  (0, _autoBind2.default)(observableStore, store, false);
+  return observableStore;
 }
-
 
 /***/ })
 /******/ ]);

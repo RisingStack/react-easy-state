@@ -2,9 +2,7 @@ import { Component } from 'react'
 import { observable, unobserve, observe } from '@nx-js/observer-util'
 import autoBind from './autoBind'
 
-const OBSERVED_RENDER = Symbol('observed render')
-const IS_DIRECT_RENDER = Symbol('is direct render')
-const RENDER_RESULT = Symbol('render result')
+const REACTIVE_RENDER = Symbol('reactive render')
 
 export default function easyComp (Comp) {
   if (typeof Comp !== 'function') {
@@ -67,21 +65,29 @@ function toReactiveComp (Comp) {
     }
 
     render () {
-      if (!this[OBSERVED_RENDER]) {
-        this[OBSERVED_RENDER] = () => {
-          if (this[IS_DIRECT_RENDER]) {
-            this[RENDER_RESULT] = super.render()
+      // if it is the first direct render from react call there is no reactive render yet
+      if (!this[REACTIVE_RENDER]) {
+        let result
+        // create a reactive render, which is automatically called by easyState on relevant state and store mutations
+        // the passed function is executed right away synchronously once by easyState
+        this[REACTIVE_RENDER] = observe(() => {
+          // if it is the first (synchronous) execution, call the original component's render
+          // this is necessary because forceUpdate can not be called synchronously inside render functions
+          if (!this[REACTIVE_RENDER]) {
+            result = super.render()
           } else {
+            // if it is a later reactive, asynchronous execution - triggered by easyState - forceUpdate the original component
+            // this is necessary, because calling render would require the result to be returned
+            // which is not possible from this asynchronous context
             super.forceUpdate()
           }
-        }
+        })
+        // return the result from super.render() inside the reactive render on the first render execution
+        return result
+      } else {
+        // return the original component's render result on direct calls from react
+        return super.render()
       }
-
-      this[IS_DIRECT_RENDER] = true
-      this[OBSERVED_RENDER] = observe(this[OBSERVED_RENDER])
-      this[IS_DIRECT_RENDER] = false
-
-      return this[RENDER_RESULT]
     }
 
     // react should trigger updates on prop changes, while easyState handles state changes
@@ -108,7 +114,7 @@ function toReactiveComp (Comp) {
 
     componentWillUnmount () {
       // clean up memory used by easyState
-      unobserve(this[OBSERVED_RENDER])
+      unobserve(this[REACTIVE_RENDER])
 
       // also call user defined componentWillUnmount to allow the user
       // to clean up additional memory
