@@ -5,25 +5,24 @@ import store from './store'
 
 class TodoItem extends Component {
   remove () {
-    store.remove(this.props.todo)
+    store.remove(this.props.id)
   }
 
   toggle () {
-    const { todo } = this.props
-    todo.completed = !todo.completed
+    store.toggle(this.props.id)
   }
 
   // render is triggered whenever the relevant parts of the component props or global store change
   render () {
     const { toggle, remove } = this
-    const { todo } = this.props
+    const { title, completed = false } = this.props
 
-    const itemClass = classNames({ view: true, completed: todo.completed })
+    const itemClass = classNames({ view: true, completed })
 
     return (
       <li className={itemClass}>
-        <input className='toggle' type='checkbox' checked={todo.completed} onChange={toggle} />
-        <label>{todo.title}</label>
+        <input className='toggle' type='checkbox' checked={completed} onChange={toggle} />
+        <label>{title}</label>
         <button onClick={remove} className='destroy' />
       </li>
     )

@@ -73,12 +73,8 @@ exports[`02. Add Test Todo 1`] = `
         className="todo-list"
       >
         <EasyCompWrapper
-          todo={
-            Object {
-              "completed": false,
-              "title": "Test Todo",
-            }
-          }
+          id={0}
+          title="Test Todo"
         >
           <li
             className="view"
@@ -159,7 +155,7 @@ exports[`02. Add Test Todo 1`] = `
         Mark all as complete
       </label>
       <ul class="todo-list">
-        <EasyCompWrapper>
+        <EasyCompWrapper title="Test Todo">
           <li class="view">
             <input
               class="toggle"
@@ -239,12 +235,8 @@ exports[`03. Add Other Todo 1`] = `
         className="todo-list"
       >
         <EasyCompWrapper
-          todo={
-            Object {
-              "completed": false,
-              "title": "Test Todo",
-            }
-          }
+          id={0}
+          title="Test Todo"
         >
           <li
             className="view"
@@ -265,12 +257,8 @@ exports[`03. Add Other Todo 1`] = `
           </li>
         </EasyCompWrapper>
         <EasyCompWrapper
-          todo={
-            Object {
-              "completed": false,
-              "title": "Other Todo",
-            }
-          }
+          id={1}
+          title="Other Todo"
         >
           <li
             className="view"
@@ -351,7 +339,7 @@ exports[`03. Add Other Todo 1`] = `
         Mark all as complete
       </label>
       <ul class="todo-list">
-        <EasyCompWrapper>
+        <EasyCompWrapper title="Test Todo">
           <li class="view">
             <input
               class="toggle"
@@ -363,7 +351,7 @@ exports[`03. Add Other Todo 1`] = `
             <button class="destroy"></button>
           </li>
         </EasyCompWrapper>
-        <EasyCompWrapper>
+        <EasyCompWrapper title="Other Todo">
           <li class="view">
             <input
               class="toggle"
@@ -443,12 +431,8 @@ exports[`04. Add Final Todo 1`] = `
         className="todo-list"
       >
         <EasyCompWrapper
-          todo={
-            Object {
-              "completed": false,
-              "title": "Test Todo",
-            }
-          }
+          id={0}
+          title="Test Todo"
         >
           <li
             className="view"
@@ -469,12 +453,8 @@ exports[`04. Add Final Todo 1`] = `
           </li>
         </EasyCompWrapper>
         <EasyCompWrapper
-          todo={
-            Object {
-              "completed": false,
-              "title": "Other Todo",
-            }
-          }
+          id={1}
+          title="Other Todo"
         >
           <li
             className="view"
@@ -495,12 +475,8 @@ exports[`04. Add Final Todo 1`] = `
           </li>
         </EasyCompWrapper>
         <EasyCompWrapper
-          todo={
-            Object {
-              "completed": false,
-              "title": "Final Todo",
-            }
-          }
+          id={2}
+          title="Final Todo"
         >
           <li
             className="view"
@@ -581,7 +557,7 @@ exports[`04. Add Final Todo 1`] = `
         Mark all as complete
       </label>
       <ul class="todo-list">
-        <EasyCompWrapper>
+        <EasyCompWrapper title="Test Todo">
           <li class="view">
             <input
               class="toggle"
@@ -593,7 +569,7 @@ exports[`04. Add Final Todo 1`] = `
             <button class="destroy"></button>
           </li>
         </EasyCompWrapper>
-        <EasyCompWrapper>
+        <EasyCompWrapper title="Other Todo">
           <li class="view">
             <input
               class="toggle"
@@ -605,7 +581,7 @@ exports[`04. Add Final Todo 1`] = `
             <button class="destroy"></button>
           </li>
         </EasyCompWrapper>
-        <EasyCompWrapper>
+        <EasyCompWrapper title="Final Todo">
           <li class="view">
             <input
               class="toggle"
@@ -685,12 +661,9 @@ exports[`05. Toggle Test Todo to completed 1`] = `
         className="todo-list"
       >
         <EasyCompWrapper
-          todo={
-            Object {
-              "completed": true,
-              "title": "Test Todo",
-            }
-          }
+          completed={true}
+          id={0}
+          title="Test Todo"
         >
           <li
             className="view completed"
@@ -711,12 +684,8 @@ exports[`05. Toggle Test Todo to completed 1`] = `
           </li>
         </EasyCompWrapper>
         <EasyCompWrapper
-          todo={
-            Object {
-              "completed": false,
-              "title": "Other Todo",
-            }
-          }
+          id={1}
+          title="Other Todo"
         >
           <li
             className="view"
@@ -737,12 +706,8 @@ exports[`05. Toggle Test Todo to completed 1`] = `
           </li>
         </EasyCompWrapper>
         <EasyCompWrapper
-          todo={
-            Object {
-              "completed": false,
-              "title": "Final Todo",
-            }
-          }
+          id={2}
+          title="Final Todo"
         >
           <li
             className="view"
@@ -829,7 +794,10 @@ exports[`05. Toggle Test Todo to completed 1`] = `
         Mark all as complete
       </label>
       <ul class="todo-list">
-        <EasyCompWrapper>
+        <EasyCompWrapper
+          completed
+          title="Test Todo"
+        >
           <li class="view completed">
             <input
               checked
@@ -842,7 +810,7 @@ exports[`05. Toggle Test Todo to completed 1`] = `
             <button class="destroy"></button>
           </li>
         </EasyCompWrapper>
-        <EasyCompWrapper>
+        <EasyCompWrapper title="Other Todo">
           <li class="view">
             <input
               class="toggle"
@@ -854,7 +822,7 @@ exports[`05. Toggle Test Todo to completed 1`] = `
             <button class="destroy"></button>
           </li>
         </EasyCompWrapper>
-        <EasyCompWrapper>
+        <EasyCompWrapper title="Final Todo">
           <li class="view">
             <input
               class="toggle"
@@ -937,12 +905,9 @@ exports[`06. Toggle Other Todo to completed 1`] = `
         className="todo-list"
       >
         <EasyCompWrapper
-          todo={
-            Object {
-              "completed": true,
-              "title": "Test Todo",
-            }
-          }
+          completed={true}
+          id={0}
+          title="Test Todo"
         >
           <li
             className="view completed"
@@ -963,12 +928,9 @@ exports[`06. Toggle Other Todo to completed 1`] = `
           </li>
         </EasyCompWrapper>
         <EasyCompWrapper
-          todo={
-            Object {
-              "completed": true,
-              "title": "Other Todo",
-            }
-          }
+          completed={true}
+          id={1}
+          title="Other Todo"
         >
           <li
             className="view completed"
@@ -989,12 +951,8 @@ exports[`06. Toggle Other Todo to completed 1`] = `
           </li>
         </EasyCompWrapper>
         <EasyCompWrapper
-          todo={
-            Object {
-              "completed": false,
-              "title": "Final Todo",
-            }
-          }
+          id={2}
+          title="Final Todo"
         >
           <li
             className="view"
@@ -1081,7 +1039,10 @@ exports[`06. Toggle Other Todo to completed 1`] = `
         Mark all as complete
       </label>
       <ul class="todo-list">
-        <EasyCompWrapper>
+        <EasyCompWrapper
+          completed
+          title="Test Todo"
+        >
           <li class="view completed">
             <input
               checked
@@ -1094,7 +1055,10 @@ exports[`06. Toggle Other Todo to completed 1`] = `
             <button class="destroy"></button>
           </li>
         </EasyCompWrapper>
-        <EasyCompWrapper>
+        <EasyCompWrapper
+          completed
+          title="Other Todo"
+        >
           <li class="view completed">
             <input
               checked
@@ -1107,7 +1071,7 @@ exports[`06. Toggle Other Todo to completed 1`] = `
             <button class="destroy"></button>
           </li>
         </EasyCompWrapper>
-        <EasyCompWrapper>
+        <EasyCompWrapper title="Final Todo">
           <li class="view">
             <input
               class="toggle"
@@ -1190,12 +1154,9 @@ exports[`07. Toggle Test Todo to active 1`] = `
         className="todo-list"
       >
         <EasyCompWrapper
-          todo={
-            Object {
-              "completed": false,
-              "title": "Test Todo",
-            }
-          }
+          completed={false}
+          id={0}
+          title="Test Todo"
         >
           <li
             className="view"
@@ -1216,12 +1177,9 @@ exports[`07. Toggle Test Todo to active 1`] = `
           </li>
         </EasyCompWrapper>
         <EasyCompWrapper
-          todo={
-            Object {
-              "completed": true,
-              "title": "Other Todo",
-            }
-          }
+          completed={true}
+          id={1}
+          title="Other Todo"
         >
           <li
             className="view completed"
@@ -1242,12 +1200,8 @@ exports[`07. Toggle Test Todo to active 1`] = `
           </li>
         </EasyCompWrapper>
         <EasyCompWrapper
-          todo={
-            Object {
-              "completed": false,
-              "title": "Final Todo",
-            }
-          }
+          id={2}
+          title="Final Todo"
         >
           <li
             className="view"
@@ -1334,7 +1288,7 @@ exports[`07. Toggle Test Todo to active 1`] = `
         Mark all as complete
       </label>
       <ul class="todo-list">
-        <EasyCompWrapper>
+        <EasyCompWrapper title="Test Todo">
           <li class="view">
             <input
               class="toggle"
@@ -1346,7 +1300,10 @@ exports[`07. Toggle Test Todo to active 1`] = `
             <button class="destroy"></button>
           </li>
         </EasyCompWrapper>
-        <EasyCompWrapper>
+        <EasyCompWrapper
+          completed
+          title="Other Todo"
+        >
           <li class="view completed">
             <input
               checked
@@ -1359,7 +1316,7 @@ exports[`07. Toggle Test Todo to active 1`] = `
             <button class="destroy"></button>
           </li>
         </EasyCompWrapper>
-        <EasyCompWrapper>
+        <EasyCompWrapper title="Final Todo">
           <li class="view">
             <input
               class="toggle"
@@ -1442,12 +1399,9 @@ exports[`08. Filter completed 1`] = `
         className="todo-list"
       >
         <EasyCompWrapper
-          todo={
-            Object {
-              "completed": true,
-              "title": "Other Todo",
-            }
-          }
+          completed={true}
+          id={0}
+          title="Other Todo"
         >
           <li
             className="view completed"
@@ -1534,7 +1488,10 @@ exports[`08. Filter completed 1`] = `
         Mark all as complete
       </label>
       <ul class="todo-list">
-        <EasyCompWrapper>
+        <EasyCompWrapper
+          completed
+          title="Other Todo"
+        >
           <li class="view completed">
             <input
               checked
@@ -1618,12 +1575,9 @@ exports[`09. Filter active 1`] = `
         className="todo-list"
       >
         <EasyCompWrapper
-          todo={
-            Object {
-              "completed": false,
-              "title": "Test Todo",
-            }
-          }
+          completed={false}
+          id={0}
+          title="Test Todo"
         >
           <li
             className="view"
@@ -1644,12 +1598,8 @@ exports[`09. Filter active 1`] = `
           </li>
         </EasyCompWrapper>
         <EasyCompWrapper
-          todo={
-            Object {
-              "completed": false,
-              "title": "Final Todo",
-            }
-          }
+          id={1}
+          title="Final Todo"
         >
           <li
             className="view"
@@ -1736,7 +1686,7 @@ exports[`09. Filter active 1`] = `
         Mark all as complete
       </label>
       <ul class="todo-list">
-        <EasyCompWrapper>
+        <EasyCompWrapper title="Test Todo">
           <li class="view">
             <input
               class="toggle"
@@ -1748,7 +1698,7 @@ exports[`09. Filter active 1`] = `
             <button class="destroy"></button>
           </li>
         </EasyCompWrapper>
-        <EasyCompWrapper>
+        <EasyCompWrapper title="Final Todo">
           <li class="view">
             <input
               class="toggle"
@@ -1831,12 +1781,9 @@ exports[`10. Filter all 1`] = `
         className="todo-list"
       >
         <EasyCompWrapper
-          todo={
-            Object {
-              "completed": false,
-              "title": "Test Todo",
-            }
-          }
+          completed={false}
+          id={0}
+          title="Test Todo"
         >
           <li
             className="view"
@@ -1857,12 +1804,9 @@ exports[`10. Filter all 1`] = `
           </li>
         </EasyCompWrapper>
         <EasyCompWrapper
-          todo={
-            Object {
-              "completed": true,
-              "title": "Other Todo",
-            }
-          }
+          completed={true}
+          id={1}
+          title="Other Todo"
         >
           <li
             className="view completed"
@@ -1883,12 +1827,8 @@ exports[`10. Filter all 1`] = `
           </li>
         </EasyCompWrapper>
         <EasyCompWrapper
-          todo={
-            Object {
-              "completed": false,
-              "title": "Final Todo",
-            }
-          }
+          id={2}
+          title="Final Todo"
         >
           <li
             className="view"
@@ -1975,7 +1915,7 @@ exports[`10. Filter all 1`] = `
         Mark all as complete
       </label>
       <ul class="todo-list">
-        <EasyCompWrapper>
+        <EasyCompWrapper title="Test Todo">
           <li class="view">
             <input
               class="toggle"
@@ -1987,7 +1927,10 @@ exports[`10. Filter all 1`] = `
             <button class="destroy"></button>
           </li>
         </EasyCompWrapper>
-        <EasyCompWrapper>
+        <EasyCompWrapper
+          completed
+          title="Other Todo"
+        >
           <li class="view completed">
             <input
               checked
@@ -2000,7 +1943,7 @@ exports[`10. Filter all 1`] = `
             <button class="destroy"></button>
           </li>
         </EasyCompWrapper>
-        <EasyCompWrapper>
+        <EasyCompWrapper title="Final Todo">
           <li class="view">
             <input
               class="toggle"
@@ -2083,12 +2026,9 @@ exports[`11. Clear completed 1`] = `
         className="todo-list"
       >
         <EasyCompWrapper
-          todo={
-            Object {
-              "completed": false,
-              "title": "Test Todo",
-            }
-          }
+          completed={false}
+          id={0}
+          title="Test Todo"
         >
           <li
             className="view"
@@ -2109,12 +2049,8 @@ exports[`11. Clear completed 1`] = `
           </li>
         </EasyCompWrapper>
         <EasyCompWrapper
-          todo={
-            Object {
-              "completed": false,
-              "title": "Final Todo",
-            }
-          }
+          id={1}
+          title="Final Todo"
         >
           <li
             className="view"
@@ -2195,7 +2131,7 @@ exports[`11. Clear completed 1`] = `
         Mark all as complete
       </label>
       <ul class="todo-list">
-        <EasyCompWrapper>
+        <EasyCompWrapper title="Test Todo">
           <li class="view">
             <input
               class="toggle"
@@ -2207,7 +2143,7 @@ exports[`11. Clear completed 1`] = `
             <button class="destroy"></button>
           </li>
         </EasyCompWrapper>
-        <EasyCompWrapper>
+        <EasyCompWrapper title="Final Todo">
           <li class="view">
             <input
               class="toggle"
@@ -2287,12 +2223,9 @@ exports[`12. Toggle all to completed 1`] = `
         className="todo-list"
       >
         <EasyCompWrapper
-          todo={
-            Object {
-              "completed": true,
-              "title": "Test Todo",
-            }
-          }
+          completed={true}
+          id={0}
+          title="Test Todo"
         >
           <li
             className="view completed"
@@ -2313,12 +2246,9 @@ exports[`12. Toggle all to completed 1`] = `
           </li>
         </EasyCompWrapper>
         <EasyCompWrapper
-          todo={
-            Object {
-              "completed": true,
-              "title": "Final Todo",
-            }
-          }
+          completed={true}
+          id={1}
+          title="Final Todo"
         >
           <li
             className="view completed"
@@ -2406,7 +2336,10 @@ exports[`12. Toggle all to completed 1`] = `
         Mark all as complete
       </label>
       <ul class="todo-list">
-        <EasyCompWrapper>
+        <EasyCompWrapper
+          completed
+          title="Test Todo"
+        >
           <li class="view completed">
             <input
               checked
@@ -2419,7 +2352,10 @@ exports[`12. Toggle all to completed 1`] = `
             <button class="destroy"></button>
           </li>
         </EasyCompWrapper>
-        <EasyCompWrapper>
+        <EasyCompWrapper
+          completed
+          title="Final Todo"
+        >
           <li class="view completed">
             <input
               checked
@@ -2503,12 +2439,9 @@ exports[`13. Toggle all to active 1`] = `
         className="todo-list"
       >
         <EasyCompWrapper
-          todo={
-            Object {
-              "completed": false,
-              "title": "Test Todo",
-            }
-          }
+          completed={false}
+          id={0}
+          title="Test Todo"
         >
           <li
             className="view"
@@ -2529,12 +2462,9 @@ exports[`13. Toggle all to active 1`] = `
           </li>
         </EasyCompWrapper>
         <EasyCompWrapper
-          todo={
-            Object {
-              "completed": false,
-              "title": "Final Todo",
-            }
-          }
+          completed={false}
+          id={1}
+          title="Final Todo"
         >
           <li
             className="view"
@@ -2615,7 +2545,7 @@ exports[`13. Toggle all to active 1`] = `
         Mark all as complete
       </label>
       <ul class="todo-list">
-        <EasyCompWrapper>
+        <EasyCompWrapper title="Test Todo">
           <li class="view">
             <input
               class="toggle"
@@ -2627,7 +2557,7 @@ exports[`13. Toggle all to active 1`] = `
             <button class="destroy"></button>
           </li>
         </EasyCompWrapper>
-        <EasyCompWrapper>
+        <EasyCompWrapper title="Final Todo">
           <li class="view">
             <input
               class="toggle"
@@ -2707,12 +2637,9 @@ exports[`14. Delete Test Todo 1`] = `
         className="todo-list"
       >
         <EasyCompWrapper
-          todo={
-            Object {
-              "completed": false,
-              "title": "Final Todo",
-            }
-          }
+          completed={false}
+          id={0}
+          title="Final Todo"
         >
           <li
             className="view"
@@ -2793,7 +2720,7 @@ exports[`14. Delete Test Todo 1`] = `
         Mark all as complete
       </label>
       <ul class="todo-list">
-        <EasyCompWrapper>
+        <EasyCompWrapper title="Final Todo">
           <li class="view">
             <input
               class="toggle"

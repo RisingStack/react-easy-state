@@ -24,7 +24,7 @@ function App () {
         <input className='toggle-all' type='checkbox' checked={allCompleted} onChange={toggleAll} />
         <label htmlFor='toggle-all'>Mark all as complete</label>
         <ul className='todo-list'>
-          {store[filter].map(todo => <TodoItem key={todo.title} todo={todo} />)}
+          {store[filter].map((todo, idx) => <TodoItem {...todo} id={idx} key={idx} />)}
         </ul>
       </section>}
 

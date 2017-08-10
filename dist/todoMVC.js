@@ -23287,15 +23287,19 @@ exports.default = (0, _reactEasyState.easyStore)({
   },
   create: function create(ev) {
     if (ev.keyCode === 13) {
-      this.todos.push({ title: ev.target.value, completed: false });
+      this.todos.push({ title: ev.target.value });
       ev.target.value = '';
     }
   },
   changeFilter: function changeFilter(ev) {
     this.filter = ev.target.value;
   },
-  remove: function remove(todo) {
-    this.todos.splice(this.todos.indexOf(todo), 1);
+  remove: function remove(id) {
+    this.todos.splice(id, 1);
+  },
+  toggle: function toggle(id) {
+    var todo = this.todos[id];
+    todo.completed = !todo.completed;
   },
   clearCompleted: function clearCompleted() {
     this.todos = this.active;
@@ -23342,6 +23346,8 @@ _reactDom2.default.render(_react2.default.createElement(_App2.default, null), do
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _react = __webpack_require__(25);
 
@@ -23405,8 +23411,8 @@ function App() {
       _react2.default.createElement(
         'ul',
         { className: 'todo-list' },
-        _store2.default[filter].map(function (todo) {
-          return _react2.default.createElement(_TodoItem2.default, { key: todo.title, todo: todo });
+        _store2.default[filter].map(function (todo, idx) {
+          return _react2.default.createElement(_TodoItem2.default, _extends({}, todo, { id: idx, key: idx }));
         })
       )
     ),
@@ -23497,14 +23503,12 @@ var TodoItem = function (_Component) {
   _createClass(TodoItem, [{
     key: 'remove',
     value: function remove() {
-      _store2.default.remove(this.props.todo);
+      _store2.default.remove(this.props.id);
     }
   }, {
     key: 'toggle',
     value: function toggle() {
-      var todo = this.props.todo;
-
-      todo.completed = !todo.completed;
+      _store2.default.toggle(this.props.id);
     }
 
     // render is triggered whenever the relevant parts of the component props or global store change
@@ -23514,19 +23518,22 @@ var TodoItem = function (_Component) {
     value: function render() {
       var toggle = this.toggle,
           remove = this.remove;
-      var todo = this.props.todo;
+      var _props = this.props,
+          title = _props.title,
+          _props$completed = _props.completed,
+          completed = _props$completed === undefined ? false : _props$completed;
 
 
-      var itemClass = (0, _classnames2.default)({ view: true, completed: todo.completed });
+      var itemClass = (0, _classnames2.default)({ view: true, completed: completed });
 
       return _react2.default.createElement(
         'li',
         { className: itemClass },
-        _react2.default.createElement('input', { className: 'toggle', type: 'checkbox', checked: todo.completed, onChange: toggle }),
+        _react2.default.createElement('input', { className: 'toggle', type: 'checkbox', checked: completed, onChange: toggle }),
         _react2.default.createElement(
           'label',
           null,
-          todo.title
+          title
         ),
         _react2.default.createElement('button', { onClick: remove, className: 'destroy' })
       );

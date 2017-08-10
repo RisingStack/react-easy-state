@@ -32,15 +32,19 @@ export default easyStore({
   },
   create (ev) {
     if (ev.keyCode === 13) {
-      this.todos.push({ title: ev.target.value, completed: false })
+      this.todos.push({ title: ev.target.value })
       ev.target.value = ''
     }
   },
   changeFilter (ev) {
     this.filter = ev.target.value
   },
-  remove (todo) {
-    this.todos.splice(this.todos.indexOf(todo), 1)
+  remove (id) {
+    this.todos.splice(id, 1)
+  },
+  toggle (id) {
+    const todo = this.todos[id]
+    todo.completed = !todo.completed
   },
   clearCompleted () {
     this.todos = this.active

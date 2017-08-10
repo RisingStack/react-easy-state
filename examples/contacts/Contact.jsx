@@ -6,7 +6,7 @@ class Contact extends Component {
   constructor ({ contact }) {
     super()
 
-    // save internal utility data in component state, instead of the global store
+    // save internal utility data in component state instead of the global store
     // editing is boolean meta flag, which indicates if the contact is currently edited
     // currentContact is a temporary state of the contact during editing, which can be saved or cancelled
     this.state = {

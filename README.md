@@ -1,6 +1,12 @@
+<center>
+
 # React Easy State
 
+[![CircleCI](https://circleci.com/gh/solkimicreb/react-easy-state/tree/master.svg?style=shield)](https://circleci.com/gh/solkimicreb/react-easy-state/tree/master) [![Coverage Status](https://coveralls.io/repos/github/solkimicreb/react-easy-state/badge.svg)](https://coveralls.io/github/solkimicreb/react-easy-state) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) [![Version](https://img.shields.io/npm/v/react-easy-state.svg)](https://www.npmjs.com/package/react-easy-state) [![License](https://img.shields.io/npm/l/react-easy-state.svg)](https://www.npmjs.com/package/react-easy-state)
+
 Easy State a tiny state management solution for React with a strong focus on simplicity.
+
+</center>
 
 ## Installation
 

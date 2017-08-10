@@ -23339,7 +23339,7 @@ var Contact = function (_Component) {
 
     _classCallCheck(this, Contact);
 
-    // save internal utility data in component state, instead of the global store
+    // save internal utility data in component state instead of the global store
     // editing is boolean meta flag, which indicates if the contact is currently edited
     // currentContact is a temporary state of the contact during editing, which can be saved or cancelled
     var _this = _possibleConstructorReturn(this, (Contact.__proto__ || Object.getPrototypeOf(Contact)).call(this));
