@@ -26,6 +26,10 @@ describe('TodoMVC App', () => {
     expect(toJSON(app)).toMatchSnapshot('03. Add Other Todo')
 
     input.simulate('keyUp', {
+      keyCode: 27,
+      target: { value: 'Final Tod' }
+    })
+    input.simulate('keyUp', {
       keyCode: 13,
       target: { value: 'Final Todo' }
     })

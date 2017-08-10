@@ -22,7 +22,9 @@
       "./node_modules/jest-html"
     ],
     "collectCoverageFrom": [
-      "**/src/**"
+      "**/src/**",
+      "**/examples/**",
+      "!**/examples/**/index.jsx"
     ]
   },
   "author": {

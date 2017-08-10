@@ -31,14 +31,14 @@ describe('Contacts App', () => {
     expect(toJSON(app)).toMatchSnapshot('04. Add Test Contact')
 
     nameField.simulate('change', {
-      target: { name: 'name', value: 'Other Contact' }
+      target: { name: 'name', value: '' }
     })
     emailField.simulate('change', {
-      target: { name: 'email', value: 'other.contact@gmail.com' }
+      target: { name: 'email', value: '' }
     })
     createButton.simulate('click')
     await Promise.resolve()
-    expect(toJSON(app)).toMatchSnapshot('05. Add Other Contact')
+    expect(toJSON(app)).toMatchSnapshot('05. Add Placeholder Contact')
   })
 
   test('should edit contact', async () => {
@@ -92,7 +92,7 @@ describe('Contacts App', () => {
 
     deleteButton.simulate('click')
     await Promise.resolve()
-    expect(toJSON(app)).toMatchSnapshot('12. Delete Other Contact')
+    expect(toJSON(app)).toMatchSnapshot('12. Delete Placeholder Contact')
 
     deleteButton = app.find('.contact-display .zmdi-delete').at(0)
 

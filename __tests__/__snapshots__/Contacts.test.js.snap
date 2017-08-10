@@ -429,7 +429,7 @@ exports[`04. Add Test Contact 1`] = `
 </App>
 `;
 
-exports[`05. Add Other Contact 1`] = `
+exports[`05. Add Placeholder Contact 1`] = `
 <App>
   <table>
     <thead>
@@ -484,8 +484,8 @@ exports[`05. Add Other Contact 1`] = `
       <EasyCompWrapper
         contact={
           Object {
-            "email": "other.contact@gmail.com",
-            "name": "Other Contact",
+            "email": "Placeholder",
+            "name": "Placeholder",
           }
         }
       >
@@ -493,10 +493,10 @@ exports[`05. Add Other Contact 1`] = `
           className="contact-display"
         >
           <td>
-            Other Contact
+            Placeholder
           </td>
           <td>
-            other.contact@gmail.com
+            Placeholder
           </td>
           <td>
             <button
@@ -586,10 +586,10 @@ exports[`05. Add Other Contact 1`] = `
       <EasyCompWrapper>
         <tr class="contact-display">
           <td>
-            Other Contact
+            Placeholder
           </td>
           <td>
-            other.contact@gmail.com
+            Placeholder
           </td>
           <td>
             <button>
@@ -693,8 +693,8 @@ exports[`06. Switch Test Contact to Edit Mode 1`] = `
       <EasyCompWrapper
         contact={
           Object {
-            "email": "other.contact@gmail.com",
-            "name": "Other Contact",
+            "email": "Placeholder",
+            "name": "Placeholder",
           }
         }
       >
@@ -702,10 +702,10 @@ exports[`06. Switch Test Contact to Edit Mode 1`] = `
           className="contact-display"
         >
           <td>
-            Other Contact
+            Placeholder
           </td>
           <td>
-            other.contact@gmail.com
+            Placeholder
           </td>
           <td>
             <button
@@ -802,10 +802,10 @@ exports[`06. Switch Test Contact to Edit Mode 1`] = `
       <EasyCompWrapper>
         <tr class="contact-display">
           <td>
-            Other Contact
+            Placeholder
           </td>
           <td>
-            other.contact@gmail.com
+            Placeholder
           </td>
           <td>
             <button>
@@ -909,8 +909,8 @@ exports[`07. Edit Test Contact name 1`] = `
       <EasyCompWrapper
         contact={
           Object {
-            "email": "other.contact@gmail.com",
-            "name": "Other Contact",
+            "email": "Placeholder",
+            "name": "Placeholder",
           }
         }
       >
@@ -918,10 +918,10 @@ exports[`07. Edit Test Contact name 1`] = `
           className="contact-display"
         >
           <td>
-            Other Contact
+            Placeholder
           </td>
           <td>
-            other.contact@gmail.com
+            Placeholder
           </td>
           <td>
             <button
@@ -1018,10 +1018,10 @@ exports[`07. Edit Test Contact name 1`] = `
       <EasyCompWrapper>
         <tr class="contact-display">
           <td>
-            Other Contact
+            Placeholder
           </td>
           <td>
-            other.contact@gmail.com
+            Placeholder
           </td>
           <td>
             <button>
@@ -1116,8 +1116,8 @@ exports[`08. Cancel Test Contact edit 1`] = `
       <EasyCompWrapper
         contact={
           Object {
-            "email": "other.contact@gmail.com",
-            "name": "Other Contact",
+            "email": "Placeholder",
+            "name": "Placeholder",
           }
         }
       >
@@ -1125,10 +1125,10 @@ exports[`08. Cancel Test Contact edit 1`] = `
           className="contact-display"
         >
           <td>
-            Other Contact
+            Placeholder
           </td>
           <td>
-            other.contact@gmail.com
+            Placeholder
           </td>
           <td>
             <button
@@ -1218,10 +1218,10 @@ exports[`08. Cancel Test Contact edit 1`] = `
       <EasyCompWrapper>
         <tr class="contact-display">
           <td>
-            Other Contact
+            Placeholder
           </td>
           <td>
-            other.contact@gmail.com
+            Placeholder
           </td>
           <td>
             <button>
@@ -1325,8 +1325,8 @@ exports[`09. Switch Test Contact to edit Mode 1`] = `
       <EasyCompWrapper
         contact={
           Object {
-            "email": "other.contact@gmail.com",
-            "name": "Other Contact",
+            "email": "Placeholder",
+            "name": "Placeholder",
           }
         }
       >
@@ -1334,10 +1334,10 @@ exports[`09. Switch Test Contact to edit Mode 1`] = `
           className="contact-display"
         >
           <td>
-            Other Contact
+            Placeholder
           </td>
           <td>
-            other.contact@gmail.com
+            Placeholder
           </td>
           <td>
             <button
@@ -1434,10 +1434,10 @@ exports[`09. Switch Test Contact to edit Mode 1`] = `
       <EasyCompWrapper>
         <tr class="contact-display">
           <td>
-            Other Contact
+            Placeholder
           </td>
           <td>
-            other.contact@gmail.com
+            Placeholder
           </td>
           <td>
             <button>
@@ -1541,8 +1541,8 @@ exports[`10. Edit Test Contact email 1`] = `
       <EasyCompWrapper
         contact={
           Object {
-            "email": "other.contact@gmail.com",
-            "name": "Other Contact",
+            "email": "Placeholder",
+            "name": "Placeholder",
           }
         }
       >
@@ -1550,10 +1550,10 @@ exports[`10. Edit Test Contact email 1`] = `
           className="contact-display"
         >
           <td>
-            Other Contact
+            Placeholder
           </td>
           <td>
-            other.contact@gmail.com
+            Placeholder
           </td>
           <td>
             <button
@@ -1650,10 +1650,10 @@ exports[`10. Edit Test Contact email 1`] = `
       <EasyCompWrapper>
         <tr class="contact-display">
           <td>
-            Other Contact
+            Placeholder
           </td>
           <td>
-            other.contact@gmail.com
+            Placeholder
           </td>
           <td>
             <button>
@@ -1748,8 +1748,8 @@ exports[`11. Save Test Contact edit 1`] = `
       <EasyCompWrapper
         contact={
           Object {
-            "email": "other.contact@gmail.com",
-            "name": "Other Contact",
+            "email": "Placeholder",
+            "name": "Placeholder",
           }
         }
       >
@@ -1757,10 +1757,10 @@ exports[`11. Save Test Contact edit 1`] = `
           className="contact-display"
         >
           <td>
-            Other Contact
+            Placeholder
           </td>
           <td>
-            other.contact@gmail.com
+            Placeholder
           </td>
           <td>
             <button
@@ -1850,10 +1850,10 @@ exports[`11. Save Test Contact edit 1`] = `
       <EasyCompWrapper>
         <tr class="contact-display">
           <td>
-            Other Contact
+            Placeholder
           </td>
           <td>
-            other.contact@gmail.com
+            Placeholder
           </td>
           <td>
             <button>
@@ -1893,7 +1893,7 @@ exports[`11. Save Test Contact edit 1`] = `
 </App>
 `;
 
-exports[`12. Delete Other Contact 1`] = `
+exports[`12. Delete Placeholder Contact 1`] = `
 <App>
   <table>
     <thead>
