@@ -22748,6 +22748,10 @@ function easyCompHOC(WrappedComp) {
     WrappedComp.defaultProps = renderer.defaultProps;
   }
 
+  if (typeof WrappedComp.prototype.shouldComponentUpdate === 'function') {
+    throw new Error('Do not implement shouldComponentUpdate, easyState already optimizes it for you!');
+  }
+
   return function (_WrappedComp) {
     _inherits(EasyCompWrapper, _WrappedComp);
 
@@ -22784,11 +22788,7 @@ function easyCompHOC(WrappedComp) {
       }
     }, {
       key: 'shouldComponentUpdate',
-      value: function shouldComponentUpdate(nextProps) {
-        if (_get(EasyCompWrapper.prototype.__proto__ || Object.getPrototypeOf(EasyCompWrapper.prototype), 'shouldComponentUpdate', this)) {
-          return _get(EasyCompWrapper.prototype.__proto__ || Object.getPrototypeOf(EasyCompWrapper.prototype), 'shouldComponentUpdate', this).call(this);
-        }
-
+      value: function shouldComponentUpdate(nextProps, nextState) {
         var props = this.props;
 
         var keys = Object.keys(props);

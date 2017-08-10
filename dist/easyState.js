@@ -507,6 +507,10 @@ function easyCompHOC (WrappedComp) {
     WrappedComp.defaultProps = renderer.defaultProps
   }
 
+  if (typeof WrappedComp.prototype.shouldComponentUpdate === 'function') {
+    throw new Error('Do not implement shouldComponentUpdate, easyState already optimizes it for you!')
+  }
+
   return class EasyCompWrapper extends WrappedComp {
     constructor (props) {
       super(props)
@@ -532,11 +536,7 @@ function easyCompHOC (WrappedComp) {
       return this[RENDER_RESULT]
     }
 
-    shouldComponentUpdate (nextProps) {
-      if (super.shouldComponentUpdate) {
-        return super.shouldComponentUpdate()
-      }
-
+    shouldComponentUpdate (nextProps, nextState) {
       const { props } = this
       const keys = Object.keys(props)
       const nextKeys = Object.keys(nextProps)

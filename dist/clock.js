@@ -27111,6 +27111,10 @@ function easyCompHOC(WrappedComp) {
     WrappedComp.defaultProps = renderer.defaultProps;
   }
 
+  if (typeof WrappedComp.prototype.shouldComponentUpdate === 'function') {
+    throw new Error('Do not implement shouldComponentUpdate, easyState already optimizes it for you!');
+  }
+
   return function (_WrappedComp) {
     _inherits(EasyCompWrapper, _WrappedComp);
 
@@ -27147,11 +27151,7 @@ function easyCompHOC(WrappedComp) {
       }
     }, {
       key: 'shouldComponentUpdate',
-      value: function shouldComponentUpdate(nextProps) {
-        if (_get(EasyCompWrapper.prototype.__proto__ || Object.getPrototypeOf(EasyCompWrapper.prototype), 'shouldComponentUpdate', this)) {
-          return _get(EasyCompWrapper.prototype.__proto__ || Object.getPrototypeOf(EasyCompWrapper.prototype), 'shouldComponentUpdate', this).call(this);
-        }
-
+      value: function shouldComponentUpdate(nextProps, nextState) {
         var props = this.props;
 
         var keys = Object.keys(props);
@@ -38893,8 +38893,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var App = function (_Component) {
-  _inherits(App, _Component);
+var App = function (_PureComponent) {
+  _inherits(App, _PureComponent);
 
   function App() {
     _classCallCheck(this, App);
@@ -38941,7 +38941,7 @@ var App = function (_Component) {
   }]);
 
   return App;
-}(_react.Component);
+}(_react.PureComponent);
 
 // wrap the component with easyComp before exporting it
 

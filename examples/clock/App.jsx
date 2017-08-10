@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import moment from 'moment'
 import { easyComp } from 'react-easy-state'
 
-class App extends Component {
+class App extends PureComponent {
   constructor () {
     super()
 
