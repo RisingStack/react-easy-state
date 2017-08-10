@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`01. Initial state 1`] = `
-<App>
+<EasyHOC>
   <div
     className="todoapp"
   >
@@ -19,9 +19,9 @@ exports[`01. Initial state 1`] = `
       />
     </header>
   </div>
-</App>
+</EasyHOC>
 ------------HTML PREVIEW---------------
-<App>
+<EasyHOC>
   <div class="todoapp">
     <header class="header">
       <h1>
@@ -34,11 +34,11 @@ exports[`01. Initial state 1`] = `
       >
     </header>
   </div>
-</App>
+</EasyHOC>
 `;
 
 exports[`02. Add Test Todo 1`] = `
-<App>
+<EasyHOC>
   <div
     className="todoapp"
   >
@@ -72,7 +72,7 @@ exports[`02. Add Test Todo 1`] = `
       <ul
         className="todo-list"
       >
-        <EasyCompWrapper
+        <EasyHOC
           id={0}
           title="Test Todo"
         >
@@ -93,7 +93,7 @@ exports[`02. Add Test Todo 1`] = `
               onClick={[Function]}
             />
           </li>
-        </EasyCompWrapper>
+        </EasyHOC>
       </ul>
     </section>
     <footer
@@ -132,9 +132,9 @@ exports[`02. Add Test Todo 1`] = `
       </div>
     </footer>
   </div>
-</App>
+</EasyHOC>
 ------------HTML PREVIEW---------------
-<App>
+<EasyHOC>
   <div class="todoapp">
     <header class="header">
       <h1>
@@ -155,7 +155,7 @@ exports[`02. Add Test Todo 1`] = `
         Mark all as complete
       </label>
       <ul class="todo-list">
-        <EasyCompWrapper title="Test Todo">
+        <EasyHOC title="Test Todo">
           <li class="view">
             <input
               class="toggle"
@@ -166,7 +166,7 @@ exports[`02. Add Test Todo 1`] = `
             </label>
             <button class="destroy"></button>
           </li>
-        </EasyCompWrapper>
+        </EasyHOC>
       </ul>
     </section>
     <footer class="footer">
@@ -196,11 +196,11 @@ exports[`02. Add Test Todo 1`] = `
       </div>
     </footer>
   </div>
-</App>
+</EasyHOC>
 `;
 
 exports[`03. Add Other Todo 1`] = `
-<App>
+<EasyHOC>
   <div
     className="todoapp"
   >
@@ -234,7 +234,7 @@ exports[`03. Add Other Todo 1`] = `
       <ul
         className="todo-list"
       >
-        <EasyCompWrapper
+        <EasyHOC
           id={0}
           title="Test Todo"
         >
@@ -255,8 +255,8 @@ exports[`03. Add Other Todo 1`] = `
               onClick={[Function]}
             />
           </li>
-        </EasyCompWrapper>
-        <EasyCompWrapper
+        </EasyHOC>
+        <EasyHOC
           id={1}
           title="Other Todo"
         >
@@ -277,7 +277,7 @@ exports[`03. Add Other Todo 1`] = `
               onClick={[Function]}
             />
           </li>
-        </EasyCompWrapper>
+        </EasyHOC>
       </ul>
     </section>
     <footer
@@ -316,9 +316,9 @@ exports[`03. Add Other Todo 1`] = `
       </div>
     </footer>
   </div>
-</App>
+</EasyHOC>
 ------------HTML PREVIEW---------------
-<App>
+<EasyHOC>
   <div class="todoapp">
     <header class="header">
       <h1>
@@ -339,7 +339,7 @@ exports[`03. Add Other Todo 1`] = `
         Mark all as complete
       </label>
       <ul class="todo-list">
-        <EasyCompWrapper title="Test Todo">
+        <EasyHOC title="Test Todo">
           <li class="view">
             <input
               class="toggle"
@@ -350,8 +350,8 @@ exports[`03. Add Other Todo 1`] = `
             </label>
             <button class="destroy"></button>
           </li>
-        </EasyCompWrapper>
-        <EasyCompWrapper title="Other Todo">
+        </EasyHOC>
+        <EasyHOC title="Other Todo">
           <li class="view">
             <input
               class="toggle"
@@ -362,7 +362,7 @@ exports[`03. Add Other Todo 1`] = `
             </label>
             <button class="destroy"></button>
           </li>
-        </EasyCompWrapper>
+        </EasyHOC>
       </ul>
     </section>
     <footer class="footer">
@@ -392,11 +392,11 @@ exports[`03. Add Other Todo 1`] = `
       </div>
     </footer>
   </div>
-</App>
+</EasyHOC>
 `;
 
 exports[`04. Add Final Todo 1`] = `
-<App>
+<EasyHOC>
   <div
     className="todoapp"
   >
@@ -430,7 +430,7 @@ exports[`04. Add Final Todo 1`] = `
       <ul
         className="todo-list"
       >
-        <EasyCompWrapper
+        <EasyHOC
           id={0}
           title="Test Todo"
         >
@@ -451,8 +451,8 @@ exports[`04. Add Final Todo 1`] = `
               onClick={[Function]}
             />
           </li>
-        </EasyCompWrapper>
-        <EasyCompWrapper
+        </EasyHOC>
+        <EasyHOC
           id={1}
           title="Other Todo"
         >
@@ -473,8 +473,8 @@ exports[`04. Add Final Todo 1`] = `
               onClick={[Function]}
             />
           </li>
-        </EasyCompWrapper>
-        <EasyCompWrapper
+        </EasyHOC>
+        <EasyHOC
           id={2}
           title="Final Todo"
         >
@@ -495,7 +495,7 @@ exports[`04. Add Final Todo 1`] = `
               onClick={[Function]}
             />
           </li>
-        </EasyCompWrapper>
+        </EasyHOC>
       </ul>
     </section>
     <footer
@@ -534,9 +534,9 @@ exports[`04. Add Final Todo 1`] = `
       </div>
     </footer>
   </div>
-</App>
+</EasyHOC>
 ------------HTML PREVIEW---------------
-<App>
+<EasyHOC>
   <div class="todoapp">
     <header class="header">
       <h1>
@@ -557,7 +557,7 @@ exports[`04. Add Final Todo 1`] = `
         Mark all as complete
       </label>
       <ul class="todo-list">
-        <EasyCompWrapper title="Test Todo">
+        <EasyHOC title="Test Todo">
           <li class="view">
             <input
               class="toggle"
@@ -568,8 +568,8 @@ exports[`04. Add Final Todo 1`] = `
             </label>
             <button class="destroy"></button>
           </li>
-        </EasyCompWrapper>
-        <EasyCompWrapper title="Other Todo">
+        </EasyHOC>
+        <EasyHOC title="Other Todo">
           <li class="view">
             <input
               class="toggle"
@@ -580,8 +580,8 @@ exports[`04. Add Final Todo 1`] = `
             </label>
             <button class="destroy"></button>
           </li>
-        </EasyCompWrapper>
-        <EasyCompWrapper title="Final Todo">
+        </EasyHOC>
+        <EasyHOC title="Final Todo">
           <li class="view">
             <input
               class="toggle"
@@ -592,7 +592,7 @@ exports[`04. Add Final Todo 1`] = `
             </label>
             <button class="destroy"></button>
           </li>
-        </EasyCompWrapper>
+        </EasyHOC>
       </ul>
     </section>
     <footer class="footer">
@@ -622,11 +622,11 @@ exports[`04. Add Final Todo 1`] = `
       </div>
     </footer>
   </div>
-</App>
+</EasyHOC>
 `;
 
 exports[`05. Toggle Test Todo to completed 1`] = `
-<App>
+<EasyHOC>
   <div
     className="todoapp"
   >
@@ -660,7 +660,7 @@ exports[`05. Toggle Test Todo to completed 1`] = `
       <ul
         className="todo-list"
       >
-        <EasyCompWrapper
+        <EasyHOC
           completed={true}
           id={0}
           title="Test Todo"
@@ -682,8 +682,8 @@ exports[`05. Toggle Test Todo to completed 1`] = `
               onClick={[Function]}
             />
           </li>
-        </EasyCompWrapper>
-        <EasyCompWrapper
+        </EasyHOC>
+        <EasyHOC
           id={1}
           title="Other Todo"
         >
@@ -704,8 +704,8 @@ exports[`05. Toggle Test Todo to completed 1`] = `
               onClick={[Function]}
             />
           </li>
-        </EasyCompWrapper>
-        <EasyCompWrapper
+        </EasyHOC>
+        <EasyHOC
           id={2}
           title="Final Todo"
         >
@@ -726,7 +726,7 @@ exports[`05. Toggle Test Todo to completed 1`] = `
               onClick={[Function]}
             />
           </li>
-        </EasyCompWrapper>
+        </EasyHOC>
       </ul>
     </section>
     <footer
@@ -771,9 +771,9 @@ exports[`05. Toggle Test Todo to completed 1`] = `
       </button>
     </footer>
   </div>
-</App>
+</EasyHOC>
 ------------HTML PREVIEW---------------
-<App>
+<EasyHOC>
   <div class="todoapp">
     <header class="header">
       <h1>
@@ -794,7 +794,7 @@ exports[`05. Toggle Test Todo to completed 1`] = `
         Mark all as complete
       </label>
       <ul class="todo-list">
-        <EasyCompWrapper
+        <EasyHOC
           completed
           title="Test Todo"
         >
@@ -809,8 +809,8 @@ exports[`05. Toggle Test Todo to completed 1`] = `
             </label>
             <button class="destroy"></button>
           </li>
-        </EasyCompWrapper>
-        <EasyCompWrapper title="Other Todo">
+        </EasyHOC>
+        <EasyHOC title="Other Todo">
           <li class="view">
             <input
               class="toggle"
@@ -821,8 +821,8 @@ exports[`05. Toggle Test Todo to completed 1`] = `
             </label>
             <button class="destroy"></button>
           </li>
-        </EasyCompWrapper>
-        <EasyCompWrapper title="Final Todo">
+        </EasyHOC>
+        <EasyHOC title="Final Todo">
           <li class="view">
             <input
               class="toggle"
@@ -833,7 +833,7 @@ exports[`05. Toggle Test Todo to completed 1`] = `
             </label>
             <button class="destroy"></button>
           </li>
-        </EasyCompWrapper>
+        </EasyHOC>
       </ul>
     </section>
     <footer class="footer">
@@ -866,11 +866,11 @@ exports[`05. Toggle Test Todo to completed 1`] = `
       </button>
     </footer>
   </div>
-</App>
+</EasyHOC>
 `;
 
 exports[`06. Toggle Other Todo to completed 1`] = `
-<App>
+<EasyHOC>
   <div
     className="todoapp"
   >
@@ -904,7 +904,7 @@ exports[`06. Toggle Other Todo to completed 1`] = `
       <ul
         className="todo-list"
       >
-        <EasyCompWrapper
+        <EasyHOC
           completed={true}
           id={0}
           title="Test Todo"
@@ -926,8 +926,8 @@ exports[`06. Toggle Other Todo to completed 1`] = `
               onClick={[Function]}
             />
           </li>
-        </EasyCompWrapper>
-        <EasyCompWrapper
+        </EasyHOC>
+        <EasyHOC
           completed={true}
           id={1}
           title="Other Todo"
@@ -949,8 +949,8 @@ exports[`06. Toggle Other Todo to completed 1`] = `
               onClick={[Function]}
             />
           </li>
-        </EasyCompWrapper>
-        <EasyCompWrapper
+        </EasyHOC>
+        <EasyHOC
           id={2}
           title="Final Todo"
         >
@@ -971,7 +971,7 @@ exports[`06. Toggle Other Todo to completed 1`] = `
               onClick={[Function]}
             />
           </li>
-        </EasyCompWrapper>
+        </EasyHOC>
       </ul>
     </section>
     <footer
@@ -1016,9 +1016,9 @@ exports[`06. Toggle Other Todo to completed 1`] = `
       </button>
     </footer>
   </div>
-</App>
+</EasyHOC>
 ------------HTML PREVIEW---------------
-<App>
+<EasyHOC>
   <div class="todoapp">
     <header class="header">
       <h1>
@@ -1039,7 +1039,7 @@ exports[`06. Toggle Other Todo to completed 1`] = `
         Mark all as complete
       </label>
       <ul class="todo-list">
-        <EasyCompWrapper
+        <EasyHOC
           completed
           title="Test Todo"
         >
@@ -1054,8 +1054,8 @@ exports[`06. Toggle Other Todo to completed 1`] = `
             </label>
             <button class="destroy"></button>
           </li>
-        </EasyCompWrapper>
-        <EasyCompWrapper
+        </EasyHOC>
+        <EasyHOC
           completed
           title="Other Todo"
         >
@@ -1070,8 +1070,8 @@ exports[`06. Toggle Other Todo to completed 1`] = `
             </label>
             <button class="destroy"></button>
           </li>
-        </EasyCompWrapper>
-        <EasyCompWrapper title="Final Todo">
+        </EasyHOC>
+        <EasyHOC title="Final Todo">
           <li class="view">
             <input
               class="toggle"
@@ -1082,7 +1082,7 @@ exports[`06. Toggle Other Todo to completed 1`] = `
             </label>
             <button class="destroy"></button>
           </li>
-        </EasyCompWrapper>
+        </EasyHOC>
       </ul>
     </section>
     <footer class="footer">
@@ -1115,11 +1115,11 @@ exports[`06. Toggle Other Todo to completed 1`] = `
       </button>
     </footer>
   </div>
-</App>
+</EasyHOC>
 `;
 
 exports[`07. Toggle Test Todo to active 1`] = `
-<App>
+<EasyHOC>
   <div
     className="todoapp"
   >
@@ -1153,7 +1153,7 @@ exports[`07. Toggle Test Todo to active 1`] = `
       <ul
         className="todo-list"
       >
-        <EasyCompWrapper
+        <EasyHOC
           completed={false}
           id={0}
           title="Test Todo"
@@ -1175,8 +1175,8 @@ exports[`07. Toggle Test Todo to active 1`] = `
               onClick={[Function]}
             />
           </li>
-        </EasyCompWrapper>
-        <EasyCompWrapper
+        </EasyHOC>
+        <EasyHOC
           completed={true}
           id={1}
           title="Other Todo"
@@ -1198,8 +1198,8 @@ exports[`07. Toggle Test Todo to active 1`] = `
               onClick={[Function]}
             />
           </li>
-        </EasyCompWrapper>
-        <EasyCompWrapper
+        </EasyHOC>
+        <EasyHOC
           id={2}
           title="Final Todo"
         >
@@ -1220,7 +1220,7 @@ exports[`07. Toggle Test Todo to active 1`] = `
               onClick={[Function]}
             />
           </li>
-        </EasyCompWrapper>
+        </EasyHOC>
       </ul>
     </section>
     <footer
@@ -1265,9 +1265,9 @@ exports[`07. Toggle Test Todo to active 1`] = `
       </button>
     </footer>
   </div>
-</App>
+</EasyHOC>
 ------------HTML PREVIEW---------------
-<App>
+<EasyHOC>
   <div class="todoapp">
     <header class="header">
       <h1>
@@ -1288,7 +1288,7 @@ exports[`07. Toggle Test Todo to active 1`] = `
         Mark all as complete
       </label>
       <ul class="todo-list">
-        <EasyCompWrapper title="Test Todo">
+        <EasyHOC title="Test Todo">
           <li class="view">
             <input
               class="toggle"
@@ -1299,8 +1299,8 @@ exports[`07. Toggle Test Todo to active 1`] = `
             </label>
             <button class="destroy"></button>
           </li>
-        </EasyCompWrapper>
-        <EasyCompWrapper
+        </EasyHOC>
+        <EasyHOC
           completed
           title="Other Todo"
         >
@@ -1315,8 +1315,8 @@ exports[`07. Toggle Test Todo to active 1`] = `
             </label>
             <button class="destroy"></button>
           </li>
-        </EasyCompWrapper>
-        <EasyCompWrapper title="Final Todo">
+        </EasyHOC>
+        <EasyHOC title="Final Todo">
           <li class="view">
             <input
               class="toggle"
@@ -1327,7 +1327,7 @@ exports[`07. Toggle Test Todo to active 1`] = `
             </label>
             <button class="destroy"></button>
           </li>
-        </EasyCompWrapper>
+        </EasyHOC>
       </ul>
     </section>
     <footer class="footer">
@@ -1360,11 +1360,11 @@ exports[`07. Toggle Test Todo to active 1`] = `
       </button>
     </footer>
   </div>
-</App>
+</EasyHOC>
 `;
 
 exports[`08. Filter completed 1`] = `
-<App>
+<EasyHOC>
   <div
     className="todoapp"
   >
@@ -1398,7 +1398,7 @@ exports[`08. Filter completed 1`] = `
       <ul
         className="todo-list"
       >
-        <EasyCompWrapper
+        <EasyHOC
           completed={true}
           id={0}
           title="Other Todo"
@@ -1420,7 +1420,7 @@ exports[`08. Filter completed 1`] = `
               onClick={[Function]}
             />
           </li>
-        </EasyCompWrapper>
+        </EasyHOC>
       </ul>
     </section>
     <footer
@@ -1465,9 +1465,9 @@ exports[`08. Filter completed 1`] = `
       </button>
     </footer>
   </div>
-</App>
+</EasyHOC>
 ------------HTML PREVIEW---------------
-<App>
+<EasyHOC>
   <div class="todoapp">
     <header class="header">
       <h1>
@@ -1488,7 +1488,7 @@ exports[`08. Filter completed 1`] = `
         Mark all as complete
       </label>
       <ul class="todo-list">
-        <EasyCompWrapper
+        <EasyHOC
           completed
           title="Other Todo"
         >
@@ -1503,7 +1503,7 @@ exports[`08. Filter completed 1`] = `
             </label>
             <button class="destroy"></button>
           </li>
-        </EasyCompWrapper>
+        </EasyHOC>
       </ul>
     </section>
     <footer class="footer">
@@ -1536,11 +1536,11 @@ exports[`08. Filter completed 1`] = `
       </button>
     </footer>
   </div>
-</App>
+</EasyHOC>
 `;
 
 exports[`09. Filter active 1`] = `
-<App>
+<EasyHOC>
   <div
     className="todoapp"
   >
@@ -1574,7 +1574,7 @@ exports[`09. Filter active 1`] = `
       <ul
         className="todo-list"
       >
-        <EasyCompWrapper
+        <EasyHOC
           completed={false}
           id={0}
           title="Test Todo"
@@ -1596,8 +1596,8 @@ exports[`09. Filter active 1`] = `
               onClick={[Function]}
             />
           </li>
-        </EasyCompWrapper>
-        <EasyCompWrapper
+        </EasyHOC>
+        <EasyHOC
           id={1}
           title="Final Todo"
         >
@@ -1618,7 +1618,7 @@ exports[`09. Filter active 1`] = `
               onClick={[Function]}
             />
           </li>
-        </EasyCompWrapper>
+        </EasyHOC>
       </ul>
     </section>
     <footer
@@ -1663,9 +1663,9 @@ exports[`09. Filter active 1`] = `
       </button>
     </footer>
   </div>
-</App>
+</EasyHOC>
 ------------HTML PREVIEW---------------
-<App>
+<EasyHOC>
   <div class="todoapp">
     <header class="header">
       <h1>
@@ -1686,7 +1686,7 @@ exports[`09. Filter active 1`] = `
         Mark all as complete
       </label>
       <ul class="todo-list">
-        <EasyCompWrapper title="Test Todo">
+        <EasyHOC title="Test Todo">
           <li class="view">
             <input
               class="toggle"
@@ -1697,8 +1697,8 @@ exports[`09. Filter active 1`] = `
             </label>
             <button class="destroy"></button>
           </li>
-        </EasyCompWrapper>
-        <EasyCompWrapper title="Final Todo">
+        </EasyHOC>
+        <EasyHOC title="Final Todo">
           <li class="view">
             <input
               class="toggle"
@@ -1709,7 +1709,7 @@ exports[`09. Filter active 1`] = `
             </label>
             <button class="destroy"></button>
           </li>
-        </EasyCompWrapper>
+        </EasyHOC>
       </ul>
     </section>
     <footer class="footer">
@@ -1742,11 +1742,11 @@ exports[`09. Filter active 1`] = `
       </button>
     </footer>
   </div>
-</App>
+</EasyHOC>
 `;
 
 exports[`10. Filter all 1`] = `
-<App>
+<EasyHOC>
   <div
     className="todoapp"
   >
@@ -1780,7 +1780,7 @@ exports[`10. Filter all 1`] = `
       <ul
         className="todo-list"
       >
-        <EasyCompWrapper
+        <EasyHOC
           completed={false}
           id={0}
           title="Test Todo"
@@ -1802,8 +1802,8 @@ exports[`10. Filter all 1`] = `
               onClick={[Function]}
             />
           </li>
-        </EasyCompWrapper>
-        <EasyCompWrapper
+        </EasyHOC>
+        <EasyHOC
           completed={true}
           id={1}
           title="Other Todo"
@@ -1825,8 +1825,8 @@ exports[`10. Filter all 1`] = `
               onClick={[Function]}
             />
           </li>
-        </EasyCompWrapper>
-        <EasyCompWrapper
+        </EasyHOC>
+        <EasyHOC
           id={2}
           title="Final Todo"
         >
@@ -1847,7 +1847,7 @@ exports[`10. Filter all 1`] = `
               onClick={[Function]}
             />
           </li>
-        </EasyCompWrapper>
+        </EasyHOC>
       </ul>
     </section>
     <footer
@@ -1892,9 +1892,9 @@ exports[`10. Filter all 1`] = `
       </button>
     </footer>
   </div>
-</App>
+</EasyHOC>
 ------------HTML PREVIEW---------------
-<App>
+<EasyHOC>
   <div class="todoapp">
     <header class="header">
       <h1>
@@ -1915,7 +1915,7 @@ exports[`10. Filter all 1`] = `
         Mark all as complete
       </label>
       <ul class="todo-list">
-        <EasyCompWrapper title="Test Todo">
+        <EasyHOC title="Test Todo">
           <li class="view">
             <input
               class="toggle"
@@ -1926,8 +1926,8 @@ exports[`10. Filter all 1`] = `
             </label>
             <button class="destroy"></button>
           </li>
-        </EasyCompWrapper>
-        <EasyCompWrapper
+        </EasyHOC>
+        <EasyHOC
           completed
           title="Other Todo"
         >
@@ -1942,8 +1942,8 @@ exports[`10. Filter all 1`] = `
             </label>
             <button class="destroy"></button>
           </li>
-        </EasyCompWrapper>
-        <EasyCompWrapper title="Final Todo">
+        </EasyHOC>
+        <EasyHOC title="Final Todo">
           <li class="view">
             <input
               class="toggle"
@@ -1954,7 +1954,7 @@ exports[`10. Filter all 1`] = `
             </label>
             <button class="destroy"></button>
           </li>
-        </EasyCompWrapper>
+        </EasyHOC>
       </ul>
     </section>
     <footer class="footer">
@@ -1987,11 +1987,11 @@ exports[`10. Filter all 1`] = `
       </button>
     </footer>
   </div>
-</App>
+</EasyHOC>
 `;
 
 exports[`11. Clear completed 1`] = `
-<App>
+<EasyHOC>
   <div
     className="todoapp"
   >
@@ -2025,7 +2025,7 @@ exports[`11. Clear completed 1`] = `
       <ul
         className="todo-list"
       >
-        <EasyCompWrapper
+        <EasyHOC
           completed={false}
           id={0}
           title="Test Todo"
@@ -2047,8 +2047,8 @@ exports[`11. Clear completed 1`] = `
               onClick={[Function]}
             />
           </li>
-        </EasyCompWrapper>
-        <EasyCompWrapper
+        </EasyHOC>
+        <EasyHOC
           id={1}
           title="Final Todo"
         >
@@ -2069,7 +2069,7 @@ exports[`11. Clear completed 1`] = `
               onClick={[Function]}
             />
           </li>
-        </EasyCompWrapper>
+        </EasyHOC>
       </ul>
     </section>
     <footer
@@ -2108,9 +2108,9 @@ exports[`11. Clear completed 1`] = `
       </div>
     </footer>
   </div>
-</App>
+</EasyHOC>
 ------------HTML PREVIEW---------------
-<App>
+<EasyHOC>
   <div class="todoapp">
     <header class="header">
       <h1>
@@ -2131,7 +2131,7 @@ exports[`11. Clear completed 1`] = `
         Mark all as complete
       </label>
       <ul class="todo-list">
-        <EasyCompWrapper title="Test Todo">
+        <EasyHOC title="Test Todo">
           <li class="view">
             <input
               class="toggle"
@@ -2142,8 +2142,8 @@ exports[`11. Clear completed 1`] = `
             </label>
             <button class="destroy"></button>
           </li>
-        </EasyCompWrapper>
-        <EasyCompWrapper title="Final Todo">
+        </EasyHOC>
+        <EasyHOC title="Final Todo">
           <li class="view">
             <input
               class="toggle"
@@ -2154,7 +2154,7 @@ exports[`11. Clear completed 1`] = `
             </label>
             <button class="destroy"></button>
           </li>
-        </EasyCompWrapper>
+        </EasyHOC>
       </ul>
     </section>
     <footer class="footer">
@@ -2184,11 +2184,11 @@ exports[`11. Clear completed 1`] = `
       </div>
     </footer>
   </div>
-</App>
+</EasyHOC>
 `;
 
 exports[`12. Toggle all to completed 1`] = `
-<App>
+<EasyHOC>
   <div
     className="todoapp"
   >
@@ -2222,7 +2222,7 @@ exports[`12. Toggle all to completed 1`] = `
       <ul
         className="todo-list"
       >
-        <EasyCompWrapper
+        <EasyHOC
           completed={true}
           id={0}
           title="Test Todo"
@@ -2244,8 +2244,8 @@ exports[`12. Toggle all to completed 1`] = `
               onClick={[Function]}
             />
           </li>
-        </EasyCompWrapper>
-        <EasyCompWrapper
+        </EasyHOC>
+        <EasyHOC
           completed={true}
           id={1}
           title="Final Todo"
@@ -2267,7 +2267,7 @@ exports[`12. Toggle all to completed 1`] = `
               onClick={[Function]}
             />
           </li>
-        </EasyCompWrapper>
+        </EasyHOC>
       </ul>
     </section>
     <footer
@@ -2312,9 +2312,9 @@ exports[`12. Toggle all to completed 1`] = `
       </button>
     </footer>
   </div>
-</App>
+</EasyHOC>
 ------------HTML PREVIEW---------------
-<App>
+<EasyHOC>
   <div class="todoapp">
     <header class="header">
       <h1>
@@ -2336,7 +2336,7 @@ exports[`12. Toggle all to completed 1`] = `
         Mark all as complete
       </label>
       <ul class="todo-list">
-        <EasyCompWrapper
+        <EasyHOC
           completed
           title="Test Todo"
         >
@@ -2351,8 +2351,8 @@ exports[`12. Toggle all to completed 1`] = `
             </label>
             <button class="destroy"></button>
           </li>
-        </EasyCompWrapper>
-        <EasyCompWrapper
+        </EasyHOC>
+        <EasyHOC
           completed
           title="Final Todo"
         >
@@ -2367,7 +2367,7 @@ exports[`12. Toggle all to completed 1`] = `
             </label>
             <button class="destroy"></button>
           </li>
-        </EasyCompWrapper>
+        </EasyHOC>
       </ul>
     </section>
     <footer class="footer">
@@ -2400,11 +2400,11 @@ exports[`12. Toggle all to completed 1`] = `
       </button>
     </footer>
   </div>
-</App>
+</EasyHOC>
 `;
 
 exports[`13. Toggle all to active 1`] = `
-<App>
+<EasyHOC>
   <div
     className="todoapp"
   >
@@ -2438,7 +2438,7 @@ exports[`13. Toggle all to active 1`] = `
       <ul
         className="todo-list"
       >
-        <EasyCompWrapper
+        <EasyHOC
           completed={false}
           id={0}
           title="Test Todo"
@@ -2460,8 +2460,8 @@ exports[`13. Toggle all to active 1`] = `
               onClick={[Function]}
             />
           </li>
-        </EasyCompWrapper>
-        <EasyCompWrapper
+        </EasyHOC>
+        <EasyHOC
           completed={false}
           id={1}
           title="Final Todo"
@@ -2483,7 +2483,7 @@ exports[`13. Toggle all to active 1`] = `
               onClick={[Function]}
             />
           </li>
-        </EasyCompWrapper>
+        </EasyHOC>
       </ul>
     </section>
     <footer
@@ -2522,9 +2522,9 @@ exports[`13. Toggle all to active 1`] = `
       </div>
     </footer>
   </div>
-</App>
+</EasyHOC>
 ------------HTML PREVIEW---------------
-<App>
+<EasyHOC>
   <div class="todoapp">
     <header class="header">
       <h1>
@@ -2545,7 +2545,7 @@ exports[`13. Toggle all to active 1`] = `
         Mark all as complete
       </label>
       <ul class="todo-list">
-        <EasyCompWrapper title="Test Todo">
+        <EasyHOC title="Test Todo">
           <li class="view">
             <input
               class="toggle"
@@ -2556,8 +2556,8 @@ exports[`13. Toggle all to active 1`] = `
             </label>
             <button class="destroy"></button>
           </li>
-        </EasyCompWrapper>
-        <EasyCompWrapper title="Final Todo">
+        </EasyHOC>
+        <EasyHOC title="Final Todo">
           <li class="view">
             <input
               class="toggle"
@@ -2568,7 +2568,7 @@ exports[`13. Toggle all to active 1`] = `
             </label>
             <button class="destroy"></button>
           </li>
-        </EasyCompWrapper>
+        </EasyHOC>
       </ul>
     </section>
     <footer class="footer">
@@ -2598,11 +2598,11 @@ exports[`13. Toggle all to active 1`] = `
       </div>
     </footer>
   </div>
-</App>
+</EasyHOC>
 `;
 
 exports[`14. Delete Test Todo 1`] = `
-<App>
+<EasyHOC>
   <div
     className="todoapp"
   >
@@ -2636,7 +2636,7 @@ exports[`14. Delete Test Todo 1`] = `
       <ul
         className="todo-list"
       >
-        <EasyCompWrapper
+        <EasyHOC
           completed={false}
           id={0}
           title="Final Todo"
@@ -2658,7 +2658,7 @@ exports[`14. Delete Test Todo 1`] = `
               onClick={[Function]}
             />
           </li>
-        </EasyCompWrapper>
+        </EasyHOC>
       </ul>
     </section>
     <footer
@@ -2697,9 +2697,9 @@ exports[`14. Delete Test Todo 1`] = `
       </div>
     </footer>
   </div>
-</App>
+</EasyHOC>
 ------------HTML PREVIEW---------------
-<App>
+<EasyHOC>
   <div class="todoapp">
     <header class="header">
       <h1>
@@ -2720,7 +2720,7 @@ exports[`14. Delete Test Todo 1`] = `
         Mark all as complete
       </label>
       <ul class="todo-list">
-        <EasyCompWrapper title="Final Todo">
+        <EasyHOC title="Final Todo">
           <li class="view">
             <input
               class="toggle"
@@ -2731,7 +2731,7 @@ exports[`14. Delete Test Todo 1`] = `
             </label>
             <button class="destroy"></button>
           </li>
-        </EasyCompWrapper>
+        </EasyHOC>
       </ul>
     </section>
     <footer class="footer">
@@ -2761,5 +2761,5 @@ exports[`14. Delete Test Todo 1`] = `
       </div>
     </footer>
   </div>
-</App>
+</EasyHOC>
 `;

@@ -6,32 +6,55 @@ const OBSERVED_RENDER = Symbol('observed render')
 const IS_DIRECT_RENDER = Symbol('is direct render')
 const RENDER_RESULT = Symbol('render result')
 
-export default function easyCompHOC (WrappedComp) {
-  if (typeof WrappedComp !== 'function') {
-    throw new TypeError('easyComp expects a component class or function as argument.')
+export default function easyComp (Comp) {
+  if (typeof Comp !== 'function') {
+    throw new TypeError('easyComp expects a component as argument.')
   }
 
-  if ((!WrappedComp.prototype || !WrappedComp.prototype.render) && !WrappedComp.isReactClass && !Component.isPrototypeOf(WrappedComp)) {
-    const renderer = WrappedComp
-    WrappedComp = class extends Component {
-      render () {
-        return renderer.call(this, this.props, this.context)
-      }
+  // wrap stateless components in a class
+  if (isStatelessComp(Comp)) {
+    Comp = statelessToStatefulComp(Comp)
+  } else if (hasComponentShouldUpdate(Comp)) {
+    // shouldComponentUpdate is optimized by easyState, overwriting it would add zero or less value
+    throw new Error('easyState optimizes shouldComponentUpdate, do not implement it.')
+  }
+
+  return toReactiveComp(Comp)
+}
+
+function isStatelessComp (Comp) {
+  return (!(Comp.prototype && Comp.prototype.render) && !Component.isPrototypeOf(Comp))
+}
+
+function statelessToStatefulComp (StatelessComp) {
+  return class StatefulComp extends Component {
+    displayName = StatelessComp.displayName || StatelessComp.name
+    contextTypes = StatelessComp.contextTypes
+    propTypes = StatelessComp.propTypes
+    defaultProps = StatelessComp.defaultProps
+
+    // call the original function component inside the render method
+    render () {
+      return StatelessComp.call(this, this.props, this.context)
     }
-    WrappedComp.displayName = renderer.displayName || renderer.name
-    WrappedComp.contextTypes = renderer.contextTypes
-    WrappedComp.propTypes = renderer.propTypes
-    WrappedComp.defaultProps = renderer.defaultProps
   }
+}
 
-  if (typeof WrappedComp.prototype.shouldComponentUpdate === 'function') {
-    throw new Error('Do not implement shouldComponentUpdate, easyState already optimizes it for you!')
-  }
+function hasComponentShouldUpdate (Comp) {
+  return (typeof Comp.prototype.shouldComponentUpdate === 'function')
+}
 
-  return class EasyCompWrapper extends WrappedComp {
+function toReactiveComp (Comp) {
+  // return a HOC which overwrites render, shouldComponentUpdate and componentWillUnmount
+  // it decides when to run the new reactive methods and when to proxy to the original methods
+  return class EasyHOC extends Comp {
     constructor (props) {
       super(props)
-      autoBind(this, WrappedComp.prototype, true)
+
+      // auto bind non react specific original methods to the component instance
+      autoBind(this, Comp.prototype, true)
+
+      // turn the state into an observable object, which triggers rendering on mutations
       this.state = observable(this.state)
     }
 
@@ -53,28 +76,37 @@ export default function easyCompHOC (WrappedComp) {
       return this[RENDER_RESULT]
     }
 
-    shouldComponentUpdate (nextProps, nextState) {
+    // react should trigger updates on prop changes, while easyState handles state changes
+    shouldComponentUpdate (nextProps) {
       const { props } = this
       const keys = Object.keys(props)
       const nextKeys = Object.keys(nextProps)
 
+      // component should update if the number of its props changed
       if (keys.length !== nextKeys.length) {
         return true
       }
 
+      // component should update if any of its props changed value
       for (let key of keys) {
         if (props[key] !== nextProps[key]) {
           return true
         }
       }
+
+      // do not let react update the comp otherwise, leave state triggered updates to easyState
       return false
     }
 
     componentWillUnmount () {
-      if (super.componentWillUnmount) {
-        return super.componentWillUnmount()
-      }
+      // clean up memory used by easyState
       unobserve(this[OBSERVED_RENDER])
+
+      // also call user defined componentWillUnmount to allow the user
+      // to clean up additional memory
+      if (super.componentWillUnmount) {
+        super.componentWillUnmount()
+      }
     }
   }
 }

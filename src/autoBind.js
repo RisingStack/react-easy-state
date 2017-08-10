@@ -1,3 +1,4 @@
+// do not bind these, they should not be directly invoked or passed as callbacks by the user
 const reactInternals = new Set([
   'constructor',
   'render',
@@ -10,6 +11,7 @@ const reactInternals = new Set([
   'componentWillUnmount'
 ])
 
+// bind the methods from proto to the passed context object and assign them to the context
 export default function autoBind (context, proto, isReact) {
   for (let key of Object.getOwnPropertyNames(proto)) {
     const value = proto[key]
