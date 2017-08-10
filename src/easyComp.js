@@ -28,10 +28,12 @@ function isStatelessComp (Comp) {
 
 function statelessToStatefulComp (StatelessComp) {
   return class StatefulComp extends Component {
-    displayName = StatelessComp.displayName || StatelessComp.name
-    contextTypes = StatelessComp.contextTypes
-    propTypes = StatelessComp.propTypes
-    defaultProps = StatelessComp.defaultProps
+    // proxy react specific static variables to the stateful component
+    // from the stateless component
+    static displayName = StatelessComp.displayName || StatelessComp.name
+    static contextTypes = StatelessComp.contextTypes
+    static propTypes = StatelessComp.propTypes
+    static defaultProps = StatelessComp.defaultProps
 
     // call the original function component inside the render method
     render () {
@@ -48,6 +50,12 @@ function toReactiveComp (Comp) {
   // return a HOC which overwrites render, shouldComponentUpdate and componentWillUnmount
   // it decides when to run the new reactive methods and when to proxy to the original methods
   return class EasyHOC extends Comp {
+    // proxy react specific static variables to the HOC from the component
+    static displayName = Comp.displayName || Comp.name
+    static contextTypes = Comp.contextTypes
+    static propTypes = Comp.propTypes
+    static defaultProps = Comp.defaultProps
+
     constructor (props) {
       super(props)
 

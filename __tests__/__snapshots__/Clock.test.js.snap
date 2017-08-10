@@ -1,43 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`01. Initial state 1`] = `
-<EasyHOC>
+<App>
   <div>
     12:00:00 AM
   </div>
-</EasyHOC>
+</App>
 ------------HTML PREVIEW---------------
-<EasyHOC>
+<App>
   <div>
     12:00:00 AM
   </div>
-</EasyHOC>
+</App>
 `;
 
 exports[`02. After 2 seconds 1`] = `
-<EasyHOC>
+<App>
   <div>
     12:00:02 AM
   </div>
-</EasyHOC>
+</App>
 ------------HTML PREVIEW---------------
-<EasyHOC>
+<App>
   <div>
     12:00:02 AM
   </div>
-</EasyHOC>
+</App>
 `;
 
 exports[`03. After 10.5 seconds 1`] = `
-<EasyHOC>
+<App>
   <div>
     12:00:10 AM
   </div>
-</EasyHOC>
+</App>
 ------------HTML PREVIEW---------------
-<EasyHOC>
+<App>
   <div>
     12:00:10 AM
   </div>
-</EasyHOC>
+</App>
 `;
