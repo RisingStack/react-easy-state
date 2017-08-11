@@ -68,7 +68,7 @@ class Hello extends Component {
 export default easyComp(Hello)
 ```
 
-**Make sure to wrap all of your components - including stateful and stateless ones - before you export them.**
+**Make sure to wrap all of your components with `easyComp` - including stateful and stateless ones - before you export them.**
 
 In addition to the boilerplate reduction, `easyComp` comes with a bunch of additional benefits that may not be obvious at first glance.
 
@@ -143,7 +143,7 @@ As a result the stores are always fresh and a stable and a fresh view is always 
 
 ## Examples with live demos
 
-- [Clock Widget](https://solkimicreb.github.io/react-easy-state/dist/clock/clock.html) ([source](/examples/clock/))
+- [Clock Widget](https://solkimicreb.github.io/react-easy-state/dist/clock.html) ([source](/examples/clock/))
 - [TodoMVC](https://solkimicreb.github.io/react-easy-state/dist/todoMVC.html) ([source](/examples/todoMVC/))
 - [Contacts Table](https://solkimicreb.github.io/react-easy-state/dist/contacts.html) ([source](/examples/contacts/))
 
