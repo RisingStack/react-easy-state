@@ -1,12 +1,8 @@
-<div style="text-align: center;">
-
 # React Easy State
 
 [![CircleCI](https://circleci.com/gh/solkimicreb/react-easy-state/tree/master.svg?style=shield)](https://circleci.com/gh/solkimicreb/react-easy-state/tree/master) [![Coverage Status](https://coveralls.io/repos/github/solkimicreb/react-easy-state/badge.svg)](https://coveralls.io/github/solkimicreb/react-easy-state) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) [![Version](https://img.shields.io/npm/v/react-easy-state.svg)](https://www.npmjs.com/package/react-easy-state) [![License](https://img.shields.io/npm/l/react-easy-state.svg)](https://www.npmjs.com/package/react-easy-state)
 
 *Easy State provides a healthy balance of local and global state management in a simple, scalable way.*
-
-</div>
 
 ## Table of contents
 
@@ -101,7 +97,7 @@ As a result the state is always fresh and a stable and a fresh view is always ac
 - It binds your object's methods to the object.
 
 ```js
-import React, { Component } from 'react'
+import React from 'react'
 import { easyComp, easyStore } from 'react-easy-state'
 
 // this creates a global state store
