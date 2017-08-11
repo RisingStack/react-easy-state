@@ -1,7 +1,7 @@
 {
   "name": "react-easy-state",
-  "version": "1.0.4",
-  "description": "Easy State replaces React's setState with plain native JavaScript",
+  "version": "2.0.0",
+  "description": "React Easy State provides a healthy balance of local and global state management in a simple, scalable way",
   "main": "dist/easyState.js",
   "module": "src/index.js",
   "scripts": {
