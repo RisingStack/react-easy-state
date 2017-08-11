@@ -1,5 +1,5 @@
-import { Component, PureComponent } from 'react'
-import { easyComp, easyStore } from 'react-easy-state'
+import { Component } from 'react'
+import { easyComp } from 'react-easy-state'
 
 describe('static props', () => {
   test('easyComp should proxy react specific static properties from the component', () => {
