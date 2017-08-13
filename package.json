@@ -1,9 +1,9 @@
 {
   "name": "react-easy-state",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "React Easy State provides a healthy balance of local and global state management in a simple, scalable way",
-  "main": "dist/easyState.js",
-  "module": "src/index.js",
+  "main": "dist/es5.js",
+  "module": "dist/es6/index.js",
   "scripts": {
     "test": "jest --coverage",
     "test:watch": "jest --watch",
@@ -12,7 +12,7 @@
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
     "lint": "standard",
     "lint:fix": "standard --fix",
-    "build": "webpack",
+    "build": "babel ./src --out-dir dist/es6 && webpack",
     "build-examples": "webpack --config ./webpack.examples.js",
     "build-examples-dev": "webpack --config ./webpack.examples.js --watch",
     "build-all": "npm run build && npm run build-examples"
@@ -56,6 +56,7 @@
     "@nx-js/observer-util": "3"
   },
   "devDependencies": {
+    "babel-cli": "^6.24.1",
     "babel-core": "6.25.0",
     "babel-eslint": "^7.2.3",
     "babel-jest": "^20.0.3",
