@@ -20,6 +20,16 @@
 
 `npm install react-easy-state`
 
+### Setting up a quick project
+
+Easy State supports [Create React App](https://github.com/facebookincubator/create-react-app) without additional configuration. Just run the following commands to get started.
+
+- `npm install -g create-react-app`
+- `create-react-app my-app`
+- `cd my-app`
+- `npm install react-easy-state --save`
+- `npm start`
+
 ## Usage
 
 Easy State consists of two functions:
