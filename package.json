@@ -1,6 +1,6 @@
 {
   "name": "react-easy-state",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "React Easy State provides a healthy balance of local and global state management in a simple, scalable way",
   "main": "dist/easyState.commonJS.js",
   "module": "dist/easyState.module/index.js",
