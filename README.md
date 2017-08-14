@@ -51,7 +51,7 @@ import { easyComp } from 'react-easy-state'
 
 class Hello extends Component {
   state = {
-    name: 'World!'
+    name: 'World'
   }
 
   // this is bound to the component, so it can be safely passed as a callback
@@ -112,7 +112,7 @@ import { easyComp, easyStore } from 'react-easy-state'
 
 // this creates a global state store
 const store = easyStore({
-  name: 'Hello',
+  name: 'World',
   // this is bound to the object, so it can be safely passed as a callback
   setName (ev) {
     this.name = ev.target.value
