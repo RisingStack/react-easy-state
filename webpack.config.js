@@ -4,8 +4,8 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'easyState.js',
-    libraryTarget: 'umd'
+    filename: 'easyState.commonJS.js',
+    libraryTarget: 'commonjs2'
   },
   module: {
     rules: [
