@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 324);
+/******/ 	return __webpack_require__(__webpack_require__.s = 321);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -344,45 +344,43 @@ var emptyFunction = __webpack_require__(10);
 var warning = emptyFunction;
 
 if (process.env.NODE_ENV !== 'production') {
-  (function () {
-    var printWarning = function printWarning(format) {
-      for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-        args[_key - 1] = arguments[_key];
+  var printWarning = function printWarning(format) {
+    for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      args[_key - 1] = arguments[_key];
+    }
+
+    var argIndex = 0;
+    var message = 'Warning: ' + format.replace(/%s/g, function () {
+      return args[argIndex++];
+    });
+    if (typeof console !== 'undefined') {
+      console.error(message);
+    }
+    try {
+      // --- Welcome to debugging React ---
+      // This error was thrown as a convenience so that you can use this stack
+      // to find the callsite that caused this warning to fire.
+      throw new Error(message);
+    } catch (x) {}
+  };
+
+  warning = function warning(condition, format) {
+    if (format === undefined) {
+      throw new Error('`warning(condition, format, ...args)` requires a warning ' + 'message argument');
+    }
+
+    if (format.indexOf('Failed Composite propType: ') === 0) {
+      return; // Ignore CompositeComponent proptype check.
+    }
+
+    if (!condition) {
+      for (var _len2 = arguments.length, args = Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
+        args[_key2 - 2] = arguments[_key2];
       }
 
-      var argIndex = 0;
-      var message = 'Warning: ' + format.replace(/%s/g, function () {
-        return args[argIndex++];
-      });
-      if (typeof console !== 'undefined') {
-        console.error(message);
-      }
-      try {
-        // --- Welcome to debugging React ---
-        // This error was thrown as a convenience so that you can use this stack
-        // to find the callsite that caused this warning to fire.
-        throw new Error(message);
-      } catch (x) {}
-    };
-
-    warning = function warning(condition, format) {
-      if (format === undefined) {
-        throw new Error('`warning(condition, format, ...args)` requires a warning ' + 'message argument');
-      }
-
-      if (format.indexOf('Failed Composite propType: ') === 0) {
-        return; // Ignore CompositeComponent proptype check.
-      }
-
-      if (!condition) {
-        for (var _len2 = arguments.length, args = Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
-          args[_key2 - 2] = arguments[_key2];
-        }
-
-        printWarning.apply(undefined, [format].concat(args));
-      }
-    };
-  })();
+      printWarning.apply(undefined, [format].concat(args));
+    }
+  };
 }
 
 module.exports = warning;
@@ -9101,18 +9099,11 @@ module.exports = traverseAllChildren;
 
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
+ * All rights reserved.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
  *
  * @typechecks
  */
@@ -22927,28 +22918,7 @@ function easyStore(store) {
 }
 
 /***/ }),
-/* 199 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_easy_state__ = __webpack_require__(53);
-
-
-// store the central data and logic of the application in a global store
-/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_0_react_easy_state__["b" /* easyStore */])({
-  contacts: [],
-  addContact(contact) {
-    contact.name = contact.name || 'Placeholder';
-    contact.email = contact.email || 'Placeholder';
-    this.contacts.push(contact);
-  },
-  deleteContact(contact) {
-    const idx = this.contacts.indexOf(contact);
-    this.contacts.splice(idx, 1);
-  }
-}));
-
-/***/ }),
+/* 199 */,
 /* 200 */,
 /* 201 */,
 /* 202 */,
@@ -23064,16 +23034,127 @@ function easyStore(store) {
 /* 312 */,
 /* 313 */,
 /* 314 */,
-/* 315 */,
-/* 316 */,
+/* 315 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+  Copyright (c) 2016 Jed Watson.
+  Licensed under the MIT License (MIT), see
+  http://jedwatson.github.io/classnames
+*/
+/* global define */
+
+(function () {
+	'use strict';
+
+	var hasOwn = {}.hasOwnProperty;
+
+	function classNames() {
+		var classes = [];
+
+		for (var i = 0; i < arguments.length; i++) {
+			var arg = arguments[i];
+			if (!arg) continue;
+
+			var argType = typeof arg;
+
+			if (argType === 'string' || argType === 'number') {
+				classes.push(arg);
+			} else if (Array.isArray(arg)) {
+				classes.push(classNames.apply(null, arg));
+			} else if (argType === 'object') {
+				for (var key in arg) {
+					if (hasOwn.call(arg, key) && arg[key]) {
+						classes.push(key);
+					}
+				}
+			}
+		}
+
+		return classes.join(' ');
+	}
+
+	if (typeof module !== 'undefined' && module.exports) {
+		module.exports = classNames;
+	} else if (true) {
+		// register as 'classnames', consistent with npm package name
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+			return classNames;
+		}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	} else {
+		window.classNames = classNames;
+	}
+})();
+
+/***/ }),
+/* 316 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_easy_state__ = __webpack_require__(53);
+
+
+// a complex global store with a lot of derived data (getters and setters)
+/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_0_react_easy_state__["b" /* easyStore */])({
+  filter: 'todos',
+  todos: [],
+  get hasTodos() {
+    return this.todos.length !== 0;
+  },
+  get completed() {
+    return this.todos.filter(todo => todo.completed);
+  },
+  get hasCompleted() {
+    return this.completed.length !== 0;
+  },
+  get allCompleted() {
+    return this.todos.every(todo => todo.completed);
+  },
+  set allCompleted(completed) {
+    if (completed) {
+      this.todos.forEach(todo => {
+        todo.completed = true;
+      });
+    } else {
+      this.todos.forEach(todo => {
+        todo.completed = false;
+      });
+    }
+  },
+  get active() {
+    return this.todos.filter(todo => !todo.completed);
+  },
+  create(ev) {
+    if (ev.keyCode === 13) {
+      this.todos.push({ title: ev.target.value });
+      ev.target.value = '';
+    }
+  },
+  changeFilter(ev) {
+    this.filter = ev.target.value;
+  },
+  remove(id) {
+    this.todos.splice(id, 1);
+  },
+  toggle(id) {
+    const todo = this.todos[id];
+    todo.completed = !todo.completed;
+  },
+  clearCompleted() {
+    this.todos = this.active;
+  },
+  toggleAll() {
+    this.allCompleted = !this.allCompleted;
+  }
+}));
+
+/***/ }),
 /* 317 */,
 /* 318 */,
 /* 319 */,
 /* 320 */,
-/* 321 */,
-/* 322 */,
-/* 323 */,
-/* 324 */
+/* 321 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -23082,7 +23163,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(104);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__App__ = __webpack_require__(325);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__App__ = __webpack_require__(322);
 
 
 
@@ -23090,253 +23171,150 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__App__["a" /* default */], null), document.getElementById('react-root'));
 
 /***/ }),
-/* 325 */
+/* 322 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_easy_state__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Contact__ = __webpack_require__(326);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ContactCreator__ = __webpack_require__(327);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__store__ = __webpack_require__(199);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_classnames__ = __webpack_require__(315);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_classnames__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_easy_state__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__TodoItem__ = __webpack_require__(323);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__store__ = __webpack_require__(316);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 
 
 
 
 
-// this rerenders whenever the store.contacts array changes (elements pushed or deleted)
+
+// render is triggered whenever the relevant parts of the global store change
 function App() {
+  const { hasTodos, hasCompleted, allCompleted, active, filter,
+    create, changeFilter, toggleAll, clearCompleted } = __WEBPACK_IMPORTED_MODULE_4__store__["a" /* default */];
+
+  const todosClass = __WEBPACK_IMPORTED_MODULE_1_classnames___default()({ selected: filter === 'todos' });
+  const completedClass = __WEBPACK_IMPORTED_MODULE_1_classnames___default()({ selected: filter === 'completed' });
+  const activeClass = __WEBPACK_IMPORTED_MODULE_1_classnames___default()({ selected: filter === 'active' });
+
   return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-    'table',
-    null,
+    'div',
+    { className: 'todoapp' },
     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-      'thead',
-      null,
+      'header',
+      { className: 'header' },
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'tr',
+        'h1',
         null,
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'th',
-          null,
-          'Name'
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'th',
-          null,
-          'Email'
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'th',
-          null,
-          'Action'
-        )
+        'todos'
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { onKeyUp: create, className: 'new-todo', placeholder: 'What needs to be done?', autoFocus: true })
+    ),
+    hasTodos && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'section',
+      { className: 'main' },
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { className: 'toggle-all', type: 'checkbox', checked: allCompleted, onChange: toggleAll }),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'label',
+        { htmlFor: 'toggle-all' },
+        'Mark all as complete'
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'ul',
+        { className: 'todo-list' },
+        __WEBPACK_IMPORTED_MODULE_4__store__["a" /* default */][filter].map((todo, idx) => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__TodoItem__["a" /* default */], _extends({}, todo, { id: idx, key: idx })))
       )
     ),
-    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-      'tbody',
-      null,
-      __WEBPACK_IMPORTED_MODULE_4__store__["a" /* default */].contacts.map(contact => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Contact__["a" /* default */], { contact: contact, key: contact.email })),
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__ContactCreator__["a" /* default */], null)
+    hasTodos && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'footer',
+      { className: 'footer' },
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'span',
+        { className: 'todo-count' },
+        active.length,
+        ' items left'
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        { className: 'filters' },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'button',
+          { className: todosClass, value: 'todos', onClick: changeFilter },
+          'All'
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'button',
+          { className: activeClass, value: 'active', onClick: changeFilter },
+          'Active'
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'button',
+          { className: completedClass, value: 'completed', onClick: changeFilter },
+          'Completed'
+        )
+      ),
+      hasCompleted && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'button',
+        { className: 'clear-completed', onClick: clearCompleted },
+        'Clear completed'
+      )
     )
   );
 }
 
 // wrap the component with easyComp before exporting it
-/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_1_react_easy_state__["a" /* easyComp */])(App));
+/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_2_react_easy_state__["a" /* easyComp */])(App));
 
 /***/ }),
-/* 326 */
+/* 323 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_easy_state__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__store__ = __webpack_require__(199);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_classnames__ = __webpack_require__(315);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_classnames__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_easy_state__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__store__ = __webpack_require__(316);
 
 
 
 
-class Contact extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
-  constructor({ contact }) {
-    super();
 
-    // save internal utility data in component state instead of the global store
-    // editing is boolean meta flag, which indicates if the contact is currently edited
-    // currentContact is a temporary state of the contact during editing, which can be saved or cancelled
-    this.state = {
-      currentContact: Object.assign({}, contact),
-      editing: false
-    };
+class TodoItem extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
+  remove() {
+    __WEBPACK_IMPORTED_MODULE_3__store__["a" /* default */].remove(this.props.id);
   }
 
-  onEdit() {
-    this.state.editing = true;
+  toggle() {
+    __WEBPACK_IMPORTED_MODULE_3__store__["a" /* default */].toggle(this.props.id);
   }
 
-  onDelete() {
-    __WEBPACK_IMPORTED_MODULE_2__store__["a" /* default */].deleteContact(this.props.contact);
-  }
-
-  // transfer finalized changes from the component state to the main store
-  onSave() {
-    Object.assign(this.props.contact, this.state.currentContact);
-    this.state.editing = false;
-  }
-
-  // cancel changes by reverting to data from the main store
-  onCancel() {
-    Object.assign(this.state.currentContact, this.props.contact);
-    this.state.editing = false;
-  }
-
-  onChange(ev) {
-    this.state.currentContact[ev.target.name] = ev.target.value;
-  }
-
-  // render is triggered whenever the relevant parts of the component state, props or global store change
+  // render is triggered whenever the relevant parts of the component props or global store change
   render() {
-    const { onChange, onSave, onCancel, onEdit, onDelete } = this;
-    const { currentContact, editing } = this.state;
-    const { contact } = this.props;
+    const { toggle, remove } = this;
+    const { title, completed = false } = this.props;
 
-    if (!editing) {
-      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'tr',
-        { className: 'contact-display' },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'td',
-          null,
-          contact.name
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'td',
-          null,
-          contact.email
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'td',
-          null,
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'button',
-            { onClick: onEdit },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'zmdi zmdi-edit' })
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'button',
-            { onClick: onDelete },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'zmdi zmdi-delete' })
-          )
-        )
-      );
-    }
+    const itemClass = __WEBPACK_IMPORTED_MODULE_1_classnames___default()({ view: true, completed });
 
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-      'tr',
-      { className: 'contact-editor' },
+      'li',
+      { className: itemClass },
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { className: 'toggle', type: 'checkbox', checked: completed, onChange: toggle }),
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'td',
+        'label',
         null,
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { name: 'name', value: currentContact.name, onChange: onChange, autoFocus: true })
+        title
       ),
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'td',
-        null,
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { name: 'email', value: currentContact.email, onChange: onChange })
-      ),
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'td',
-        null,
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'button',
-          { onClick: onSave },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'zmdi zmdi-save' })
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'button',
-          { onClick: onCancel },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'zmdi zmdi-close' })
-        )
-      )
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('button', { onClick: remove, className: 'destroy' })
     );
   }
 }
 
 // wrap the component with easyComp before exporting it
-/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_1_react_easy_state__["a" /* easyComp */])(Contact));
-
-/***/ }),
-/* 327 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_easy_state__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__store__ = __webpack_require__(199);
-
-
-
-
-class ContactCreator extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
-  constructor(...args) {
-    var _temp;
-
-    return _temp = super(...args), this.state = {
-      newContact: { name: '', email: '' }
-
-      // transfer finalized contact from the component state to the main store
-    }, _temp;
-  }
-  // save internal utility data in component state, instead of the global store
-  // newContact is the skeleton for the next contact before it is added to the list
-
-
-  addContact() {
-    __WEBPACK_IMPORTED_MODULE_2__store__["a" /* default */].addContact(this.state.newContact);
-    this.state.newContact = { name: '', email: '' };
-  }
-
-  onChange(ev) {
-    const { newContact } = this.state;
-    newContact[ev.target.name] = ev.target.value;
-  }
-
-  // render is triggered whenever the relevant parts of the component state or global store change
-  render() {
-    const { addContact, onChange } = this;
-    const { newContact } = this.state;
-
-    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-      'tr',
-      { className: 'contact-creator' },
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'td',
-        null,
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { name: 'name', value: newContact.name, onChange: onChange, placeholder: 'Contact name...' })
-      ),
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'td',
-        null,
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { name: 'email', value: newContact.email, onChange: onChange, placeholder: 'Contact email...' })
-      ),
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'td',
-        null,
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'button',
-          { onClick: addContact },
-          'Add Contact'
-        )
-      )
-    );
-  }
-}
-
-// wrap the component with easyComp before exporting it
-/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_1_react_easy_state__["a" /* easyComp */])(ContactCreator));
+/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_2_react_easy_state__["a" /* easyComp */])(TodoItem));
 
 /***/ })
 /******/ ]);

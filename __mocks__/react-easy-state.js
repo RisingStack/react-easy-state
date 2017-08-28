@@ -2,7 +2,7 @@
 export * from '../src'
 
 // use this to test the es6 modules build
-// export * from '../dist/easyState.module'
+// export * from '../dist/easyState.es'
 
 // use to test the commonJS build
-// export * from '../dist/easyState.commonJS'
+// export * from '../dist/easyState.cjs'

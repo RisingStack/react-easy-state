@@ -153,9 +153,9 @@ As a result the stores are always fresh and a stable and a fresh view is always 
 
 ## Examples with live demos
 
-- [Clock Widget](https://solkimicreb.github.io/react-easy-state/dist/clock.html) ([source](/examples/clock/))
-- [TodoMVC](https://solkimicreb.github.io/react-easy-state/dist/todoMVC.html) ([source](/examples/todoMVC/))
-- [Contacts Table](https://solkimicreb.github.io/react-easy-state/dist/contacts.html) ([source](/examples/contacts/))
+- [Clock Widget](https://solkimicreb.github.io/react-easy-state/examples/clock/dist) ([source](/examples/clock/))
+- [TodoMVC](https://solkimicreb.github.io/react-easy-state/examples/todoMVC/dist) ([source](/examples/todoMVC/))
+- [Contacts Table](https://solkimicreb.github.io/react-easy-state/examples/contacts/dist) ([source](/examples/contacts/))
 
 ## Platform support
 

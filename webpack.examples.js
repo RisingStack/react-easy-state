@@ -7,8 +7,8 @@ module.exports = {
     contacts: './examples/contacts'
   },
   output: {
-    path: path.join(__dirname, 'dist'),
-    filename: '[name].js'
+    path: path.join(__dirname, 'examples'),
+    filename: '[name]/dist/bundle.js'
   },
   module: {
     rules: [

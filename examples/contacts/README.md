@@ -1,3 +1,3 @@
-# Contact Table · [Live Demo](https://solkimicreb.github.io/react-easy-state/dist/contacts.html)
+# Contact Table · [Live Demo](https://solkimicreb.github.io/react-easy-state/examples/contacts/dist)
 
 An editable contact list, which demonstrates how to balance between local component state and global stores. It manages the central data and logic in a global store and keeps temporary utility data in component states. Dependency injection is handled by plain imports and react props.

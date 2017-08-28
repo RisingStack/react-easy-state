@@ -2,8 +2,8 @@
   "name": "react-easy-state",
   "version": "2.0.3",
   "description": "React Easy State provides a healthy balance of local and global state management in a simple, scalable way",
-  "main": "dist/easyState.es5.cjs.js",
-  "module": "dist/easyState.es5.cjs.js",
+  "main": "dist/easyState.cjs.js",
+  "module": "dist/easyState.es.js",
   "scripts": {
     "test": "jest --coverage",
     "test:watch": "jest --watch",
@@ -12,11 +12,11 @@
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
     "lint": "standard",
     "lint:fix": "standard --fix",
-    "build": "webpack --config ./webpack.config.js",
+    "build": "rollup --config ./rollup.config.js && npm run transpile",
     "build-examples": "webpack --config ./webpack.examples.js",
     "build-examples-dev": "webpack --config ./webpack.examples.js --watch",
-    "build-all": "npm run build && npm run build-examples && npm run transpile",
-    "transpile": "babel dist/easyState.cjs.js --out-file dist/easyState.es5.cjs.js --presets=es2015"
+    "build-all": "npm run build && npm run build-examples",
+    "transpile": "buble dist/easyState.cjs.js --yes dangerousForOf -o dist/easyState.cjs.js && buble dist/easyState.es.js --yes dangerousForOf --no modules -o dist/easyState.es.js"
   },
   "jest": {
     "snapshotSerializers": [
@@ -25,6 +25,7 @@
     "collectCoverageFrom": [
       "**/src/**",
       "**/examples/**",
+      "!**/examples/**/dist/**",
       "!**/examples/**/index.jsx"
     ]
   },
@@ -63,11 +64,11 @@
     "babel-jest": "^20.0.3",
     "babel-loader": "7.1.1",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
-    "babel-preset-es2015": "^6.24.1",
     "babel-preset-es2016": "^6.24.1",
     "babel-preset-es2017": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "buble": "^0.15.2",
     "classnames": "2.2.5",
     "coveralls": "^2.13.1",
     "enzyme": "^2.9.1",
@@ -80,6 +81,9 @@
     "react": "15.6.1",
     "react-dom": "15.6.1",
     "react-test-renderer": "^15.6.1",
+    "rollup": "^0.49.0",
+    "rollup-plugin-babel": "^3.0.2",
+    "rollup-plugin-node-resolve": "^3.0.0",
     "sinon": "3.1.0",
     "standard": "10.0.3",
     "webpack": "^3.5.2"
