@@ -34,14 +34,14 @@ Easy State supports [Create React App](https://github.com/facebookincubator/crea
 
 Easy State consists of two functions:
 
-- `easyComp` makes React's own component level state management simpler.
+- `easyComp` makes component level state management simpler.
 - `easyStore` creates global state stores for complex apps.
 
 ### easyComp
 
 Wrapping your components with the `easyComp` function provides the following benefits.
 
-- It allows you to mutate the component's state directly, without calling `setState`.
+- It adds a local `store` to the component, which can be handled as a simple JS object.
 
 - It binds your component's methods to the component.
 
@@ -50,20 +50,20 @@ import React, { Component } from 'react'
 import { easyComp } from 'react-easy-state'
 
 class Hello extends Component {
-  state = {
+  store = {
     name: 'World'
   }
 
   // this is bound to the component, so it can be safely passed as a callback
   onChange (ev) {
-    // the state can be modified directly
-    this.state.name = ev.target.value  
+    // the store can be modified directly
+    this.store.name = ev.target.value  
   }
 
-  // the render is triggered whenever state.name changes
+  // the render is triggered whenever store.name changes
   render () {
     const { onChange } = this
-    const { name } = this.state
+    const { name } = this.store
 
     return (
       <div>
@@ -82,9 +82,9 @@ export default easyComp(Hello)
 
 In addition to the boilerplate reduction, `easyComp` comes with a bunch of additional benefits that may not be obvious at first glance.
 
-- The state becomes a simple object, which updates synchronously. You don't have to worry about immutable state updates or the asynchronous nature of `setState`. If you are not sure about the meaning of this check out [this article](https://medium.freecodecamp.org/functional-setstate-is-the-future-of-react-374f30401b6b) about `setState`.
+- The store is simple object. You don't have to worry about immutable state updates or the asynchronous nature of `setState`. If you are not sure about the meaning of this check out [this article](https://medium.freecodecamp.org/functional-setstate-is-the-future-of-react-374f30401b6b) about `setState`.
 
-- The render method is only triggered if it is affected by the state mutations. If it doesn't use the mutated part of the state or the mutation doesn't change the state, the render method is not triggered.
+- The render method is only triggered if it is affected by store mutations. If it doesn't use the mutated part of the store or the mutation doesn't change the store, the render method is not triggered.
 
 - The render method is never executed immediately. Triggered renders are collected and executed asynchronously in one batch.
 
@@ -92,19 +92,19 @@ In addition to the boilerplate reduction, `easyComp` comes with a bunch of addit
 
 - Duplicates renders are removed. A render never runs twice in one batch - no matter how many times it got triggered.
 
-- Renders may trigger others renders by mutating the state. In this case loops are automatically resolved.
+- Renders may trigger others renders by mutating the store. In this case loops are automatically resolved.
 
 - Easy State implements an optimal `shouldComponentUpdate` for your components.
 
-As a result the state is always fresh and a stable and a fresh view is always achieved before the next repaint with the minimal number of required renders.
+As a result the store is always fresh and a stable and a fresh view is always achieved before the next repaint with the minimal number of required renders.
 
 ### easyStore
 
-`easyStore` creates global state stores, to handle data that do not fit into component state. Wrapping an object with `easyStore` has to following effects.
+`easyStore` creates global state stores, to handle data that does not fit into component stores. Wrapping an object with `easyStore` has to following effects.
 
-- It transforms the object into a reactive data store, which triggers appropriate renders on mutations.
+- It transforms the object into a reactive data store, which triggers appropriate renders on mutations. This store is just a simple object.
 
-- It binds your object's methods to the object.
+- It binds your store's methods to the store.
 
 ```js
 import React from 'react'
@@ -135,7 +135,7 @@ function Hello () {
 export default easyComp(Hello)
 ```
 
-**Make sure to wrap your component with `easyComp` even if it uses global stores only and no local state.**
+**Make sure to wrap your component with `easyComp` even if it uses global stores only and no local stores.**
 
 - Global stores are simple objects and there is no limitation on what you can do with them. As an example feel free to use expando properties, arrays, deeply nested objects, ES6 collections or getters/setters in your stores.
 
@@ -178,11 +178,11 @@ The list of benchmarks will expand in the future.
 
 ## State management overview
 
-Finding the right balance between local component state and global state stores is not always a trivial task. This section gives you some general guide lines when to use which.
+Finding the right balance between local component stores and global state stores is not always a trivial task. This section gives you some general guide lines when to use which.
 
 ### Reusable widgets
 
-This is an easy decision. Always use local component state for reusable components. Depending on global stores would interfere with their reusability and break them. Check out the introductory [clock example](/examples/clock/) for some code.
+This is an easy decision. Always use local component stores for reusable components. Depending on global stores would interfere with their reusability and break them. Check out the introductory [clock example](/examples/clock/) for some code.
 
 ### Application state
 
@@ -192,9 +192,9 @@ Application state should usually be managed in global stores. It is singleton an
 
 - User inputs, which should go into the URL or change the browser history are also great examples. These are inherently global because they affect global concepts - like the URL and browser history. Some example for these are filters, date ranges and sorting primitives.
 
-Not everything fits in global stores though. You can find a few cases below when using the local component state makes more sense then global stores.
+Not everything fits in global stores though. You can find a few cases below when using the local component store makes more sense then global stores.
 
-- Utility and meta data should go into component state. For example you may have a component which handles recent history for an input field. It may make sense to receive the data for the input from a global store and manage the history meta data in the local state. Check out the [contacts table example](/examples/contacts/) for some code.
+- Utility and meta data should go into component stores. For example you may have a component which handles recent history for an input field. It may make sense to receive the data for the input from a global store and manage the history meta data in the local store. Check out the [contacts table example](/examples/contacts/) for some code.
 
 ### Application pages
 
