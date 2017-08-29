@@ -60,15 +60,19 @@ function toReactiveComp (Comp) {
       // auto bind non react specific original methods to the component instance
       autoBind(this, Comp.prototype, true)
 
-      // turn the state into an observable object, which triggers rendering on mutations
-      this.state = observable(this.state)
+      // turn the store into an observable object, which triggers rendering on mutations
+      if (typeof this.store === 'object' && this.store !== null) {
+        this.store = observable(this.store)
+      } else if ('store' in this) {
+        throw new TypeError('component.store must be an object')
+      }
     }
 
     render () {
       // if it is the first direct render from react call there is no reactive render yet
       if (!this[REACTIVE_RENDER]) {
         let result
-        // create a reactive render, which is automatically called by easyState on relevant state and store mutations
+        // create a reactive render, which is automatically called by easyState on relevant store mutations
         // the passed function is executed right away synchronously once by easyState
         this[REACTIVE_RENDER] = observe(() => {
           // if it is the first (synchronous) execution, call the original component's render
@@ -90,7 +94,7 @@ function toReactiveComp (Comp) {
       }
     }
 
-    // react should trigger updates on prop changes, while easyState handles state changes
+    // react should trigger updates on prop changes, while easyState handles store changes
     shouldComponentUpdate (nextProps) {
       const { props } = this
       const keys = Object.keys(props)
@@ -108,7 +112,7 @@ function toReactiveComp (Comp) {
         }
       }
 
-      // do not let react update the comp otherwise, leave state triggered updates to easyState
+      // do not let react update the comp otherwise, leave store triggered updates to easyState
       return false
     }
 

@@ -6,25 +6,25 @@ class App extends Component {
   constructor () {
     super()
 
-    this.state = {
+    this.store = {
       clock: setInterval(() => this.setTime(), 1000)
     }
     this.setTime()
   }
 
-  // state can be manipulated as a plain JS object, instead of setState
+  // the store can be manipulated as a plain JS object
   setTime () {
-    this.state.time = moment().utc().format('hh:mm:ss A')
+    this.store.time = moment().utc().format('hh:mm:ss A')
   }
 
   // clean up the timer before the component is unmounted
   componentWillUnmount () {
-    clearInterval(this.state.clock)
+    clearInterval(this.store.clock)
   }
 
-  // render is automatically triggered whenever this.state.time changes
+  // render is automatically triggered whenever this.store.time changes
   render () {
-    return <div>{this.state.time}</div>
+    return <div>{this.store.time}</div>
   }
 }
 

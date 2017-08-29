@@ -27005,15 +27005,19 @@ function toReactiveComp(Comp) {
       // auto bind non react specific original methods to the component instance
       Object(__WEBPACK_IMPORTED_MODULE_2__autoBind__["a" /* default */])(this, Comp.prototype, true);
 
-      // turn the state into an observable object, which triggers rendering on mutations
-      this.state = Object(__WEBPACK_IMPORTED_MODULE_1__nx_js_observer_util__["a" /* observable */])(this.state);
+      // turn the store into an observable object, which triggers rendering on mutations
+      if (typeof this.store === 'object' && this.store !== null) {
+        this.store = Object(__WEBPACK_IMPORTED_MODULE_1__nx_js_observer_util__["a" /* observable */])(this.store);
+      } else if ('store' in this) {
+        throw new TypeError('component.store must be an object');
+      }
     }
 
     render() {
       // if it is the first direct render from react call there is no reactive render yet
       if (!this[REACTIVE_RENDER]) {
         let result;
-        // create a reactive render, which is automatically called by easyState on relevant state and store mutations
+        // create a reactive render, which is automatically called by easyState on relevant store mutations
         // the passed function is executed right away synchronously once by easyState
         this[REACTIVE_RENDER] = Object(__WEBPACK_IMPORTED_MODULE_1__nx_js_observer_util__["b" /* observe */])(() => {
           // if it is the first (synchronous) execution, call the original component's render
@@ -27035,7 +27039,7 @@ function toReactiveComp(Comp) {
       }
     }
 
-    // react should trigger updates on prop changes, while easyState handles state changes
+    // react should trigger updates on prop changes, while easyState handles store changes
     shouldComponentUpdate(nextProps) {
       const { props } = this;
       const keys = Object.keys(props);
@@ -27053,7 +27057,7 @@ function toReactiveComp(Comp) {
         }
       }
 
-      // do not let react update the comp otherwise, leave state triggered updates to easyState
+      // do not let react update the comp otherwise, leave store triggered updates to easyState
       return false;
     }
 
@@ -37809,28 +37813,28 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
   constructor() {
     super();
 
-    this.state = {
+    this.store = {
       clock: setInterval(() => this.setTime(), 1000)
     };
     this.setTime();
   }
 
-  // state can be manipulated as a plain JS object, instead of setState
+  // the store can be manipulated as a plain JS object
   setTime() {
-    this.state.time = __WEBPACK_IMPORTED_MODULE_1_moment___default()().utc().format('hh:mm:ss A');
+    this.store.time = __WEBPACK_IMPORTED_MODULE_1_moment___default()().utc().format('hh:mm:ss A');
   }
 
   // clean up the timer before the component is unmounted
   componentWillUnmount() {
-    clearInterval(this.state.clock);
+    clearInterval(this.store.clock);
   }
 
-  // render is automatically triggered whenever this.state.time changes
+  // render is automatically triggered whenever this.store.time changes
   render() {
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'div',
       null,
-      this.state.time
+      this.store.time
     );
   }
 }

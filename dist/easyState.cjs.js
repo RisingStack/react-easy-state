@@ -4,9 +4,9 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 var react = require('react');
 
-var promise = Promise.resolve();
-var mutateWithTask;
-var currTask;
+const promise = Promise.resolve();
+let mutateWithTask;
+let currTask;
 
 function nextTick(task) {
   currTask = task;
@@ -18,9 +18,9 @@ function nextTick(task) {
 }
 
 if (typeof MutationObserver !== 'undefined') {
-  var counter = 0;
-  var observer = new MutationObserver(onTask);
-  var textNode = document.createTextNode(String(counter));
+  let counter = 0;
+  const observer = new MutationObserver(onTask);
+  const textNode = document.createTextNode(String(counter));
   observer.observe(textNode, { characterData: true });
 
   mutateWithTask = function mutateWithTask() {
@@ -35,16 +35,16 @@ function onTask() {
   }
 }
 
-var UNOBSERVED = Symbol('unobserved');
-var proxyToRaw = new WeakMap();
-var rawToProxy = new WeakMap();
+const UNOBSERVED = Symbol('unobserved');
+const proxyToRaw = new WeakMap();
+const rawToProxy = new WeakMap();
 
-var ITERATE = Symbol('iterate');
-var getPrototypeOf = Object.getPrototypeOf;
+const ITERATE = Symbol('iterate');
+const getPrototypeOf = Object.getPrototypeOf;
 
 function has(value) {
-  var rawContext = proxyToRaw.get(this);
-  var proto = getPrototypeOf(this);
+  const rawContext = proxyToRaw.get(this);
+  const proto = getPrototypeOf(this);
   if (!rawContext) {
     return proto.has.apply(this, arguments);
   }
@@ -53,8 +53,8 @@ function has(value) {
 }
 
 function get$1(value) {
-  var rawContext = proxyToRaw.get(this);
-  var proto = getPrototypeOf(this);
+  const rawContext = proxyToRaw.get(this);
+  const proto = getPrototypeOf(this);
   if (!rawContext) {
     return proto.get.apply(this, arguments);
   }
@@ -63,8 +63,8 @@ function get$1(value) {
 }
 
 function add(value) {
-  var rawContext = proxyToRaw.get(this);
-  var proto = getPrototypeOf(this);
+  const rawContext = proxyToRaw.get(this);
+  const proto = getPrototypeOf(this);
   if (!rawContext) {
     return proto.add.apply(this, arguments);
   }
@@ -76,8 +76,8 @@ function add(value) {
 }
 
 function set$1(key, value) {
-  var rawContext = proxyToRaw.get(this);
-  var proto = getPrototypeOf(this);
+  const rawContext = proxyToRaw.get(this);
+  const proto = getPrototypeOf(this);
   if (!rawContext) {
     return proto.set.apply(this, arguments);
   }
@@ -89,8 +89,8 @@ function set$1(key, value) {
 }
 
 function deleteFn(value) {
-  var rawContext = proxyToRaw.get(this);
-  var proto = getPrototypeOf(this);
+  const rawContext = proxyToRaw.get(this);
+  const proto = getPrototypeOf(this);
   if (!rawContext) {
     return proto.delete.apply(this, arguments);
   }
@@ -102,8 +102,8 @@ function deleteFn(value) {
 }
 
 function clear() {
-  var rawContext = proxyToRaw.get(this);
-  var proto = getPrototypeOf(this);
+  const rawContext = proxyToRaw.get(this);
+  const proto = getPrototypeOf(this);
   if (!rawContext) {
     return proto.clear.apply(this, arguments);
   }
@@ -114,8 +114,8 @@ function clear() {
 }
 
 function forEach() {
-  var rawContext = proxyToRaw.get(this);
-  var proto = getPrototypeOf(this);
+  const rawContext = proxyToRaw.get(this);
+  const proto = getPrototypeOf(this);
   if (!rawContext) {
     return proto.forEach.apply(this, arguments);
   }
@@ -124,8 +124,8 @@ function forEach() {
 }
 
 function keys() {
-  var rawContext = proxyToRaw.get(this);
-  var proto = getPrototypeOf(this);
+  const rawContext = proxyToRaw.get(this);
+  const proto = getPrototypeOf(this);
   if (!rawContext) {
     return proto.keys.apply(this, arguments);
   }
@@ -134,8 +134,8 @@ function keys() {
 }
 
 function values() {
-  var rawContext = proxyToRaw.get(this);
-  var proto = getPrototypeOf(this);
+  const rawContext = proxyToRaw.get(this);
+  const proto = getPrototypeOf(this);
   if (!rawContext) {
     return proto.values.apply(this, arguments);
   }
@@ -144,8 +144,8 @@ function values() {
 }
 
 function entries() {
-  var rawContext = proxyToRaw.get(this);
-  var proto = getPrototypeOf(this);
+  const rawContext = proxyToRaw.get(this);
+  const proto = getPrototypeOf(this);
   if (!rawContext) {
     return proto.entries.apply(this, arguments);
   }
@@ -154,8 +154,8 @@ function entries() {
 }
 
 function iterator() {
-  var rawContext = proxyToRaw.get(this);
-  var proto = getPrototypeOf(this);
+  const rawContext = proxyToRaw.get(this);
+  const proto = getPrototypeOf(this);
   if (!rawContext) {
     return proto[Symbol.iterator].apply(this, arguments);
   }
@@ -164,8 +164,8 @@ function iterator() {
 }
 
 function getSize() {
-  var rawContext = proxyToRaw.get(this);
-  var proto = getPrototypeOf(this);
+  const rawContext = proxyToRaw.get(this);
+  const proto = getPrototypeOf(this);
   if (!rawContext) {
     return Reflect.get(proto, 'size', this);
   }
@@ -215,19 +215,19 @@ function instrumentWeakSet(target) {
 
 var instrumentations = new Map([[Map.prototype, instrumentMap], [Set.prototype, instrumentSet], [WeakMap.prototype, instrumentWeakMap], [WeakSet.prototype, instrumentWeakSet], [Date.prototype, false], [RegExp.prototype, false]]);
 
-var observerStore = new WeakMap();
+const observerStore = new WeakMap();
 
 function storeObservable(target) {
   observerStore.set(target, Object.create(null));
 }
 
 function storeObserver(target, key, observer) {
-  var observers = observerStore.get(target);
-  var observersForKey = observers[key];
+  const observers = observerStore.get(target);
+  const observersForKey = observers[key];
   if (observersForKey !== observer) {
     if (typeof observersForKey === 'object' && observersForKey.size > 0) {
       observersForKey.add(observer);
-      observer[("_" + key + "_observers")] = observersForKey;
+      observer[`_${key}_observers`] = observersForKey;
     } else if (typeof observersForKey === 'function' && !observersForKey[UNOBSERVED]) {
       observers[key] = new Set().add(observer).add(observersForKey);
     } else {
@@ -237,8 +237,8 @@ function storeObserver(target, key, observer) {
 }
 
 function iterateObservers(target, key, fn) {
-  var observers = observerStore.get(target);
-  var observersForKey = observers[key];
+  const observers = observerStore.get(target);
+  const observersForKey = observers[key];
   if (observersForKey instanceof Set) {
     observersForKey.forEach(fn);
   } else if (observersForKey) {
@@ -247,16 +247,16 @@ function iterateObservers(target, key, fn) {
 }
 
 function releaseObserver(observer) {
-  for (var key in observer) {
+  for (let key in observer) {
     observer[key].delete(observer);
   }
 }
 
-var ENUMERATE = Symbol('enumerate');
-var queuedObservers = new Set();
-var queued = false;
-var currentObserver;
-var handlers = { get: get, ownKeys: ownKeys, set: set, deleteProperty: deleteProperty };
+const ENUMERATE = Symbol('enumerate');
+const queuedObservers = new Set();
+let queued = false;
+let currentObserver;
+const handlers = { get, ownKeys, set, deleteProperty };
 
 function observe(observer) {
   if (typeof observer !== 'function') {
@@ -291,7 +291,7 @@ function observable(obj) {
 }
 
 function instrumentObservable(obj) {
-  var instrument = instrumentations.get(Object.getPrototypeOf(obj));
+  const instrument = instrumentations.get(Object.getPrototypeOf(obj));
   if (typeof instrument === 'function') {
     instrument(obj);
   }
@@ -299,7 +299,7 @@ function instrumentObservable(obj) {
 }
 
 function createObservable(obj) {
-  var observable = new Proxy(obj, handlers);
+  const observable = new Proxy(obj, handlers);
   storeObservable(obj);
   proxyToRaw.set(observable, obj);
   rawToProxy.set(obj, observable);
@@ -307,8 +307,8 @@ function createObservable(obj) {
 }
 
 function get(target, key, receiver) {
-  var rawTarget = proxyToRaw.get(target) || target;
-  var result = Reflect.get(target, key, receiver);
+  const rawTarget = proxyToRaw.get(target) || target;
+  const result = Reflect.get(target, key, receiver);
   registerObserver(rawTarget, key);
   if (currentObserver && typeof result === 'object' && result !== null) {
     return observable(result);
@@ -379,14 +379,12 @@ function runObserver(observer) {
 }
 
 // do not bind these, they should not be directly invoked or passed as callbacks by the user
-var reactInternals = new Set(['constructor', 'render', 'componentWillMount', 'componentDidMount', 'componentWillReceiveProps', 'shouldComponentUpdate', 'componentWillUpdate', 'componentDidUpdate', 'componentWillUnmount']);
+const reactInternals = new Set(['constructor', 'render', 'componentWillMount', 'componentDidMount', 'componentWillReceiveProps', 'shouldComponentUpdate', 'componentWillUpdate', 'componentDidUpdate', 'componentWillUnmount']);
 
 // bind the methods from proto to the passed context object and assign them to the context
 function autoBind(context, proto, isReact) {
-  for (var i = 0, list = Object.getOwnPropertyNames(proto); i < list.length; i += 1) {
-    var key = list[i];
-
-    var value = proto[key];
+  for (let key of Object.getOwnPropertyNames(proto)) {
+    const value = proto[key];
 
     if (typeof value === 'function' && !(isReact && reactInternals.has(key))) {
       context[key] = value.bind(context);
@@ -394,7 +392,7 @@ function autoBind(context, proto, isReact) {
   }
 }
 
-var REACTIVE_RENDER = Symbol('reactive render');
+const REACTIVE_RENDER = Symbol('reactive render');
 
 function easyComp(Comp) {
   if (typeof Comp !== 'function') {
@@ -419,21 +417,16 @@ function isStatelessComp(Comp) {
 function statelessToStatefulComp(StatelessComp) {
   var _class, _temp;
 
-  return _temp = _class = (function (superclass) {
-    function StatefulComp () {
-      superclass.apply(this, arguments);
-    }
+  return _temp = _class = class StatefulComp extends react.Component {
 
-    if ( superclass ) StatefulComp.__proto__ = superclass;
-    StatefulComp.prototype = Object.create( superclass && superclass.prototype );
-    StatefulComp.prototype.constructor = StatefulComp;
+    // call the original function component inside the render method
 
-    StatefulComp.prototype.render = function render () {
+    // proxy react specific static variables to the stateful component
+    // from the stateless component
+    render() {
       return StatelessComp.call(this, this.props, this.context);
-    };
-
-    return StatefulComp;
-  }(react.Component)), _class.displayName = StatelessComp.displayName || StatelessComp.name, _class.contextTypes = StatelessComp.contextTypes, _class.propTypes = StatelessComp.propTypes, _class.defaultProps = StatelessComp.defaultProps, _temp;
+    }
+  }, _class.displayName = StatelessComp.displayName || StatelessComp.name, _class.contextTypes = StatelessComp.contextTypes, _class.propTypes = StatelessComp.propTypes, _class.defaultProps = StatelessComp.defaultProps, _temp;
 }
 
 function hasComponentShouldUpdate(Comp) {
@@ -445,67 +438,64 @@ function toReactiveComp(Comp) {
 
   // return a HOC which overwrites render, shouldComponentUpdate and componentWillUnmount
   // it decides when to run the new reactive methods and when to proxy to the original methods
-  return _temp2 = _class2 = (function (Comp) {
-    function EasyHOC(props) {
-      Comp.call(this, props);
+  return _temp2 = _class2 = class EasyHOC extends Comp {
+    // proxy react specific static variables to the HOC from the component
+    constructor(props) {
+      super(props);
 
       // auto bind non react specific original methods to the component instance
       autoBind(this, Comp.prototype, true);
 
-      // turn the state into an observable object, which triggers rendering on mutations
-      this.state = observable(this.state);
+      // turn the store into an observable object, which triggers rendering on mutations
+      if (typeof this.store === 'object' && this.store !== null) {
+        this.store = observable(this.store);
+      } else if ('store' in this) {
+        throw new TypeError('component.store must be an object');
+      }
     }
 
-    if ( Comp ) EasyHOC.__proto__ = Comp;
-    EasyHOC.prototype = Object.create( Comp && Comp.prototype );
-    EasyHOC.prototype.constructor = EasyHOC;
-
-    EasyHOC.prototype.render = function render () {
-      var this$1 = this;
-
+    render() {
       // if it is the first direct render from react call there is no reactive render yet
       if (!this[REACTIVE_RENDER]) {
-        var result;
-        // create a reactive render, which is automatically called by easyState on relevant state and store mutations
+        let result;
+        // create a reactive render, which is automatically called by easyState on relevant store mutations
         // the passed function is executed right away synchronously once by easyState
-        this[REACTIVE_RENDER] = observe(function () {
+        this[REACTIVE_RENDER] = observe(() => {
           // if it is the first (synchronous) execution, call the original component's render
           // this is necessary because forceUpdate can not be called synchronously inside render functions
-          if (!this$1[REACTIVE_RENDER]) {
-            result = Comp.prototype.render.call(this$1);
+          if (!this[REACTIVE_RENDER]) {
+            result = super.render();
           } else {
             // if it is a later reactive, asynchronous execution - triggered by easyState - forceUpdate the original component
             // this is necessary, because calling render would require the result to be returned
             // which is not possible from this asynchronous context
-            Comp.prototype.forceUpdate.call(this$1);
+            super.forceUpdate();
           }
         });
         // return the result from super.render() inside the reactive render on the first render execution
         return result;
       } else {
         // return the original component's render result on direct calls from react
-        return Comp.prototype.render.call(this);
+        return super.render();
       }
-    };
+    }
 
-    // react should trigger updates on prop changes, while easyState handles state changes
-    EasyHOC.prototype.shouldComponentUpdate = function shouldComponentUpdate (nextProps) {
+    // react should trigger updates on prop changes, while easyState handles store changes
+    shouldComponentUpdate(nextProps) {
       return false;
-    };
+    }
 
-    EasyHOC.prototype.componentWillUnmount = function componentWillUnmount () {
+    componentWillUnmount() {
       // clean up memory used by easyState
       unobserve(this[REACTIVE_RENDER]);
 
       // also call user defined componentWillUnmount to allow the user
       // to clean up additional memory
-      if (Comp.prototype.componentWillUnmount) {
-        Comp.prototype.componentWillUnmount.call(this);
+      if (super.componentWillUnmount) {
+        super.componentWillUnmount();
       }
-    };
-
-    return EasyHOC;
-  }(Comp)), _class2.displayName = Comp.displayName || Comp.name, _class2.contextTypes = Comp.contextTypes, _class2.propTypes = Comp.propTypes, _class2.defaultProps = Comp.defaultProps, _temp2;
+    }
+  }, _class2.displayName = Comp.displayName || Comp.name, _class2.contextTypes = Comp.contextTypes, _class2.propTypes = Comp.propTypes, _class2.defaultProps = Comp.defaultProps, _temp2;
 }
 
 function easyStore(store) {
@@ -515,7 +505,7 @@ function easyStore(store) {
 
   // create an observable object from the passed store
   // and bind all of its methods to the created observable
-  var observableStore = observable(store);
+  const observableStore = observable(store);
   autoBind(observableStore, store, false);
   return observableStore;
 }

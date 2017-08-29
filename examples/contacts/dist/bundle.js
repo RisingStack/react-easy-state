@@ -22651,15 +22651,19 @@ function toReactiveComp(Comp) {
       // auto bind non react specific original methods to the component instance
       Object(__WEBPACK_IMPORTED_MODULE_2__autoBind__["a" /* default */])(this, Comp.prototype, true);
 
-      // turn the state into an observable object, which triggers rendering on mutations
-      this.state = Object(__WEBPACK_IMPORTED_MODULE_1__nx_js_observer_util__["a" /* observable */])(this.state);
+      // turn the store into an observable object, which triggers rendering on mutations
+      if (typeof this.store === 'object' && this.store !== null) {
+        this.store = Object(__WEBPACK_IMPORTED_MODULE_1__nx_js_observer_util__["a" /* observable */])(this.store);
+      } else if ('store' in this) {
+        throw new TypeError('component.store must be an object');
+      }
     }
 
     render() {
       // if it is the first direct render from react call there is no reactive render yet
       if (!this[REACTIVE_RENDER]) {
         let result;
-        // create a reactive render, which is automatically called by easyState on relevant state and store mutations
+        // create a reactive render, which is automatically called by easyState on relevant store mutations
         // the passed function is executed right away synchronously once by easyState
         this[REACTIVE_RENDER] = Object(__WEBPACK_IMPORTED_MODULE_1__nx_js_observer_util__["b" /* observe */])(() => {
           // if it is the first (synchronous) execution, call the original component's render
@@ -22681,7 +22685,7 @@ function toReactiveComp(Comp) {
       }
     }
 
-    // react should trigger updates on prop changes, while easyState handles state changes
+    // react should trigger updates on prop changes, while easyState handles store changes
     shouldComponentUpdate(nextProps) {
       const { props } = this;
       const keys = Object.keys(props);
@@ -22699,7 +22703,7 @@ function toReactiveComp(Comp) {
         }
       }
 
-      // do not let react update the comp otherwise, leave state triggered updates to easyState
+      // do not let react update the comp otherwise, leave store triggered updates to easyState
       return false;
     }
 
@@ -23154,43 +23158,43 @@ class Contact extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
   constructor({ contact }) {
     super();
 
-    // save internal utility data in component state instead of the global store
+    // save internal utility data in component store instead of the global store
     // editing is boolean meta flag, which indicates if the contact is currently edited
     // currentContact is a temporary state of the contact during editing, which can be saved or cancelled
-    this.state = {
+    this.store = {
       currentContact: Object.assign({}, contact),
       editing: false
     };
   }
 
   onEdit() {
-    this.state.editing = true;
+    this.store.editing = true;
   }
 
   onDelete() {
     __WEBPACK_IMPORTED_MODULE_2__store__["a" /* default */].deleteContact(this.props.contact);
   }
 
-  // transfer finalized changes from the component state to the main store
+  // transfer finalized changes from the component store to the main store
   onSave() {
-    Object.assign(this.props.contact, this.state.currentContact);
-    this.state.editing = false;
+    Object.assign(this.props.contact, this.store.currentContact);
+    this.store.editing = false;
   }
 
   // cancel changes by reverting to data from the main store
   onCancel() {
-    Object.assign(this.state.currentContact, this.props.contact);
-    this.state.editing = false;
+    Object.assign(this.store.currentContact, this.props.contact);
+    this.store.editing = false;
   }
 
   onChange(ev) {
-    this.state.currentContact[ev.target.name] = ev.target.value;
+    this.store.currentContact[ev.target.name] = ev.target.value;
   }
 
-  // render is triggered whenever the relevant parts of the component state, props or global store change
+  // render is triggered whenever the relevant parts of the component store, props or global store change
   render() {
     const { onChange, onSave, onCancel, onEdit, onDelete } = this;
-    const { currentContact, editing } = this.state;
+    const { currentContact, editing } = this.store;
     const { contact } = this.props;
 
     if (!editing) {
@@ -23275,30 +23279,30 @@ class ContactCreator extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
   constructor(...args) {
     var _temp;
 
-    return _temp = super(...args), this.state = {
+    return _temp = super(...args), this.store = {
       newContact: { name: '', email: '' }
 
-      // transfer finalized contact from the component state to the main store
+      // transfer finalized contact from the component store to the main store
     }, _temp;
   }
-  // save internal utility data in component state, instead of the global store
+  // save internal utility data in component store, instead of the global store
   // newContact is the skeleton for the next contact before it is added to the list
 
 
   addContact() {
-    __WEBPACK_IMPORTED_MODULE_2__store__["a" /* default */].addContact(this.state.newContact);
-    this.state.newContact = { name: '', email: '' };
+    __WEBPACK_IMPORTED_MODULE_2__store__["a" /* default */].addContact(this.store.newContact);
+    this.store.newContact = { name: '', email: '' };
   }
 
   onChange(ev) {
-    const { newContact } = this.state;
+    const { newContact } = this.store;
     newContact[ev.target.name] = ev.target.value;
   }
 
-  // render is triggered whenever the relevant parts of the component state or global store change
+  // render is triggered whenever the relevant parts of the component store or global store change
   render() {
     const { addContact, onChange } = this;
-    const { newContact } = this.state;
+    const { newContact } = this.store;
 
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'tr',

@@ -12,7 +12,7 @@
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
     "lint": "standard",
     "lint:fix": "standard --fix",
-    "build": "rollup --config ./rollup.config.js && npm run transpile",
+    "build": "rollup --config ./rollup.config.js",
     "build-examples": "webpack --config ./webpack.examples.js",
     "build-examples-dev": "webpack --config ./webpack.examples.js --watch",
     "build-all": "npm run build && npm run build-examples",
