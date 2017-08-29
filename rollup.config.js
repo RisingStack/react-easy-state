@@ -1,12 +1,11 @@
-const pkg = require('./package.json')
-const resolve = require('rollup-plugin-node-resolve')
-const babel = require('rollup-plugin-babel')
+import resolve from 'rollup-plugin-node-resolve'
+import babel from 'rollup-plugin-babel'
 
 export default {
   input: './src/index.js',
   output: [
-    { file: pkg.main, format: 'cjs' },
-    { file: pkg.module, format: 'es' }
+    { file: 'dist/cjs.es6.js', format: 'cjs' },
+    { file: 'dist/esm.es6.js', format: 'es' }
   ],
   plugins: [
     resolve(),

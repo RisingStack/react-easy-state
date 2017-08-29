@@ -2,8 +2,11 @@
   "name": "react-easy-state",
   "version": "2.0.3",
   "description": "React Easy State provides a healthy balance of local and global state management in a simple, scalable way",
-  "main": "dist/easyState.cjs.js",
-  "module": "dist/easyState.es.js",
+  "main": "dist/cjs.es5.js",
+  "module": "dist/esm.es5.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "test": "jest --coverage",
     "test:watch": "jest --watch",
@@ -12,11 +15,11 @@
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
     "lint": "standard",
     "lint:fix": "standard --fix",
-    "build": "rollup --config ./rollup.config.js",
     "build-examples": "webpack --config ./webpack.examples.js",
     "build-examples-dev": "webpack --config ./webpack.examples.js --watch",
-    "build-all": "npm run build && npm run build-examples",
-    "transpile": "buble dist/easyState.cjs.js --yes dangerousForOf -o dist/easyState.cjs.js && buble dist/easyState.es.js --yes dangerousForOf --no modules -o dist/easyState.es.js"
+    "build": "rollup --config ./rollup.config.js && npm run transpile && npm run minify",
+    "transpile": "buble dist/cjs.es6.js --yes dangerousForOf -o dist/cjs.es5.js && buble dist/esm.es6.js --yes dangerousForOf --no modules -o dist/esm.es5.js",
+    "minify": "minify dist/cjs.es6.js --o dist/cjs.es6.min.js && minify dist/cjs.es5.js --o dist/cjs.es5.min.js && minify dist/esm.es6.js --o dist/esm.es6.min.js && minify dist/esm.es5.js --o dist/esm.es5.min.js"
   },
   "jest": {
     "snapshotSerializers": [
@@ -63,6 +66,7 @@
     "babel-eslint": "^7.2.3",
     "babel-jest": "^20.0.3",
     "babel-loader": "7.1.1",
+    "babel-minify": "^0.2.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
     "babel-preset-es2016": "^6.24.1",
     "babel-preset-es2017": "^6.24.1",
@@ -105,6 +109,7 @@
   },
   "pre-push": [
     "lint",
-    "test"
+    "test",
+    "build-examples"
   ]
 }
