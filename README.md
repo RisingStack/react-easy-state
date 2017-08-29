@@ -12,6 +12,7 @@
 - [Platform support](#platform-support)
 - [Performance](#performance)
 - [State management overview](#state-management-overview)
+- [Alternative builds](#alternative-builds)
 - [How does it work?](#how-does-it-work)
 - [Contributing](#contributing)
 - [The NX Framework](#the-nx-framework)
@@ -201,6 +202,15 @@ Not everything fits in global stores though. You can find a few cases below when
 Application pages deserve a special mention. A typical app has several pages but, only one of them is active at a time. This makes them a nice candidate for singleton global state stores. However pages are not as persistent as the app's user for example, which makes them lean towards local state management.
 
 Page state usually has properties, which belong in the URL and browser history. In this case it is inherently global and it should be handled in a global store. These stores persist between page transitions, but this is perfectly fine. As a bonus you get a faster transition, because you don't always have to re-fetch all of the data. If you do not want data to linger around clean up the relevant parts in `componentWillUnmount`.
+
+## Alternative builds
+
+By default Easy State detects if you use ES6 or commonJS modules and serve the right format to you. The exposed libraries are transpiled to ES5 to support common tools - like UglifyJS minifying. If you would like a finer control over the provided build, you can specify them in your imports.
+
+- `react-easy-state/dist/esm.es6` exposes an ES6 build with ES6 modules.
+- `react-easy-state/dist/esm.es5` exposes an ES5 build with ES6 modules.
+- `react-easy-state/dist/cjs.es6` exposes an ES6 build with commonJS modules.
+- `react-easy-state/dist/cjs.es5` exposes an ES5 build with commonJS modules.
 
 ## How does it work?
 
