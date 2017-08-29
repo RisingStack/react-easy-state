@@ -56,7 +56,7 @@ describe('TodoMVC App', () => {
   test('should filter todos', async () => {
     const completedFilter = app.find('button[value="completed"]')
     const activeFilter = app.find('button[value="active"]')
-    const allFilter = app.find('button[value="todos"]')
+    const allFilter = app.find('button[value="all"]')
 
     completedFilter.simulate('click')
     await Promise.resolve()

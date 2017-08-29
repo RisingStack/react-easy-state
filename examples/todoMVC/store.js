@@ -2,37 +2,31 @@ import { easyStore } from 'react-easy-state'
 
 // a complex global store with a lot of derived data (getters and setters)
 export default easyStore({
-  filter: 'todos',
-  todos: [],
-  get hasTodos () {
-    return this.todos.length !== 0
+  all: [],
+  filter: 'all',
+  get isEmpty () {
+    return (this.all.length === 0)
   },
   get completed () {
-    return this.todos.filter(todo => todo.completed)
+    return this.all.filter(todo => todo.completed)
   },
   get hasCompleted () {
     return this.completed.length !== 0
   },
   get allCompleted () {
-    return this.todos.every(todo => todo.completed)
+    return this.all.every(todo => todo.completed)
   },
   set allCompleted (completed) {
-    if (completed) {
-      this.todos.forEach(todo => {
-        todo.completed = true
-      })
-    } else {
-      this.todos.forEach(todo => {
-        todo.completed = false
-      })
-    }
+    this.all.forEach(todo => {
+      todo.completed = completed
+    })
   },
   get active () {
-    return this.todos.filter(todo => !todo.completed)
+    return this.all.filter(todo => !todo.completed)
   },
   create (ev) {
-    if (ev.keyCode === 13) {
-      this.todos.push({ title: ev.target.value })
+    if (ev.keyCode === 13 && ev.target.value) {
+      this.all.push({ title: ev.target.value })
       ev.target.value = ''
     }
   },
@@ -40,16 +34,16 @@ export default easyStore({
     this.filter = ev.target.value
   },
   remove (id) {
-    this.todos.splice(id, 1)
+    this.all.splice(id, 1)
   },
   toggle (id) {
-    const todo = this.todos[id]
+    const todo = this.all[id]
     todo.completed = !todo.completed
-  },
-  clearCompleted () {
-    this.todos = this.active
   },
   toggleAll () {
     this.allCompleted = !this.allCompleted
+  },
+  clearCompleted () {
+    this.all = this.active
   }
 })

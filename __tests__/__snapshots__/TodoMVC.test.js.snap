@@ -111,7 +111,7 @@ exports[`02. Add Test Todo 1`] = `
         <button
           className="selected"
           onClick={[Function]}
-          value="todos"
+          value="all"
         >
           All
         </button>
@@ -177,7 +177,7 @@ exports[`02. Add Test Todo 1`] = `
       <div class="filters">
         <button
           class="selected"
-          value="todos"
+          value="all"
         >
           All
         </button>
@@ -295,7 +295,7 @@ exports[`03. Add Other Todo 1`] = `
         <button
           className="selected"
           onClick={[Function]}
-          value="todos"
+          value="all"
         >
           All
         </button>
@@ -373,7 +373,7 @@ exports[`03. Add Other Todo 1`] = `
       <div class="filters">
         <button
           class="selected"
-          value="todos"
+          value="all"
         >
           All
         </button>
@@ -513,7 +513,7 @@ exports[`04. Add Final Todo 1`] = `
         <button
           className="selected"
           onClick={[Function]}
-          value="todos"
+          value="all"
         >
           All
         </button>
@@ -603,7 +603,7 @@ exports[`04. Add Final Todo 1`] = `
       <div class="filters">
         <button
           class="selected"
-          value="todos"
+          value="all"
         >
           All
         </button>
@@ -744,7 +744,7 @@ exports[`05. Toggle Test Todo to completed 1`] = `
         <button
           className="selected"
           onClick={[Function]}
-          value="todos"
+          value="all"
         >
           All
         </button>
@@ -844,7 +844,7 @@ exports[`05. Toggle Test Todo to completed 1`] = `
       <div class="filters">
         <button
           class="selected"
-          value="todos"
+          value="all"
         >
           All
         </button>
@@ -989,7 +989,7 @@ exports[`06. Toggle Other Todo to completed 1`] = `
         <button
           className="selected"
           onClick={[Function]}
-          value="todos"
+          value="all"
         >
           All
         </button>
@@ -1093,7 +1093,7 @@ exports[`06. Toggle Other Todo to completed 1`] = `
       <div class="filters">
         <button
           class="selected"
-          value="todos"
+          value="all"
         >
           All
         </button>
@@ -1238,7 +1238,7 @@ exports[`07. Toggle Test Todo to active 1`] = `
         <button
           className="selected"
           onClick={[Function]}
-          value="todos"
+          value="all"
         >
           All
         </button>
@@ -1338,7 +1338,7 @@ exports[`07. Toggle Test Todo to active 1`] = `
       <div class="filters">
         <button
           class="selected"
-          value="todos"
+          value="all"
         >
           All
         </button>
@@ -1438,7 +1438,7 @@ exports[`08. Filter completed 1`] = `
         <button
           className=""
           onClick={[Function]}
-          value="todos"
+          value="all"
         >
           All
         </button>
@@ -1514,7 +1514,7 @@ exports[`08. Filter completed 1`] = `
       <div class="filters">
         <button
           class=""
-          value="todos"
+          value="all"
         >
           All
         </button>
@@ -1636,7 +1636,7 @@ exports[`09. Filter active 1`] = `
         <button
           className=""
           onClick={[Function]}
-          value="todos"
+          value="all"
         >
           All
         </button>
@@ -1720,7 +1720,7 @@ exports[`09. Filter active 1`] = `
       <div class="filters">
         <button
           class=""
-          value="todos"
+          value="all"
         >
           All
         </button>
@@ -1865,7 +1865,7 @@ exports[`10. Filter all 1`] = `
         <button
           className="selected"
           onClick={[Function]}
-          value="todos"
+          value="all"
         >
           All
         </button>
@@ -1965,7 +1965,7 @@ exports[`10. Filter all 1`] = `
       <div class="filters">
         <button
           class="selected"
-          value="todos"
+          value="all"
         >
           All
         </button>
@@ -2087,7 +2087,7 @@ exports[`11. Clear completed 1`] = `
         <button
           className="selected"
           onClick={[Function]}
-          value="todos"
+          value="all"
         >
           All
         </button>
@@ -2165,7 +2165,7 @@ exports[`11. Clear completed 1`] = `
       <div class="filters">
         <button
           class="selected"
-          value="todos"
+          value="all"
         >
           All
         </button>
@@ -2285,7 +2285,7 @@ exports[`12. Toggle all to completed 1`] = `
         <button
           className="selected"
           onClick={[Function]}
-          value="todos"
+          value="all"
         >
           All
         </button>
@@ -2378,7 +2378,7 @@ exports[`12. Toggle all to completed 1`] = `
       <div class="filters">
         <button
           class="selected"
-          value="todos"
+          value="all"
         >
           All
         </button>
@@ -2501,7 +2501,7 @@ exports[`13. Toggle all to active 1`] = `
         <button
           className="selected"
           onClick={[Function]}
-          value="todos"
+          value="all"
         >
           All
         </button>
@@ -2579,7 +2579,7 @@ exports[`13. Toggle all to active 1`] = `
       <div class="filters">
         <button
           class="selected"
-          value="todos"
+          value="all"
         >
           All
         </button>
@@ -2676,7 +2676,7 @@ exports[`14. Delete Test Todo 1`] = `
         <button
           className="selected"
           onClick={[Function]}
-          value="todos"
+          value="all"
         >
           All
         </button>
@@ -2742,7 +2742,7 @@ exports[`14. Delete Test Todo 1`] = `
       <div class="filters">
         <button
           class="selected"
-          value="todos"
+          value="all"
         >
           All
         </button>

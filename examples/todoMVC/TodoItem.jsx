@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
 import classNames from 'classnames'
 import { easyComp } from 'react-easy-state'
-import store from './store'
+import todos from './store'
 
 class TodoItem extends Component {
   remove () {
-    store.remove(this.props.id)
+    todos.remove(this.props.id)
   }
 
   toggle () {
-    store.toggle(this.props.id)
+    todos.toggle(this.props.id)
   }
 
-  // render is triggered whenever the relevant parts of the component props or global store change
+  // render is triggered whenever the relevant parts of the component props or global todos store change
   render () {
     const { toggle, remove } = this
     const { title, completed = false } = this.props

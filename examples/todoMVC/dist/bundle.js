@@ -23101,37 +23101,31 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 // a complex global store with a lot of derived data (getters and setters)
 /* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_0_react_easy_state__["b" /* easyStore */])({
-  filter: 'todos',
-  todos: [],
-  get hasTodos() {
-    return this.todos.length !== 0;
+  all: [],
+  filter: 'all',
+  get isEmpty() {
+    return this.all.length === 0;
   },
   get completed() {
-    return this.todos.filter(todo => todo.completed);
+    return this.all.filter(todo => todo.completed);
   },
   get hasCompleted() {
     return this.completed.length !== 0;
   },
   get allCompleted() {
-    return this.todos.every(todo => todo.completed);
+    return this.all.every(todo => todo.completed);
   },
   set allCompleted(completed) {
-    if (completed) {
-      this.todos.forEach(todo => {
-        todo.completed = true;
-      });
-    } else {
-      this.todos.forEach(todo => {
-        todo.completed = false;
-      });
-    }
+    this.all.forEach(todo => {
+      todo.completed = completed;
+    });
   },
   get active() {
-    return this.todos.filter(todo => !todo.completed);
+    return this.all.filter(todo => !todo.completed);
   },
   create(ev) {
-    if (ev.keyCode === 13) {
-      this.todos.push({ title: ev.target.value });
+    if (ev.keyCode === 13 && ev.target.value) {
+      this.all.push({ title: ev.target.value });
       ev.target.value = '';
     }
   },
@@ -23139,17 +23133,17 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
     this.filter = ev.target.value;
   },
   remove(id) {
-    this.todos.splice(id, 1);
+    this.all.splice(id, 1);
   },
   toggle(id) {
-    const todo = this.todos[id];
+    const todo = this.all[id];
     todo.completed = !todo.completed;
-  },
-  clearCompleted() {
-    this.todos = this.active;
   },
   toggleAll() {
     this.allCompleted = !this.allCompleted;
+  },
+  clearCompleted() {
+    this.all = this.active;
   }
 }));
 
@@ -23194,12 +23188,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
 
-// render is triggered whenever the relevant parts of the global store change
+// render is triggered whenever the relevant parts of the global todos store change
 function App() {
-  const { hasTodos, hasCompleted, allCompleted, active, filter,
+  const { isEmpty, hasCompleted, allCompleted, active, filter,
     create, changeFilter, toggleAll, clearCompleted } = __WEBPACK_IMPORTED_MODULE_4__store__["a" /* default */];
 
-  const todosClass = __WEBPACK_IMPORTED_MODULE_1_classnames___default()({ selected: filter === 'todos' });
+  const todosClass = __WEBPACK_IMPORTED_MODULE_1_classnames___default()({ selected: filter === 'all' });
   const completedClass = __WEBPACK_IMPORTED_MODULE_1_classnames___default()({ selected: filter === 'completed' });
   const activeClass = __WEBPACK_IMPORTED_MODULE_1_classnames___default()({ selected: filter === 'active' });
 
@@ -23216,7 +23210,7 @@ function App() {
       ),
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { onKeyUp: create, className: 'new-todo', placeholder: 'What needs to be done?', autoFocus: true })
     ),
-    hasTodos && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+    !isEmpty && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'section',
       { className: 'main' },
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { className: 'toggle-all', type: 'checkbox', checked: allCompleted, onChange: toggleAll }),
@@ -23231,7 +23225,7 @@ function App() {
         __WEBPACK_IMPORTED_MODULE_4__store__["a" /* default */][filter].map((todo, idx) => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__TodoItem__["a" /* default */], _extends({}, todo, { id: idx, key: idx })))
       )
     ),
-    hasTodos && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+    !isEmpty && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'footer',
       { className: 'footer' },
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -23245,7 +23239,7 @@ function App() {
         { className: 'filters' },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'button',
-          { className: todosClass, value: 'todos', onClick: changeFilter },
+          { className: todosClass, value: 'all', onClick: changeFilter },
           'All'
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -23296,7 +23290,7 @@ class TodoItem extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
     __WEBPACK_IMPORTED_MODULE_3__store__["a" /* default */].toggle(this.props.id);
   }
 
-  // render is triggered whenever the relevant parts of the component props or global store change
+  // render is triggered whenever the relevant parts of the component props or global todos store change
   render() {
     const { toggle, remove } = this;
     const { title, completed = false } = this.props;
