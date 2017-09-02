@@ -23123,14 +23123,11 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
   get active() {
     return this.all.filter(todo => !todo.completed);
   },
-  create(ev) {
-    if (ev.keyCode === 13 && ev.target.value) {
-      this.all.push({ title: ev.target.value });
-      ev.target.value = '';
-    }
+  create(title) {
+    this.all.push({ title });
   },
-  changeFilter(ev) {
-    this.filter = ev.target.value;
+  changeFilter(filter) {
+    this.filter = filter;
   },
   remove(id) {
     this.all.splice(id, 1);
@@ -23189,77 +23186,90 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
 // render is triggered whenever the relevant parts of the global todos store change
-function App() {
-  const { isEmpty, hasCompleted, allCompleted, active, filter,
-    create, changeFilter, toggleAll, clearCompleted } = __WEBPACK_IMPORTED_MODULE_4__store__["a" /* default */];
+class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
+  changeFilter(ev) {
+    __WEBPACK_IMPORTED_MODULE_4__store__["a" /* default */].changeFilter(ev.target.value);
+  }
 
-  const todosClass = __WEBPACK_IMPORTED_MODULE_1_classnames___default()({ selected: filter === 'all' });
-  const completedClass = __WEBPACK_IMPORTED_MODULE_1_classnames___default()({ selected: filter === 'completed' });
-  const activeClass = __WEBPACK_IMPORTED_MODULE_1_classnames___default()({ selected: filter === 'active' });
+  // create a todo on Enter key press
+  createTodo(ev) {
+    if (ev.keyCode === 13 && ev.target.value) {
+      __WEBPACK_IMPORTED_MODULE_4__store__["a" /* default */].create(ev.target.value);
+      ev.target.value = '';
+    }
+  }
 
-  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-    'div',
-    { className: 'todoapp' },
-    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-      'header',
-      { className: 'header' },
+  render() {
+    const { isEmpty, hasCompleted, allCompleted, active, filter, toggleAll, clearCompleted } = __WEBPACK_IMPORTED_MODULE_4__store__["a" /* default */];
+
+    const todosClass = __WEBPACK_IMPORTED_MODULE_1_classnames___default()({ selected: filter === 'all' });
+    const completedClass = __WEBPACK_IMPORTED_MODULE_1_classnames___default()({ selected: filter === 'completed' });
+    const activeClass = __WEBPACK_IMPORTED_MODULE_1_classnames___default()({ selected: filter === 'active' });
+
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'div',
+      { className: 'todoapp' },
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'h1',
-        null,
-        'todos'
-      ),
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { onKeyUp: create, className: 'new-todo', placeholder: 'What needs to be done?', autoFocus: true })
-    ),
-    !isEmpty && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-      'section',
-      { className: 'main' },
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { className: 'toggle-all', type: 'checkbox', checked: allCompleted, onChange: toggleAll }),
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'label',
-        { htmlFor: 'toggle-all' },
-        'Mark all as complete'
-      ),
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'ul',
-        { className: 'todo-list' },
-        __WEBPACK_IMPORTED_MODULE_4__store__["a" /* default */][filter].map((todo, idx) => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__TodoItem__["a" /* default */], _extends({}, todo, { id: idx, key: idx })))
-      )
-    ),
-    !isEmpty && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-      'footer',
-      { className: 'footer' },
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'span',
-        { className: 'todo-count' },
-        active.length,
-        ' items left'
-      ),
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'div',
-        { className: 'filters' },
+        'header',
+        { className: 'header' },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'button',
-          { className: todosClass, value: 'all', onClick: changeFilter },
-          'All'
+          'h1',
+          null,
+          'todos'
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { onKeyUp: this.createTodo, className: 'new-todo', placeholder: 'What needs to be done?', autoFocus: true })
+      ),
+      !isEmpty && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'section',
+        { className: 'main' },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { className: 'toggle-all', type: 'checkbox', checked: allCompleted, onChange: toggleAll }),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'label',
+          { htmlFor: 'toggle-all' },
+          'Mark all as complete'
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'button',
-          { className: activeClass, value: 'active', onClick: changeFilter },
-          'Active'
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'button',
-          { className: completedClass, value: 'completed', onClick: changeFilter },
-          'Completed'
+          'ul',
+          { className: 'todo-list' },
+          __WEBPACK_IMPORTED_MODULE_4__store__["a" /* default */][filter].map((todo, idx) => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__TodoItem__["a" /* default */], _extends({}, todo, { id: idx, key: idx })))
         )
       ),
-      hasCompleted && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'button',
-        { className: 'clear-completed', onClick: clearCompleted },
-        'Clear completed'
+      !isEmpty && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'footer',
+        { className: 'footer' },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'span',
+          { className: 'todo-count' },
+          active.length,
+          ' items left'
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          { className: 'filters' },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'button',
+            { className: todosClass, value: 'all', onClick: this.changeFilter },
+            'All'
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'button',
+            { className: activeClass, value: 'active', onClick: this.changeFilter },
+            'Active'
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'button',
+            { className: completedClass, value: 'completed', onClick: this.changeFilter },
+            'Completed'
+          )
+        ),
+        hasCompleted && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'button',
+          { className: 'clear-completed', onClick: clearCompleted },
+          'Clear completed'
+        )
       )
-    )
-  );
+    );
+  }
 }
 
 // wrap the component with easyComp before exporting it

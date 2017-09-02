@@ -24,14 +24,11 @@ export default easyStore({
   get active () {
     return this.all.filter(todo => !todo.completed)
   },
-  create (ev) {
-    if (ev.keyCode === 13 && ev.target.value) {
-      this.all.push({ title: ev.target.value })
-      ev.target.value = ''
-    }
+  create (title) {
+    this.all.push({ title })
   },
-  changeFilter (ev) {
-    this.filter = ev.target.value
+  changeFilter (filter) {
+    this.filter = filter
   },
   remove (id) {
     this.all.splice(id, 1)
