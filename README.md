@@ -79,7 +79,7 @@ class Hello extends Component {
 export default easyComp(Hello)
 ```
 
-**Make sure to wrap all of your components with `easyComp` - including stateful and stateless ones - before you export them.**
+**Make sure to wrap all of your components with `easyComp` - including stateful and stateless ones - before you export them. If you do not wrap a component, it will not properly render on store mutations.**
 
 In addition to the boilerplate reduction, `easyComp` comes with a bunch of additional benefits that may not be obvious at first glance.
 
@@ -136,7 +136,7 @@ function Hello () {
 export default easyComp(Hello)
 ```
 
-**Make sure to wrap your component with `easyComp` even if it uses global stores only and no local stores.**
+**Make sure to wrap your component with `easyComp` even if it uses global stores only and no local stores. If you do not wrap the component, it will not properly render on store mutations.**
 
 - Global stores are simple objects and there is no limitation on what you can do with them. As an example feel free to use expando properties, arrays, deeply nested objects, ES6 collections or getters/setters in your stores.
 
