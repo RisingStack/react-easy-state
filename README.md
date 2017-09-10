@@ -207,8 +207,8 @@ Page state usually has properties, which belong in the URL and browser history. 
 
 By default Easy State detects if you use ES6 or commonJS modules and serve the right format to you. The exposed libraries are transpiled to ES5 to support common tools - like UglifyJS minifying. If you would like a finer control over the provided build, you can specify them in your imports.
 
-- `react-easy-state/dist/esm.es6` exposes an ES6 build with ES6 modules.
-- `react-easy-state/dist/esm.es5` exposes an ES5 build with ES6 modules.
+- `react-easy-state/dist/es.es6` exposes an ES6 build with ES6 modules.
+- `react-easy-state/dist/es.es5` exposes an ES5 build with ES6 modules.
 - `react-easy-state/dist/cjs.es6` exposes an ES6 build with commonJS modules.
 - `react-easy-state/dist/cjs.es5` exposes an ES5 build with commonJS modules.
 

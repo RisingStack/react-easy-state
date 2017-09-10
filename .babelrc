@@ -1,7 +1,8 @@
 {
   "env": {
     "development": {
-      "presets": ["react", "es2016", "es2017", "stage-0"]
+      "presets": ["react", "es2016", "es2017", "stage-0"],
+      "plugins": ["external-helpers"]
     },
     "test": {
       "presets": ["react", "es2016", "es2017", "stage-0"],

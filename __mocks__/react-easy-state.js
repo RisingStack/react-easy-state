@@ -1,5 +1,6 @@
-// use this to test the raw src folder
-export * from '../src'
+const path = require('path')
 
-// use this to test other builds
-// export * from '../dist/{module_format}{es_version}'
+const bundleName = process.env.BUNDLE
+const bundlePath = path.resolve(bundleName ? `dist/${bundleName}` : 'src/index.js')
+
+module.exports = require(bundlePath)
