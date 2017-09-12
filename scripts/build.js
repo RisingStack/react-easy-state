@@ -14,7 +14,7 @@ const bundles = [
       input: path.resolve('src/index.js'),
       plugins: [
         resolvePlugin(),
-        babelPlugin(),
+        babelPlugin({ exclude: 'node_modules/**' }),
         externalsPlugin({ dependencies: true, peerDependecies: true })
       ]
     },
@@ -27,7 +27,7 @@ const bundles = [
       input: path.resolve('src/index.js'),
       plugins: [
         resolvePlugin(),
-        babelPlugin(),
+        babelPlugin({ exclude: 'node_modules/**' }),
         externalsPlugin({ dependencies: true, peerDependecies: true })
       ]
     },
@@ -40,7 +40,7 @@ const bundles = [
       input: path.resolve('src/index.js'),
       plugins: [
         resolvePlugin(),
-        babelPlugin(),
+        babelPlugin({ exclude: 'node_modules/**' }),
         externalsPlugin({ dependencies: false, peerDependecies: true })
       ]
     },
@@ -51,7 +51,7 @@ const bundles = [
   }
 ]
 
-async function bundle () {
+async function build () {
   // Clean up the output directory
   await del(path.resolve('dist'))
   fs.mkdirSync(path.resolve('dist'))
@@ -82,5 +82,4 @@ async function bundle () {
   }
 }
 
-bundle()
-  .catch(console.log)
+build()
