@@ -42,7 +42,13 @@ describe('Contacts App', () => {
   })
 
   test('should edit contact', async () => {
-    let display, editor, editButton, cancelButton, saveButton, nameField, emailField
+    let display,
+      editor,
+      editButton,
+      cancelButton,
+      saveButton,
+      nameField,
+      emailField
 
     display = app.find('.contact-display').at(0)
     editButton = display.find('.zmdi-edit')

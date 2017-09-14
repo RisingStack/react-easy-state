@@ -16,15 +16,21 @@ describe('errors', () => {
 
   test('easyComp should throw when the store is not an object or undefined', () => {
     const UndefinedComp = easyComp(class extends Component {})
-    const ObjectComp = easyComp(class extends Component {
-      store = {}
-    })
-    const NullComp = easyComp(class extends Component {
-      store = null
-    })
-    const StringComp = easyComp(class extends Component {
-      store = 'Hello World!'
-    })
+    const ObjectComp = easyComp(
+      class extends Component {
+        store = {};
+      }
+    )
+    const NullComp = easyComp(
+      class extends Component {
+        store = null;
+      }
+    )
+    const StringComp = easyComp(
+      class extends Component {
+        store = 'Hello World!';
+      }
+    )
 
     expect(() => new UndefinedComp()).not.toThrow()
     expect(() => new ObjectComp()).not.toThrow()

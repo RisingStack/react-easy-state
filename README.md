@@ -1,21 +1,34 @@
 # React Easy State
 
-[![Build](https://img.shields.io/circleci/project/github/solkimicreb/react-easy-state/master.svg)](https://circleci.com/gh/solkimicreb/react-easy-state/tree/master) [![Coverage Status](https://coveralls.io/repos/github/solkimicreb/react-easy-state/badge.svg)](https://coveralls.io/github/solkimicreb/react-easy-state) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) [![Package size](http://img.badgesize.io/https://unpkg.com/react-easy-state/dist/es.es6.min.js?compression=gzip&label=minzip_size)](https://unpkg.com/react-easy-state/dist/es.es6.min.js)  [![Version](https://img.shields.io/npm/v/react-easy-state.svg)](https://www.npmjs.com/package/react-easy-state) [![dependencies Status](https://david-dm.org/solkimicreb/react-easy-state/status.svg)](https://david-dm.org/solkimicreb/react-easy-state) [![License](https://img.shields.io/npm/l/react-easy-state.svg)](https://www.npmjs.com/package/react-easy-state)
+[![Build](https://img.shields.io/circleci/project/github/solkimicreb/react-easy-state/master.svg)](https://circleci.com/gh/solkimicreb/react-easy-state/tree/master) [![Coverage Status](https://coveralls.io/repos/github/solkimicreb/react-easy-state/badge.svg)](https://coveralls.io/github/solkimicreb/react-easy-state) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) [![Package size](http://img.badgesize.io/https://unpkg.com/react-easy-state/dist/umd.es6.min.js?compression=gzip&label=minzip_size)](https://unpkg.com/react-easy-state/dist/umd.es6.min.js)  [![Version](https://img.shields.io/npm/v/react-easy-state.svg)](https://www.npmjs.com/package/react-easy-state) [![dependencies Status](https://david-dm.org/solkimicreb/react-easy-state/status.svg)](https://david-dm.org/solkimicreb/react-easy-state) [![License](https://img.shields.io/npm/l/react-easy-state.svg)](https://www.npmjs.com/package/react-easy-state)
 
 *Easy State provides a healthy balance of local and global state management in a simple, scalable way.*
 
-## Table of contents
+<details>
+<summary><strong>Table of Contents</strong></summary>
+<!-- Do not edit the Table of Contents, instead regenerate with `npm run build-toc` -->
 
-- [Installation](#installation)  
-- [Usage](#usage)
-- [Examples](#examples-with-live-demos)
-- [Platform support](#platform-support)
-- [Performance](#performance)
-- [State management overview](#state-management-overview)
-- [Alternative builds](#alternative-builds)
-- [How does it work?](#how-does-it-work)
-- [Contributing](#contributing)
-- [The NX Framework](#the-nx-framework)
+<!-- toc -->
+
+* [Installation](#installation)
+  + [Setting up a quick project](#setting-up-a-quick-project)
+* [Usage](#usage)
+  + [easyComp](#easycomp)
+  + [easyStore](#easystore)
+* [Examples with live demos](#examples-with-live-demos)
+* [Platform support](#platform-support)
+* [Performance](#performance)
+* [State management overview](#state-management-overview)
+  + [Reusable widgets](#reusable-widgets)
+  + [Application state](#application-state)
+  + [Application pages](#application-pages)
+* [Alternative builds](#alternative-builds)
+* [How does it work?](#how-does-it-work)
+* [Contributing](#contributing)
+
+<!-- tocstop -->
+
+</details>
 
 ## Installation
 
@@ -205,12 +218,14 @@ Page state usually has properties, which belong in the URL and browser history. 
 
 ## Alternative builds
 
-By default Easy State detects if you use ES6 or commonJS modules and serve the right format to you. The exposed libraries are transpiled to ES5 to support common tools - like UglifyJS minifying. If you would like a finer control over the provided build, you can specify them in your imports.
+This library detects if you use ES6 or commonJS modules and serve the right format to you. The exposed bundles are transpiled to ES5 to support common tools - like UglifyJS minifying. If you would like a finer control over the provided build, you can specify them in your imports.
 
-- `react-easy-state/dist/es.es6` exposes an ES6 build with ES6 modules.
-- `react-easy-state/dist/es.es5` exposes an ES5 build with ES6 modules.
-- `react-easy-state/dist/cjs.es6` exposes an ES6 build with commonJS modules.
-- `react-easy-state/dist/cjs.es5` exposes an ES5 build with commonJS modules.
+- `react-easy-state/dist/es.es6.js` exposes an ES6 build with ES6 modules.
+- `react-easy-state/dist/es.es5.js` exposes an ES5 build with ES6 modules.
+- `react-easy-state/dist/cjs.es6.js` exposes an ES6 build with commonJS modules.
+- `react-easy-state/dist/cjs.es5.js` exposes an ES5 build with commonJS modules.
+
+If you use a bundler, set up an alias for `react-easy-state` to point to your desired build. You can learn how to do it with webpack [here](https://webpack.js.org/configuration/resolve/#resolve-alias) and with rollup [here](https://github.com/rollup/rollup-plugin-alias#usage).
 
 ## How does it work?
 
@@ -219,7 +234,3 @@ Under the hood Easy State uses the [@nx-js/observer-util](https://github.com/nx-
 ## Contributing
 
 Contributions are always welcome. Just send a PR against the master branch or open a new issue. Please make sure that the tests and the linter pass and the coverage remains decent. Thanks!
-
-## The NX Framework
-
-This library is a side project of the front-end framework I have been working on in the past year. Please take a look at the [NX Framework](https://nx-framework.com/) if you have some time. Thanks and have a nice day!

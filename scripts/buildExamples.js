@@ -45,4 +45,7 @@ if (process.argv.indexOf('--watch') === -1) {
 
 function printResults (err, stats) {
   console.log(stats.toString({ colors: true }))
+  if (err) {
+    console.error(err)
+  }
 }

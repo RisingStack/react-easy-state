@@ -14,24 +14,28 @@ export default function easyComp (Comp) {
     Comp = statelessToStatefulComp(Comp)
   } else if (hasComponentShouldUpdate(Comp)) {
     // shouldComponentUpdate is optimized by easyState, overwriting it would add zero or less value
-    throw new Error('easyState optimizes shouldComponentUpdate, do not implement it.')
+    throw new Error(
+      'easyState optimizes shouldComponentUpdate, do not implement it.'
+    )
   }
 
   return toReactiveComp(Comp)
 }
 
 function isStatelessComp (Comp) {
-  return (!(Comp.prototype && Comp.prototype.render) && !Component.isPrototypeOf(Comp))
+  return (
+    !(Comp.prototype && Comp.prototype.render) && !Component.isPrototypeOf(Comp)
+  )
 }
 
 function statelessToStatefulComp (StatelessComp) {
   return class StatefulComp extends Component {
     // proxy react specific static variables to the stateful component
     // from the stateless component
-    static displayName = StatelessComp.displayName || StatelessComp.name
-    static contextTypes = StatelessComp.contextTypes
-    static propTypes = StatelessComp.propTypes
-    static defaultProps = StatelessComp.defaultProps
+    static displayName = StatelessComp.displayName || StatelessComp.name;
+    static contextTypes = StatelessComp.contextTypes;
+    static propTypes = StatelessComp.propTypes;
+    static defaultProps = StatelessComp.defaultProps;
 
     // call the original function component inside the render method
     render () {
@@ -41,7 +45,7 @@ function statelessToStatefulComp (StatelessComp) {
 }
 
 function hasComponentShouldUpdate (Comp) {
-  return (typeof Comp.prototype.shouldComponentUpdate === 'function')
+  return typeof Comp.prototype.shouldComponentUpdate === 'function'
 }
 
 function toReactiveComp (Comp) {
@@ -49,10 +53,10 @@ function toReactiveComp (Comp) {
   // it decides when to run the new reactive methods and when to proxy to the original methods
   return class EasyHOC extends Comp {
     // proxy react specific static variables to the HOC from the component
-    static displayName = Comp.displayName || Comp.name
-    static contextTypes = Comp.contextTypes
-    static propTypes = Comp.propTypes
-    static defaultProps = Comp.defaultProps
+    static displayName = Comp.displayName || Comp.name;
+    static contextTypes = Comp.contextTypes;
+    static propTypes = Comp.propTypes;
+    static defaultProps = Comp.defaultProps;
 
     constructor (props) {
       super(props)

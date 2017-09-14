@@ -23071,6 +23071,8 @@ __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODU
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_easy_state__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__TodoItem__ = __webpack_require__(317);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__store__ = __webpack_require__(306);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 
 
 
@@ -23123,7 +23125,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'ul',
           { className: 'todo-list' },
-          __WEBPACK_IMPORTED_MODULE_4__store__["a" /* default */][filter].map((todo, idx) => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__TodoItem__["a" /* default */], babelHelpers.extends({}, todo, { id: idx, key: idx })))
+          __WEBPACK_IMPORTED_MODULE_4__store__["a" /* default */][filter].map((todo, idx) => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__TodoItem__["a" /* default */], _extends({}, todo, { id: idx, key: idx })))
         )
       ),
       !isEmpty && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(

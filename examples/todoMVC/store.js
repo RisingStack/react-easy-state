@@ -5,7 +5,7 @@ export default easyStore({
   all: [],
   filter: 'all',
   get isEmpty () {
-    return (this.all.length === 0)
+    return this.all.length === 0
   },
   get completed () {
     return this.all.filter(todo => todo.completed)
