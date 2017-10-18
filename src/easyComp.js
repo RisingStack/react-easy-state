@@ -29,19 +29,16 @@ function isStatelessComp (Comp) {
 }
 
 function statelessToStatefulComp (StatelessComp) {
-  return class StatefulComp extends Component {
-    // proxy react specific static variables to the stateful component
-    // from the stateless component
-    static displayName = StatelessComp.displayName || StatelessComp.name;
-    static contextTypes = StatelessComp.contextTypes;
-    static propTypes = StatelessComp.propTypes;
-    static defaultProps = StatelessComp.defaultProps;
-
+  class StatefulComp extends Component {
     // call the original function component inside the render method
     render () {
       return StatelessComp.call(this, this.props, this.context)
     }
   }
+
+  // proxy react specific static variables to the stateful component
+  copyStaticProps(StatelessComp, StatefulComp)
+  return StatefulComp
 }
 
 function hasComponentShouldUpdate (Comp) {
@@ -51,13 +48,7 @@ function hasComponentShouldUpdate (Comp) {
 function toReactiveComp (Comp) {
   // return a HOC which overwrites render, shouldComponentUpdate and componentWillUnmount
   // it decides when to run the new reactive methods and when to proxy to the original methods
-  return class EasyHOC extends Comp {
-    // proxy react specific static variables to the HOC from the component
-    static displayName = Comp.displayName || Comp.name;
-    static contextTypes = Comp.contextTypes;
-    static propTypes = Comp.propTypes;
-    static defaultProps = Comp.defaultProps;
-
+  class EasyHOC extends Comp {
     constructor (props) {
       super(props)
 
@@ -131,4 +122,17 @@ function toReactiveComp (Comp) {
       }
     }
   }
+
+  // proxy react specific static variables to the HOC from the component
+  copyStaticProps(Comp, EasyHOC)
+  return EasyHOC
+}
+
+// copy react specific static props between passed and HOC components
+function copyStaticProps (fromComp, toComp) {
+  toComp.displayName = fromComp.displayName || fromComp.name
+  toComp.contextTypes = fromComp.contextTypes
+  toComp.childContextTypes = fromComp.childContextTypes
+  toComp.propTypes = fromComp.propTypes
+  toComp.defaultProps = fromComp.defaultProps
 }
