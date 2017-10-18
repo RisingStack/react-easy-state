@@ -25,12 +25,14 @@ class Contact extends Component {
 
   // transfer finalized changes from the component store to the main store
   onSave () {
+    // mutating the store with Object.assign is possible, but it is generally hard to reason about and debug
     Object.assign(this.props.contact, this.store.currentContact)
     this.store.editing = false
   }
 
   // cancel changes by reverting to data from the main store
   onCancel () {
+    // mutating the store with Object.assign is possible, but it is generally hard to reason about and debug
     Object.assign(this.store.currentContact, this.props.contact)
     this.store.editing = false
   }
