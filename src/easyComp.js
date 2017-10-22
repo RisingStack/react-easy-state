@@ -49,8 +49,8 @@ function toReactiveComp (Comp) {
   // return a HOC which overwrites render, shouldComponentUpdate and componentWillUnmount
   // it decides when to run the new reactive methods and when to proxy to the original methods
   class EasyHOC extends Comp {
-    constructor (props) {
-      super(props)
+    constructor (props, context) {
+      super(props, context)
 
       // auto bind non react specific original methods to the component instance
       autoBind(this, Comp.prototype, true)
@@ -66,7 +66,7 @@ function toReactiveComp (Comp) {
     render () {
       // if it is the first direct render from react call there is no reactive render yet
       if (!this[REACTIVE_RENDER]) {
-        let result
+        let result = null
         // create a reactive render, which is automatically called by easyState on relevant store mutations
         // the passed function is executed right away synchronously once by easyState
         this[REACTIVE_RENDER] = observe(() => {
