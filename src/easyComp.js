@@ -1,8 +1,10 @@
 import { Component } from 'react'
-import { observable, unobserve, observe } from '@nx-js/observer-util'
+import { observable, unobserve, observe, exec } from '@nx-js/observer-util'
 import autoBind from './autoBind'
 
 const REACTIVE_RENDER = Symbol('reactive render')
+const DIRECT_RENDER = Symbol('direct render')
+const RENDER_RESULT = Symbol('render result')
 
 export default function easyComp (Comp) {
   if (typeof Comp !== 'function') {
@@ -64,29 +66,32 @@ function toReactiveComp (Comp) {
     }
 
     render () {
-      // if it is the first direct render from react call there is no reactive render yet
+      // indicate that render was called directly (by React internals or forceUpdate)
+      this[DIRECT_RENDER] = true
+      // the render result is null by default
+      this[RENDER_RESULT] = null
+
       if (!this[REACTIVE_RENDER]) {
-        let result = null
-        // create a reactive render, which is automatically called by easyState on relevant store mutations
-        // the passed function is executed right away synchronously once by easyState
+        // if this is the first render call for this comp, create a reactive render
+        // this will be called automatically whenever relevant state changes, which causes a new UI
         this[REACTIVE_RENDER] = observe(() => {
-          // if it is the first (synchronous) execution, call the original component's render
-          // this is necessary because forceUpdate can not be called synchronously inside render functions
-          if (!this[REACTIVE_RENDER]) {
-            result = super.render()
+          if (this[DIRECT_RENDER]) {
+            // if render was called directly (by React or forceUpdate) get and save the next view
+            this[RENDER_RESULT] = super.render()
           } else {
-            // if it is a later reactive, asynchronous execution - triggered by easyState - forceUpdate the original component
-            // this is necessary, because calling render would require the result to be returned
-            // which is not possible from this asynchronous context
-            super.forceUpdate()
+            // if render was called automatically because of state changes
+            // trigger a forceUpdate (which results in a direct render later)
+            this.forceUpdate()
           }
         })
-        // return the result from super.render() inside the reactive render on the first render execution
-        return result
       } else {
-        // return the original component's render result on direct calls from react
-        return super.render()
+        // call the existing reactive render
+        exec(this[REACTIVE_RENDER])
       }
+
+      // indicate that the direct render is over, so that later reactive renders will work correctly
+      this[DIRECT_RENDER] = false
+      return this[RENDER_RESULT]
     }
 
     // react should trigger updates on prop changes, while easyState handles store changes
