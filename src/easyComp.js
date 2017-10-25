@@ -14,13 +14,7 @@ export default function easyComp (Comp) {
   // wrap stateless components in a class
   if (isStatelessComp(Comp)) {
     Comp = statelessToStatefulComp(Comp)
-  } else if (hasComponentShouldUpdate(Comp)) {
-    // shouldComponentUpdate is optimized by easyState, overwriting it would add zero or less value
-    throw new Error(
-      'easyState optimizes shouldComponentUpdate, do not implement it.'
-    )
   }
-
   return toReactiveComp(Comp)
 }
 
@@ -41,10 +35,6 @@ function statelessToStatefulComp (StatelessComp) {
   // proxy react specific static variables to the stateful component
   copyStaticProps(StatelessComp, StatefulComp)
   return StatefulComp
-}
-
-function hasComponentShouldUpdate (Comp) {
-  return typeof Comp.prototype.shouldComponentUpdate === 'function'
 }
 
 function toReactiveComp (Comp) {
@@ -78,7 +68,7 @@ function toReactiveComp (Comp) {
           if (this[DIRECT_RENDER]) {
             // if render was called directly (by React or forceUpdate) get and save the next view
             this[RENDER_RESULT] = super.render()
-          } else {
+          } else if (!super.shouldComponentUpdate || super.shouldComponentUpdate(this.props)) {
             // if render was called automatically because of state changes
             // trigger a forceUpdate (which results in a direct render later)
             this.forceUpdate()
@@ -99,6 +89,12 @@ function toReactiveComp (Comp) {
       const { props } = this
       const keys = Object.keys(props)
       const nextKeys = Object.keys(nextProps)
+
+      // respect the case when user prohibits updates
+      // and prune unnecessary updates otherwise
+      if (super.shouldComponentUpdate && !super.shouldComponentUpdate(nextProps)) {
+        return false
+      }
 
       // component should update if the number of its props changed
       if (keys.length !== nextKeys.length) {
