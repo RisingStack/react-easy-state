@@ -1,10 +1,11 @@
 import { Component } from 'react'
-import { observable, unobserve, observe, exec } from '@nx-js/observer-util'
+import { observable, unobserve, observe, Queue, priorities } from '@nx-js/observer-util'
 import autoBind from './autoBind'
 
 const REACTIVE_RENDER = Symbol('reactive render')
 const DIRECT_RENDER = Symbol('direct render')
 const RENDER_RESULT = Symbol('render result')
+const renderQueue = new Queue(priorities.CRITICAL)
 
 export default function easyComp (Comp) {
   if (typeof Comp !== 'function') {
@@ -73,10 +74,10 @@ function toReactiveComp (Comp) {
             // trigger a forceUpdate (which results in a direct render later)
             this.forceUpdate()
           }
-        })
+        }, renderQueue)
       } else {
         // call the existing reactive render
-        exec(this[REACTIVE_RENDER])
+        this[REACTIVE_RENDER]()
       }
 
       // indicate that the direct render is over, so that later reactive renders will work correctly
