@@ -28,7 +28,9 @@ function toReactiveComp (Comp) {
       super(props, context)
 
       // auto bind non react specific original methods to the component instance
-      autoBind(this, Comp.prototype, true)
+      if (!isStatelessComp) {
+        autoBind(this, Comp.prototype, true)  
+      }
 
       // turn the store into an observable object, which triggers rendering on mutations
       if (typeof this.store === 'object' && this.store !== null) {
