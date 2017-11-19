@@ -10,37 +10,16 @@ export default function easyComp (Comp) {
   if (typeof Comp !== 'function') {
     throw new TypeError('easyComp expects a component as argument.')
   }
-
-  // wrap stateless components in a class
-  if (isStatelessComp(Comp)) {
-    Comp = statelessToStatefulComp(Comp)
-  }
+  // wrap the component in a reactive HOC
   return toReactiveComp(Comp)
 }
 
-function isStatelessComp (Comp) {
-  return (
-    !(Comp.prototype && Comp.prototype.render) && !Component.isPrototypeOf(Comp)
-  )
-}
-
-function statelessToStatefulComp (StatelessComp) {
-  class StatefulComp extends Component {
-    // call the original function component inside the render method
-    render () {
-      return StatelessComp.call(this, this.props, this.context)
-    }
-  }
-
-  // proxy react specific static variables to the stateful component
-  copyStaticProps(StatelessComp, StatefulComp)
-  return StatefulComp
-}
-
 function toReactiveComp (Comp) {
+  const isStatelessComp = !Comp.prototype || !Comp.prototype.render
+  const BaseComp = isStatelessComp ? Component : Comp
   // return a HOC which overwrites render, shouldComponentUpdate and componentWillUnmount
   // it decides when to run the new reactive methods and when to proxy to the original methods
-  class EasyHOC extends Comp {
+  class ReactiveHOC extends BaseComp {
     state = {
       renderIndicator: false
     }
@@ -71,7 +50,7 @@ function toReactiveComp (Comp) {
         this[REACTIVE_RENDER] = observe(() => {
           if (this[DIRECT_RENDER]) {
             // if render was called directly (by React or forceUpdate) get and save the next view
-            this[RENDER_RESULT] = super.render()
+            this[RENDER_RESULT] = isStatelessComp ? Comp(this.props, this.context) : super.render()
           } else {
             // if render was called automatically because of store changes
             // trigger a react render (which results in a direct render later)
@@ -134,10 +113,9 @@ function toReactiveComp (Comp) {
       }
     }
   }
-
-  // proxy react specific static variables to the HOC from the component
-  copyStaticProps(Comp, EasyHOC)
-  return EasyHOC
+  // proxy react specific static variables to the reactive component
+  copyStaticProps(Comp, ReactiveHOC)
+  return ReactiveHOC
 }
 
 // copy react specific static props between passed and HOC components

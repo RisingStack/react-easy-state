@@ -14,13 +14,11 @@ const reactInternals = new Set([
 // bind the methods from proto to the passed context object and assign them to the context
 export default function autoBind (context, proto, isReact) {
   for (let key of Object.getOwnPropertyNames(proto)) {
-    const descriptor = Object.getOwnPropertyDescriptor(proto, key)
+    const { value } = Object.getOwnPropertyDescriptor(proto, key)
 
     // do not try to bind properties and getter/setters
-    if (typeof descriptor.value === 'function' && !(isReact && reactInternals.has(key))) {
-      // use the same descriptor for the copied method to keep the exact same behavior
-      const newDescriptor = Object.assign({}, descriptor, { value: descriptor.value.bind(context) })
-      Object.defineProperty(context, key, newDescriptor)
+    if (typeof value === 'function' && !(isReact && reactInternals.has(key))) {
+      context[key] = value.bind(context)
     }
   }
 }
