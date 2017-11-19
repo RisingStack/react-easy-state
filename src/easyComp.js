@@ -1,11 +1,10 @@
 import { Component } from 'react'
-import { observable, unobserve, observe, Queue, priorities } from '@nx-js/observer-util'
+import { observable, unobserve, observe } from '@nx-js/observer-util'
 import autoBind from './autoBind'
 
 const REACTIVE_RENDER = Symbol('reactive render')
 const DIRECT_RENDER = Symbol('direct render')
 const RENDER_RESULT = Symbol('render result')
-const renderQueue = new Queue(priorities.CRITICAL)
 
 export default function easyComp (Comp) {
   if (typeof Comp !== 'function') {
@@ -42,6 +41,10 @@ function toReactiveComp (Comp) {
   // return a HOC which overwrites render, shouldComponentUpdate and componentWillUnmount
   // it decides when to run the new reactive methods and when to proxy to the original methods
   class EasyHOC extends Comp {
+    state = {
+      renderIndicator: false
+    }
+
     constructor (props, context) {
       super(props, context)
 
@@ -69,12 +72,12 @@ function toReactiveComp (Comp) {
           if (this[DIRECT_RENDER]) {
             // if render was called directly (by React or forceUpdate) get and save the next view
             this[RENDER_RESULT] = super.render()
-          } else if (!super.shouldComponentUpdate || super.shouldComponentUpdate(this.props)) {
-            // if render was called automatically because of state changes
-            // trigger a forceUpdate (which results in a direct render later)
-            this.forceUpdate()
+          } else {
+            // if render was called automatically because of store changes
+            // trigger a react render (which results in a direct render later)
+            this.setState({ renderIndicator: !this.state.renderIndicator })
           }
-        }, renderQueue)
+        })
       } else {
         // call the existing reactive render
         this[REACTIVE_RENDER]()
@@ -86,16 +89,23 @@ function toReactiveComp (Comp) {
     }
 
     // react should trigger updates on prop changes, while easyState handles store changes
-    shouldComponentUpdate (nextProps) {
-      const { props } = this
-      const keys = Object.keys(props)
-      const nextKeys = Object.keys(nextProps)
+    shouldComponentUpdate (nextProps, nextState) {
+      const { props, state } = this
 
       // respect the case when user prohibits updates
       // and prune unnecessary updates otherwise
-      if (super.shouldComponentUpdate && !super.shouldComponentUpdate(nextProps)) {
+      if (super.shouldComponentUpdate && !super.shouldComponentUpdate(nextProps, nextState)) {
         return false
       }
+
+      // return true if it is a reactive render
+      if (state.renderIndicator !== nextState.renderIndicator) {
+        return true
+      }
+
+      // shallow check if the props changed
+      const keys = Object.keys(props)
+      const nextKeys = Object.keys(nextProps)
 
       // component should update if the number of its props changed
       if (keys.length !== nextKeys.length) {
