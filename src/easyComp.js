@@ -29,7 +29,7 @@ function toReactiveComp (Comp) {
 
       // auto bind non react specific original methods to the component instance
       if (!isStatelessComp) {
-        autoBind(this, Comp.prototype, true)  
+        autoBind(this, Comp.prototype, true)
       }
 
       // turn the store into an observable object, which triggers rendering on mutations
@@ -49,16 +49,7 @@ function toReactiveComp (Comp) {
       if (!this[REACTIVE_RENDER]) {
         // if this is the first render call for this comp, create a reactive render
         // this will be called automatically whenever relevant state changes, which causes a new UI
-        this[REACTIVE_RENDER] = observe(() => {
-          if (this[DIRECT_RENDER]) {
-            // if render was called directly (by React or forceUpdate) get and save the next view
-            this[RENDER_RESULT] = isStatelessComp ? Comp(this.props, this.context) : super.render()
-          } else {
-            // if render was called automatically because of store changes
-            // trigger a react render (which results in a direct render later)
-            this.setState({ renderIndicator: !this.state.renderIndicator })
-          }
-        })
+        this[REACTIVE_RENDER] = observe(this.reactiveRender.bind(this))
       } else {
         // call the existing reactive render
         this[REACTIVE_RENDER]()
@@ -69,12 +60,22 @@ function toReactiveComp (Comp) {
       return this[RENDER_RESULT]
     }
 
+    reactiveRender () {
+      if (this[DIRECT_RENDER]) {
+        // if render was called directly (by React or forceUpdate) get and save the next view
+        this[RENDER_RESULT] = isStatelessComp ? Comp(this.props, this.context) : super.render()
+      } else {
+        // if render was called automatically because of store changes
+        // trigger a react render (which results in a direct render later)
+        this.setState({ renderIndicator: !this.state.renderIndicator })
+      }
+    }
+
     // react should trigger updates on prop changes, while easyState handles store changes
     shouldComponentUpdate (nextProps, nextState) {
       const { props, state } = this
 
       // respect the case when user prohibits updates
-      // and prune unnecessary updates otherwise
       if (super.shouldComponentUpdate && !super.shouldComponentUpdate(nextProps, nextState)) {
         return false
       }
