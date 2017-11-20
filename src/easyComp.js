@@ -1,10 +1,9 @@
 import { Component } from 'react'
-import { observable, unobserve, observe } from '@nx-js/observer-util'
+import { observable, unobserve, observeLazy } from '@nx-js/observer-util'
 import autoBind from './autoBind'
 
 const REACTIVE_RENDER = Symbol('reactive render')
 const DIRECT_RENDER = Symbol('direct render')
-const RENDER_RESULT = Symbol('render result')
 
 export default function easyComp (Comp) {
   if (typeof Comp !== 'function') {
@@ -38,32 +37,26 @@ function toReactiveComp (Comp) {
       } else if ('store' in this) {
         throw new TypeError('component.store must be an object')
       }
+
+      // create a reactive render for the component
+      this[REACTIVE_RENDER] = observeLazy(this[REACTIVE_RENDER].bind(this))
     }
 
     render () {
-      // indicate that render was called directly (by React internals or forceUpdate)
-      this[DIRECT_RENDER] = true
-      // the render result is null by default
-      this[RENDER_RESULT] = null
-
-      if (!this[REACTIVE_RENDER]) {
-        // if this is the first render call for this comp, create a reactive render
-        // this will be called automatically whenever relevant state changes, which causes a new UI
-        this[REACTIVE_RENDER] = observe(this.reactiveRender.bind(this))
-      } else {
-        // call the existing reactive render
-        this[REACTIVE_RENDER]()
+      try {
+        // indicate that render was called by React internals
+        this[DIRECT_RENDER] = true
+        return this[REACTIVE_RENDER]()
+      } finally {
+        // indicate that the direct render is over
+        this[DIRECT_RENDER] = false
       }
-
-      // indicate that the direct render is over, so that later reactive renders will work correctly
-      this[DIRECT_RENDER] = false
-      return this[RENDER_RESULT]
     }
 
-    reactiveRender () {
+    [REACTIVE_RENDER] () {
       if (this[DIRECT_RENDER]) {
         // if render was called directly (by React or forceUpdate) get and save the next view
-        this[RENDER_RESULT] = isStatelessComp ? Comp(this.props, this.context) : super.render()
+        return isStatelessComp ? Comp(this.props, this.context) : super.render()
       } else {
         // if render was called automatically because of store changes
         // trigger a react render (which results in a direct render later)
