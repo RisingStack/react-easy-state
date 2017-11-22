@@ -1,5 +1,6 @@
-import { Component, PureComponent } from 'react'
+import React, { Component, PureComponent } from 'react'
 import { easyComp, easyStore } from 'react-easy-state'
+import { mount } from 'enzyme'
 
 describe('errors', () => {
   test('easyComp should throw on non component or function arguments', () => {
@@ -38,11 +39,21 @@ describe('errors', () => {
     expect(() => new StringComp()).toThrow()
   })
 
-  test('easyComp should throw when shouldComponentUpdate is defined', () => {
-    class DefinedComp extends Component {
-      shouldComponentUpdate () {}
-    }
-    expect(() => easyComp(DefinedComp)).toThrow()
+  test('easyComp should respect shouldComponentUpdate', () => {
+    const store = easyStore({ name: 'Bob' })
+    const MyComp = easyComp(class extends Component {
+      shouldComponentUpdate () {
+        return false
+      }
+      render () {
+        return <div>{store.name}</div>
+      }
+    })
+
+    const comp = mount(<MyComp />)
+    expect(comp.text()).toBe('Bob')
+    store.name = 'Ann'
+    expect(comp.text()).toBe('Bob')
   })
 
   test('easyStore should throw on non object argument', () => {
