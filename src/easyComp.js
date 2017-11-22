@@ -14,7 +14,7 @@ export default function easyComp (Comp) {
 }
 
 function toReactiveComp (Comp) {
-  const isStatelessComp = !Comp.prototype || !Comp.prototype.render
+  const isStatelessComp = !(Comp.prototype && Comp.prototype.isReactComponent)
   const BaseComp = isStatelessComp ? Component : Comp
   // return a HOC which overwrites render, shouldComponentUpdate and componentWillUnmount
   // it decides when to run the new reactive methods and when to proxy to the original methods
@@ -26,16 +26,16 @@ function toReactiveComp (Comp) {
     constructor (props, context) {
       super(props, context)
 
-      // auto bind non react specific original methods to the component instance
       if (!isStatelessComp) {
+        // auto bind non react specific original methods to the component instance
         autoBind(this, Comp.prototype, true)
-      }
 
-      // turn the store into an observable object, which triggers rendering on mutations
-      if (typeof this.store === 'object' && this.store !== null) {
-        this.store = observable(this.store)
-      } else if ('store' in this) {
-        throw new TypeError('component.store must be an object')
+        // turn the store into an observable object, which triggers rendering on mutations
+        if (typeof this.store === 'object' && this.store !== null) {
+          this.store = observable(this.store)
+        } else if (this.store !== undefined) {
+          throw new TypeError('component.store must be an object or undefined')
+        }
       }
 
       // create a reactive render for the component
