@@ -1,3 +1,2 @@
-import easyComp from './easyComp'
-import easyStore from './easyStore'
-export { easyComp, easyStore }
+export { default as easyComp } from './easyComp'
+export { default as easyStore } from './easyStore'
