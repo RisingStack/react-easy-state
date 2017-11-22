@@ -18,11 +18,9 @@ describe('Clock App', () => {
     expect(toJSON(app)).toMatchSnapshot('01. Initial state')
 
     clock.tick(2000)
-    await Promise.resolve()
     expect(toJSON(app)).toMatchSnapshot('02. After 2 seconds')
 
     clock.tick(8500)
-    await Promise.resolve()
     expect(toJSON(app)).toMatchSnapshot('03. After 10.5 seconds')
   })
 

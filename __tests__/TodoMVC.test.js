@@ -15,14 +15,12 @@ describe('TodoMVC App', () => {
       keyCode: 13,
       target: { value: 'Test Todo' }
     })
-    await Promise.resolve()
     expect(toJSON(app)).toMatchSnapshot('02. Add Test Todo')
 
     input.simulate('keyUp', {
       keyCode: 13,
       target: { value: 'Other Todo' }
     })
-    await Promise.resolve()
     expect(toJSON(app)).toMatchSnapshot('03. Add Other Todo')
 
     input.simulate('keyUp', {
@@ -33,7 +31,6 @@ describe('TodoMVC App', () => {
       keyCode: 13,
       target: { value: 'Final Todo' }
     })
-    await Promise.resolve()
     expect(toJSON(app)).toMatchSnapshot('04. Add Final Todo')
   })
 
@@ -41,15 +38,12 @@ describe('TodoMVC App', () => {
     const toggles = app.find('.todo-list .toggle')
 
     toggles.at(0).simulate('change')
-    await Promise.resolve()
     expect(toJSON(app)).toMatchSnapshot('05. Toggle Test Todo to completed')
 
     toggles.at(1).simulate('change')
-    await Promise.resolve()
     expect(toJSON(app)).toMatchSnapshot('06. Toggle Other Todo to completed')
 
     toggles.at(0).simulate('change')
-    await Promise.resolve()
     expect(toJSON(app)).toMatchSnapshot('07. Toggle Test Todo to active')
   })
 
@@ -59,15 +53,12 @@ describe('TodoMVC App', () => {
     const allFilter = app.find('button[value="all"]')
 
     completedFilter.simulate('click')
-    await Promise.resolve()
     expect(toJSON(app)).toMatchSnapshot('08. Filter completed')
 
     activeFilter.simulate('click')
-    await Promise.resolve()
     expect(toJSON(app)).toMatchSnapshot('09. Filter active')
 
     allFilter.simulate('click')
-    await Promise.resolve()
     expect(toJSON(app)).toMatchSnapshot('10. Filter all')
   })
 
@@ -75,7 +66,6 @@ describe('TodoMVC App', () => {
     const clearCompleted = app.find('.clear-completed')
 
     clearCompleted.simulate('click')
-    await Promise.resolve()
     expect(toJSON(app)).toMatchSnapshot('11. Clear completed')
   })
 
@@ -83,11 +73,9 @@ describe('TodoMVC App', () => {
     const toggleAll = app.find('.toggle-all')
 
     toggleAll.simulate('change')
-    await Promise.resolve()
     expect(toJSON(app)).toMatchSnapshot('12. Toggle all to completed')
 
     toggleAll.simulate('change')
-    await Promise.resolve()
     expect(toJSON(app)).toMatchSnapshot('13. Toggle all to active')
   })
 
@@ -95,7 +83,6 @@ describe('TodoMVC App', () => {
     const deleters = app.find('.todo-list .destroy')
 
     deleters.at(0).simulate('click')
-    await Promise.resolve()
     expect(toJSON(app)).toMatchSnapshot('14. Delete Test Todo')
   })
 })
