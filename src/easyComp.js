@@ -1,9 +1,10 @@
 import { Component } from 'react'
-import { observable, unobserve, observeLazy } from '@nx-js/observer-util'
+import { observable, observe, unobserve } from '@nx-js/observer-util'
 import autoBind from './autoBind'
 
 const REACTIVE_RENDER = Symbol('reactive render')
 const DIRECT_RENDER = Symbol('direct render')
+const observeOptions = { lazy: true }
 
 export default function easyComp (Comp) {
   if (typeof Comp !== 'function') {
@@ -39,7 +40,7 @@ function toReactiveComp (Comp) {
       }
 
       // create a reactive render for the component
-      this[REACTIVE_RENDER] = observeLazy(this[REACTIVE_RENDER].bind(this))
+      this[REACTIVE_RENDER] = observe(this[REACTIVE_RENDER].bind(this), observeOptions)
     }
 
     render () {
