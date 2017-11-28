@@ -102,6 +102,8 @@ function toReactiveComp (Comp) {
     componentWillUnmount () {
       // clean up memory used by easyState
       unobserve(this[REACTIVE_RENDER])
+      this[REACTIVE_RENDER] = undefined
+      this.store = undefined
 
       // also call user defined componentWillUnmount to allow the user
       // to clean up additional memory
