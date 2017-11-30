@@ -4,7 +4,6 @@ import autoBind from './autoBind'
 
 const REACTIVE_RENDER = Symbol('reactive render')
 const DIRECT_RENDER = Symbol('direct render')
-const observeOptions = { lazy: true }
 
 export default function easyComp (Comp) {
   if (typeof Comp !== 'function') {
@@ -40,29 +39,14 @@ function toReactiveComp (Comp) {
       }
 
       // create a reactive render for the component
-      this[REACTIVE_RENDER] = observe(this[REACTIVE_RENDER].bind(this), observeOptions)
+      this.render = observe(this.render, {
+        scheduler: () => this.setState({ renderIndicator: !this.state.renderIndicator }),
+        lazy: true
+      })
     }
 
     render () {
-      try {
-        // indicate that render was called by React internals
-        this[DIRECT_RENDER] = true
-        return this[REACTIVE_RENDER]()
-      } finally {
-        // indicate that the direct render is over
-        this[DIRECT_RENDER] = false
-      }
-    }
-
-    [REACTIVE_RENDER] () {
-      if (this[DIRECT_RENDER]) {
-        // if render was called directly (by React or forceUpdate) get and save the next view
-        return isStatelessComp ? Comp(this.props, this.context) : super.render()
-      } else {
-        // if render was called automatically because of store changes
-        // trigger a react render (which results in a direct render later)
-        this.setState({ renderIndicator: !this.state.renderIndicator })
-      }
+      return isStatelessComp ? Comp(this.props, this.context) : super.render()
     }
 
     // react should trigger updates on prop changes, while easyState handles store changes
@@ -100,16 +84,13 @@ function toReactiveComp (Comp) {
     }
 
     componentWillUnmount () {
-      // clean up memory used by easyState
-      unobserve(this[REACTIVE_RENDER])
-      this[REACTIVE_RENDER] = undefined
-      this.store = undefined
-
-      // also call user defined componentWillUnmount to allow the user
-      // to clean up additional memory
+      // call user defined componentWillUnmount
       if (super.componentWillUnmount) {
         super.componentWillUnmount()
       }
+      // clean up memory used by easyState
+      unobserve(this.render)
+      this.store = undefined
     }
   }
   // proxy react specific static variables to the reactive component
