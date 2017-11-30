@@ -41,14 +41,16 @@ describe('errors', () => {
 
   test('easyComp should respect shouldComponentUpdate', () => {
     const store = easyStore({ name: 'Bob' })
-    const MyComp = easyComp(class extends Component {
-      shouldComponentUpdate () {
-        return false
+    const MyComp = easyComp(
+      class extends Component {
+        shouldComponentUpdate () {
+          return false
+        }
+        render () {
+          return <div>{store.name}</div>
+        }
       }
-      render () {
-        return <div>{store.name}</div>
-      }
-    })
+    )
 
     const comp = mount(<MyComp />)
     expect(comp.text()).toBe('Bob')

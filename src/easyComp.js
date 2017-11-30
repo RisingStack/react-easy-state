@@ -2,9 +2,6 @@ import { Component } from 'react'
 import { observable, observe, unobserve } from '@nx-js/observer-util'
 import autoBind from './autoBind'
 
-const REACTIVE_RENDER = Symbol('reactive render')
-const DIRECT_RENDER = Symbol('direct render')
-
 export default function easyComp (Comp) {
   if (typeof Comp !== 'function') {
     throw new TypeError('easyComp expects a component as argument.')
@@ -21,7 +18,7 @@ function toReactiveComp (Comp) {
   class ReactiveHOC extends BaseComp {
     state = {
       renderIndicator: false
-    }
+    };
 
     constructor (props, context) {
       super(props, context)
@@ -40,7 +37,8 @@ function toReactiveComp (Comp) {
 
       // create a reactive render for the component
       this.render = observe(this.render, {
-        scheduler: () => this.setState({ renderIndicator: !this.state.renderIndicator }),
+        scheduler: () =>
+          this.setState({ renderIndicator: !this.state.renderIndicator }),
         lazy: true
       })
     }
@@ -54,7 +52,10 @@ function toReactiveComp (Comp) {
       const { props, state } = this
 
       // respect the case when user prohibits updates
-      if (super.shouldComponentUpdate && !super.shouldComponentUpdate(nextProps, nextState)) {
+      if (
+        super.shouldComponentUpdate &&
+        !super.shouldComponentUpdate(nextProps, nextState)
+      ) {
         return false
       }
 
