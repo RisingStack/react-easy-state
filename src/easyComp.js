@@ -17,7 +17,7 @@ function toReactiveComp (Comp) {
   // it decides when to run the new reactive methods and when to proxy to the original methods
   class ReactiveHOC extends BaseComp {
     state = {
-      renderIndicator: false
+      counter: 0
     };
 
     constructor (props, context) {
@@ -37,8 +37,7 @@ function toReactiveComp (Comp) {
 
       // create a reactive render for the component
       this.render = observe(this.render, {
-        scheduler: () =>
-          this.setState({ renderIndicator: !this.state.renderIndicator }),
+        scheduler: () => this.setState({ counter: this.state.counter + 1 }),
         lazy: true
       })
     }
@@ -60,7 +59,7 @@ function toReactiveComp (Comp) {
       }
 
       // return true if it is a reactive render
-      if (state.renderIndicator !== nextState.renderIndicator) {
+      if (state.counter !== nextState.counter) {
         return true
       }
 
