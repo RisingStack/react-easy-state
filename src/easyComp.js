@@ -63,24 +63,13 @@ function toReactiveComp (Comp) {
         return true
       }
 
-      // shallow check if the props changed
+      // the component should update if any of its props shallowly changed value
       const keys = Object.keys(props)
       const nextKeys = Object.keys(nextProps)
-
-      // component should update if the number of its props changed
-      if (keys.length !== nextKeys.length) {
-        return true
-      }
-
-      // component should update if any of its props changed value
-      for (let key of keys) {
-        if (props[key] !== nextProps[key]) {
-          return true
-        }
-      }
-
-      // do not let react update the comp otherwise, leave store triggered updates to easyState
-      return false
+      return (
+        nextKeys.length !== keys.length ||
+        nextKeys.some(key => props[key] !== nextProps[key])
+      )
     }
 
     componentWillUnmount () {
@@ -90,7 +79,6 @@ function toReactiveComp (Comp) {
       }
       // clean up memory used by easyState
       unobserve(this.render)
-      this.store = undefined
     }
   }
   // proxy react specific static variables to the reactive component
