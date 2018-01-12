@@ -1,2 +1,2 @@
-export { default as easyComp } from './easyComp'
-export { default as easyStore } from './easyStore'
+export { default as view } from './view'
+export { default as store } from './store'

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import classNames from 'classnames'
-import { easyComp } from 'react-easy-state'
-import todos from './store'
+import { view } from 'react-easy-state'
+import todos from './todosStore'
 
 class TodoItem extends Component {
   remove () {
@@ -29,5 +29,5 @@ class TodoItem extends Component {
   }
 }
 
-// wrap the component with easyComp before exporting it
-export default easyComp(TodoItem)
+// wrap the component with view() before exporting it
+export default view(TodoItem)

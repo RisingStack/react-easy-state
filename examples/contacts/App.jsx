@@ -1,10 +1,10 @@
 import React from 'react'
-import { easyComp } from 'react-easy-state'
+import { view } from 'react-easy-state'
 import Contact from './Contact'
 import ContactCreator from './ContactCreator'
-import store from './store'
+import appStore from './appStore'
 
-// this rerenders whenever the store.contacts array changes (elements pushed or deleted)
+// this rerenders whenever the appStore.contacts array changes (elements pushed or deleted)
 function App () {
   return (
     <table>
@@ -16,7 +16,7 @@ function App () {
         </tr>
       </thead>
       <tbody>
-        {store.contacts.map(
+        {appStore.contacts.map(
           contact => <Contact contact={contact} key={contact.email} />
         )}
         <ContactCreator />
@@ -25,5 +25,5 @@ function App () {
   )
 }
 
-// wrap the component with easyComp before exporting it
-export default easyComp(App)
+// wrap the component with view() before exporting it
+export default view(App)

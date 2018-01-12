@@ -1,10 +1,10 @@
 import { Component } from 'react'
-import { observable, observe, unobserve } from '@nx-js/observer-util'
+import { observe, unobserve } from '@nx-js/observer-util'
 import autoBind from './autoBind'
 
-export default function easyComp (Comp) {
+export default function view (Comp) {
   if (typeof Comp !== 'function') {
-    throw new TypeError('easyComp expects a component as argument.')
+    throw new TypeError('view() expects a component as argument.')
   }
   // wrap the component in a reactive HOC
   return toReactiveComp(Comp)
@@ -26,13 +26,6 @@ function toReactiveComp (Comp) {
       if (!isStatelessComp) {
         // auto bind non react specific original methods to the component instance
         autoBind(this, Comp.prototype, true)
-
-        // turn the store into an observable object, which triggers rendering on mutations
-        if (typeof this.store === 'object' && this.store !== null) {
-          this.store = observable(this.store)
-        } else if (this.store !== undefined) {
-          throw new TypeError('component.store must be an object or undefined')
-        }
       }
 
       // create a reactive render for the component

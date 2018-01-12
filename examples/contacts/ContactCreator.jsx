@@ -1,29 +1,29 @@
 import React, { Component } from 'react'
-import { easyComp } from 'react-easy-state'
-import store from './store'
+import { view, store } from 'react-easy-state'
+import appStore from './appStore'
 
 class ContactCreator extends Component {
-  // save internal utility data in component store, instead of the global store
+  // save internal utility data in component store, instead of the app store
   // newContact is the skeleton for the next contact before it is added to the list
-  store = {
+  compStore = store({
     newContact: { name: '', email: '' }
-  }
+  })
 
-  // transfer finalized contact from the component store to the main store
+  // transfer finalized contact from the component store to the app store
   addContact () {
-    store.addContact(this.store.newContact)
-    this.store.newContact = { name: '', email: '' }
+    appStore.addContact(this.compStore.newContact)
+    this.compStore.newContact = { name: '', email: '' }
   }
 
   onChange (ev) {
-    const { newContact } = this.store
+    const { newContact } = this.compStore
     newContact[ev.target.name] = ev.target.value
   }
 
-  // render is triggered whenever the relevant parts of the component store or global store change
+  // render is triggered whenever the relevant parts of the component store or app store change
   render () {
     const { addContact, onChange } = this
-    const { newContact } = this.store
+    const { newContact } = this.compStore
 
     return (
       <tr className='contact-creator'>
@@ -35,5 +35,5 @@ class ContactCreator extends Component {
   }
 }
 
-// wrap the component with easyComp before exporting it
-export default easyComp(ContactCreator)
+// wrap the component with view() before exporting it
+export default view(ContactCreator)

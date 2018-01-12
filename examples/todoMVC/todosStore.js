@@ -1,7 +1,7 @@
-import { easyStore } from 'react-easy-state'
+import { store } from 'react-easy-state'
 
 // a complex global store with a lot of derived data (getters and setters)
-export default easyStore({
+export default store({
   all: [],
   filter: 'all',
   get isEmpty () {

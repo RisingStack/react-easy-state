@@ -1,8 +1,8 @@
 import { Component } from 'react'
-import { easyComp } from 'react-easy-state'
+import { view } from 'react-easy-state'
 
 describe('static props', () => {
-  test('easyComp should proxy react specific static properties from the component', () => {
+  test('view() should proxy react specific static properties from the component', () => {
     class Comp extends Component {}
     function FuncComp () {}
 
@@ -11,17 +11,17 @@ describe('static props', () => {
     Comp.propTypes = FuncComp.propTypes = {}
     Comp.defaultProps = FuncComp.defaultProps = {}
 
-    const EasyComp = easyComp(Comp)
-    const EasyFuncComp = easyComp(FuncComp)
+    const ViewComp = view(Comp)
+    const ViewFuncComp = view(FuncComp)
 
-    expect(EasyComp.displayName).toBe(Comp.displayName)
-    expect(EasyComp.contextTypes).toBe(Comp.contextTypes)
-    expect(EasyComp.propTypes).toBe(Comp.propTypes)
-    expect(EasyComp.defaultProps).toBe(Comp.defaultProps)
+    expect(ViewComp.displayName).toBe(Comp.displayName)
+    expect(ViewComp.contextTypes).toBe(Comp.contextTypes)
+    expect(ViewComp.propTypes).toBe(Comp.propTypes)
+    expect(ViewComp.defaultProps).toBe(Comp.defaultProps)
 
-    expect(EasyFuncComp.displayName).toBe(FuncComp.displayName)
-    expect(EasyFuncComp.contextTypes).toBe(FuncComp.contextTypes)
-    expect(EasyFuncComp.propTypes).toBe(FuncComp.propTypes)
-    expect(EasyFuncComp.defaultProps).toBe(FuncComp.defaultProps)
+    expect(ViewFuncComp.displayName).toBe(FuncComp.displayName)
+    expect(ViewFuncComp.contextTypes).toBe(FuncComp.contextTypes)
+    expect(ViewFuncComp.propTypes).toBe(FuncComp.propTypes)
+    expect(ViewFuncComp.defaultProps).toBe(FuncComp.defaultProps)
   })
 })

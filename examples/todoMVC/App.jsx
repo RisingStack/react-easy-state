@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import classNames from 'classnames'
-import { easyComp } from 'react-easy-state'
+import { view } from 'react-easy-state'
 import TodoItem from './TodoItem'
-import todos from './store'
+import todos from './todosStore'
 
 // render is triggered whenever the relevant parts of the global todos store change
 class App extends Component {
@@ -56,5 +56,5 @@ class App extends Component {
   }
 }
 
-// wrap the component with easyComp before exporting it
-export default easyComp(App)
+// wrap the component with view() before exporting it
+export default view(App)

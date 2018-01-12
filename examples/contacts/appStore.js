@@ -1,7 +1,7 @@
-import { easyStore } from 'react-easy-state'
+import { store } from 'react-easy-state'
 
-// store the central data and logic of the application in a global store
-export default easyStore({
+// store the central data and logic of the application in a global app store
+export default store({
   contacts: [],
   addContact (contact) {
     contact.name = contact.name || 'Placeholder'
