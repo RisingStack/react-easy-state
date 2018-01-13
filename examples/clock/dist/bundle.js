@@ -10920,11 +10920,10 @@ module.exports = getEventCharCode;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__easyComp__ = __webpack_require__(187);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__easyStore__ = __webpack_require__(188);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__easyComp__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__easyStore__["a"]; });
-
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__view__ = __webpack_require__(187);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__view__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__store__ = __webpack_require__(188);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_1__store__["a"]; });
 
 
 
@@ -14110,10 +14109,421 @@ module.exports = getHostComponentFromComposite;
 
 /***/ }),
 /* 84 */
-/***/ (function(module, __webpack_exports__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-throw new Error("Module build failed: Error: ENOENT: no such file or directory, open '/Users/miklosbertalan/nx/observer-util/dist/es.es5.js'");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return observe; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return unobserve; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return observable; });
+/* unused harmony export isObservable */
+/* unused harmony export raw */
+var connectionStore = new WeakMap();
+
+function storeObservable(obj) {
+  // this will be used to save (obj.key -> reaction) connections later
+  connectionStore.set(obj, Object.create(null));
+}
+
+function registerReactionForKey(obj, key, reaction) {
+  var reactionsForObj = connectionStore.get(obj);
+  var reactionsForKey = reactionsForObj[key];
+  if (!reactionsForKey) {
+    reactionsForObj[key] = reactionsForKey = new Set();
+    // save the fact that the key is used by the reaction during its current run
+    reactionsForKey.add(reaction);
+    reaction.cleaners.push(reactionsForKey);
+  } else if (!reactionsForKey.has(reaction)) {
+    // save the fact that the key is used by the reaction during its current run
+    reactionsForKey.add(reaction);
+    reaction.cleaners.push(reactionsForKey);
+  }
+}
+
+function iterateReactionsForKey(obj, key, reactionHandler) {
+  var reactionsForKey = connectionStore.get(obj)[key];
+  if (reactionsForKey) {
+    // create a static copy of the reactions, before iterating them
+    // to avoid infinite (iterate items: remove -> readd) loops
+    Array.from(reactionsForKey).forEach(reactionHandler);
+  }
+}
+
+function releaseReaction(reaction) {
+  if (reaction.cleaners) {
+    reaction.cleaners.forEach(releaseReactionKeyConnection, reaction);
+  }
+  reaction.cleaners = undefined;
+}
+
+function releaseReactionKeyConnection(reactionsForKey) {
+  reactionsForKey.delete(this);
+}
+
+var runningReaction;
+
+function runAsReaction(reaction, fn, context, args) {
+  // throw an error if the reaction is unobserved
+  if (reaction.unobserved) {
+    throw new Error("Unobserved reactions can not be executed. You tried to run a reaction for " + fn);
+  }
+
+  // release the (obj -> key -> reactions) connections
+  // and reset the cleaner connections
+  releaseReaction(reaction);
+  reaction.cleaners = [];
+
+  try {
+    // set the reaction as the currently running one
+    // this is required so that we can create (observable.prop -> reaction) pairs in the get trap
+    runningReaction = reaction;
+    return fn.apply(context, args);
+  } finally {
+    // always remove the currently running flag from the reaction when it stops execution
+    runningReaction = undefined;
+  }
+}
+
+// register the currently running reaction to be queued again on obj.key mutations
+function registerRunningReactionForKey(obj, key) {
+  if (runningReaction) {
+    registerReactionForKey(obj, key, runningReaction);
+  }
+}
+
+function queueReactionsForKey(obj, key) {
+  // iterate and queue every reaction, which is triggered by obj.key mutation
+  iterateReactionsForKey(obj, key, queueReaction);
+}
+
+function queueReaction(reaction) {
+  // queue the reaction for later execution or run it immediately
+  if (typeof reaction.scheduler === 'function') {
+    reaction.scheduler(reaction);
+  } else if (typeof reaction.scheduler === 'object') {
+    reaction.scheduler.add(reaction);
+  } else {
+    reaction();
+  }
+}
+
+function hasRunningReaction() {
+  return runningReaction !== undefined;
+}
+
+var IS_REACTION = Symbol('is reaction');
+
+function observe(fn, options) {
+  if (options === void 0) options = {};
+
+  if (typeof fn !== 'function') {
+    throw new TypeError("The first argument must be a function instead of " + fn);
+  }
+  if (fn[IS_REACTION]) {
+    throw new TypeError('The first argument must not be an already observed reaction');
+  }
+  if (typeof options !== 'object' || options === null) {
+    throw new TypeError("The second argument must be an options object instead of " + options);
+  }
+  validateOptions(options);
+
+  // create a reaction from the passed function
+  function reaction() {
+    return runAsReaction(reaction, fn, this, arguments);
+  }
+  // save the scheduler on the reaction
+  reaction.scheduler = options.scheduler;
+  // runId will serve as a unique (incremental) id, which identifies the reaction's last run
+  reaction.runId = 0;
+  // save the fact that this is a reaction
+  reaction[IS_REACTION] = true;
+  // run the reaction once if it is not a lazy one
+  if (!options.lazy) {
+    reaction();
+  }
+  return reaction;
+}
+
+function validateOptions(ref) {
+  var lazy = ref.lazy;if (lazy === void 0) lazy = false;
+  var scheduler = ref.scheduler;
+
+  if (typeof lazy !== 'boolean') {
+    throw new TypeError("options.lazy must be a boolean or undefined instead of " + lazy);
+  }
+  if (typeof scheduler === 'object' && scheduler !== null) {
+    if (typeof scheduler.add !== 'function' || typeof scheduler.delete !== 'function') {
+      throw new TypeError('options.scheduler object must have an add and delete method');
+    }
+  } else if (scheduler !== undefined && typeof scheduler !== 'function') {
+    throw new TypeError("options.scheduler must be a function, an object or undefined instead of " + scheduler);
+  }
+}
+
+function unobserve(reaction) {
+  if (typeof reaction !== 'function' || !reaction[IS_REACTION]) {
+    throw new TypeError("The first argument must be a reaction instead of " + reaction);
+  }
+  // do nothing, if the reaction is already unobserved
+  if (!reaction.unobserved) {
+    // indicate that the reaction should not be triggered any more
+    reaction.unobserved = true;
+    // release (obj -> key -> reaction) connections
+    releaseReaction(reaction);
+  }
+  // unschedule the reaction, if it is scheduled
+  if (typeof reaction.scheduler === 'object') {
+    reaction.scheduler.delete(reaction);
+  }
+}
+
+var proxyToRaw = new WeakMap();
+var rawToProxy = new WeakMap();
+
+var ITERATE = Symbol('iterate');
+var getPrototypeOf = Object.getPrototypeOf;
+
+var instrumentations = {
+  has: function has(value) {
+    var rawContext = proxyToRaw.get(this);
+    var proto = getPrototypeOf(this);
+    registerRunningReactionForKey(rawContext, value);
+    return proto.has.apply(rawContext, arguments);
+  },
+  get: function get(key) {
+    var rawContext = proxyToRaw.get(this);
+    var proto = getPrototypeOf(this);
+    registerRunningReactionForKey(rawContext, key);
+    return proto.get.apply(rawContext, arguments);
+  },
+  add: function add(value) {
+    var rawContext = proxyToRaw.get(this);
+    var proto = getPrototypeOf(this);
+    // forward the operation before queueing reactions
+    var valueChanged = !proto.has.call(rawContext, value);
+    var result = proto.add.apply(rawContext, arguments);
+    if (valueChanged) {
+      queueReactionsForKey(rawContext, value);
+      queueReactionsForKey(rawContext, ITERATE);
+    }
+    return result;
+  },
+  set: function set(key, value) {
+    var rawContext = proxyToRaw.get(this);
+    var proto = getPrototypeOf(this);
+    // forward the operation before queueing reactions
+    var valueChanged = proto.get.call(rawContext, key) !== value;
+    var result = proto.set.apply(rawContext, arguments);
+    if (valueChanged) {
+      queueReactionsForKey(rawContext, key);
+      queueReactionsForKey(rawContext, ITERATE);
+    }
+    return result;
+  },
+  delete: function delete$1(value) {
+    var rawContext = proxyToRaw.get(this);
+    var proto = getPrototypeOf(this);
+    // forward the operation before queueing reactions
+    var valueChanged = proto.has.call(rawContext, value);
+    var result = proto.delete.apply(rawContext, arguments);
+    if (valueChanged) {
+      queueReactionsForKey(rawContext, value);
+      queueReactionsForKey(rawContext, ITERATE);
+    }
+    return result;
+  },
+  clear: function clear() {
+    var rawContext = proxyToRaw.get(this);
+    var proto = getPrototypeOf(this);
+    // forward the operation before queueing reactions
+    var valueChanged = rawContext.size !== 0;
+    var result = proto.clear.apply(rawContext, arguments);
+    if (valueChanged) {
+      queueReactionsForKey(rawContext, ITERATE);
+    }
+    return result;
+  },
+  forEach: function forEach() {
+    var rawContext = proxyToRaw.get(this);
+    var proto = getPrototypeOf(this);
+    registerRunningReactionForKey(rawContext, ITERATE);
+    return proto.forEach.apply(rawContext, arguments);
+  },
+  keys: function keys() {
+    var rawContext = proxyToRaw.get(this);
+    var proto = getPrototypeOf(this);
+    registerRunningReactionForKey(rawContext, ITERATE);
+    return proto.keys.apply(rawContext, arguments);
+  },
+  values: function values() {
+    var rawContext = proxyToRaw.get(this);
+    var proto = getPrototypeOf(this);
+    registerRunningReactionForKey(rawContext, ITERATE);
+    return proto.values.apply(rawContext, arguments);
+  },
+  entries: function entries() {
+    var rawContext = proxyToRaw.get(this);
+    var proto = getPrototypeOf(this);
+    registerRunningReactionForKey(rawContext, ITERATE);
+    return proto.entries.apply(rawContext, arguments);
+  },
+  get size() {
+    var rawContext = proxyToRaw.get(this);
+    var proto = getPrototypeOf(this);
+    registerRunningReactionForKey(rawContext, ITERATE);
+    return Reflect.get(proto, 'size', rawContext);
+  }
+};
+instrumentations[Symbol.iterator] = function () {
+  var rawContext = proxyToRaw.get(this);
+  var proto = getPrototypeOf(this);
+  registerRunningReactionForKey(rawContext, ITERATE);
+  return proto[Symbol.iterator].apply(rawContext, arguments);
+};
+
+var collectionHandlers = {
+  get: function get(target, key, receiver) {
+    // instrument methods and property accessors to be reactive
+    target = key in getPrototypeOf(target) ? instrumentations : target;
+    return Reflect.get(target, key, receiver);
+  }
+};
+
+// simple objects are not wrapped by Proxies, neither instrumented
+var dontInstrument = new Set([Date, RegExp]);
+
+// built-in object can not be wrapped by Proxies
+// their methods expect the object instance as the 'this' instead of the Proxy wrapper
+// complex objects are wrapped with a Proxy of instrumented methods
+// which switch the proxy to the raw object and to add reactive wiring
+var handlers = new Map([[Map, collectionHandlers], [Set, collectionHandlers], [WeakMap, collectionHandlers], [WeakSet, collectionHandlers]]);
+
+function shouldInstrument(obj) {
+  if (typeof Node === 'function' && obj instanceof Node) {
+    return false;
+  }
+  return !dontInstrument.has(obj.constructor);
+}
+
+function getHandlers(obj) {
+  return handlers.get(obj.constructor);
+}
+
+var ENUMERATE = Symbol('enumerate');
+
+// intercept get operations on observables to know which reaction uses their properties
+function get(obj, key, receiver) {
+  var result = Reflect.get(obj, key, receiver);
+  // do not register (observable.prop -> reaction) pairs for these cases
+  if (typeof key === 'symbol' || typeof result === 'function') {
+    return result;
+  }
+  // make sure to use the raw object here, obj might be a Proxy because of inheritance
+  obj = proxyToRaw.get(obj) || obj;
+  // register and save (observable.prop -> runningReaction)
+  registerRunningReactionForKey(obj, key);
+  // if we are inside a reaction and observable.prop is an object wrap it in an observable too
+  // this is needed to intercept property access on that object too (dynamic observable tree)
+  if (hasRunningReaction() && typeof result === 'object' && result !== null) {
+    return observable(result);
+  }
+  // otherwise return the observable wrapper if it is already created and cached or the raw object
+  return rawToProxy.get(result) || result;
+}
+
+function ownKeys(obj) {
+  registerRunningReactionForKey(obj, ENUMERATE);
+  return Reflect.ownKeys(obj);
+}
+
+// intercept set operations on observables to know when to trigger reactions
+function set(obj, key, value, receiver) {
+  // make sure to do not pollute the raw object with observables
+  if (typeof value === 'object' && value !== null) {
+    value = proxyToRaw.get(value) || value;
+  }
+  // save if the value changed because of this set operation
+  var valueChanged = value !== obj[key];
+  // length is lazy, it can change without an explicit length set operation
+  var prevLength = Array.isArray(obj) && obj.length;
+  // execute the set operation before running any reaction
+  var result = Reflect.set(obj, key, value, receiver);
+  // check if the length changed implicitly, because of out of bound set operations
+  var lengthChanged = prevLength !== false && prevLength !== obj.length;
+  // emit a warning and do not queue anything when another reaction is queued
+  // from an already running reaction
+  if (hasRunningReaction()) {
+    console.error("Mutating observables in reactions is forbidden. You set " + key + " to " + value + ".");
+    return result;
+  }
+  // if the target of the operation is not the raw receiver return
+  // (possible because of prototypal inheritance)
+  if (obj !== proxyToRaw.get(receiver)) {
+    return result;
+  }
+  // do not queue reactions if it is a symbol keyed property
+  // or the set operation resulted in no value change
+  if (typeof key !== 'symbol' && valueChanged) {
+    queueReactionsForKey(obj, key);
+    queueReactionsForKey(obj, ENUMERATE);
+  }
+  // queue length reactions in case the length changed
+  if (lengthChanged) {
+    queueReactionsForKey(obj, 'length');
+  }
+  return result;
+}
+
+function deleteProperty(obj, key) {
+  // save if the object had the key
+  var hadKey = key in obj;
+  // execute the delete operation before running any reaction
+  var result = Reflect.deleteProperty(obj, key);
+  // only queue reactions for non symbol keyed property delete which resulted in an actual change
+  if (typeof key !== 'symbol' && hadKey) {
+    queueReactionsForKey(obj, key);
+    queueReactionsForKey(obj, ENUMERATE);
+  }
+  return result;
+}
+
+var baseHandlers = { get: get, ownKeys: ownKeys, set: set, deleteProperty: deleteProperty };
+
+function observable(obj) {
+  if (obj === void 0) obj = {};
+
+  if (typeof obj !== 'object') {
+    throw new TypeError('Observable first argument must be an object or undefined');
+  }
+  // if it is already an observable or it should not be wrapped, return it
+  if (proxyToRaw.has(obj) || !shouldInstrument(obj)) {
+    return obj;
+  }
+  // if it already has a cached observable wrapper, return it
+  // otherwise create a new observable
+  return rawToProxy.get(obj) || createObservable(obj);
+}
+
+function createObservable(obj) {
+  // if it is a complex built-in object or a normal object, wrap it
+  var handlers = getHandlers(obj) || baseHandlers;
+  var observable = new Proxy(obj, handlers);
+  // save these to switch between the raw object and the wrapped object with ease later
+  rawToProxy.set(obj, observable);
+  proxyToRaw.set(observable, obj);
+  // init basic data structures to save and cleanup later (observable.prop -> reaction) connections
+  storeObservable(obj);
+  return observable;
+}
+
+function isObservable(obj) {
+  return proxyToRaw.has(obj);
+}
+
+function raw(obj) {
+  return proxyToRaw.get(obj) || obj;
+}
+
+
 
 /***/ }),
 /* 85 */
@@ -14127,13 +14537,11 @@ const reactInternals = new Set(['constructor', 'render', 'componentWillMount', '
 // bind the methods from proto to the passed context object and assign them to the context
 function autoBind(context, proto, isReact) {
   for (let key of Object.getOwnPropertyNames(proto)) {
-    const descriptor = Object.getOwnPropertyDescriptor(proto, key);
+    const { value } = Object.getOwnPropertyDescriptor(proto, key);
 
     // do not try to bind properties and getter/setters
-    if (typeof descriptor.value === 'function' && !(isReact && reactInternals.has(key))) {
-      // use the same descriptor for the copied method to keep the exact same behavior
-      const newDescriptor = Object.assign({}, descriptor, { value: descriptor.value.bind(context) });
-      Object.defineProperty(context, key, newDescriptor);
+    if (typeof value === 'function' && !(isReact && reactInternals.has(key))) {
+      context[key] = value.bind(context);
     }
   }
 }
@@ -26602,140 +27010,84 @@ module.exports = ReactDOMInvalidARIAHook;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = easyComp;
+/* harmony export (immutable) */ __webpack_exports__["a"] = view;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__nx_js_observer_util__ = __webpack_require__(84);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__nx_js_observer_util___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__nx_js_observer_util__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__autoBind__ = __webpack_require__(85);
 
 
 
 
-const REACTIVE_RENDER = Symbol('reactive render');
-const DIRECT_RENDER = Symbol('direct render');
-const RENDER_RESULT = Symbol('render result');
-const renderQueue = new __WEBPACK_IMPORTED_MODULE_1__nx_js_observer_util__["Queue"](__WEBPACK_IMPORTED_MODULE_1__nx_js_observer_util__["priorities"].CRITICAL);
-
-function easyComp(Comp) {
+function view(Comp) {
   if (typeof Comp !== 'function') {
-    throw new TypeError('easyComp expects a component as argument.');
+    throw new TypeError('view() expects a component as argument.');
   }
-
-  // wrap stateless components in a class
-  if (isStatelessComp(Comp)) {
-    Comp = statelessToStatefulComp(Comp);
-  }
+  // wrap the component in a reactive HOC
   return toReactiveComp(Comp);
 }
 
-function isStatelessComp(Comp) {
-  return !(Comp.prototype && Comp.prototype.render) && !__WEBPACK_IMPORTED_MODULE_0_react__["Component"].isPrototypeOf(Comp);
-}
-
-function statelessToStatefulComp(StatelessComp) {
-  class StatefulComp extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
-    // call the original function component inside the render method
-    render() {
-      return StatelessComp.call(this, this.props, this.context);
-    }
-  }
-
-  // proxy react specific static variables to the stateful component
-  copyStaticProps(StatelessComp, StatefulComp);
-  return StatefulComp;
-}
-
 function toReactiveComp(Comp) {
+  const isStatelessComp = !(Comp.prototype && Comp.prototype.isReactComponent);
+  const BaseComp = isStatelessComp ? __WEBPACK_IMPORTED_MODULE_0_react__["Component"] : Comp;
   // return a HOC which overwrites render, shouldComponentUpdate and componentWillUnmount
   // it decides when to run the new reactive methods and when to proxy to the original methods
-  class EasyHOC extends Comp {
+  class ReactiveHOC extends BaseComp {
+
     constructor(props, context) {
       super(props, context);
 
-      // auto bind non react specific original methods to the component instance
-      Object(__WEBPACK_IMPORTED_MODULE_2__autoBind__["a" /* default */])(this, Comp.prototype, true);
-
-      // turn the store into an observable object, which triggers rendering on mutations
-      if (typeof this.store === 'object' && this.store !== null) {
-        this.store = Object(__WEBPACK_IMPORTED_MODULE_1__nx_js_observer_util__["observable"])(this.store);
-      } else if ('store' in this) {
-        throw new TypeError('component.store must be an object');
+      this.state = {
+        counter: 0
+      };
+      if (!isStatelessComp) {
+        // auto bind non react specific original methods to the component instance
+        Object(__WEBPACK_IMPORTED_MODULE_2__autoBind__["a" /* default */])(this, Comp.prototype, true);
       }
+
+      // create a reactive render for the component
+      this.render = Object(__WEBPACK_IMPORTED_MODULE_1__nx_js_observer_util__["b" /* observe */])(this.render, {
+        scheduler: () => this.setState({ counter: this.state.counter + 1 }),
+        lazy: true
+      });
     }
 
     render() {
-      // indicate that render was called directly (by React internals or forceUpdate)
-      this[DIRECT_RENDER] = true;
-      // the render result is null by default
-      this[RENDER_RESULT] = null;
-
-      if (!this[REACTIVE_RENDER]) {
-        // if this is the first render call for this comp, create a reactive render
-        // this will be called automatically whenever relevant state changes, which causes a new UI
-        this[REACTIVE_RENDER] = Object(__WEBPACK_IMPORTED_MODULE_1__nx_js_observer_util__["observe"])(() => {
-          if (this[DIRECT_RENDER]) {
-            // if render was called directly (by React or forceUpdate) get and save the next view
-            this[RENDER_RESULT] = super.render();
-          } else if (!super.shouldComponentUpdate || super.shouldComponentUpdate(this.props)) {
-            // if render was called automatically because of state changes
-            // trigger a forceUpdate (which results in a direct render later)
-            this.forceUpdate();
-          }
-        }, renderQueue);
-      } else {
-        // call the existing reactive render
-        this[REACTIVE_RENDER]();
-      }
-
-      // indicate that the direct render is over, so that later reactive renders will work correctly
-      this[DIRECT_RENDER] = false;
-      return this[RENDER_RESULT];
+      return isStatelessComp ? Comp(this.props, this.context) : super.render();
     }
 
     // react should trigger updates on prop changes, while easyState handles store changes
-    shouldComponentUpdate(nextProps) {
-      const { props } = this;
-      const keys = Object.keys(props);
-      const nextKeys = Object.keys(nextProps);
+    shouldComponentUpdate(nextProps, nextState) {
+      const { props, state } = this;
 
       // respect the case when user prohibits updates
-      // and prune unnecessary updates otherwise
-      if (super.shouldComponentUpdate && !super.shouldComponentUpdate(nextProps)) {
+      if (super.shouldComponentUpdate && !super.shouldComponentUpdate(nextProps, nextState)) {
         return false;
       }
 
-      // component should update if the number of its props changed
-      if (keys.length !== nextKeys.length) {
+      // return true if it is a reactive render
+      if (state.counter !== nextState.counter) {
         return true;
       }
 
-      // component should update if any of its props changed value
-      for (let key of keys) {
-        if (props[key] !== nextProps[key]) {
-          return true;
-        }
-      }
-
-      // do not let react update the comp otherwise, leave store triggered updates to easyState
-      return false;
+      // the component should update if any of its props shallowly changed value
+      const keys = Object.keys(props);
+      const nextKeys = Object.keys(nextProps);
+      return nextKeys.length !== keys.length || nextKeys.some(key => props[key] !== nextProps[key]);
     }
 
     componentWillUnmount() {
-      // clean up memory used by easyState
-      Object(__WEBPACK_IMPORTED_MODULE_1__nx_js_observer_util__["unobserve"])(this[REACTIVE_RENDER]);
-
-      // also call user defined componentWillUnmount to allow the user
-      // to clean up additional memory
+      // call user defined componentWillUnmount
       if (super.componentWillUnmount) {
         super.componentWillUnmount();
       }
+      // clean up memory used by easyState
+      Object(__WEBPACK_IMPORTED_MODULE_1__nx_js_observer_util__["c" /* unobserve */])(this.render);
     }
   }
-
-  // proxy react specific static variables to the HOC from the component
-  copyStaticProps(Comp, EasyHOC);
-  return EasyHOC;
+  // proxy react specific static variables to the reactive component
+  copyStaticProps(Comp, ReactiveHOC);
+  return ReactiveHOC;
 }
 
 // copy react specific static props between passed and HOC components
@@ -26752,22 +27104,20 @@ function copyStaticProps(fromComp, toComp) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = easyStore;
+/* harmony export (immutable) */ __webpack_exports__["a"] = store;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__nx_js_observer_util__ = __webpack_require__(84);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__nx_js_observer_util___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__nx_js_observer_util__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__autoBind__ = __webpack_require__(85);
 
 
 
-function easyStore(store) {
-  if (typeof store !== 'object' || store === null) {
-    throw new TypeError('easyStore expects an object as argument');
+function store(obj = {}) {
+  if (typeof obj !== 'object' || obj === null) {
+    throw new TypeError('store() expects an object or undefined as argument');
   }
-
-  // create an observable object from the passed store
-  // and bind all of its methods to the created observable
-  const observableStore = Object(__WEBPACK_IMPORTED_MODULE_0__nx_js_observer_util__["observable"])(store);
-  Object(__WEBPACK_IMPORTED_MODULE_1__autoBind__["a" /* default */])(observableStore, store, false);
+  // create an observable store from the passed object
+  // and binds all of its methods to the created observable
+  const observableStore = Object(__WEBPACK_IMPORTED_MODULE_0__nx_js_observer_util__["a" /* observable */])(obj);
+  Object(__WEBPACK_IMPORTED_MODULE_1__autoBind__["a" /* default */])(observableStore, obj, false);
   return observableStore;
 }
 
@@ -37309,34 +37659,34 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
   constructor() {
     super();
 
-    this.store = {
-      clock: setInterval(() => this.setTime(), 1000)
-    };
+    this.clock = Object(__WEBPACK_IMPORTED_MODULE_2_react_easy_state__["a" /* store */])({
+      time: setInterval(() => this.setTime(), 1000)
+    });
     this.setTime();
   }
 
-  // the store can be manipulated as a plain JS object
+  // the clock store can be manipulated as a plain JS object
   setTime() {
-    this.store.time = __WEBPACK_IMPORTED_MODULE_1_moment___default()().utc().format('hh:mm:ss A');
+    this.clock.time = __WEBPACK_IMPORTED_MODULE_1_moment___default()().utc().format('hh:mm:ss A');
   }
 
   // clean up the timer before the component is unmounted
   componentWillUnmount() {
-    clearInterval(this.store.clock);
+    clearInterval(this.clock.time);
   }
 
-  // render is automatically triggered whenever this.store.time changes
+  // render is automatically triggered whenever this.clock.time changes
   render() {
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'div',
       null,
-      this.store.time
+      this.clock.time
     );
   }
 }
 
-// wrap the component with easyComp before exporting it
-/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_2_react_easy_state__["a" /* easyComp */])(App));
+// wrap the component with view() before exporting it
+/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_2_react_easy_state__["b" /* view */])(App));
 
 /***/ }),
 /* 309 */
