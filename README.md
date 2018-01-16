@@ -31,7 +31,7 @@ React state management with a minimal API. Made with :heart: and ES6 Proxies.
 
 ## Introduction
 
-Easy State consists of two wrapper functions only. `store` creates state stores and `view` creates reactive components, which re-render whenever state stores are mutated. The rest is just plain JavaScript.
+Easy State consists of two wrapper functions only. `store` creates state stores and `view` creates reactive components, which re-render when state stores are mutated. The rest is just plain JavaScript, that you already know.
 
 ```js
 import React from 'react'
@@ -43,7 +43,7 @@ setInterval(() => clock.time = new Date(), 1000)
 
 // reactive components re-render on store mutations
 function ClockComp () {
-  return <div>{clock.time}</div>
+  return <div>The time is: {clock.time}</div>
 }
 
 export default view(ClockComp)
