@@ -38,16 +38,21 @@ State management doesn't have to be complex. Easy State consists of only two wra
 
 `npm install react-easy-state`
 
-### Setting up a quick project
+
+<details>
+<summary><strong>Setting up a quick project</strong></summary>
 
 Easy State supports [Create React App](https://github.com/facebookincubator/create-react-app) without additional configuration. Just run the following commands to get started.
 
-- `npx create-react-app my-app`
-- `cd my-app`
-- `npm install react-easy-state`
-- `npm start`
+```sh
+npx create-react-app my-app
+cd my-app
+npm install react-easy-state
+npm start
+```
 
 *You need npm 5.2+ to use npx*
+</details>
 
 ## Usage
 
