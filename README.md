@@ -36,7 +36,7 @@ Easy State consists of two wrapper functions only. `store` creates state stores 
 
 ```js
 import React, from 'react'
-import { view, store } from 'react-easy-state'
+import { store, view } from 'react-easy-state'
 
 const clock = store({ time: new Date() })
 setInterval(() => clock.time = new Date(), 1000)
