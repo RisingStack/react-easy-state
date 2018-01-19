@@ -1,11 +1,12 @@
 {
   "env": {
     "development": {
-      "presets": ["react", "es2016", "es2017", "stage-0"]
+      "presets": ["react", "es2016", "es2017", "stage-0"],
+      "plugins": ["transform-decorators-legacy"]
     },
     "test": {
       "presets": ["react", "es2016", "es2017", "stage-0"],
-      "plugins": ["transform-es2015-modules-commonjs"]
+      "plugins": ["transform-es2015-modules-commonjs", "transform-decorators-legacy"]
     }
   }
 }

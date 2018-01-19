@@ -129,6 +129,39 @@ export default view(HelloComp)
 
 *View methods are automatically bound to the component to make passing them as callbacks easier.*
 
+<details>
+<summary><strong>Usage as a decorator</strong></summary>
+
+`view` can also be used as a class decorator with the `@view` syntax. You can learn more about decorators [here](https://medium.com/google-developers/exploring-es7-decorators-76ecb65fb841).
+
+```js
+import React, { Component } from 'react'
+import { view, store } from 'react-easy-state'
+
+const user = store({
+  name: 'Bob'
+})
+
+@view
+export default class HelloComp extends Component {
+  onChange (ev) {
+    user.name = ev.target.value  
+  }
+
+  render () {
+    return (
+      <div>
+        <input value={user.name} onChange={this.onChange} />
+        <div>Hello {user.name}!</div>
+      </div>
+    )
+  }
+}
+```
+
+*Decorators are not a standardized JavaScript feature and create-react-app does not support them yet.*
+</details>
+
 ### Creating local stores
 
 A singleton global store is perfect for something like the current user, but sometimes having local component states is better. Just create a store as a component property in these cases.

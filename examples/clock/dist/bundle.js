@@ -27004,7 +27004,7 @@ function toReactiveComp(Comp) {
   const BaseComp = isStatelessComp ? __WEBPACK_IMPORTED_MODULE_0_react__["Component"] : Comp;
   // return a HOC which overwrites render, shouldComponentUpdate and componentWillUnmount
   // it decides when to run the new reactive methods and when to proxy to the original methods
-  class ReactiveHOC extends BaseComp {
+  let ReactiveHOC = class ReactiveHOC extends BaseComp {
 
     constructor(props, context) {
       super(props, context);
@@ -27056,8 +27056,9 @@ function toReactiveComp(Comp) {
       // clean up memory used by easyState
       Object(__WEBPACK_IMPORTED_MODULE_1__nx_js_observer_util__["c" /* unobserve */])(this.render);
     }
-  }
+  };
   // proxy react specific static variables to the reactive component
+
   copyStaticProps(Comp, ReactiveHOC);
   return ReactiveHOC;
 }
@@ -37627,7 +37628,7 @@ __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODU
 
 
 
-class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
+let App = class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
   constructor() {
     super();
 
@@ -37655,9 +37656,10 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
       this.clock.time
     );
   }
-}
+};
 
 // wrap the component with view() before exporting it
+
 /* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_2_react_easy_state__["b" /* view */])(App));
 
 /***/ }),
