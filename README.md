@@ -213,8 +213,10 @@ Triggered renders are passed to React for execution, there is no `forceUpdate` b
 - Safari: 10 and above
 - Edge: 12 and above
 - Opera: 36 and above
-- React native is not yet supported
+- React Native is not yet supported
 - IE is not supported
+
+This library is based on non polyfillable ES6 Proxies. Because of this, React Native and IE support is not possible as of now. This may change in the future, if these platforms add ES6 Proxy support.
 
 ## Performance
 
