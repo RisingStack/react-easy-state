@@ -22650,7 +22650,7 @@ function toReactiveComp(Comp) {
   const BaseComp = isStatelessComp ? __WEBPACK_IMPORTED_MODULE_0_react__["Component"] : Comp;
   // return a HOC which overwrites render, shouldComponentUpdate and componentWillUnmount
   // it decides when to run the new reactive methods and when to proxy to the original methods
-  let ReactiveHOC = class ReactiveHOC extends BaseComp {
+  class ReactiveHOC extends BaseComp {
 
     constructor(props, context) {
       super(props, context);
@@ -22702,9 +22702,8 @@ function toReactiveComp(Comp) {
       // clean up memory used by easyState
       Object(__WEBPACK_IMPORTED_MODULE_1__nx_js_observer_util__["c" /* unobserve */])(this.render);
     }
-  };
+  }
   // proxy react specific static variables to the reactive component
-
   copyStaticProps(Comp, ReactiveHOC);
   return ReactiveHOC;
 }
@@ -23009,7 +23008,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
 // render is triggered whenever the relevant parts of the global todos store change
-let App = class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
+class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
   changeFilter(ev) {
     __WEBPACK_IMPORTED_MODULE_4__todosStore__["a" /* default */].changeFilter(ev.target.value);
   }
@@ -23093,10 +23092,9 @@ let App = class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
       )
     );
   }
-};
+}
 
 // wrap the component with view() before exporting it
-
 /* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_2_react_easy_state__["b" /* view */])(App));
 
 /***/ }),
@@ -23115,7 +23113,7 @@ let App = class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
 
 
 
-let TodoItem = class TodoItem extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
+class TodoItem extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
   remove() {
     __WEBPACK_IMPORTED_MODULE_3__todosStore__["a" /* default */].remove(this.props.id);
   }
@@ -23143,10 +23141,9 @@ let TodoItem = class TodoItem extends __WEBPACK_IMPORTED_MODULE_0_react__["Compo
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('button', { onClick: remove, className: 'destroy' })
     );
   }
-};
+}
 
 // wrap the component with view() before exporting it
-
 /* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_2_react_easy_state__["b" /* view */])(TodoItem));
 
 /***/ })

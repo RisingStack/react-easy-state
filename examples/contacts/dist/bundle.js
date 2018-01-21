@@ -22650,7 +22650,7 @@ function toReactiveComp(Comp) {
   const BaseComp = isStatelessComp ? __WEBPACK_IMPORTED_MODULE_0_react__["Component"] : Comp;
   // return a HOC which overwrites render, shouldComponentUpdate and componentWillUnmount
   // it decides when to run the new reactive methods and when to proxy to the original methods
-  let ReactiveHOC = class ReactiveHOC extends BaseComp {
+  class ReactiveHOC extends BaseComp {
 
     constructor(props, context) {
       super(props, context);
@@ -22702,9 +22702,8 @@ function toReactiveComp(Comp) {
       // clean up memory used by easyState
       Object(__WEBPACK_IMPORTED_MODULE_1__nx_js_observer_util__["c" /* unobserve */])(this.render);
     }
-  };
+  }
   // proxy react specific static variables to the reactive component
-
   copyStaticProps(Comp, ReactiveHOC);
   return ReactiveHOC;
 }
@@ -22970,7 +22969,7 @@ function App() {
 
 
 
-let Contact = class Contact extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
+class Contact extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
   constructor({ contact }) {
     super();
 
@@ -23075,10 +23074,9 @@ let Contact = class Contact extends __WEBPACK_IMPORTED_MODULE_0_react__["Compone
       )
     );
   }
-};
+}
 
 // wrap the component with view() before exporting it
-
 /* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_1_react_easy_state__["b" /* view */])(Contact));
 
 /***/ }),
@@ -23094,7 +23092,7 @@ let Contact = class Contact extends __WEBPACK_IMPORTED_MODULE_0_react__["Compone
 
 
 
-let ContactCreator = class ContactCreator extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
+class ContactCreator extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
   constructor(...args) {
     var _temp;
 
@@ -23146,10 +23144,9 @@ let ContactCreator = class ContactCreator extends __WEBPACK_IMPORTED_MODULE_0_re
       )
     );
   }
-};
+}
 
 // wrap the component with view() before exporting it
-
 /* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_1_react_easy_state__["b" /* view */])(ContactCreator));
 
 /***/ })
