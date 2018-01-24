@@ -220,9 +220,9 @@ Triggered renders are passed to React for execution, there is no `forceUpdate` b
 
 ## Performance
 
-You can compare Easy State with plain React and other state management libraries with the below benchmarks. Easy State performs a bit better than MobX, a bit worse than plain optimized React and similarly to Redux.
+You can compare Easy State with plain React and other state management libraries with the below benchmarks. It performs a bit better than MobX and a bit worse than Redux.
 
-- [js-framework-benchmark](https://github.com/krausest/js-framework-benchmark) ([source](https://github.com/krausest/js-framework-benchmark/tree/master/react-v16.1.0-easy-state-v3.0.1-keyed)) ([results](https://rawgit.com/krausest/js-framework-benchmark/master/webdriver-ts-results/table.html))
+- [js-framework-benchmark](https://github.com/krausest/js-framework-benchmark) ([source](https://github.com/krausest/js-framework-benchmark/tree/master/react-v16.1.0-easy-state-v4.0.1-keyed)) ([results](https://rawgit.com/krausest/js-framework-benchmark/master/webdriver-ts-results/table.html))
 
 ## How does it work?
 
