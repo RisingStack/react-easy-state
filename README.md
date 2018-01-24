@@ -1,6 +1,4 @@
-<img src="/logo.png" alt="logo" width="120" style="vertical-align: middle;" />
-
-# React Easy State
+# React Easy State <img src="logo.png" alt="logo" width="120" style="vertical-align: middle;" />
 
 Simple React state management. Made with :heart: and ES6 Proxies.
 
