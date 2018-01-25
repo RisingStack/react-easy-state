@@ -30,7 +30,8 @@
       "**/src/**",
       "**/examples/**",
       "!**/examples/**/dist/**",
-      "!**/examples/**/index.jsx"
+      "!**/examples/**/index.jsx",
+      "!**/examples/stopWatch/**"
     ]
   },
   "author": {
