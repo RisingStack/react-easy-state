@@ -65,6 +65,7 @@
     "react": "*"
   },
   "devDependencies": {
+    "@types/react": "^16.0.35",
     "babel-core": "6.25.0",
     "babel-eslint": "^7.2.3",
     "babel-loader": "7.1.1",
