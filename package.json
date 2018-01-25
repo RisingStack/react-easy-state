@@ -1,6 +1,6 @@
 {
   "name": "react-easy-state",
-  "version": "4.0.1",
+  "version": "4.1.0",
   "description": "React state management with a minimal API. Made with ES6 Proxies.",
   "main": "dist/cjs.es5.js",
   "module": "dist/es.es5.js",
