@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 309);
+/******/ 	return __webpack_require__(__webpack_require__.s = 315);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -37876,7 +37876,13 @@ webpackContext.id = 305;
 /* 306 */,
 /* 307 */,
 /* 308 */,
-/* 309 */
+/* 309 */,
+/* 310 */,
+/* 311 */,
+/* 312 */,
+/* 313 */,
+/* 314 */,
+/* 315 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -37885,7 +37891,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(101);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__App__ = __webpack_require__(310);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__App__ = __webpack_require__(316);
 
 
 
@@ -37893,51 +37899,90 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__App__["a" /* default */], null), document.getElementById('react-root'));
 
 /***/ }),
-/* 310 */
+/* 316 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_easy_state__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_easy_state__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__clock__ = __webpack_require__(317);
 
 
 
 
-class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
-  constructor() {
-    super();
+function StopWatch() {
+  const { time, toggle, reset, isTicking } = __WEBPACK_IMPORTED_MODULE_2__clock__["a" /* default */];
+  const label = isTicking ? 'Stop' : 'Start';
 
-    this.clock = Object(__WEBPACK_IMPORTED_MODULE_2_react_easy_state__["a" /* store */])({
-      time: setInterval(() => this.setTime(), 1000)
-    });
-    this.setTime();
-  }
-
-  // the clock store can be manipulated as a plain JS object
-  setTime() {
-    this.clock.time = __WEBPACK_IMPORTED_MODULE_1_moment___default()().utc().format('hh:mm:ss A');
-  }
-
-  // clean up the timer before the component is unmounted
-  componentWillUnmount() {
-    clearInterval(this.clock.time);
-  }
-
-  // render is automatically triggered whenever this.clock.time changes
-  render() {
-    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+    'div',
+    null,
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'div',
       null,
-      this.clock.time
-    );
-  }
+      time.seconds,
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'small',
+        null,
+        time.fraction
+      )
+    ),
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'button',
+      { onClick: toggle },
+      label
+    ),
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'button',
+      { onClick: reset },
+      'Reset'
+    )
+  );
 }
 
-// wrap the component with view() before exporting it
-/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_2_react_easy_state__["b" /* view */])(App));
+/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_1_react_easy_state__["b" /* view */])(StopWatch));
+
+/***/ }),
+/* 317 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_easy_state__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_moment__);
+
+
+
+const clock = {
+  ticks: 0,
+  start() {
+    this.intervalId = setInterval(() => this.ticks++, 10);
+  },
+  stop() {
+    this.intervalId = clearInterval(this.intervalId);
+  },
+  get time() {
+    const time = __WEBPACK_IMPORTED_MODULE_1_moment___default()(0).millisecond(this.ticks * 10);
+
+    return {
+      seconds: time.format('mm:ss'),
+      fraction: time.format('SS')
+    };
+  },
+  get isTicking() {
+    return this.intervalId !== undefined;
+  },
+  toggle() {
+    this.isTicking ? this.stop() : this.start();
+  },
+  reset() {
+    this.ticks = 0;
+    this.stop();
+  }
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_0_react_easy_state__["a" /* store */])(clock));
 
 /***/ })
 /******/ ]);

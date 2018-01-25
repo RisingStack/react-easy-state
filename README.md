@@ -201,9 +201,15 @@ Triggered renders are passed to React for execution, there is no `forceUpdate` b
 
 ## Examples with live demos
 
-- [Clock Widget](https://solkimicreb.github.io/react-easy-state/examples/clock/dist) ([source](/examples/clock/))
-- [TodoMVC](https://solkimicreb.github.io/react-easy-state/examples/todoMVC/dist) ([source](/examples/todoMVC/))
-- [Contacts Table](https://solkimicreb.github.io/react-easy-state/examples/contacts/dist) ([source](/examples/contacts/))
+*Beginner*
+
+- [Clock Widget](https://solkimicreb.github.io/react-easy-state/examples/clock/dist) ([source](/examples/clock/)): a reusable clock widget with a tiny local state store.
+- [Stopwatch](https://solkimicreb.github.io/react-easy-state/examples/stopWatch/dist) ([source](/examples/stopWatch/)) ([tutorial](https://hackernoon.com/introducing-react-easy-state-1210a156fa16)): a stopwatch with a mix of normal and computed state properties. 
+
+*Advanced*
+
+- [TodoMVC](https://solkimicreb.github.io/react-easy-state/examples/todoMVC/dist) ([source](/examples/todoMVC/)): a classic TodoMVC implementation with a lot of computed data and implicit reactivity.
+- [Contacts Table](https://solkimicreb.github.io/react-easy-state/examples/contacts/dist) ([source](/examples/contacts/)): a data grid implementation with a mix of global and local state.
 
 ## Platform support
 
