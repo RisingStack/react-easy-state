@@ -6,7 +6,8 @@
   "module": "dist/es.es5.js",
   "types": "types/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "types"
   ],
   "scripts": {
     "test": "jest --coverage",
