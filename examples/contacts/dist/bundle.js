@@ -9741,6 +9741,54 @@ module.exports = getHostComponentFromComposite;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return observable; });
 /* unused harmony export isObservable */
 /* unused harmony export raw */
+// increase the default stack trace size of V8 from 10 to 20
+Error.stackTraceLimit = 20;
+
+var excludeSetTokens = ['Object.set', '__WEBPACK', '(<anonymous>)'];
+var excludeGetTokens = ['Object.get', '__WEBPACK', '(<anonymous>)'];
+
+function debugReaction(reaction, key, context) {
+  // copy and extend the base context
+  context = Object.assign({
+    reaction: reaction.fn,
+    stackTraces: {
+      get: Array.from(reaction.stacks.get(context.object)[key]),
+      set: createStackTrace(7, excludeSetTokens)
+    }
+  }, context);
+
+  reaction.debugger(context);
+}
+
+function registerStackForKey(obj, key, reaction) {
+  var stacksForObj = reaction.stacks.get(obj);
+  if (!stacksForObj) {
+    stacksForObj = Object.create(null);
+    reaction.stacks.set(obj, stacksForObj);
+  }
+  var stacksForKey = stacksForObj[key];
+  if (!stacksForKey) {
+    stacksForObj[key] = stacksForKey = new Set();
+  }
+
+  var stack = createStackTrace(6, excludeGetTokens);
+  stacksForKey.add(stack);
+}
+
+function createStackTrace(firstLine, excludeTokens) {
+  return new Error().stack.split('\n').slice(firstLine).filter(function (line) {
+    return hasNoTokens(line, excludeTokens);
+  }).map(function (line) {
+    return line.replace('Proxy', 'Object');
+  }).join('\n');
+}
+
+function hasNoTokens(string, tokens) {
+  return tokens.every(function (token) {
+    return string.indexOf(token) === -1;
+  });
+}
+
 var connectionStore = new WeakMap();
 
 function storeObservable(obj) {
@@ -9753,22 +9801,27 @@ function registerReactionForKey(obj, key, reaction) {
   var reactionsForKey = reactionsForObj[key];
   if (!reactionsForKey) {
     reactionsForObj[key] = reactionsForKey = new Set();
-    // save the fact that the key is used by the reaction during its current run
-    reactionsForKey.add(reaction);
-    reaction.cleaners.push(reactionsForKey);
-  } else if (!reactionsForKey.has(reaction)) {
+  }
+  if (!reactionsForKey.has(reaction)) {
     // save the fact that the key is used by the reaction during its current run
     reactionsForKey.add(reaction);
     reaction.cleaners.push(reactionsForKey);
   }
+  if (reaction.debugger) {
+    registerStackForKey(obj, key, reaction);
+  }
 }
 
-function iterateReactionsForKey(obj, key, reactionHandler) {
+function iterateReactionsForKey(obj, key, reactionHandler, context) {
   var reactionsForKey = connectionStore.get(obj)[key];
   if (reactionsForKey) {
     // create a static copy of the reactions, before iterating them
     // to avoid infinite (iterate items: remove -> readd) loops
-    Array.from(reactionsForKey).forEach(reactionHandler);
+    for (var i = 0, list = Array.from(reactionsForKey); i < list.length; i += 1) {
+      var reaction = list[i];
+
+      reactionHandler(reaction, key, context);
+    }
   }
 }
 
@@ -9776,7 +9829,10 @@ function releaseReaction(reaction) {
   if (reaction.cleaners) {
     reaction.cleaners.forEach(releaseReactionKeyConnection, reaction);
   }
-  reaction.cleaners = undefined;
+  reaction.cleaners = [];
+  if (reaction.debugger) {
+    reaction.stacks = new WeakMap();
+  }
 }
 
 function releaseReactionKeyConnection(reactionsForKey) {
@@ -9794,7 +9850,6 @@ function runAsReaction(reaction, fn, context, args) {
   // release the (obj -> key -> reactions) connections
   // and reset the cleaner connections
   releaseReaction(reaction);
-  reaction.cleaners = [];
 
   try {
     // set the reaction as the currently running one
@@ -9814,12 +9869,12 @@ function registerRunningReactionForKey(obj, key) {
   }
 }
 
-function queueReactionsForKey(obj, key) {
+function queueReactionsForKey(obj, key, context) {
   // iterate and queue every reaction, which is triggered by obj.key mutation
-  iterateReactionsForKey(obj, key, queueReaction);
+  iterateReactionsForKey(obj, key, queueReaction, context);
 }
 
-function queueReaction(reaction) {
+function queueReaction(reaction, key, context) {
   // queue the reaction for later execution or run it immediately
   if (typeof reaction.scheduler === 'function') {
     reaction.scheduler(reaction);
@@ -9827,6 +9882,10 @@ function queueReaction(reaction) {
     reaction.scheduler.add(reaction);
   } else {
     reaction();
+  }
+
+  if (reaction.debugger) {
+    debugReaction(reaction, key, context);
   }
 }
 
@@ -9854,10 +9913,11 @@ function observe(fn, options) {
   function reaction() {
     return runAsReaction(reaction, fn, this, arguments);
   }
-  // save the scheduler on the reaction
+  // save the original function on the reaction
+  reaction.fn = fn;
+  // save the scheduler and debugger on the reaction
   reaction.scheduler = options.scheduler;
-  // runId will serve as a unique (incremental) id, which identifies the reaction's last run
-  reaction.runId = 0;
+  reaction.debugger = options.debugger;
   // save the fact that this is a reaction
   reaction[IS_REACTION] = true;
   // run the reaction once if it is not a lazy one
@@ -9881,6 +9941,11 @@ function validateOptions(ref) {
   } else if (scheduler !== undefined && typeof scheduler !== 'function') {
     throw new TypeError("options.scheduler must be a function, an object or undefined instead of " + scheduler);
   }
+  /*if (debugger !== undefined && typeof debugger !== 'function') {
+    throw new TypeError(
+      `options.debugger must be a function or undefined instead of ${debugger}`
+    )
+  }*/
 }
 
 function unobserve(reaction) {
@@ -9905,6 +9970,7 @@ var rawToProxy = new WeakMap();
 
 var ITERATE = Symbol('iterate');
 var getPrototypeOf = Object.getPrototypeOf;
+var hasOwnProperty = Object.prototype.hasOwnProperty;
 
 var instrumentations = {
   has: function has(value) {
@@ -9922,8 +9988,8 @@ var instrumentations = {
   add: function add(value) {
     var rawContext = proxyToRaw.get(this);
     var proto = getPrototypeOf(this);
-    // forward the operation before queueing reactions
     var valueChanged = !proto.has.call(rawContext, value);
+    // forward the operation before queueing reactions
     var result = proto.add.apply(rawContext, arguments);
     if (valueChanged) {
       queueReactionsForKey(rawContext, value);
@@ -9934,11 +10000,14 @@ var instrumentations = {
   set: function set(key, value) {
     var rawContext = proxyToRaw.get(this);
     var proto = getPrototypeOf(this);
-    // forward the operation before queueing reactions
+    var hadKey = proto.has.call(rawContext, key);
     var valueChanged = proto.get.call(rawContext, key) !== value;
+    // forward the operation before queueing reactions
     var result = proto.set.apply(rawContext, arguments);
     if (valueChanged) {
       queueReactionsForKey(rawContext, key);
+    }
+    if (!hadKey) {
       queueReactionsForKey(rawContext, ITERATE);
     }
     return result;
@@ -9946,8 +10015,8 @@ var instrumentations = {
   delete: function delete$1(value) {
     var rawContext = proxyToRaw.get(this);
     var proto = getPrototypeOf(this);
-    // forward the operation before queueing reactions
     var valueChanged = proto.has.call(rawContext, value);
+    // forward the operation before queueing reactions
     var result = proto.delete.apply(rawContext, arguments);
     if (valueChanged) {
       queueReactionsForKey(rawContext, value);
@@ -9958,8 +10027,8 @@ var instrumentations = {
   clear: function clear() {
     var rawContext = proxyToRaw.get(this);
     var proto = getPrototypeOf(this);
-    // forward the operation before queueing reactions
     var valueChanged = rawContext.size !== 0;
+    // forward the operation before queueing reactions
     var result = proto.clear.apply(rawContext, arguments);
     if (valueChanged) {
       queueReactionsForKey(rawContext, ITERATE);
@@ -10007,7 +10076,7 @@ instrumentations[Symbol.iterator] = function () {
 var collectionHandlers = {
   get: function get(target, key, receiver) {
     // instrument methods and property accessors to be reactive
-    target = key in getPrototypeOf(target) ? instrumentations : target;
+    target = hasOwnProperty.call(instrumentations, key) ? instrumentations : target;
     return Reflect.get(target, key, receiver);
   }
 };
@@ -10032,19 +10101,20 @@ function getHandlers(obj) {
   return handlers.get(obj.constructor);
 }
 
+var hasOwnProperty$1 = Object.prototype.hasOwnProperty;
 var ENUMERATE = Symbol('enumerate');
 
 // intercept get operations on observables to know which reaction uses their properties
-function get(obj, key, receiver) {
-  var result = Reflect.get(obj, key, receiver);
+function get(object, key, receiver) {
+  var result = Reflect.get(object, key, receiver);
   // do not register (observable.prop -> reaction) pairs for these cases
   if (typeof key === 'symbol' || typeof result === 'function') {
     return result;
   }
-  // make sure to use the raw object here, obj might be a Proxy because of inheritance
-  obj = proxyToRaw.get(obj) || obj;
+  // make sure to use the raw object here, object might be a Proxy because of inheritance
+  object = proxyToRaw.get(object) || object;
   // register and save (observable.prop -> runningReaction)
-  registerRunningReactionForKey(obj, key);
+  registerRunningReactionForKey(object, key);
   // if we are inside a reaction and observable.prop is an object wrap it in an observable too
   // this is needed to intercept property access on that object too (dynamic observable tree)
   if (hasRunningReaction() && typeof result === 'object' && result !== null) {
@@ -10054,58 +10124,57 @@ function get(obj, key, receiver) {
   return rawToProxy.get(result) || result;
 }
 
-function ownKeys(obj) {
-  registerRunningReactionForKey(obj, ENUMERATE);
-  return Reflect.ownKeys(obj);
+function ownKeys(object) {
+  registerRunningReactionForKey(object, ENUMERATE);
+  return Reflect.ownKeys(object);
 }
 
 // intercept set operations on observables to know when to trigger reactions
-function set(obj, key, value, receiver) {
+function set(object, key, newValue, receiver) {
   // make sure to do not pollute the raw object with observables
-  if (typeof value === 'object' && value !== null) {
-    value = proxyToRaw.get(value) || value;
+  if (typeof newValue === 'object' && newValue !== null) {
+    newValue = proxyToRaw.get(newValue) || newValue;
   }
-  // save if the value changed because of this set operation
-  var valueChanged = value !== obj[key];
-  // length is lazy, it can change without an explicit length set operation
-  var prevLength = Array.isArray(obj) && obj.length;
+  // save if the object had a descriptor for this key
+  var hadKey = hasOwnProperty$1.call(object, key);
+  // save the old value before the operation
+  var oldValue = object[key];
   // execute the set operation before running any reaction
-  var result = Reflect.set(obj, key, value, receiver);
-  // check if the length changed implicitly, because of out of bound set operations
-  var lengthChanged = prevLength !== false && prevLength !== obj.length;
+  var result = Reflect.set(object, key, newValue, receiver);
   // emit a warning and do not queue anything when another reaction is queued
   // from an already running reaction
   if (hasRunningReaction()) {
-    console.error("Mutating observables in reactions is forbidden. You set " + key + " to " + value + ".");
-    return result;
-  }
-  // if the target of the operation is not the raw receiver return
-  // (possible because of prototypal inheritance)
-  if (obj !== proxyToRaw.get(receiver)) {
+    console.error("Mutating observables in reactions is forbidden. You set " + key + " to " + newValue + ".");
     return result;
   }
   // do not queue reactions if it is a symbol keyed property
-  // or the set operation resulted in no value change
-  if (typeof key !== 'symbol' && valueChanged) {
-    queueReactionsForKey(obj, key);
-    queueReactionsForKey(obj, ENUMERATE);
+  // or the target of the operation is not the raw receiver
+  // (possible because of prototypal inheritance)
+  if (typeof key === 'symbol' || object !== proxyToRaw.get(receiver)) {
+    return result;
   }
-  // queue length reactions in case the length changed
-  if (lengthChanged) {
-    queueReactionsForKey(obj, 'length');
+  // queue if the set operation resulted in value change
+  if (newValue !== oldValue) {
+    queueReactionsForKey(object, key, { object: object, key: key, oldValue: oldValue, newValue: newValue, operation: 'set' });
+  }
+  // or if it added a new key
+  if (!hadKey) {
+    var iterationKey = Array.isArray(object) ? 'length' : ENUMERATE;
+    queueReactionsForKey(object, iterationKey, { object: object, key: key, newValue: newValue, operation: 'add' });
   }
   return result;
 }
 
-function deleteProperty(obj, key) {
+function deleteProperty(object, key) {
   // save if the object had the key
-  var hadKey = key in obj;
+  var hadKey = hasOwnProperty$1.call(object, key);
   // execute the delete operation before running any reaction
-  var result = Reflect.deleteProperty(obj, key);
+  var result = Reflect.deleteProperty(object, key);
   // only queue reactions for non symbol keyed property delete which resulted in an actual change
   if (typeof key !== 'symbol' && hadKey) {
-    queueReactionsForKey(obj, key);
-    queueReactionsForKey(obj, ENUMERATE);
+    queueReactionsForKey(object, key, { object: object, key: key, operation: 'delete' });
+    var iterationKey = Array.isArray(object) ? 'length' : ENUMERATE;
+    queueReactionsForKey(object, iterationKey, { object: object, key: key, operation: 'delete' });
   }
   return result;
 }
@@ -11987,6 +12056,27 @@ function factory(ReactComponent, isValidElement, ReactNoopUpdateQueue) {
      */
     componentWillUnmount: 'DEFINE_MANY',
 
+    /**
+     * Replacement for (deprecated) `componentWillMount`.
+     *
+     * @optional
+     */
+    UNSAFE_componentWillMount: 'DEFINE_MANY',
+
+    /**
+     * Replacement for (deprecated) `componentWillReceiveProps`.
+     *
+     * @optional
+     */
+    UNSAFE_componentWillReceiveProps: 'DEFINE_MANY',
+
+    /**
+     * Replacement for (deprecated) `componentWillUpdate`.
+     *
+     * @optional
+     */
+    UNSAFE_componentWillUpdate: 'DEFINE_MANY',
+
     // ==== Advanced methods ====
 
     /**
@@ -12000,6 +12090,23 @@ function factory(ReactComponent, isValidElement, ReactNoopUpdateQueue) {
      * @overridable
      */
     updateComponent: 'OVERRIDE_BASE'
+  };
+
+  /**
+   * Similar to ReactClassInterface but for static methods.
+   */
+  var ReactClassStaticInterface = {
+    /**
+     * This method is invoked after a component is instantiated and when it
+     * receives new props. Return an object to update state in response to
+     * prop changes. Return null to indicate no change to state.
+     *
+     * If an object is returned, its keys will be merged into the existing state.
+     *
+     * @return {object || null}
+     * @optional
+     */
+    getDerivedStateFromProps: 'DEFINE_MANY_MERGED'
   };
 
   /**
@@ -12175,6 +12282,7 @@ function factory(ReactComponent, isValidElement, ReactNoopUpdateQueue) {
     if (!statics) {
       return;
     }
+
     for (var name in statics) {
       var property = statics[name];
       if (!statics.hasOwnProperty(name)) {
@@ -12184,8 +12292,17 @@ function factory(ReactComponent, isValidElement, ReactNoopUpdateQueue) {
       var isReserved = name in RESERVED_SPEC_KEYS;
       _invariant(!isReserved, 'ReactClass: You are attempting to define a reserved ' + 'property, `%s`, that shouldn\'t be on the "statics" key. Define it ' + 'as an instance property instead; it will still be accessible on the ' + 'constructor.', name);
 
-      var isInherited = name in Constructor;
-      _invariant(!isInherited, 'ReactClass: You are attempting to define ' + '`%s` on your component more than once. This conflict may be ' + 'due to a mixin.', name);
+      var isAlreadyDefined = name in Constructor;
+      if (isAlreadyDefined) {
+        var specPolicy = ReactClassStaticInterface.hasOwnProperty(name) ? ReactClassStaticInterface[name] : null;
+
+        _invariant(specPolicy === 'DEFINE_MANY_MERGED', 'ReactClass: You are attempting to define ' + '`%s` on your component more than once. This conflict may be ' + 'due to a mixin.', name);
+
+        Constructor[name] = createMergedResultFunction(Constructor[name], property);
+
+        return;
+      }
+
       Constructor[name] = property;
     }
   }
@@ -12429,6 +12546,7 @@ function factory(ReactComponent, isValidElement, ReactNoopUpdateQueue) {
     if (process.env.NODE_ENV !== 'production') {
       warning(!Constructor.prototype.componentShouldUpdate, '%s has a method called ' + 'componentShouldUpdate(). Did you mean shouldComponentUpdate()? ' + 'The name is phrased as a question because the function is ' + 'expected to return a value.', spec.displayName || 'A component');
       warning(!Constructor.prototype.componentWillRecieveProps, '%s has a method called ' + 'componentWillRecieveProps(). Did you mean componentWillReceiveProps()?', spec.displayName || 'A component');
+      warning(!Constructor.prototype.UNSAFE_componentWillRecieveProps, '%s has a method called UNSAFE_componentWillRecieveProps(). ' + 'Did you mean UNSAFE_componentWillReceiveProps()?', spec.displayName || 'A component');
     }
 
     // Reduce time spent doing lookups by setting these on the prototype.
