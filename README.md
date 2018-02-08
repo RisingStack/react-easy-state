@@ -224,9 +224,9 @@ Triggered renders are passed to React for execution, there is no `forceUpdate` b
 - React Native: iOS 10 and above and Android with [community JSC](https://github.com/SoftwareMansion/jsc-android-buildscripts)
 - IE is not supported and never will be
 
-*This library is based on non polyfillable ES6 Proxies. Because of this, it will never support IE.
+*This library is based on non polyfillable ES6 Proxies. Because of this, it will never support IE.*
 
-React Native support is possible with the community JavaScriptCore for Android. Learn how to set it up [here](https://github.com/SoftwareMansion/jsc-android-buildscripts#how-to-use-it-with-my-react-native-app). It is pretty simple.*
+*React Native is supported on iOS and Android is supported with the community JavaScriptCore. Learn how to set it up [here](https://github.com/SoftwareMansion/jsc-android-buildscripts#how-to-use-it-with-my-react-native-app). It is pretty simple.*
 
 ## Performance
 
