@@ -16,12 +16,9 @@ function toReactiveComp (Comp) {
   // return a HOC which overwrites render, shouldComponentUpdate and componentWillUnmount
   // it decides when to run the new reactive methods and when to proxy to the original methods
   class ReactiveHOC extends BaseComp {
-    state = {
-      counter: 0
-    };
-
     constructor (props, context) {
       super(props, context)
+      this.state = this.state || {}
 
       if (!isStatelessComp) {
         // auto bind non react specific original methods to the component instance
@@ -30,7 +27,7 @@ function toReactiveComp (Comp) {
 
       // create a reactive render for the component
       this.render = observe(this.render, {
-        scheduler: () => this.setState({ counter: this.state.counter + 1 }),
+        scheduler: () => this.setState(this.state),
         lazy: true
       })
     }
@@ -51,8 +48,8 @@ function toReactiveComp (Comp) {
         return false
       }
 
-      // return true if it is a reactive render
-      if (state.counter !== nextState.counter) {
+      // return true if it is a reactive render or state changes
+      if (state !== nextState) {
         return true
       }
 

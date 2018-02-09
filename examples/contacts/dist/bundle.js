@@ -9744,8 +9744,8 @@ module.exports = getHostComponentFromComposite;
 // increase the default stack trace size of V8 from 10 to 20
 Error.stackTraceLimit = 20;
 
-var excludeSetTokens = ['Object.set', '__WEBPACK', '(<anonymous>)'];
-var excludeGetTokens = ['Object.get', '__WEBPACK', '(<anonymous>)'];
+var excludeSetTokens = ['Object.set', '__WEBPACK'];
+var excludeGetTokens = ['Object.get', '__WEBPACK'];
 
 function debugReaction(reaction, key, context) {
   // copy and extend the base context
@@ -10168,13 +10168,14 @@ function set(object, key, newValue, receiver) {
 function deleteProperty(object, key) {
   // save if the object had the key
   var hadKey = hasOwnProperty$1.call(object, key);
+  var oldValue = object[key];
   // execute the delete operation before running any reaction
   var result = Reflect.deleteProperty(object, key);
   // only queue reactions for non symbol keyed property delete which resulted in an actual change
   if (typeof key !== 'symbol' && hadKey) {
     queueReactionsForKey(object, key, { object: object, key: key, operation: 'delete' });
     var iterationKey = Array.isArray(object) ? 'length' : ENUMERATE;
-    queueReactionsForKey(object, iterationKey, { object: object, key: key, operation: 'delete' });
+    queueReactionsForKey(object, iterationKey, { object: object, key: key, oldValue: oldValue, operation: 'delete' });
   }
   return result;
 }
@@ -22769,13 +22770,10 @@ function toReactiveComp(Comp) {
   // return a HOC which overwrites render, shouldComponentUpdate and componentWillUnmount
   // it decides when to run the new reactive methods and when to proxy to the original methods
   class ReactiveHOC extends BaseComp {
-
     constructor(props, context) {
       super(props, context);
+      this.state = this.state || {};
 
-      this.state = {
-        counter: 0
-      };
       if (!isStatelessComp) {
         // auto bind non react specific original methods to the component instance
         Object(__WEBPACK_IMPORTED_MODULE_2__autoBind__["a" /* default */])(this, Comp.prototype, true);
@@ -22783,7 +22781,7 @@ function toReactiveComp(Comp) {
 
       // create a reactive render for the component
       this.render = Object(__WEBPACK_IMPORTED_MODULE_1__nx_js_observer_util__["b" /* observe */])(this.render, {
-        scheduler: () => this.setState({ counter: this.state.counter + 1 }),
+        scheduler: () => this.setState(this.state),
         lazy: true
       });
     }
@@ -22801,8 +22799,8 @@ function toReactiveComp(Comp) {
         return false;
       }
 
-      // return true if it is a reactive render
-      if (state.counter !== nextState.counter) {
+      // return true if it is a reactive render or state changes
+      if (state !== nextState) {
         return true;
       }
 
