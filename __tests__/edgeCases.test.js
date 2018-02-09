@@ -1,4 +1,4 @@
-import React, { Component, PureComponent } from 'react'
+import React, { Component } from 'react'
 import { view, store } from 'react-easy-state'
 import { mount } from 'enzyme'
 
