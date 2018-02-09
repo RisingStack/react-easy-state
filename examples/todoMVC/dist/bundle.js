@@ -22757,14 +22757,6 @@ module.exports = ReactDOMInvalidARIAHook;
 
 
 function view(Comp) {
-  if (typeof Comp !== 'function') {
-    throw new TypeError('view() expects a component as argument.');
-  }
-  // wrap the component in a reactive HOC
-  return toReactiveComp(Comp);
-}
-
-function toReactiveComp(Comp) {
   const isStatelessComp = !(Comp.prototype && Comp.prototype.isReactComponent);
   const BaseComp = isStatelessComp ? __WEBPACK_IMPORTED_MODULE_0_react__["Component"] : Comp;
   // return a HOC which overwrites render, shouldComponentUpdate and componentWillUnmount
@@ -22845,9 +22837,6 @@ function copyStaticProps(fromComp, toComp) {
 
 
 function store(obj = {}) {
-  if (typeof obj !== 'object' || obj === null) {
-    throw new TypeError('store() expects an object or undefined as argument');
-  }
   // create an observable store from the passed object
   // and binds all of its methods to the created observable
   const observableStore = Object(__WEBPACK_IMPORTED_MODULE_0__nx_js_observer_util__["a" /* observable */])(obj);

@@ -3,14 +3,6 @@ import { observe, unobserve } from '@nx-js/observer-util'
 import autoBind from './autoBind'
 
 export default function view (Comp) {
-  if (typeof Comp !== 'function') {
-    throw new TypeError('view() expects a component as argument.')
-  }
-  // wrap the component in a reactive HOC
-  return toReactiveComp(Comp)
-}
-
-function toReactiveComp (Comp) {
   const isStatelessComp = !(Comp.prototype && Comp.prototype.isReactComponent)
   const BaseComp = isStatelessComp ? Component : Comp
   // return a HOC which overwrites render, shouldComponentUpdate and componentWillUnmount

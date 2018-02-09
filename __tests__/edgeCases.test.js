@@ -3,18 +3,6 @@ import { view, store } from 'react-easy-state'
 import { mount } from 'enzyme'
 
 describe('errors', () => {
-  test('view() should throw on non component or function arguments', () => {
-    class Comp extends Component {}
-    class PureComp extends PureComponent {}
-    function FuncComp () {}
-
-    expect(() => view()).toThrow()
-    expect(() => view(12)).toThrow()
-    expect(() => view(Comp)).not.toThrow()
-    expect(() => view(PureComp)).not.toThrow()
-    expect(() => view(FuncComp)).not.toThrow()
-  })
-
   test('view() should respect shouldComponentUpdate', () => {
     const person = store({ name: 'Bob' })
     const MyComp = view(
