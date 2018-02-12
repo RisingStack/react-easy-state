@@ -15,29 +15,29 @@ class Contact extends Component {
     })
   }
 
-  onEdit () {
+  onEdit = () => {
     this.compStore.editing = true
   }
 
-  onDelete () {
+  onDelete = () => {
     appStore.deleteContact(this.props.contact)
   }
 
   // transfer finalized changes from the component store to the app store
-  onSave () {
+  onSave = () => {
     // mutating the store with Object.assign is possible, but it is generally hard to reason about and debug
     Object.assign(this.props.contact, this.compStore.currentContact)
     this.compStore.editing = false
   }
 
   // cancel changes by reverting to data from the main store
-  onCancel () {
+  onCancel = () => {
     // mutating the store with Object.assign is possible, but it is generally hard to reason about and debug
     Object.assign(this.compStore.currentContact, this.props.contact)
     this.compStore.editing = false
   }
 
-  onChange (ev) {
+  onChange = (ev) => {
     this.compStore.currentContact[ev.target.name] = ev.target.value
   }
 

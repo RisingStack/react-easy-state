@@ -10,12 +10,12 @@ class ContactCreator extends Component {
   })
 
   // transfer finalized contact from the component store to the app store
-  addContact () {
+  addContact = () => {
     appStore.addContact(this.compStore.newContact)
     this.compStore.newContact = { name: '', email: '' }
   }
 
-  onChange (ev) {
+  onChange = (ev) => {
     const { newContact } = this.compStore
     newContact[ev.target.name] = ev.target.value
   }

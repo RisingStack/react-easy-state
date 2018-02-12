@@ -1,16 +1,16 @@
 import { store } from 'react-easy-state'
 import moment from 'moment'
 
-const clock = {
+const clock = store({
   ticks: 0,
   start () {
-    this.intervalId = setInterval(() => this.ticks++, 10)
+    clock.intervalId = setInterval(() => clock.ticks++, 10)
   },
   stop () {
-    this.intervalId = clearInterval(this.intervalId)
+    clock.intervalId = clearInterval(clock.intervalId)
   },
   get time () {
-    const time = moment(0).millisecond(this.ticks * 10)
+    const time = moment(0).millisecond(clock.ticks * 10)
 
     return {
       seconds: time.format('mm:ss'),
@@ -18,15 +18,15 @@ const clock = {
     }
   },
   get isTicking () {
-    return this.intervalId !== undefined
+    return clock.intervalId !== undefined
   },
   toggle () {
-    this.isTicking ? this.stop() : this.start()
+    clock.isTicking ? clock.stop() : clock.start()
   },
   reset () {
-    this.ticks = 0
-    this.stop()
+    clock.ticks = 0
+    clock.stop()
   }
-}
+})
 
-export default store(clock)
+export default clock

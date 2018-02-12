@@ -44,11 +44,7 @@ const clock = store({ time: new Date() })
 setInterval(() => clock.time = new Date(), 1000)
 
 // reactive components re-render on store mutations
-function ClockComp () {
-  return <div>The time is: {clock.time}</div>
-}
-
-export default view(ClockComp)
+export default view(() => <div>{clock.time}</div>)
 ```
 
 ## Installation
@@ -93,8 +89,6 @@ const user = store({
 user.name = 'Bob'
 ```
 
-*Store methods are automatically bound to the store to make passing them as callbacks easier.*
-
 ### Creating reactive views
 
 Wrapping your components with `view` turns them into reactive views. A reactive view re-renders whenever a store - used inside its render - changes.
@@ -108,7 +102,7 @@ const user = store({
 })
 
 class HelloComp extends Component {
-  onChange (ev) {
+  onChange = (ev) => {
     user.name = ev.target.value  
   }
 
@@ -129,8 +123,6 @@ export default view(HelloComp)
 
 **Make sure to wrap all of your components with `view` - including stateful and stateless ones. If you do not wrap a component, it will not properly render on store mutations.**
 
-*View methods are automatically bound to the component to make passing them as callbacks easier.*
-
 <details>
 <summary><strong>Usage as a decorator</strong></summary>
 
@@ -146,7 +138,7 @@ const user = store({
 
 @view
 export default class HelloComp extends Component {
-  onChange (ev) {
+  onChange = (ev) => {
     user.name = ev.target.value  
   }
 

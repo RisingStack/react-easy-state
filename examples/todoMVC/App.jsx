@@ -6,12 +6,12 @@ import todos from './todosStore'
 
 // render is triggered whenever the relevant parts of the global todos store change
 class App extends Component {
-  changeFilter (ev) {
-    todos.changeFilter(ev.target.value)
+  changeFilter = (ev) => {
+    todos.filter = ev.target.value
   }
 
   // create a todo on Enter key press
-  createTodo (ev) {
+  createTodo = (ev) => {
     if (ev.keyCode === 13 && ev.target.value) {
       todos.create(ev.target.value)
       ev.target.value = ''

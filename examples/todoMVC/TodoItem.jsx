@@ -4,11 +4,11 @@ import { view } from 'react-easy-state'
 import todos from './todosStore'
 
 class TodoItem extends Component {
-  remove () {
+  remove = () => {
     todos.remove(this.props.id)
   }
 
-  toggle () {
+  toggle = () => {
     todos.toggle(this.props.id)
   }
 

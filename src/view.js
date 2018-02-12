@@ -1,6 +1,5 @@
 import { Component } from 'react'
 import { observe, unobserve } from '@nx-js/observer-util'
-import autoBind from './autoBind'
 
 export default function view (Comp) {
   const isStatelessComp = !(Comp.prototype && Comp.prototype.isReactComponent)
@@ -10,11 +9,6 @@ export default function view (Comp) {
   class ReactiveHOC extends BaseComp {
     constructor (props, context) {
       super(props, context)
-
-      if (!isStatelessComp) {
-        // auto bind non react specific original methods to the component instance
-        autoBind(this, Comp.prototype, true)
-      }
 
       // create a reactive render for the component
       this.render = observe(this.render, {
