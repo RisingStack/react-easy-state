@@ -4,7 +4,7 @@ import { observe, unobserve } from '@nx-js/observer-util'
 export default function view (Comp) {
   const isStatelessComp = !(Comp.prototype && Comp.prototype.isReactComponent)
   const BaseComp = isStatelessComp ? Component : Comp
-  
+
   // return a HOC which overwrites render, shouldComponentUpdate and componentWillUnmount
   // it decides when to run the new reactive methods and when to proxy to the original methods
   return class ReactiveHOC extends BaseComp {
@@ -18,6 +18,7 @@ export default function view (Comp) {
       super(props, context)
 
       // create a reactive render for the component
+      // run a dummy setState to schedule a new reactive render, avoid forceUpdate
       this.render = observe(this.render, {
         scheduler: () => this.setState({}),
         lazy: true
