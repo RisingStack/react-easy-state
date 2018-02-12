@@ -4,9 +4,16 @@ import { observe, unobserve } from '@nx-js/observer-util'
 export default function view (Comp) {
   const isStatelessComp = !(Comp.prototype && Comp.prototype.isReactComponent)
   const BaseComp = isStatelessComp ? Component : Comp
+  
   // return a HOC which overwrites render, shouldComponentUpdate and componentWillUnmount
   // it decides when to run the new reactive methods and when to proxy to the original methods
-  class ReactiveHOC extends BaseComp {
+  return class ReactiveHOC extends BaseComp {
+    static displayName = Comp.displayName || Comp.name
+    static contextTypes = Comp.contextTypes
+    static childContextTypes = Comp.childContextTypes
+    static propTypes = Comp.propTypes
+    static defaultProps = Comp.defaultProps
+
     constructor (props, context) {
       super(props, context)
 
@@ -56,16 +63,4 @@ export default function view (Comp) {
       unobserve(this.render)
     }
   }
-  // proxy react specific static variables to the reactive component
-  copyStaticProps(Comp, ReactiveHOC)
-  return ReactiveHOC
-}
-
-// copy react specific static props between passed and HOC components
-function copyStaticProps (fromComp, toComp) {
-  toComp.displayName = fromComp.displayName || fromComp.name
-  toComp.contextTypes = fromComp.contextTypes
-  toComp.childContextTypes = fromComp.childContextTypes
-  toComp.propTypes = fromComp.propTypes
-  toComp.defaultProps = fromComp.defaultProps
 }
