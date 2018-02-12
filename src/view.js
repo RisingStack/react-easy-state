@@ -10,7 +10,6 @@ export default function view (Comp) {
   class ReactiveHOC extends BaseComp {
     constructor (props, context) {
       super(props, context)
-      this.state = this.state || {}
 
       if (!isStatelessComp) {
         // auto bind non react specific original methods to the component instance
@@ -19,7 +18,7 @@ export default function view (Comp) {
 
       // create a reactive render for the component
       this.render = observe(this.render, {
-        scheduler: () => this.setState(this.state),
+        scheduler: () => this.setState({}),
         lazy: true
       })
     }
