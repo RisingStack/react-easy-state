@@ -31,8 +31,8 @@ describe('errors', () => {
   test('should not change vanilla setState behavior', () => {
     const MyComp = view(
       class extends Component {
-        state = { counter: 0 }
-        increment = () => this.setState({ counter: this.state.counter + 1 })
+        state = { counter: 0 };
+        increment = () => this.setState({ counter: this.state.counter + 1 });
 
         render () {
           return <div onClick={this.increment}>{this.state.counter}</div>
@@ -49,8 +49,8 @@ describe('errors', () => {
   test('should not change vanilla setState behavior', () => {
     const MyComp = view(
       class extends Component {
-        state = { counter: 0 }
-        increment = () => this.setState({ counter: this.state.counter + 1 })
+        state = { counter: 0 };
+        increment = () => this.setState({ counter: this.state.counter + 1 });
 
         render () {
           return <div onClick={this.increment}>{this.state.counter}</div>
@@ -67,8 +67,8 @@ describe('errors', () => {
   test("should not render when state or props don't change", () => {
     const MyComp = view(
       class extends Component {
-        state = { counter: 0 }
-        increment = () => this.setState({ counter: this.state.counter + 1 })
+        state = { counter: 0 };
+        increment = () => this.setState({ counter: this.state.counter + 1 });
 
         render () {
           return (

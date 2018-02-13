@@ -22669,22 +22669,33 @@ module.exports = ReactDOMInvalidARIAHook;
 
 
 function view(Comp) {
+  var _class, _temp;
+
   const isStatelessComp = !(Comp.prototype && Comp.prototype.isReactComponent);
   const BaseComp = isStatelessComp ? __WEBPACK_IMPORTED_MODULE_0_react__["Component"] : Comp;
+
+  const rawDevtool = typeof __REACT_EASY_STATE_DEVTOOL__ === 'function' && __REACT_EASY_STATE_DEVTOOL__;
+
+  const devtool = rawDevtool ? operation => rawDevtool(Object.assign({ Component: Comp }, operation)) : undefined;
+
   // return a HOC which overwrites render, shouldComponentUpdate and componentWillUnmount
   // it decides when to run the new reactive methods and when to proxy to the original methods
-  class ReactiveHOC extends BaseComp {
+  return _temp = _class = class ReactiveHOC extends BaseComp {
+
     constructor(props, context) {
       super(props, context);
 
       // create a reactive render for the component
+      // run a dummy setState to schedule a new reactive render, avoid forceUpdate
       this.render = Object(__WEBPACK_IMPORTED_MODULE_1__nx_js_observer_util__["b" /* observe */])(this.render, {
         scheduler: () => this.setState({}),
+        debugger: devtool,
         lazy: true
       });
     }
 
     render() {
+      devtool && devtool({ type: 'render' });
       return isStatelessComp ? Comp(this.props, this.context) : super.render();
     }
 
@@ -22716,19 +22727,7 @@ function view(Comp) {
       // clean up memory used by easyState
       Object(__WEBPACK_IMPORTED_MODULE_1__nx_js_observer_util__["c" /* unobserve */])(this.render);
     }
-  }
-  // proxy react specific static variables to the reactive component
-  copyStaticProps(Comp, ReactiveHOC);
-  return ReactiveHOC;
-}
-
-// copy react specific static props between passed and HOC components
-function copyStaticProps(fromComp, toComp) {
-  toComp.displayName = fromComp.displayName || fromComp.name;
-  toComp.contextTypes = fromComp.contextTypes;
-  toComp.childContextTypes = fromComp.childContextTypes;
-  toComp.propTypes = fromComp.propTypes;
-  toComp.defaultProps = fromComp.defaultProps;
+  }, _class.displayName = Comp.displayName || Comp.name, _class.contextTypes = Comp.contextTypes, _class.childContextTypes = Comp.childContextTypes, _class.propTypes = Comp.propTypes, _class.defaultProps = Comp.defaultProps, _temp;
 }
 
 /***/ }),

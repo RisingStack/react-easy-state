@@ -5,14 +5,22 @@ export default function view (Comp) {
   const isStatelessComp = !(Comp.prototype && Comp.prototype.isReactComponent)
   const BaseComp = isStatelessComp ? Component : Comp
 
+  const rawDevtool =
+    typeof __REACT_EASY_STATE_DEVTOOL__ === 'function' &&
+    __REACT_EASY_STATE_DEVTOOL__
+
+  const devtool = rawDevtool
+    ? operation => rawDevtool(Object.assign({ Component: Comp }, operation))
+    : undefined
+
   // return a HOC which overwrites render, shouldComponentUpdate and componentWillUnmount
   // it decides when to run the new reactive methods and when to proxy to the original methods
   return class ReactiveHOC extends BaseComp {
-    static displayName = Comp.displayName || Comp.name
-    static contextTypes = Comp.contextTypes
-    static childContextTypes = Comp.childContextTypes
-    static propTypes = Comp.propTypes
-    static defaultProps = Comp.defaultProps
+    static displayName = Comp.displayName || Comp.name;
+    static contextTypes = Comp.contextTypes;
+    static childContextTypes = Comp.childContextTypes;
+    static propTypes = Comp.propTypes;
+    static defaultProps = Comp.defaultProps;
 
     constructor (props, context) {
       super(props, context)
@@ -21,11 +29,13 @@ export default function view (Comp) {
       // run a dummy setState to schedule a new reactive render, avoid forceUpdate
       this.render = observe(this.render, {
         scheduler: () => this.setState({}),
+        debugger: devtool,
         lazy: true
       })
     }
 
     render () {
+      devtool && devtool({ type: 'render' })
       return isStatelessComp ? Comp(this.props, this.context) : super.render()
     }
 

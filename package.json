@@ -107,6 +107,9 @@
     "parser": "babel-eslint",
     "env": [
       "jest"
+    ],
+    "globals": [
+      "__REACT_EASY_STATE_DEVTOOL__"
     ]
   },
   "pre-push": [
