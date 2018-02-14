@@ -6,7 +6,7 @@ Simple React state management. Made with :heart: and ES6 Proxies.
 
 <a href="#platform-support"><img src="images/browser_support.png" alt="Browser support" width="450px" /></a>
 
-[Breaking change in v5](https://github.com/solkimicreb/react-easy-state/releases/tag/v5.0.0): the auto bind feature got removed. See the alternatives for your components at the [official React docs](https://reactjs.org/docs/handling-events.html) and for you stores at [the FAQ docs section](#my-stores-are-broken).
+**Breaking change in [v5](https://github.com/solkimicreb/react-easy-state/releases/tag/v5.0.0)**: the auto bind feature got removed. See the alternatives for your components at the [official React docs](https://reactjs.org/docs/handling-events.html) and for you stores at [the FAQ docs section](#my-stores-are-broken).
 
 <details>
 <summary><strong>Table of Contents</strong></summary>
