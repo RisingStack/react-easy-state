@@ -6,6 +6,8 @@ Simple React state management. Made with :heart: and ES6 Proxies.
 
 <a href="#platform-support"><img src="images/browser_support.png" alt="Browser support" width="450px" /></a>
 
+**Breaking change in v5:** the auto bind feature got removed. See the alternatives for your components at the [official React docs](https://reactjs.org/docs/handling-events.html) and for you stores at [the FAQ docs section](#my-stores-are-broken).
+
 <details>
 <summary><strong>Table of Contents</strong></summary>
 <!-- Do not edit the Table of Contents, instead regenerate with `npm run build-toc` -->
@@ -34,8 +36,6 @@ Simple React state management. Made with :heart: and ES6 Proxies.
 <!-- tocstop -->
 
 </details>
-
-**Breaking change in v5:** the auto bind feature got removed. See the alternatives for your components at the [official React docs](https://reactjs.org/docs/handling-events.html) and for you stores at [the FAQ docs section](#my-stores-are-broken).
 
 ## Introduction
 
