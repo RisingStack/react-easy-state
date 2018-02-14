@@ -43,21 +43,33 @@ export default function view (Comp, { devtool: rawDevtool } = {}) {
         super.shouldComponentUpdate &&
         !super.shouldComponentUpdate(nextProps, nextState)
       ) {
+        devtool && devtool({ type: 'render', renderType: 'blocked' })
         return false
       }
 
       // return true if it is a reactive render or state changes
       if (state !== nextState) {
+        devtool && devtool({ type: 'render', renderType: 'reactive' })
         return true
       }
 
       // the component should update if any of its props shallowly changed value
       const keys = Object.keys(props)
       const nextKeys = Object.keys(nextProps)
-      return (
+      if (
         nextKeys.length !== keys.length ||
         nextKeys.some(key => props[key] !== nextProps[key])
-      )
+      ) {
+        devtool &&
+          devtool({
+            type: 'render',
+            renderType: 'normal',
+            props: nextProps,
+            oldProps: props
+          })
+        return true
+      }
+      return false
     }
 
     componentWillUnmount () {

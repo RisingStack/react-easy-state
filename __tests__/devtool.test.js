@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { view, store } from 'react-easy-state'
 import { mount } from 'enzyme'
 
@@ -23,7 +23,7 @@ describe('devtool', () => {
     devtool.mockClear()
     person.name = 'Ann'
 
-    expect(devtool.mock.calls.length).toBe(2)
+    expect(devtool.mock.calls.length).toBe(3)
     expect(devtool.mock.calls[0][0]).toEqual({
       Component: rawComp,
       target: rawPerson,
@@ -33,16 +33,96 @@ describe('devtool', () => {
       receiver: person,
       type: 'set'
     })
-    /* expect(devtool.mock.calls[1][0]).toEqual({
-      Component: rawComp,
-      type: 'render'
-    }) */
     expect(devtool.mock.calls[1][0]).toEqual({
+      Component: rawComp,
+      type: 'render',
+      renderType: 'reactive'
+    })
+    expect(devtool.mock.calls[2][0]).toEqual({
       Component: rawComp,
       target: rawPerson,
       key: 'name',
       receiver: person,
       type: 'get'
+    })
+  })
+
+  test('devtool should be called on view render because of props change', () => {
+    const rawPerson = { name: 'Bob' }
+    const person = store(rawPerson)
+    const rawChild = ({ name }) => <div>{name}</div>
+    const Child = view(rawChild, { devtool })
+    const rawComp = () => <Child name={person.name} />
+    const MyComp = view(rawComp, { devtool })
+
+    mount(<MyComp />)
+    devtool.mockClear()
+
+    person.name = 'Ann'
+
+    expect(devtool.mock.calls.length).toBe(4)
+    expect(devtool.mock.calls[0][0]).toEqual({
+      Component: rawComp,
+      target: rawPerson,
+      key: 'name',
+      value: 'Ann',
+      oldValue: 'Bob',
+      receiver: person,
+      type: 'set'
+    })
+    expect(devtool.mock.calls[1][0]).toEqual({
+      Component: rawComp,
+      type: 'render',
+      renderType: 'reactive'
+    })
+    expect(devtool.mock.calls[2][0]).toEqual({
+      Component: rawComp,
+      target: rawPerson,
+      key: 'name',
+      receiver: person,
+      type: 'get'
+    })
+    expect(devtool.mock.calls[3][0]).toEqual({
+      Component: rawChild,
+      type: 'render',
+      renderType: 'normal',
+      oldProps: { name: 'Bob' },
+      props: { name: 'Ann' }
+    })
+  })
+
+  test('devtool should be called on renders blocked with shouldComponentUpdate', () => {
+    const rawPerson = { name: 'Bob' }
+    const person = store(rawPerson)
+    class RawComp extends Component {
+      render () {
+        return <div>{person.name}</div>
+      }
+      shouldComponentUpdate () {
+        return false
+      }
+    }
+    const MyComp = view(RawComp, { devtool })
+
+    mount(<MyComp />)
+
+    devtool.mockClear()
+    person.name = 'Ann'
+
+    expect(devtool.mock.calls.length).toBe(2)
+    expect(devtool.mock.calls[0][0]).toEqual({
+      Component: RawComp,
+      target: rawPerson,
+      key: 'name',
+      value: 'Ann',
+      oldValue: 'Bob',
+      receiver: person,
+      type: 'set'
+    })
+    expect(devtool.mock.calls[1][0]).toEqual({
+      Component: RawComp,
+      type: 'render',
+      renderType: 'blocked'
     })
   })
 
