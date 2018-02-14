@@ -6,7 +6,7 @@ Simple React state management. Made with :heart: and ES6 Proxies.
 
 <a href="#platform-support"><img src="images/browser_support.png" alt="Browser support" width="450px" /></a>
 
-**Breaking change in [v5](https://github.com/solkimicreb/react-easy-state/releases/tag/v5.0.0)**: the auto bind feature got removed. See the alternatives for your components at the [official React docs](https://reactjs.org/docs/handling-events.html) and for you stores at [the FAQ docs section](#my-stores-are-broken).
+**Breaking change in [v5](https://github.com/solkimicreb/react-easy-state/releases/tag/v5.0.0)**: the auto bind feature got removed. See the alternatives for your components at the [official React docs](https://reactjs.org/docs/handling-events.html) and for you stores at [the FAQ docs section](#my-store-methods-are-broken).
 
 <details>
 <summary><strong>Table of Contents</strong></summary>
@@ -39,12 +39,10 @@ Simple React state management. Made with :heart: and ES6 Proxies.
 
 ## Introduction
 
-Easy State has two rules:
+Easy State has two rules.
 
 1. Always wrap you components with `view`.
 2. Always wrap you state store objects with `store`.
-
-This is enough for it to automatically update your views when needed - no matter how exotically you mutate your state stores. With this freedom you can invent and use your personal favorite state management patterns.
 
 ```js
 import React from 'react'
@@ -55,6 +53,8 @@ setInterval(() => clock.time = new Date(), 1000)
 
 export default view(() => <div>{clock.time}</div>)
 ```
+
+This is enough for it to automatically update your views when needed - no matter how exotically you mutate your state stores. With this freedom you can invent and use your personal favorite state management patterns.
 
 ## Installation
 
@@ -240,7 +240,7 @@ This works as expected, even when you pass store methods as callbacks.
 
 ### My views are not rendering
 
-You should wrap your state stores in `store` as early as possible to make them reactive.
+You should wrap your state stores with `store` as early as possible to make them reactive.
 
 ```js
 const person = { name: 'Bob' }
@@ -249,7 +249,9 @@ person.name = 'Ann'
 export default store(person)
 ```
 
-The above example wouldn't cause any re-renders on the `person.name = 'Ann'` mutation, because it is targeted at the raw object. Mutating the raw - none `store` wrapped object - won't schedule renders. Do this instead of the above code.
+The above example wouldn't trigger re-renders on the `person.name = 'Ann'` mutation, because it is targeted at the raw object. Mutating the raw - none `store` wrapped object - won't schedule renders.
+
+Do this instead of the above code.
 
 ```js
 const person = store({ name: 'Bob' })

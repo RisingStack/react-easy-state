@@ -9811,6 +9811,7 @@ function releaseReactionKeyConnection(reactionsForKey) {
 }
 
 var runningReaction;
+var isDebugging = false;
 
 function runAsReaction(reaction, fn, context, args) {
   // do not build reactive relations, if the reaction is unobserved
@@ -9836,9 +9837,7 @@ function runAsReaction(reaction, fn, context, args) {
 // register the currently running reaction to be queued again on obj.key mutations
 function registerRunningReactionForOperation(operation) {
   if (runningReaction) {
-    if (runningReaction.debugger) {
-      runningReaction.debugger(operation);
-    }
+    debugOperation(runningReaction, operation);
     registerReactionForOperation(runningReaction, operation);
   }
 }
@@ -9849,9 +9848,7 @@ function queueReactionsForOperation(operation) {
 }
 
 function queueReaction(reaction) {
-  if (reaction.debugger) {
-    reaction.debugger(this);
-  }
+  debugOperation(reaction, this);
   // queue the reaction for later execution or run it immediately
   if (typeof reaction.scheduler === 'function') {
     reaction.scheduler(reaction);
@@ -9859,6 +9856,17 @@ function queueReaction(reaction) {
     reaction.scheduler.add(reaction);
   } else {
     reaction();
+  }
+}
+
+function debugOperation(reaction, operation) {
+  if (reaction.debugger && !isDebugging) {
+    try {
+      isDebugging = true;
+      reaction.debugger(operation);
+    } finally {
+      isDebugging = false;
+    }
   }
 }
 
@@ -10100,7 +10108,14 @@ function set(target, key, value, receiver) {
   if (!hadKey) {
     queueReactionsForOperation({ target: target, key: key, value: value, receiver: receiver, type: 'add' });
   } else if (value !== oldValue) {
-    queueReactionsForOperation({ target: target, key: key, value: value, oldValue: oldValue, receiver: receiver, type: 'set' });
+    queueReactionsForOperation({
+      target: target,
+      key: key,
+      value: value,
+      oldValue: oldValue,
+      receiver: receiver,
+      type: 'set'
+    });
   }
   return result;
 }
@@ -22668,13 +22683,11 @@ module.exports = ReactDOMInvalidARIAHook;
 
 
 
-function view(Comp) {
+function view(Comp, { devtool: rawDevtool } = {}) {
   var _class, _temp;
 
   const isStatelessComp = !(Comp.prototype && Comp.prototype.isReactComponent);
   const BaseComp = isStatelessComp ? __WEBPACK_IMPORTED_MODULE_0_react__["Component"] : Comp;
-
-  const rawDevtool = typeof __REACT_EASY_STATE_DEVTOOL__ === 'function' && __REACT_EASY_STATE_DEVTOOL__;
 
   const devtool = rawDevtool ? operation => rawDevtool(Object.assign({ Component: Comp }, operation)) : undefined;
 
@@ -22695,7 +22708,6 @@ function view(Comp) {
     }
 
     render() {
-      devtool && devtool({ type: 'render' });
       return isStatelessComp ? Comp(this.props, this.context) : super.render();
     }
 
@@ -22705,18 +22717,29 @@ function view(Comp) {
 
       // respect the case when user prohibits updates
       if (super.shouldComponentUpdate && !super.shouldComponentUpdate(nextProps, nextState)) {
+        devtool && devtool({ type: 'render', renderType: 'blocked' });
         return false;
       }
 
       // return true if it is a reactive render or state changes
       if (state !== nextState) {
+        devtool && devtool({ type: 'render', renderType: 'reactive' });
         return true;
       }
 
       // the component should update if any of its props shallowly changed value
       const keys = Object.keys(props);
       const nextKeys = Object.keys(nextProps);
-      return nextKeys.length !== keys.length || nextKeys.some(key => props[key] !== nextProps[key]);
+      if (nextKeys.length !== keys.length || nextKeys.some(key => props[key] !== nextProps[key])) {
+        devtool && devtool({
+          type: 'render',
+          renderType: 'normal',
+          props: nextProps,
+          oldProps: props
+        });
+        return true;
+      }
+      return false;
     }
 
     componentWillUnmount() {
