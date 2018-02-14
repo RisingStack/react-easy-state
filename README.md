@@ -18,9 +18,13 @@ Simple React state management. Made with :heart: and ES6 Proxies.
   + [Creating stores](#creating-stores)
   + [Creating reactive views](#creating-reactive-views)
   + [Creating local stores](#creating-local-stores)
+* [Examples with live demos](#examples-with-live-demos)
+* [Articles](#articles)
+* [FAQ and Gotchas](#faq-and-gotchas)
   + [What triggers a re-render?](#what-triggers-a-re-render)
   + [When do renders run?](#when-do-renders-run)
-* [Examples with live demos](#examples-with-live-demos)
+  + [My store methods are broken](#my-store-methods-are-broken)
+  + [My views are not rendering](#my-views-are-not-rendering)
 * [Platform support](#platform-support)
 * [Performance](#performance)
 * [How does it work?](#how-does-it-work)
@@ -31,19 +35,24 @@ Simple React state management. Made with :heart: and ES6 Proxies.
 
 </details>
 
+**Breaking change in v5:** the auto bind feature got removed. See the alternatives for your components at the [official React docs](https://reactjs.org/docs/handling-events.html) and for you stores at [the FAQ docs section](#my-stores-are-broken).
+
 ## Introduction
 
-Easy State consists of two wrapper functions only. `store` creates state stores and `view` creates reactive components, which re-render when state stores are mutated. The rest is just plain JavaScript, that you already know.
+Easy State has two rules:
+
+1. Always wrap you components with `view`.
+2. Always wrap you state store objects with `store`.
+
+This is enough for it to automatically update your views when needed - no matter how exotically you mutate your state stores. With this freedom you can invent and use your personal favorite state management patterns.
 
 ```js
 import React from 'react'
 import { store, view } from 'react-easy-state'
 
-// stores are normal objects
 const clock = store({ time: new Date() })
 setInterval(() => clock.time = new Date(), 1000)
 
-// reactive components re-render on store mutations
 export default view(() => <div>{clock.time}</div>)
 ```
 
@@ -69,14 +78,9 @@ npm start
 
 ## Usage
 
-Easy State consists of two functions:
-
-- `store` turns your objects into observable state stores.
-- `view` makes your components reactive. Reactive components re-render when stores are mutated.
-
 ### Creating stores
 
-`store` creates a state store from the passed object and returns it. State stores are just like normal JS objects. (To be precise, they are transparent proxies of the original object.)
+`store` creates a state store from the passed object and returns it. State stores are just like normal JS objects. (To be precise, they are transparent reactive proxies of the original object.)
 
 ```js
 import { store } from 'react-easy-state'
@@ -91,20 +95,16 @@ user.name = 'Bob'
 
 ### Creating reactive views
 
-Wrapping your components with `view` turns them into reactive views. A reactive view re-renders whenever a store - used inside its render - changes.
+Wrapping your components with `view` turns them into reactive views. A reactive view re-renders whenever a store's property - used inside its render - changes.
 
 ```js
 import React, { Component } from 'react'
 import { view, store } from 'react-easy-state'
 
-const user = store({
-  name: 'Bob'
-})
+const user = store({ name: 'Bob' })
 
 class HelloComp extends Component {
-  onChange = (ev) => {
-    user.name = ev.target.value  
-  }
+  onChange = (ev) => (user.name = ev.target.value)
 
   // the render is triggered whenever user.name changes
   render () {
@@ -137,11 +137,10 @@ const user = store({
 })
 
 @view
-export default class HelloComp extends Component {
-  onChange = (ev) => {
-    user.name = ev.target.value  
-  }
+class HelloComp extends Component {
+  onChange = (ev) => (user.name = ev.target.value)
 
+  // the render is triggered whenever user.name changes
   render () {
     return (
       <div>
@@ -158,40 +157,28 @@ export default class HelloComp extends Component {
 
 ### Creating local stores
 
-A singleton global store is perfect for something like the current user, but sometimes having local component states is better. Just create a store as a component property in these cases.
+A singleton global store is perfect for something like the current user, but sometimes having local component states is a better fit. Just create a store as a component property in these cases.
 
 ```js
 import React, { Component } from 'react'
 import { view, store } from 'react-easy-state'
 
 class ClockComp extends Component {
-  clock = store({
-    time: new Date()
-  })
+  clock = store({ time: new Date() })
 
   componentDidMount () {
     setInterval(() => this.clock.time = new Date(), 1000)
   }
 
-  // the render is triggered whenever this.clock.time changes
   render () {
     return <div>{this.clock.time}</div>
   }
 }
 
-// the component must be wrapped with `view`
 export default view(ClockComp)
 ```
 
-That's it! You know everything to master React state management.
-
-### What triggers a re-render?
-
-Easy State monitors which store properties are used inside each component's render method. If a store property changes, the relevant renders are automatically triggered. You can do **anything** with stores without worrying about edge cases. Use nested properties, expando properties, arrays, ES6 collections or getters/setters - as a few examples. Easy State will monitor their mutations and trigger renders when needed. (Big cheer for [ES6 Proxies](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy)!)
-
-### When do renders run?
-
-Triggered renders are passed to React for execution, there is no `forceUpdate` behind the scenes. This means that component lifecycle hooks behave as expected and that React Fiber works nicely together with Easy State. On top of this, you can use your favorite testing frameworks without any added hassle.
+That's it, You know everything to master React state management! Check some of the [examples](#examples-with-live-demos) and [articles](#articles) for more inspiration or the [FAQ section](#faq-and-gotchas) for common issues.
 
 ## Examples with live demos
 
@@ -204,6 +191,72 @@ Triggered renders are passed to React for execution, there is no `forceUpdate` b
 
 - [TodoMVC](https://solkimicreb.github.io/react-easy-state/examples/todoMVC/dist) ([source](/examples/todoMVC/)): a classic TodoMVC implementation with a lot of computed data and implicit reactivity.
 - [Contacts Table](https://solkimicreb.github.io/react-easy-state/examples/contacts/dist) ([source](/examples/contacts/)): a data grid implementation with a mix of global and local state.
+
+## Articles
+
+- [Introducing React Easy State](https://blog.risingstack.com/introducing-react-easy-state/): making a simple stopwatch.
+- [Stress Testing React Easy State](https://medium.com/@solkimicreb/stress-testing-react-easy-state-ac321fa3becf): demonstrating Easy State's reactivity with increasingly exotic state mutations.
+- [The Ideas Behind React Easy State](https://medium.com/dailyjs/the-ideas-behind-react-easy-state-901d70e4d03e): a deep dive under the hood of Easy State.
+
+## FAQ and Gotchas
+
+### What triggers a re-render?
+
+Easy State monitors which store properties are used inside each component's render method. If a store property changes, the relevant renders are automatically triggered. You can do **anything** with stores without worrying about edge cases. Use nested properties, computed properties with getters/setters, dynamic properties, arrays, ES6 collections and prototypal inheritance - as a few examples. Easy State will monitor all state mutations and trigger renders when needed. (Big cheer for [ES6 Proxies](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy)!)
+
+### When do renders run?
+
+Triggered renders are passed to React for execution, there is no `forceUpdate` behind the scenes. This means that component lifecycle hooks behave as expected and that React Fiber works nicely together with Easy State. On top of this, you can use your favorite testing frameworks without any added hassle.
+
+### My store methods are broken
+
+You should not use the `this` keyword in the methods of your state stores.
+
+```js
+const counter = store({
+  num: 0,
+  increment () {
+    this.num++
+  }
+})
+
+export default view(() =>
+  <div onClick={counter.increment}>{counter.num}</div>
+)
+```
+
+The above snippet won't work, because `increment` is passed as a callback and looses its `this`. You should use the direct object reference - `counter` in this case - instead of `this`.
+
+```js
+const counter = store({
+  num: 0,
+  increment () {
+    counter.num++
+  }
+})
+```
+
+This works as expected, even when you pass store methods as callbacks.
+
+### My views are not rendering
+
+You should wrap your state stores in `store` as early as possible to make them reactive.
+
+```js
+const person = { name: 'Bob' }
+person.name = 'Ann'
+
+export default store(person)
+```
+
+The above example wouldn't cause any re-renders on the `person.name = 'Ann'` mutation, because it is targeted at the raw object. Mutating the raw - none `store` wrapped object - won't schedule renders. Do this instead of the above code.
+
+```js
+const person = store({ name: 'Bob' })
+person.name = 'Ann'
+
+export default person
+```
 
 ## Platform support
 
@@ -228,7 +281,7 @@ You can compare Easy State with plain React and other state management libraries
 
 ## How does it work?
 
-Under the hood Easy State uses the [@nx-js/observer-util](https://github.com/nx-js/observer-util) library, which relies on [ES6 Proxies](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) to observe state changes. Thanks to the Proxies it doesn't have edge cases. You can write any JS code without worrying about your render functions. [This blog post](https://blog.risingstack.com/writing-a-javascript-framework-data-binding-es6-proxy/) gives a little sneak peek under the hood of the `observer-util`.
+Under the hood Easy State uses the [@nx-js/observer-util](https://github.com/nx-js/observer-util) library, which relies on [ES6 Proxies](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) to observe state changes. [This blog post](https://blog.risingstack.com/writing-a-javascript-framework-data-binding-es6-proxy/) gives a little sneak peek under the hood of the `observer-util`.
 
 ## Alternative builds
 
