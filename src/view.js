@@ -1,13 +1,9 @@
 import { Component } from 'react'
 import { observe, unobserve } from '@nx-js/observer-util'
 
-export default function view (Comp) {
+export default function view (Comp, { devtool: rawDevtool } = {}) {
   const isStatelessComp = !(Comp.prototype && Comp.prototype.isReactComponent)
   const BaseComp = isStatelessComp ? Component : Comp
-
-  const rawDevtool =
-    typeof __REACT_EASY_STATE_DEVTOOL__ === 'function' &&
-    __REACT_EASY_STATE_DEVTOOL__
 
   const devtool = rawDevtool
     ? operation => rawDevtool(Object.assign({ Component: Comp }, operation))
@@ -35,7 +31,6 @@ export default function view (Comp) {
     }
 
     render () {
-      devtool && devtool({ type: 'render' })
       return isStatelessComp ? Comp(this.props, this.context) : super.render()
     }
 
