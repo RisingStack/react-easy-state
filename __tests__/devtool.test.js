@@ -6,24 +6,24 @@ describe('devtool', () => {
   let devtool
 
   beforeAll(() => {
-    devtool = global.__REACT_EASY_STATE_DEVTOOL__ = jest.fn()
+    devtool = jest.fn()
   })
   afterAll(() => {
-    devtool = global.__REACT_EASY_STATE_DEVTOOL__ = undefined
+    devtool = undefined
   })
 
   test('devtool should be called on store mutations, renders and get operations - related to a view', () => {
     const rawPerson = { name: 'Bob' }
     const person = store(rawPerson)
     const rawComp = () => <div>{person.name}</div>
-    const MyComp = view(rawComp)
+    const MyComp = view(rawComp, { devtool })
 
     mount(<MyComp />)
 
     devtool.mockClear()
     person.name = 'Ann'
 
-    expect(devtool.mock.calls.length).toBe(3)
+    expect(devtool.mock.calls.length).toBe(2)
     expect(devtool.mock.calls[0][0]).toEqual({
       Component: rawComp,
       target: rawPerson,
@@ -33,11 +33,11 @@ describe('devtool', () => {
       receiver: person,
       type: 'set'
     })
-    expect(devtool.mock.calls[1][0]).toEqual({
+    /* expect(devtool.mock.calls[1][0]).toEqual({
       Component: rawComp,
       type: 'render'
-    })
-    expect(devtool.mock.calls[2][0]).toEqual({
+    }) */
+    expect(devtool.mock.calls[1][0]).toEqual({
       Component: rawComp,
       target: rawPerson,
       key: 'name',
@@ -50,7 +50,7 @@ describe('devtool', () => {
     const rawPerson = { name: 'Bob' }
     const person = store(rawPerson)
     const rawComp = () => <div>{person.name}</div>
-    const MyComp = view(rawComp)
+    const MyComp = view(rawComp, { devtool })
 
     mount(<MyComp />)
 
