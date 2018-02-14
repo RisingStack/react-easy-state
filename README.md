@@ -260,6 +260,10 @@ person.name = 'Ann'
 export default person
 ```
 
+### Naming local stores as state
+
+Naming your local state stores as `state` may conflict with React linter rules, which guard against direct state mutations. Please use a more descriptive name instead.
+
 ## Platform support
 
 - Node: 6 and above
