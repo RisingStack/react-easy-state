@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`01. Initial state 1`] = `
+exports[`Contacts App should add new contacts: 01. Initial state 1`] = `
 <App>
   <table>
     <thead>
@@ -49,52 +49,9 @@ exports[`01. Initial state 1`] = `
     </tbody>
   </table>
 </App>
-------------HTML PREVIEW---------------
-<App>
-  <table>
-    <thead>
-      <tr>
-        <th>
-          Name
-        </th>
-        <th>
-          Email
-        </th>
-        <th>
-          Action
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <ContactCreator>
-        <tr class="contact-creator">
-          <td>
-            <input
-              name="name"
-              placeholder="Contact name..."
-              value=""
-            >
-          </td>
-          <td>
-            <input
-              name="email"
-              placeholder="Contact email..."
-              value=""
-            >
-          </td>
-          <td>
-            <button>
-              Add Contact
-            </button>
-          </td>
-        </tr>
-      </ContactCreator>
-    </tbody>
-  </table>
-</App>
 `;
 
-exports[`02. Create Test Contact name 1`] = `
+exports[`Contacts App should add new contacts: 02. Create Test Contact name 1`] = `
 <App>
   <table>
     <thead>
@@ -143,52 +100,9 @@ exports[`02. Create Test Contact name 1`] = `
     </tbody>
   </table>
 </App>
-------------HTML PREVIEW---------------
-<App>
-  <table>
-    <thead>
-      <tr>
-        <th>
-          Name
-        </th>
-        <th>
-          Email
-        </th>
-        <th>
-          Action
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <ContactCreator>
-        <tr class="contact-creator">
-          <td>
-            <input
-              name="name"
-              placeholder="Contact name..."
-              value="Test Contact"
-            >
-          </td>
-          <td>
-            <input
-              name="email"
-              placeholder="Contact email..."
-              value=""
-            >
-          </td>
-          <td>
-            <button>
-              Add Contact
-            </button>
-          </td>
-        </tr>
-      </ContactCreator>
-    </tbody>
-  </table>
-</App>
 `;
 
-exports[`03. Create Test Contact email 1`] = `
+exports[`Contacts App should add new contacts: 03. Create Test Contact email 1`] = `
 <App>
   <table>
     <thead>
@@ -237,52 +151,9 @@ exports[`03. Create Test Contact email 1`] = `
     </tbody>
   </table>
 </App>
-------------HTML PREVIEW---------------
-<App>
-  <table>
-    <thead>
-      <tr>
-        <th>
-          Name
-        </th>
-        <th>
-          Email
-        </th>
-        <th>
-          Action
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <ContactCreator>
-        <tr class="contact-creator">
-          <td>
-            <input
-              name="name"
-              placeholder="Contact name..."
-              value="Test Contact"
-            >
-          </td>
-          <td>
-            <input
-              name="email"
-              placeholder="Contact email..."
-              value="test.contact@gmail.com"
-            >
-          </td>
-          <td>
-            <button>
-              Add Contact
-            </button>
-          </td>
-        </tr>
-      </ContactCreator>
-    </tbody>
-  </table>
-</App>
 `;
 
-exports[`04. Add Test Contact 1`] = `
+exports[`Contacts App should add new contacts: 04. Add Test Contact 1`] = `
 <App>
   <table>
     <thead>
@@ -306,6 +177,7 @@ exports[`04. Add Test Contact 1`] = `
             "name": "Test Contact",
           }
         }
+        key="test.contact@gmail.com"
       >
         <tr
           className="contact-display"
@@ -366,70 +238,9 @@ exports[`04. Add Test Contact 1`] = `
     </tbody>
   </table>
 </App>
-------------HTML PREVIEW---------------
-<App>
-  <table>
-    <thead>
-      <tr>
-        <th>
-          Name
-        </th>
-        <th>
-          Email
-        </th>
-        <th>
-          Action
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <Contact>
-        <tr class="contact-display">
-          <td>
-            Test Contact
-          </td>
-          <td>
-            test.contact@gmail.com
-          </td>
-          <td>
-            <button>
-              <i class="zmdi zmdi-edit"></i>
-            </button>
-            <button>
-              <i class="zmdi zmdi-delete"></i>
-            </button>
-          </td>
-        </tr>
-      </Contact>
-      <ContactCreator>
-        <tr class="contact-creator">
-          <td>
-            <input
-              name="name"
-              placeholder="Contact name..."
-              value=""
-            >
-          </td>
-          <td>
-            <input
-              name="email"
-              placeholder="Contact email..."
-              value=""
-            >
-          </td>
-          <td>
-            <button>
-              Add Contact
-            </button>
-          </td>
-        </tr>
-      </ContactCreator>
-    </tbody>
-  </table>
-</App>
 `;
 
-exports[`05. Add Placeholder Contact 1`] = `
+exports[`Contacts App should add new contacts: 05. Add Placeholder Contact 1`] = `
 <App>
   <table>
     <thead>
@@ -453,6 +264,7 @@ exports[`05. Add Placeholder Contact 1`] = `
             "name": "Test Contact",
           }
         }
+        key="test.contact@gmail.com"
       >
         <tr
           className="contact-display"
@@ -488,6 +300,7 @@ exports[`05. Add Placeholder Contact 1`] = `
             "name": "Placeholder",
           }
         }
+        key="Placeholder"
       >
         <tr
           className="contact-display"
@@ -548,7 +361,9 @@ exports[`05. Add Placeholder Contact 1`] = `
     </tbody>
   </table>
 </App>
-------------HTML PREVIEW---------------
+`;
+
+exports[`Contacts App should delete contact: 12. Delete Placeholder Contact 1`] = `
 <App>
   <table>
     <thead>
@@ -565,60 +380,66 @@ exports[`05. Add Placeholder Contact 1`] = `
       </tr>
     </thead>
     <tbody>
-      <Contact>
-        <tr class="contact-display">
+      <Contact
+        contact={
+          Object {
+            "email": "test.contact.edited@gmail.com",
+            "name": "Test Contact",
+          }
+        }
+        key="test.contact.edited@gmail.com"
+      >
+        <tr
+          className="contact-display"
+        >
           <td>
             Test Contact
           </td>
           <td>
-            test.contact@gmail.com
+            test.contact.edited@gmail.com
           </td>
           <td>
-            <button>
-              <i class="zmdi zmdi-edit"></i>
+            <button
+              onClick={[Function]}
+            >
+              <i
+                className="zmdi zmdi-edit"
+              />
             </button>
-            <button>
-              <i class="zmdi zmdi-delete"></i>
-            </button>
-          </td>
-        </tr>
-      </Contact>
-      <Contact>
-        <tr class="contact-display">
-          <td>
-            Placeholder
-          </td>
-          <td>
-            Placeholder
-          </td>
-          <td>
-            <button>
-              <i class="zmdi zmdi-edit"></i>
-            </button>
-            <button>
-              <i class="zmdi zmdi-delete"></i>
+            <button
+              onClick={[Function]}
+            >
+              <i
+                className="zmdi zmdi-delete"
+              />
             </button>
           </td>
         </tr>
       </Contact>
       <ContactCreator>
-        <tr class="contact-creator">
+        <tr
+          className="contact-creator"
+        >
           <td>
             <input
               name="name"
+              onChange={[Function]}
               placeholder="Contact name..."
               value=""
-            >
+            />
           </td>
           <td>
             <input
               name="email"
+              onChange={[Function]}
               placeholder="Contact email..."
               value=""
-            >
+            />
           </td>
           <td>
-            <button>
+            <button
+              onClick={[Function]}
+            >
               Add Contact
             </button>
           </td>
@@ -629,7 +450,58 @@ exports[`05. Add Placeholder Contact 1`] = `
 </App>
 `;
 
-exports[`06. Switch Test Contact to Edit Mode 1`] = `
+exports[`Contacts App should delete contact: 13. Delete Test Contact 1`] = `
+<App>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Email
+        </th>
+        <th>
+          Action
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <ContactCreator>
+        <tr
+          className="contact-creator"
+        >
+          <td>
+            <input
+              name="name"
+              onChange={[Function]}
+              placeholder="Contact name..."
+              value=""
+            />
+          </td>
+          <td>
+            <input
+              name="email"
+              onChange={[Function]}
+              placeholder="Contact email..."
+              value=""
+            />
+          </td>
+          <td>
+            <button
+              onClick={[Function]}
+            >
+              Add Contact
+            </button>
+          </td>
+        </tr>
+      </ContactCreator>
+    </tbody>
+  </table>
+</App>
+`;
+
+exports[`Contacts App should edit contact: 06. Switch Test Contact to Edit Mode 1`] = `
 <App>
   <table>
     <thead>
@@ -653,6 +525,7 @@ exports[`06. Switch Test Contact to Edit Mode 1`] = `
             "name": "Test Contact",
           }
         }
+        key="test.contact@gmail.com"
       >
         <tr
           className="contact-editor"
@@ -697,6 +570,7 @@ exports[`06. Switch Test Contact to Edit Mode 1`] = `
             "name": "Placeholder",
           }
         }
+        key="Placeholder"
       >
         <tr
           className="contact-display"
@@ -757,95 +631,9 @@ exports[`06. Switch Test Contact to Edit Mode 1`] = `
     </tbody>
   </table>
 </App>
-------------HTML PREVIEW---------------
-<App>
-  <table>
-    <thead>
-      <tr>
-        <th>
-          Name
-        </th>
-        <th>
-          Email
-        </th>
-        <th>
-          Action
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <Contact>
-        <tr class="contact-editor">
-          <td>
-            <input
-              autoFocus
-              name="name"
-              value="Test Contact"
-            >
-          </td>
-          <td>
-            <input
-              name="email"
-              value="test.contact@gmail.com"
-            >
-          </td>
-          <td>
-            <button>
-              <i class="zmdi zmdi-save"></i>
-            </button>
-            <button>
-              <i class="zmdi zmdi-close"></i>
-            </button>
-          </td>
-        </tr>
-      </Contact>
-      <Contact>
-        <tr class="contact-display">
-          <td>
-            Placeholder
-          </td>
-          <td>
-            Placeholder
-          </td>
-          <td>
-            <button>
-              <i class="zmdi zmdi-edit"></i>
-            </button>
-            <button>
-              <i class="zmdi zmdi-delete"></i>
-            </button>
-          </td>
-        </tr>
-      </Contact>
-      <ContactCreator>
-        <tr class="contact-creator">
-          <td>
-            <input
-              name="name"
-              placeholder="Contact name..."
-              value=""
-            >
-          </td>
-          <td>
-            <input
-              name="email"
-              placeholder="Contact email..."
-              value=""
-            >
-          </td>
-          <td>
-            <button>
-              Add Contact
-            </button>
-          </td>
-        </tr>
-      </ContactCreator>
-    </tbody>
-  </table>
-</App>
 `;
 
-exports[`07. Edit Test Contact name 1`] = `
+exports[`Contacts App should edit contact: 07. Edit Test Contact name 1`] = `
 <App>
   <table>
     <thead>
@@ -869,6 +657,7 @@ exports[`07. Edit Test Contact name 1`] = `
             "name": "Test Contact",
           }
         }
+        key="test.contact@gmail.com"
       >
         <tr
           className="contact-editor"
@@ -913,6 +702,7 @@ exports[`07. Edit Test Contact name 1`] = `
             "name": "Placeholder",
           }
         }
+        key="Placeholder"
       >
         <tr
           className="contact-display"
@@ -973,95 +763,9 @@ exports[`07. Edit Test Contact name 1`] = `
     </tbody>
   </table>
 </App>
-------------HTML PREVIEW---------------
-<App>
-  <table>
-    <thead>
-      <tr>
-        <th>
-          Name
-        </th>
-        <th>
-          Email
-        </th>
-        <th>
-          Action
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <Contact>
-        <tr class="contact-editor">
-          <td>
-            <input
-              autoFocus
-              name="name"
-              value="Edited Test Contact"
-            >
-          </td>
-          <td>
-            <input
-              name="email"
-              value="test.contact@gmail.com"
-            >
-          </td>
-          <td>
-            <button>
-              <i class="zmdi zmdi-save"></i>
-            </button>
-            <button>
-              <i class="zmdi zmdi-close"></i>
-            </button>
-          </td>
-        </tr>
-      </Contact>
-      <Contact>
-        <tr class="contact-display">
-          <td>
-            Placeholder
-          </td>
-          <td>
-            Placeholder
-          </td>
-          <td>
-            <button>
-              <i class="zmdi zmdi-edit"></i>
-            </button>
-            <button>
-              <i class="zmdi zmdi-delete"></i>
-            </button>
-          </td>
-        </tr>
-      </Contact>
-      <ContactCreator>
-        <tr class="contact-creator">
-          <td>
-            <input
-              name="name"
-              placeholder="Contact name..."
-              value=""
-            >
-          </td>
-          <td>
-            <input
-              name="email"
-              placeholder="Contact email..."
-              value=""
-            >
-          </td>
-          <td>
-            <button>
-              Add Contact
-            </button>
-          </td>
-        </tr>
-      </ContactCreator>
-    </tbody>
-  </table>
-</App>
 `;
 
-exports[`08. Cancel Test Contact edit 1`] = `
+exports[`Contacts App should edit contact: 08. Cancel Test Contact edit 1`] = `
 <App>
   <table>
     <thead>
@@ -1085,6 +789,7 @@ exports[`08. Cancel Test Contact edit 1`] = `
             "name": "Test Contact",
           }
         }
+        key="test.contact@gmail.com"
       >
         <tr
           className="contact-display"
@@ -1120,6 +825,7 @@ exports[`08. Cancel Test Contact edit 1`] = `
             "name": "Placeholder",
           }
         }
+        key="Placeholder"
       >
         <tr
           className="contact-display"
@@ -1180,88 +886,9 @@ exports[`08. Cancel Test Contact edit 1`] = `
     </tbody>
   </table>
 </App>
-------------HTML PREVIEW---------------
-<App>
-  <table>
-    <thead>
-      <tr>
-        <th>
-          Name
-        </th>
-        <th>
-          Email
-        </th>
-        <th>
-          Action
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <Contact>
-        <tr class="contact-display">
-          <td>
-            Test Contact
-          </td>
-          <td>
-            test.contact@gmail.com
-          </td>
-          <td>
-            <button>
-              <i class="zmdi zmdi-edit"></i>
-            </button>
-            <button>
-              <i class="zmdi zmdi-delete"></i>
-            </button>
-          </td>
-        </tr>
-      </Contact>
-      <Contact>
-        <tr class="contact-display">
-          <td>
-            Placeholder
-          </td>
-          <td>
-            Placeholder
-          </td>
-          <td>
-            <button>
-              <i class="zmdi zmdi-edit"></i>
-            </button>
-            <button>
-              <i class="zmdi zmdi-delete"></i>
-            </button>
-          </td>
-        </tr>
-      </Contact>
-      <ContactCreator>
-        <tr class="contact-creator">
-          <td>
-            <input
-              name="name"
-              placeholder="Contact name..."
-              value=""
-            >
-          </td>
-          <td>
-            <input
-              name="email"
-              placeholder="Contact email..."
-              value=""
-            >
-          </td>
-          <td>
-            <button>
-              Add Contact
-            </button>
-          </td>
-        </tr>
-      </ContactCreator>
-    </tbody>
-  </table>
-</App>
 `;
 
-exports[`09. Switch Test Contact to edit Mode 1`] = `
+exports[`Contacts App should edit contact: 09. Switch Test Contact to edit Mode 1`] = `
 <App>
   <table>
     <thead>
@@ -1285,6 +912,7 @@ exports[`09. Switch Test Contact to edit Mode 1`] = `
             "name": "Test Contact",
           }
         }
+        key="test.contact@gmail.com"
       >
         <tr
           className="contact-editor"
@@ -1329,6 +957,7 @@ exports[`09. Switch Test Contact to edit Mode 1`] = `
             "name": "Placeholder",
           }
         }
+        key="Placeholder"
       >
         <tr
           className="contact-display"
@@ -1389,95 +1018,9 @@ exports[`09. Switch Test Contact to edit Mode 1`] = `
     </tbody>
   </table>
 </App>
-------------HTML PREVIEW---------------
-<App>
-  <table>
-    <thead>
-      <tr>
-        <th>
-          Name
-        </th>
-        <th>
-          Email
-        </th>
-        <th>
-          Action
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <Contact>
-        <tr class="contact-editor">
-          <td>
-            <input
-              autoFocus
-              name="name"
-              value="Test Contact"
-            >
-          </td>
-          <td>
-            <input
-              name="email"
-              value="test.contact@gmail.com"
-            >
-          </td>
-          <td>
-            <button>
-              <i class="zmdi zmdi-save"></i>
-            </button>
-            <button>
-              <i class="zmdi zmdi-close"></i>
-            </button>
-          </td>
-        </tr>
-      </Contact>
-      <Contact>
-        <tr class="contact-display">
-          <td>
-            Placeholder
-          </td>
-          <td>
-            Placeholder
-          </td>
-          <td>
-            <button>
-              <i class="zmdi zmdi-edit"></i>
-            </button>
-            <button>
-              <i class="zmdi zmdi-delete"></i>
-            </button>
-          </td>
-        </tr>
-      </Contact>
-      <ContactCreator>
-        <tr class="contact-creator">
-          <td>
-            <input
-              name="name"
-              placeholder="Contact name..."
-              value=""
-            >
-          </td>
-          <td>
-            <input
-              name="email"
-              placeholder="Contact email..."
-              value=""
-            >
-          </td>
-          <td>
-            <button>
-              Add Contact
-            </button>
-          </td>
-        </tr>
-      </ContactCreator>
-    </tbody>
-  </table>
-</App>
 `;
 
-exports[`10. Edit Test Contact email 1`] = `
+exports[`Contacts App should edit contact: 10. Edit Test Contact email 1`] = `
 <App>
   <table>
     <thead>
@@ -1501,6 +1044,7 @@ exports[`10. Edit Test Contact email 1`] = `
             "name": "Test Contact",
           }
         }
+        key="test.contact@gmail.com"
       >
         <tr
           className="contact-editor"
@@ -1545,6 +1089,7 @@ exports[`10. Edit Test Contact email 1`] = `
             "name": "Placeholder",
           }
         }
+        key="Placeholder"
       >
         <tr
           className="contact-display"
@@ -1605,95 +1150,9 @@ exports[`10. Edit Test Contact email 1`] = `
     </tbody>
   </table>
 </App>
-------------HTML PREVIEW---------------
-<App>
-  <table>
-    <thead>
-      <tr>
-        <th>
-          Name
-        </th>
-        <th>
-          Email
-        </th>
-        <th>
-          Action
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <Contact>
-        <tr class="contact-editor">
-          <td>
-            <input
-              autoFocus
-              name="name"
-              value="Test Contact"
-            >
-          </td>
-          <td>
-            <input
-              name="email"
-              value="test.contact.edited@gmail.com"
-            >
-          </td>
-          <td>
-            <button>
-              <i class="zmdi zmdi-save"></i>
-            </button>
-            <button>
-              <i class="zmdi zmdi-close"></i>
-            </button>
-          </td>
-        </tr>
-      </Contact>
-      <Contact>
-        <tr class="contact-display">
-          <td>
-            Placeholder
-          </td>
-          <td>
-            Placeholder
-          </td>
-          <td>
-            <button>
-              <i class="zmdi zmdi-edit"></i>
-            </button>
-            <button>
-              <i class="zmdi zmdi-delete"></i>
-            </button>
-          </td>
-        </tr>
-      </Contact>
-      <ContactCreator>
-        <tr class="contact-creator">
-          <td>
-            <input
-              name="name"
-              placeholder="Contact name..."
-              value=""
-            >
-          </td>
-          <td>
-            <input
-              name="email"
-              placeholder="Contact email..."
-              value=""
-            >
-          </td>
-          <td>
-            <button>
-              Add Contact
-            </button>
-          </td>
-        </tr>
-      </ContactCreator>
-    </tbody>
-  </table>
-</App>
 `;
 
-exports[`11. Save Test Contact edit 1`] = `
+exports[`Contacts App should edit contact: 11. Save Test Contact edit 1`] = `
 <App>
   <table>
     <thead>
@@ -1717,6 +1176,7 @@ exports[`11. Save Test Contact edit 1`] = `
             "name": "Test Contact",
           }
         }
+        key="test.contact.edited@gmail.com"
       >
         <tr
           className="contact-display"
@@ -1752,6 +1212,7 @@ exports[`11. Save Test Contact edit 1`] = `
             "name": "Placeholder",
           }
         }
+        key="Placeholder"
       >
         <tr
           className="contact-display"
@@ -1804,326 +1265,6 @@ exports[`11. Save Test Contact edit 1`] = `
             <button
               onClick={[Function]}
             >
-              Add Contact
-            </button>
-          </td>
-        </tr>
-      </ContactCreator>
-    </tbody>
-  </table>
-</App>
-------------HTML PREVIEW---------------
-<App>
-  <table>
-    <thead>
-      <tr>
-        <th>
-          Name
-        </th>
-        <th>
-          Email
-        </th>
-        <th>
-          Action
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <Contact>
-        <tr class="contact-display">
-          <td>
-            Test Contact
-          </td>
-          <td>
-            test.contact.edited@gmail.com
-          </td>
-          <td>
-            <button>
-              <i class="zmdi zmdi-edit"></i>
-            </button>
-            <button>
-              <i class="zmdi zmdi-delete"></i>
-            </button>
-          </td>
-        </tr>
-      </Contact>
-      <Contact>
-        <tr class="contact-display">
-          <td>
-            Placeholder
-          </td>
-          <td>
-            Placeholder
-          </td>
-          <td>
-            <button>
-              <i class="zmdi zmdi-edit"></i>
-            </button>
-            <button>
-              <i class="zmdi zmdi-delete"></i>
-            </button>
-          </td>
-        </tr>
-      </Contact>
-      <ContactCreator>
-        <tr class="contact-creator">
-          <td>
-            <input
-              name="name"
-              placeholder="Contact name..."
-              value=""
-            >
-          </td>
-          <td>
-            <input
-              name="email"
-              placeholder="Contact email..."
-              value=""
-            >
-          </td>
-          <td>
-            <button>
-              Add Contact
-            </button>
-          </td>
-        </tr>
-      </ContactCreator>
-    </tbody>
-  </table>
-</App>
-`;
-
-exports[`12. Delete Placeholder Contact 1`] = `
-<App>
-  <table>
-    <thead>
-      <tr>
-        <th>
-          Name
-        </th>
-        <th>
-          Email
-        </th>
-        <th>
-          Action
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <Contact
-        contact={
-          Object {
-            "email": "test.contact.edited@gmail.com",
-            "name": "Test Contact",
-          }
-        }
-      >
-        <tr
-          className="contact-display"
-        >
-          <td>
-            Test Contact
-          </td>
-          <td>
-            test.contact.edited@gmail.com
-          </td>
-          <td>
-            <button
-              onClick={[Function]}
-            >
-              <i
-                className="zmdi zmdi-edit"
-              />
-            </button>
-            <button
-              onClick={[Function]}
-            >
-              <i
-                className="zmdi zmdi-delete"
-              />
-            </button>
-          </td>
-        </tr>
-      </Contact>
-      <ContactCreator>
-        <tr
-          className="contact-creator"
-        >
-          <td>
-            <input
-              name="name"
-              onChange={[Function]}
-              placeholder="Contact name..."
-              value=""
-            />
-          </td>
-          <td>
-            <input
-              name="email"
-              onChange={[Function]}
-              placeholder="Contact email..."
-              value=""
-            />
-          </td>
-          <td>
-            <button
-              onClick={[Function]}
-            >
-              Add Contact
-            </button>
-          </td>
-        </tr>
-      </ContactCreator>
-    </tbody>
-  </table>
-</App>
-------------HTML PREVIEW---------------
-<App>
-  <table>
-    <thead>
-      <tr>
-        <th>
-          Name
-        </th>
-        <th>
-          Email
-        </th>
-        <th>
-          Action
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <Contact>
-        <tr class="contact-display">
-          <td>
-            Test Contact
-          </td>
-          <td>
-            test.contact.edited@gmail.com
-          </td>
-          <td>
-            <button>
-              <i class="zmdi zmdi-edit"></i>
-            </button>
-            <button>
-              <i class="zmdi zmdi-delete"></i>
-            </button>
-          </td>
-        </tr>
-      </Contact>
-      <ContactCreator>
-        <tr class="contact-creator">
-          <td>
-            <input
-              name="name"
-              placeholder="Contact name..."
-              value=""
-            >
-          </td>
-          <td>
-            <input
-              name="email"
-              placeholder="Contact email..."
-              value=""
-            >
-          </td>
-          <td>
-            <button>
-              Add Contact
-            </button>
-          </td>
-        </tr>
-      </ContactCreator>
-    </tbody>
-  </table>
-</App>
-`;
-
-exports[`13. Delete Test Contact 1`] = `
-<App>
-  <table>
-    <thead>
-      <tr>
-        <th>
-          Name
-        </th>
-        <th>
-          Email
-        </th>
-        <th>
-          Action
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <ContactCreator>
-        <tr
-          className="contact-creator"
-        >
-          <td>
-            <input
-              name="name"
-              onChange={[Function]}
-              placeholder="Contact name..."
-              value=""
-            />
-          </td>
-          <td>
-            <input
-              name="email"
-              onChange={[Function]}
-              placeholder="Contact email..."
-              value=""
-            />
-          </td>
-          <td>
-            <button
-              onClick={[Function]}
-            >
-              Add Contact
-            </button>
-          </td>
-        </tr>
-      </ContactCreator>
-    </tbody>
-  </table>
-</App>
-------------HTML PREVIEW---------------
-<App>
-  <table>
-    <thead>
-      <tr>
-        <th>
-          Name
-        </th>
-        <th>
-          Email
-        </th>
-        <th>
-          Action
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <ContactCreator>
-        <tr class="contact-creator">
-          <td>
-            <input
-              name="name"
-              placeholder="Contact name..."
-              value=""
-            >
-          </td>
-          <td>
-            <input
-              name="email"
-              placeholder="Contact email..."
-              value=""
-            >
-          </td>
-          <td>
-            <button>
               Add Contact
             </button>
           </td>

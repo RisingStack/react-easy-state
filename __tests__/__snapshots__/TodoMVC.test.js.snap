@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`01. Initial state 1`] = `
+exports[`TodoMVC App should add todos: 01. Initial state 1`] = `
 <App>
   <div
     className="todoapp"
@@ -20,24 +20,9 @@ exports[`01. Initial state 1`] = `
     </header>
   </div>
 </App>
-------------HTML PREVIEW---------------
-<App>
-  <div class="todoapp">
-    <header class="header">
-      <h1>
-        todos
-      </h1>
-      <input
-        autoFocus
-        class="new-todo"
-        placeholder="What needs to be done?"
-      >
-    </header>
-  </div>
-</App>
 `;
 
-exports[`02. Add Test Todo 1`] = `
+exports[`TodoMVC App should add todos: 02. Add Test Todo 1`] = `
 <App>
   <div
     className="todoapp"
@@ -74,6 +59,7 @@ exports[`02. Add Test Todo 1`] = `
       >
         <TodoItem
           id={0}
+          key="0"
           title="Test Todo"
         >
           <li
@@ -133,73 +119,9 @@ exports[`02. Add Test Todo 1`] = `
     </footer>
   </div>
 </App>
-------------HTML PREVIEW---------------
-<App>
-  <div class="todoapp">
-    <header class="header">
-      <h1>
-        todos
-      </h1>
-      <input
-        autoFocus
-        class="new-todo"
-        placeholder="What needs to be done?"
-      >
-    </header>
-    <section class="main">
-      <input
-        class="toggle-all"
-        type="checkbox"
-      >
-      <label for="toggle-all">
-        Mark all as complete
-      </label>
-      <ul class="todo-list">
-        <TodoItem title="Test Todo">
-          <li class="view">
-            <input
-              class="toggle"
-              type="checkbox"
-            >
-            <label>
-              Test Todo
-            </label>
-            <button class="destroy"></button>
-          </li>
-        </TodoItem>
-      </ul>
-    </section>
-    <footer class="footer">
-      <span class="todo-count">
-        1
-         items left
-      </span>
-      <div class="filters">
-        <button
-          class="selected"
-          value="all"
-        >
-          All
-        </button>
-        <button
-          class=""
-          value="active"
-        >
-          Active
-        </button>
-        <button
-          class=""
-          value="completed"
-        >
-          Completed
-        </button>
-      </div>
-    </footer>
-  </div>
-</App>
 `;
 
-exports[`03. Add Other Todo 1`] = `
+exports[`TodoMVC App should add todos: 03. Add Other Todo 1`] = `
 <App>
   <div
     className="todoapp"
@@ -236,6 +158,7 @@ exports[`03. Add Other Todo 1`] = `
       >
         <TodoItem
           id={0}
+          key="0"
           title="Test Todo"
         >
           <li
@@ -258,6 +181,7 @@ exports[`03. Add Other Todo 1`] = `
         </TodoItem>
         <TodoItem
           id={1}
+          key="1"
           title="Other Todo"
         >
           <li
@@ -317,85 +241,9 @@ exports[`03. Add Other Todo 1`] = `
     </footer>
   </div>
 </App>
-------------HTML PREVIEW---------------
-<App>
-  <div class="todoapp">
-    <header class="header">
-      <h1>
-        todos
-      </h1>
-      <input
-        autoFocus
-        class="new-todo"
-        placeholder="What needs to be done?"
-      >
-    </header>
-    <section class="main">
-      <input
-        class="toggle-all"
-        type="checkbox"
-      >
-      <label for="toggle-all">
-        Mark all as complete
-      </label>
-      <ul class="todo-list">
-        <TodoItem title="Test Todo">
-          <li class="view">
-            <input
-              class="toggle"
-              type="checkbox"
-            >
-            <label>
-              Test Todo
-            </label>
-            <button class="destroy"></button>
-          </li>
-        </TodoItem>
-        <TodoItem title="Other Todo">
-          <li class="view">
-            <input
-              class="toggle"
-              type="checkbox"
-            >
-            <label>
-              Other Todo
-            </label>
-            <button class="destroy"></button>
-          </li>
-        </TodoItem>
-      </ul>
-    </section>
-    <footer class="footer">
-      <span class="todo-count">
-        2
-         items left
-      </span>
-      <div class="filters">
-        <button
-          class="selected"
-          value="all"
-        >
-          All
-        </button>
-        <button
-          class=""
-          value="active"
-        >
-          Active
-        </button>
-        <button
-          class=""
-          value="completed"
-        >
-          Completed
-        </button>
-      </div>
-    </footer>
-  </div>
-</App>
 `;
 
-exports[`04. Add Final Todo 1`] = `
+exports[`TodoMVC App should add todos: 04. Add Final Todo 1`] = `
 <App>
   <div
     className="todoapp"
@@ -432,6 +280,7 @@ exports[`04. Add Final Todo 1`] = `
       >
         <TodoItem
           id={0}
+          key="0"
           title="Test Todo"
         >
           <li
@@ -454,6 +303,7 @@ exports[`04. Add Final Todo 1`] = `
         </TodoItem>
         <TodoItem
           id={1}
+          key="1"
           title="Other Todo"
         >
           <li
@@ -476,6 +326,7 @@ exports[`04. Add Final Todo 1`] = `
         </TodoItem>
         <TodoItem
           id={2}
+          key="2"
           title="Final Todo"
         >
           <li
@@ -535,97 +386,9 @@ exports[`04. Add Final Todo 1`] = `
     </footer>
   </div>
 </App>
-------------HTML PREVIEW---------------
-<App>
-  <div class="todoapp">
-    <header class="header">
-      <h1>
-        todos
-      </h1>
-      <input
-        autoFocus
-        class="new-todo"
-        placeholder="What needs to be done?"
-      >
-    </header>
-    <section class="main">
-      <input
-        class="toggle-all"
-        type="checkbox"
-      >
-      <label for="toggle-all">
-        Mark all as complete
-      </label>
-      <ul class="todo-list">
-        <TodoItem title="Test Todo">
-          <li class="view">
-            <input
-              class="toggle"
-              type="checkbox"
-            >
-            <label>
-              Test Todo
-            </label>
-            <button class="destroy"></button>
-          </li>
-        </TodoItem>
-        <TodoItem title="Other Todo">
-          <li class="view">
-            <input
-              class="toggle"
-              type="checkbox"
-            >
-            <label>
-              Other Todo
-            </label>
-            <button class="destroy"></button>
-          </li>
-        </TodoItem>
-        <TodoItem title="Final Todo">
-          <li class="view">
-            <input
-              class="toggle"
-              type="checkbox"
-            >
-            <label>
-              Final Todo
-            </label>
-            <button class="destroy"></button>
-          </li>
-        </TodoItem>
-      </ul>
-    </section>
-    <footer class="footer">
-      <span class="todo-count">
-        3
-         items left
-      </span>
-      <div class="filters">
-        <button
-          class="selected"
-          value="all"
-        >
-          All
-        </button>
-        <button
-          class=""
-          value="active"
-        >
-          Active
-        </button>
-        <button
-          class=""
-          value="completed"
-        >
-          Completed
-        </button>
-      </div>
-    </footer>
-  </div>
-</App>
 `;
 
-exports[`05. Toggle Test Todo to completed 1`] = `
+exports[`TodoMVC App should clear completed: 11. Clear completed 1`] = `
 <App>
   <div
     className="todoapp"
@@ -661,15 +424,16 @@ exports[`05. Toggle Test Todo to completed 1`] = `
         className="todo-list"
       >
         <TodoItem
-          completed={true}
+          completed={false}
           id={0}
+          key="0"
           title="Test Todo"
         >
           <li
-            className="view completed"
+            className="view"
           >
             <input
-              checked={true}
+              checked={false}
               className="toggle"
               onChange={[Function]}
               type="checkbox"
@@ -685,28 +449,7 @@ exports[`05. Toggle Test Todo to completed 1`] = `
         </TodoItem>
         <TodoItem
           id={1}
-          title="Other Todo"
-        >
-          <li
-            className="view"
-          >
-            <input
-              checked={false}
-              className="toggle"
-              onChange={[Function]}
-              type="checkbox"
-            />
-            <label>
-              Other Todo
-            </label>
-            <button
-              className="destroy"
-              onClick={[Function]}
-            />
-          </li>
-        </TodoItem>
-        <TodoItem
-          id={2}
+          key="1"
           title="Final Todo"
         >
           <li
@@ -763,113 +506,12 @@ exports[`05. Toggle Test Todo to completed 1`] = `
           Completed
         </button>
       </div>
-      <button
-        className="clear-completed"
-        onClick={[Function]}
-      >
-        Clear completed
-      </button>
-    </footer>
-  </div>
-</App>
-------------HTML PREVIEW---------------
-<App>
-  <div class="todoapp">
-    <header class="header">
-      <h1>
-        todos
-      </h1>
-      <input
-        autoFocus
-        class="new-todo"
-        placeholder="What needs to be done?"
-      >
-    </header>
-    <section class="main">
-      <input
-        class="toggle-all"
-        type="checkbox"
-      >
-      <label for="toggle-all">
-        Mark all as complete
-      </label>
-      <ul class="todo-list">
-        <TodoItem
-          completed
-          title="Test Todo"
-        >
-          <li class="view completed">
-            <input
-              checked
-              class="toggle"
-              type="checkbox"
-            >
-            <label>
-              Test Todo
-            </label>
-            <button class="destroy"></button>
-          </li>
-        </TodoItem>
-        <TodoItem title="Other Todo">
-          <li class="view">
-            <input
-              class="toggle"
-              type="checkbox"
-            >
-            <label>
-              Other Todo
-            </label>
-            <button class="destroy"></button>
-          </li>
-        </TodoItem>
-        <TodoItem title="Final Todo">
-          <li class="view">
-            <input
-              class="toggle"
-              type="checkbox"
-            >
-            <label>
-              Final Todo
-            </label>
-            <button class="destroy"></button>
-          </li>
-        </TodoItem>
-      </ul>
-    </section>
-    <footer class="footer">
-      <span class="todo-count">
-        2
-         items left
-      </span>
-      <div class="filters">
-        <button
-          class="selected"
-          value="all"
-        >
-          All
-        </button>
-        <button
-          class=""
-          value="active"
-        >
-          Active
-        </button>
-        <button
-          class=""
-          value="completed"
-        >
-          Completed
-        </button>
-      </div>
-      <button class="clear-completed">
-        Clear completed
-      </button>
     </footer>
   </div>
 </App>
 `;
 
-exports[`06. Toggle Other Todo to completed 1`] = `
+exports[`TodoMVC App should delete todo: 14. Delete Test Todo 1`] = `
 <App>
   <div
     className="todoapp"
@@ -905,53 +547,9 @@ exports[`06. Toggle Other Todo to completed 1`] = `
         className="todo-list"
       >
         <TodoItem
-          completed={true}
+          completed={false}
           id={0}
-          title="Test Todo"
-        >
-          <li
-            className="view completed"
-          >
-            <input
-              checked={true}
-              className="toggle"
-              onChange={[Function]}
-              type="checkbox"
-            />
-            <label>
-              Test Todo
-            </label>
-            <button
-              className="destroy"
-              onClick={[Function]}
-            />
-          </li>
-        </TodoItem>
-        <TodoItem
-          completed={true}
-          id={1}
-          title="Other Todo"
-        >
-          <li
-            className="view completed"
-          >
-            <input
-              checked={true}
-              className="toggle"
-              onChange={[Function]}
-              type="checkbox"
-            />
-            <label>
-              Other Todo
-            </label>
-            <button
-              className="destroy"
-              onClick={[Function]}
-            />
-          </li>
-        </TodoItem>
-        <TodoItem
-          id={2}
+          key="0"
           title="Final Todo"
         >
           <li
@@ -1008,6 +606,106 @@ exports[`06. Toggle Other Todo to completed 1`] = `
           Completed
         </button>
       </div>
+    </footer>
+  </div>
+</App>
+`;
+
+exports[`TodoMVC App should filter todos: 08. Filter completed 1`] = `
+<App>
+  <div
+    className="todoapp"
+  >
+    <header
+      className="header"
+    >
+      <h1>
+        todos
+      </h1>
+      <input
+        autoFocus={true}
+        className="new-todo"
+        onKeyUp={[Function]}
+        placeholder="What needs to be done?"
+      />
+    </header>
+    <section
+      className="main"
+    >
+      <input
+        checked={false}
+        className="toggle-all"
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <label
+        htmlFor="toggle-all"
+      >
+        Mark all as complete
+      </label>
+      <ul
+        className="todo-list"
+      >
+        <TodoItem
+          completed={true}
+          id={0}
+          key="0"
+          title="Other Todo"
+        >
+          <li
+            className="view completed"
+          >
+            <input
+              checked={true}
+              className="toggle"
+              onChange={[Function]}
+              type="checkbox"
+            />
+            <label>
+              Other Todo
+            </label>
+            <button
+              className="destroy"
+              onClick={[Function]}
+            />
+          </li>
+        </TodoItem>
+      </ul>
+    </section>
+    <footer
+      className="footer"
+    >
+      <span
+        className="todo-count"
+      >
+        2
+         items left
+      </span>
+      <div
+        className="filters"
+      >
+        <button
+          className=""
+          onClick={[Function]}
+          value="all"
+        >
+          All
+        </button>
+        <button
+          className=""
+          onClick={[Function]}
+          value="active"
+        >
+          Active
+        </button>
+        <button
+          className="selected"
+          onClick={[Function]}
+          value="completed"
+        >
+          Completed
+        </button>
+      </div>
       <button
         className="clear-completed"
         onClick={[Function]}
@@ -1017,108 +715,9 @@ exports[`06. Toggle Other Todo to completed 1`] = `
     </footer>
   </div>
 </App>
-------------HTML PREVIEW---------------
-<App>
-  <div class="todoapp">
-    <header class="header">
-      <h1>
-        todos
-      </h1>
-      <input
-        autoFocus
-        class="new-todo"
-        placeholder="What needs to be done?"
-      >
-    </header>
-    <section class="main">
-      <input
-        class="toggle-all"
-        type="checkbox"
-      >
-      <label for="toggle-all">
-        Mark all as complete
-      </label>
-      <ul class="todo-list">
-        <TodoItem
-          completed
-          title="Test Todo"
-        >
-          <li class="view completed">
-            <input
-              checked
-              class="toggle"
-              type="checkbox"
-            >
-            <label>
-              Test Todo
-            </label>
-            <button class="destroy"></button>
-          </li>
-        </TodoItem>
-        <TodoItem
-          completed
-          title="Other Todo"
-        >
-          <li class="view completed">
-            <input
-              checked
-              class="toggle"
-              type="checkbox"
-            >
-            <label>
-              Other Todo
-            </label>
-            <button class="destroy"></button>
-          </li>
-        </TodoItem>
-        <TodoItem title="Final Todo">
-          <li class="view">
-            <input
-              class="toggle"
-              type="checkbox"
-            >
-            <label>
-              Final Todo
-            </label>
-            <button class="destroy"></button>
-          </li>
-        </TodoItem>
-      </ul>
-    </section>
-    <footer class="footer">
-      <span class="todo-count">
-        1
-         items left
-      </span>
-      <div class="filters">
-        <button
-          class="selected"
-          value="all"
-        >
-          All
-        </button>
-        <button
-          class=""
-          value="active"
-        >
-          Active
-        </button>
-        <button
-          class=""
-          value="completed"
-        >
-          Completed
-        </button>
-      </div>
-      <button class="clear-completed">
-        Clear completed
-      </button>
-    </footer>
-  </div>
-</App>
 `;
 
-exports[`07. Toggle Test Todo to active 1`] = `
+exports[`TodoMVC App should filter todos: 09. Filter active 1`] = `
 <App>
   <div
     className="todoapp"
@@ -1156,6 +755,136 @@ exports[`07. Toggle Test Todo to active 1`] = `
         <TodoItem
           completed={false}
           id={0}
+          key="0"
+          title="Test Todo"
+        >
+          <li
+            className="view"
+          >
+            <input
+              checked={false}
+              className="toggle"
+              onChange={[Function]}
+              type="checkbox"
+            />
+            <label>
+              Test Todo
+            </label>
+            <button
+              className="destroy"
+              onClick={[Function]}
+            />
+          </li>
+        </TodoItem>
+        <TodoItem
+          id={1}
+          key="1"
+          title="Final Todo"
+        >
+          <li
+            className="view"
+          >
+            <input
+              checked={false}
+              className="toggle"
+              onChange={[Function]}
+              type="checkbox"
+            />
+            <label>
+              Final Todo
+            </label>
+            <button
+              className="destroy"
+              onClick={[Function]}
+            />
+          </li>
+        </TodoItem>
+      </ul>
+    </section>
+    <footer
+      className="footer"
+    >
+      <span
+        className="todo-count"
+      >
+        2
+         items left
+      </span>
+      <div
+        className="filters"
+      >
+        <button
+          className=""
+          onClick={[Function]}
+          value="all"
+        >
+          All
+        </button>
+        <button
+          className="selected"
+          onClick={[Function]}
+          value="active"
+        >
+          Active
+        </button>
+        <button
+          className=""
+          onClick={[Function]}
+          value="completed"
+        >
+          Completed
+        </button>
+      </div>
+      <button
+        className="clear-completed"
+        onClick={[Function]}
+      >
+        Clear completed
+      </button>
+    </footer>
+  </div>
+</App>
+`;
+
+exports[`TodoMVC App should filter todos: 10. Filter all 1`] = `
+<App>
+  <div
+    className="todoapp"
+  >
+    <header
+      className="header"
+    >
+      <h1>
+        todos
+      </h1>
+      <input
+        autoFocus={true}
+        className="new-todo"
+        onKeyUp={[Function]}
+        placeholder="What needs to be done?"
+      />
+    </header>
+    <section
+      className="main"
+    >
+      <input
+        checked={false}
+        className="toggle-all"
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <label
+        htmlFor="toggle-all"
+      >
+        Mark all as complete
+      </label>
+      <ul
+        className="todo-list"
+      >
+        <TodoItem
+          completed={false}
+          id={0}
+          key="0"
           title="Test Todo"
         >
           <li
@@ -1179,6 +908,7 @@ exports[`07. Toggle Test Todo to active 1`] = `
         <TodoItem
           completed={true}
           id={1}
+          key="1"
           title="Other Todo"
         >
           <li
@@ -1201,6 +931,7 @@ exports[`07. Toggle Test Todo to active 1`] = `
         </TodoItem>
         <TodoItem
           id={2}
+          key="2"
           title="Final Todo"
         >
           <li
@@ -1266,928 +997,9 @@ exports[`07. Toggle Test Todo to active 1`] = `
     </footer>
   </div>
 </App>
-------------HTML PREVIEW---------------
-<App>
-  <div class="todoapp">
-    <header class="header">
-      <h1>
-        todos
-      </h1>
-      <input
-        autoFocus
-        class="new-todo"
-        placeholder="What needs to be done?"
-      >
-    </header>
-    <section class="main">
-      <input
-        class="toggle-all"
-        type="checkbox"
-      >
-      <label for="toggle-all">
-        Mark all as complete
-      </label>
-      <ul class="todo-list">
-        <TodoItem title="Test Todo">
-          <li class="view">
-            <input
-              class="toggle"
-              type="checkbox"
-            >
-            <label>
-              Test Todo
-            </label>
-            <button class="destroy"></button>
-          </li>
-        </TodoItem>
-        <TodoItem
-          completed
-          title="Other Todo"
-        >
-          <li class="view completed">
-            <input
-              checked
-              class="toggle"
-              type="checkbox"
-            >
-            <label>
-              Other Todo
-            </label>
-            <button class="destroy"></button>
-          </li>
-        </TodoItem>
-        <TodoItem title="Final Todo">
-          <li class="view">
-            <input
-              class="toggle"
-              type="checkbox"
-            >
-            <label>
-              Final Todo
-            </label>
-            <button class="destroy"></button>
-          </li>
-        </TodoItem>
-      </ul>
-    </section>
-    <footer class="footer">
-      <span class="todo-count">
-        2
-         items left
-      </span>
-      <div class="filters">
-        <button
-          class="selected"
-          value="all"
-        >
-          All
-        </button>
-        <button
-          class=""
-          value="active"
-        >
-          Active
-        </button>
-        <button
-          class=""
-          value="completed"
-        >
-          Completed
-        </button>
-      </div>
-      <button class="clear-completed">
-        Clear completed
-      </button>
-    </footer>
-  </div>
-</App>
 `;
 
-exports[`08. Filter completed 1`] = `
-<App>
-  <div
-    className="todoapp"
-  >
-    <header
-      className="header"
-    >
-      <h1>
-        todos
-      </h1>
-      <input
-        autoFocus={true}
-        className="new-todo"
-        onKeyUp={[Function]}
-        placeholder="What needs to be done?"
-      />
-    </header>
-    <section
-      className="main"
-    >
-      <input
-        checked={false}
-        className="toggle-all"
-        onChange={[Function]}
-        type="checkbox"
-      />
-      <label
-        htmlFor="toggle-all"
-      >
-        Mark all as complete
-      </label>
-      <ul
-        className="todo-list"
-      >
-        <TodoItem
-          completed={true}
-          id={0}
-          title="Other Todo"
-        >
-          <li
-            className="view completed"
-          >
-            <input
-              checked={true}
-              className="toggle"
-              onChange={[Function]}
-              type="checkbox"
-            />
-            <label>
-              Other Todo
-            </label>
-            <button
-              className="destroy"
-              onClick={[Function]}
-            />
-          </li>
-        </TodoItem>
-      </ul>
-    </section>
-    <footer
-      className="footer"
-    >
-      <span
-        className="todo-count"
-      >
-        2
-         items left
-      </span>
-      <div
-        className="filters"
-      >
-        <button
-          className=""
-          onClick={[Function]}
-          value="all"
-        >
-          All
-        </button>
-        <button
-          className=""
-          onClick={[Function]}
-          value="active"
-        >
-          Active
-        </button>
-        <button
-          className="selected"
-          onClick={[Function]}
-          value="completed"
-        >
-          Completed
-        </button>
-      </div>
-      <button
-        className="clear-completed"
-        onClick={[Function]}
-      >
-        Clear completed
-      </button>
-    </footer>
-  </div>
-</App>
-------------HTML PREVIEW---------------
-<App>
-  <div class="todoapp">
-    <header class="header">
-      <h1>
-        todos
-      </h1>
-      <input
-        autoFocus
-        class="new-todo"
-        placeholder="What needs to be done?"
-      >
-    </header>
-    <section class="main">
-      <input
-        class="toggle-all"
-        type="checkbox"
-      >
-      <label for="toggle-all">
-        Mark all as complete
-      </label>
-      <ul class="todo-list">
-        <TodoItem
-          completed
-          title="Other Todo"
-        >
-          <li class="view completed">
-            <input
-              checked
-              class="toggle"
-              type="checkbox"
-            >
-            <label>
-              Other Todo
-            </label>
-            <button class="destroy"></button>
-          </li>
-        </TodoItem>
-      </ul>
-    </section>
-    <footer class="footer">
-      <span class="todo-count">
-        2
-         items left
-      </span>
-      <div class="filters">
-        <button
-          class=""
-          value="all"
-        >
-          All
-        </button>
-        <button
-          class=""
-          value="active"
-        >
-          Active
-        </button>
-        <button
-          class="selected"
-          value="completed"
-        >
-          Completed
-        </button>
-      </div>
-      <button class="clear-completed">
-        Clear completed
-      </button>
-    </footer>
-  </div>
-</App>
-`;
-
-exports[`09. Filter active 1`] = `
-<App>
-  <div
-    className="todoapp"
-  >
-    <header
-      className="header"
-    >
-      <h1>
-        todos
-      </h1>
-      <input
-        autoFocus={true}
-        className="new-todo"
-        onKeyUp={[Function]}
-        placeholder="What needs to be done?"
-      />
-    </header>
-    <section
-      className="main"
-    >
-      <input
-        checked={false}
-        className="toggle-all"
-        onChange={[Function]}
-        type="checkbox"
-      />
-      <label
-        htmlFor="toggle-all"
-      >
-        Mark all as complete
-      </label>
-      <ul
-        className="todo-list"
-      >
-        <TodoItem
-          completed={false}
-          id={0}
-          title="Test Todo"
-        >
-          <li
-            className="view"
-          >
-            <input
-              checked={false}
-              className="toggle"
-              onChange={[Function]}
-              type="checkbox"
-            />
-            <label>
-              Test Todo
-            </label>
-            <button
-              className="destroy"
-              onClick={[Function]}
-            />
-          </li>
-        </TodoItem>
-        <TodoItem
-          id={1}
-          title="Final Todo"
-        >
-          <li
-            className="view"
-          >
-            <input
-              checked={false}
-              className="toggle"
-              onChange={[Function]}
-              type="checkbox"
-            />
-            <label>
-              Final Todo
-            </label>
-            <button
-              className="destroy"
-              onClick={[Function]}
-            />
-          </li>
-        </TodoItem>
-      </ul>
-    </section>
-    <footer
-      className="footer"
-    >
-      <span
-        className="todo-count"
-      >
-        2
-         items left
-      </span>
-      <div
-        className="filters"
-      >
-        <button
-          className=""
-          onClick={[Function]}
-          value="all"
-        >
-          All
-        </button>
-        <button
-          className="selected"
-          onClick={[Function]}
-          value="active"
-        >
-          Active
-        </button>
-        <button
-          className=""
-          onClick={[Function]}
-          value="completed"
-        >
-          Completed
-        </button>
-      </div>
-      <button
-        className="clear-completed"
-        onClick={[Function]}
-      >
-        Clear completed
-      </button>
-    </footer>
-  </div>
-</App>
-------------HTML PREVIEW---------------
-<App>
-  <div class="todoapp">
-    <header class="header">
-      <h1>
-        todos
-      </h1>
-      <input
-        autoFocus
-        class="new-todo"
-        placeholder="What needs to be done?"
-      >
-    </header>
-    <section class="main">
-      <input
-        class="toggle-all"
-        type="checkbox"
-      >
-      <label for="toggle-all">
-        Mark all as complete
-      </label>
-      <ul class="todo-list">
-        <TodoItem title="Test Todo">
-          <li class="view">
-            <input
-              class="toggle"
-              type="checkbox"
-            >
-            <label>
-              Test Todo
-            </label>
-            <button class="destroy"></button>
-          </li>
-        </TodoItem>
-        <TodoItem title="Final Todo">
-          <li class="view">
-            <input
-              class="toggle"
-              type="checkbox"
-            >
-            <label>
-              Final Todo
-            </label>
-            <button class="destroy"></button>
-          </li>
-        </TodoItem>
-      </ul>
-    </section>
-    <footer class="footer">
-      <span class="todo-count">
-        2
-         items left
-      </span>
-      <div class="filters">
-        <button
-          class=""
-          value="all"
-        >
-          All
-        </button>
-        <button
-          class="selected"
-          value="active"
-        >
-          Active
-        </button>
-        <button
-          class=""
-          value="completed"
-        >
-          Completed
-        </button>
-      </div>
-      <button class="clear-completed">
-        Clear completed
-      </button>
-    </footer>
-  </div>
-</App>
-`;
-
-exports[`10. Filter all 1`] = `
-<App>
-  <div
-    className="todoapp"
-  >
-    <header
-      className="header"
-    >
-      <h1>
-        todos
-      </h1>
-      <input
-        autoFocus={true}
-        className="new-todo"
-        onKeyUp={[Function]}
-        placeholder="What needs to be done?"
-      />
-    </header>
-    <section
-      className="main"
-    >
-      <input
-        checked={false}
-        className="toggle-all"
-        onChange={[Function]}
-        type="checkbox"
-      />
-      <label
-        htmlFor="toggle-all"
-      >
-        Mark all as complete
-      </label>
-      <ul
-        className="todo-list"
-      >
-        <TodoItem
-          completed={false}
-          id={0}
-          title="Test Todo"
-        >
-          <li
-            className="view"
-          >
-            <input
-              checked={false}
-              className="toggle"
-              onChange={[Function]}
-              type="checkbox"
-            />
-            <label>
-              Test Todo
-            </label>
-            <button
-              className="destroy"
-              onClick={[Function]}
-            />
-          </li>
-        </TodoItem>
-        <TodoItem
-          completed={true}
-          id={1}
-          title="Other Todo"
-        >
-          <li
-            className="view completed"
-          >
-            <input
-              checked={true}
-              className="toggle"
-              onChange={[Function]}
-              type="checkbox"
-            />
-            <label>
-              Other Todo
-            </label>
-            <button
-              className="destroy"
-              onClick={[Function]}
-            />
-          </li>
-        </TodoItem>
-        <TodoItem
-          id={2}
-          title="Final Todo"
-        >
-          <li
-            className="view"
-          >
-            <input
-              checked={false}
-              className="toggle"
-              onChange={[Function]}
-              type="checkbox"
-            />
-            <label>
-              Final Todo
-            </label>
-            <button
-              className="destroy"
-              onClick={[Function]}
-            />
-          </li>
-        </TodoItem>
-      </ul>
-    </section>
-    <footer
-      className="footer"
-    >
-      <span
-        className="todo-count"
-      >
-        2
-         items left
-      </span>
-      <div
-        className="filters"
-      >
-        <button
-          className="selected"
-          onClick={[Function]}
-          value="all"
-        >
-          All
-        </button>
-        <button
-          className=""
-          onClick={[Function]}
-          value="active"
-        >
-          Active
-        </button>
-        <button
-          className=""
-          onClick={[Function]}
-          value="completed"
-        >
-          Completed
-        </button>
-      </div>
-      <button
-        className="clear-completed"
-        onClick={[Function]}
-      >
-        Clear completed
-      </button>
-    </footer>
-  </div>
-</App>
-------------HTML PREVIEW---------------
-<App>
-  <div class="todoapp">
-    <header class="header">
-      <h1>
-        todos
-      </h1>
-      <input
-        autoFocus
-        class="new-todo"
-        placeholder="What needs to be done?"
-      >
-    </header>
-    <section class="main">
-      <input
-        class="toggle-all"
-        type="checkbox"
-      >
-      <label for="toggle-all">
-        Mark all as complete
-      </label>
-      <ul class="todo-list">
-        <TodoItem title="Test Todo">
-          <li class="view">
-            <input
-              class="toggle"
-              type="checkbox"
-            >
-            <label>
-              Test Todo
-            </label>
-            <button class="destroy"></button>
-          </li>
-        </TodoItem>
-        <TodoItem
-          completed
-          title="Other Todo"
-        >
-          <li class="view completed">
-            <input
-              checked
-              class="toggle"
-              type="checkbox"
-            >
-            <label>
-              Other Todo
-            </label>
-            <button class="destroy"></button>
-          </li>
-        </TodoItem>
-        <TodoItem title="Final Todo">
-          <li class="view">
-            <input
-              class="toggle"
-              type="checkbox"
-            >
-            <label>
-              Final Todo
-            </label>
-            <button class="destroy"></button>
-          </li>
-        </TodoItem>
-      </ul>
-    </section>
-    <footer class="footer">
-      <span class="todo-count">
-        2
-         items left
-      </span>
-      <div class="filters">
-        <button
-          class="selected"
-          value="all"
-        >
-          All
-        </button>
-        <button
-          class=""
-          value="active"
-        >
-          Active
-        </button>
-        <button
-          class=""
-          value="completed"
-        >
-          Completed
-        </button>
-      </div>
-      <button class="clear-completed">
-        Clear completed
-      </button>
-    </footer>
-  </div>
-</App>
-`;
-
-exports[`11. Clear completed 1`] = `
-<App>
-  <div
-    className="todoapp"
-  >
-    <header
-      className="header"
-    >
-      <h1>
-        todos
-      </h1>
-      <input
-        autoFocus={true}
-        className="new-todo"
-        onKeyUp={[Function]}
-        placeholder="What needs to be done?"
-      />
-    </header>
-    <section
-      className="main"
-    >
-      <input
-        checked={false}
-        className="toggle-all"
-        onChange={[Function]}
-        type="checkbox"
-      />
-      <label
-        htmlFor="toggle-all"
-      >
-        Mark all as complete
-      </label>
-      <ul
-        className="todo-list"
-      >
-        <TodoItem
-          completed={false}
-          id={0}
-          title="Test Todo"
-        >
-          <li
-            className="view"
-          >
-            <input
-              checked={false}
-              className="toggle"
-              onChange={[Function]}
-              type="checkbox"
-            />
-            <label>
-              Test Todo
-            </label>
-            <button
-              className="destroy"
-              onClick={[Function]}
-            />
-          </li>
-        </TodoItem>
-        <TodoItem
-          id={1}
-          title="Final Todo"
-        >
-          <li
-            className="view"
-          >
-            <input
-              checked={false}
-              className="toggle"
-              onChange={[Function]}
-              type="checkbox"
-            />
-            <label>
-              Final Todo
-            </label>
-            <button
-              className="destroy"
-              onClick={[Function]}
-            />
-          </li>
-        </TodoItem>
-      </ul>
-    </section>
-    <footer
-      className="footer"
-    >
-      <span
-        className="todo-count"
-      >
-        2
-         items left
-      </span>
-      <div
-        className="filters"
-      >
-        <button
-          className="selected"
-          onClick={[Function]}
-          value="all"
-        >
-          All
-        </button>
-        <button
-          className=""
-          onClick={[Function]}
-          value="active"
-        >
-          Active
-        </button>
-        <button
-          className=""
-          onClick={[Function]}
-          value="completed"
-        >
-          Completed
-        </button>
-      </div>
-    </footer>
-  </div>
-</App>
-------------HTML PREVIEW---------------
-<App>
-  <div class="todoapp">
-    <header class="header">
-      <h1>
-        todos
-      </h1>
-      <input
-        autoFocus
-        class="new-todo"
-        placeholder="What needs to be done?"
-      >
-    </header>
-    <section class="main">
-      <input
-        class="toggle-all"
-        type="checkbox"
-      >
-      <label for="toggle-all">
-        Mark all as complete
-      </label>
-      <ul class="todo-list">
-        <TodoItem title="Test Todo">
-          <li class="view">
-            <input
-              class="toggle"
-              type="checkbox"
-            >
-            <label>
-              Test Todo
-            </label>
-            <button class="destroy"></button>
-          </li>
-        </TodoItem>
-        <TodoItem title="Final Todo">
-          <li class="view">
-            <input
-              class="toggle"
-              type="checkbox"
-            >
-            <label>
-              Final Todo
-            </label>
-            <button class="destroy"></button>
-          </li>
-        </TodoItem>
-      </ul>
-    </section>
-    <footer class="footer">
-      <span class="todo-count">
-        2
-         items left
-      </span>
-      <div class="filters">
-        <button
-          class="selected"
-          value="all"
-        >
-          All
-        </button>
-        <button
-          class=""
-          value="active"
-        >
-          Active
-        </button>
-        <button
-          class=""
-          value="completed"
-        >
-          Completed
-        </button>
-      </div>
-    </footer>
-  </div>
-</App>
-`;
-
-exports[`12. Toggle all to completed 1`] = `
+exports[`TodoMVC App should toggle all todo state at once: 12. Toggle all to completed 1`] = `
 <App>
   <div
     className="todoapp"
@@ -2225,6 +1037,7 @@ exports[`12. Toggle all to completed 1`] = `
         <TodoItem
           completed={true}
           id={0}
+          key="0"
           title="Test Todo"
         >
           <li
@@ -2248,6 +1061,7 @@ exports[`12. Toggle all to completed 1`] = `
         <TodoItem
           completed={true}
           id={1}
+          key="1"
           title="Final Todo"
         >
           <li
@@ -2313,97 +1127,9 @@ exports[`12. Toggle all to completed 1`] = `
     </footer>
   </div>
 </App>
-------------HTML PREVIEW---------------
-<App>
-  <div class="todoapp">
-    <header class="header">
-      <h1>
-        todos
-      </h1>
-      <input
-        autoFocus
-        class="new-todo"
-        placeholder="What needs to be done?"
-      >
-    </header>
-    <section class="main">
-      <input
-        checked
-        class="toggle-all"
-        type="checkbox"
-      >
-      <label for="toggle-all">
-        Mark all as complete
-      </label>
-      <ul class="todo-list">
-        <TodoItem
-          completed
-          title="Test Todo"
-        >
-          <li class="view completed">
-            <input
-              checked
-              class="toggle"
-              type="checkbox"
-            >
-            <label>
-              Test Todo
-            </label>
-            <button class="destroy"></button>
-          </li>
-        </TodoItem>
-        <TodoItem
-          completed
-          title="Final Todo"
-        >
-          <li class="view completed">
-            <input
-              checked
-              class="toggle"
-              type="checkbox"
-            >
-            <label>
-              Final Todo
-            </label>
-            <button class="destroy"></button>
-          </li>
-        </TodoItem>
-      </ul>
-    </section>
-    <footer class="footer">
-      <span class="todo-count">
-        0
-         items left
-      </span>
-      <div class="filters">
-        <button
-          class="selected"
-          value="all"
-        >
-          All
-        </button>
-        <button
-          class=""
-          value="active"
-        >
-          Active
-        </button>
-        <button
-          class=""
-          value="completed"
-        >
-          Completed
-        </button>
-      </div>
-      <button class="clear-completed">
-        Clear completed
-      </button>
-    </footer>
-  </div>
-</App>
 `;
 
-exports[`13. Toggle all to active 1`] = `
+exports[`TodoMVC App should toggle all todo state at once: 13. Toggle all to active 1`] = `
 <App>
   <div
     className="todoapp"
@@ -2441,6 +1167,7 @@ exports[`13. Toggle all to active 1`] = `
         <TodoItem
           completed={false}
           id={0}
+          key="0"
           title="Test Todo"
         >
           <li
@@ -2464,6 +1191,7 @@ exports[`13. Toggle all to active 1`] = `
         <TodoItem
           completed={false}
           id={1}
+          key="1"
           title="Final Todo"
         >
           <li
@@ -2523,85 +1251,314 @@ exports[`13. Toggle all to active 1`] = `
     </footer>
   </div>
 </App>
-------------HTML PREVIEW---------------
+`;
+
+exports[`TodoMVC App should toggle todo status: 05. Toggle Test Todo to completed 1`] = `
 <App>
-  <div class="todoapp">
-    <header class="header">
+  <div
+    className="todoapp"
+  >
+    <header
+      className="header"
+    >
       <h1>
         todos
       </h1>
       <input
-        autoFocus
-        class="new-todo"
+        autoFocus={true}
+        className="new-todo"
+        onKeyUp={[Function]}
         placeholder="What needs to be done?"
-      >
+      />
     </header>
-    <section class="main">
+    <section
+      className="main"
+    >
       <input
-        class="toggle-all"
+        checked={false}
+        className="toggle-all"
+        onChange={[Function]}
         type="checkbox"
+      />
+      <label
+        htmlFor="toggle-all"
       >
-      <label for="toggle-all">
         Mark all as complete
       </label>
-      <ul class="todo-list">
-        <TodoItem title="Test Todo">
-          <li class="view">
+      <ul
+        className="todo-list"
+      >
+        <TodoItem
+          completed={true}
+          id={0}
+          key="0"
+          title="Test Todo"
+        >
+          <li
+            className="view completed"
+          >
             <input
-              class="toggle"
+              checked={true}
+              className="toggle"
+              onChange={[Function]}
               type="checkbox"
-            >
+            />
             <label>
               Test Todo
             </label>
-            <button class="destroy"></button>
+            <button
+              className="destroy"
+              onClick={[Function]}
+            />
           </li>
         </TodoItem>
-        <TodoItem title="Final Todo">
-          <li class="view">
+        <TodoItem
+          id={1}
+          key="1"
+          title="Other Todo"
+        >
+          <li
+            className="view"
+          >
             <input
-              class="toggle"
+              checked={false}
+              className="toggle"
+              onChange={[Function]}
               type="checkbox"
-            >
+            />
+            <label>
+              Other Todo
+            </label>
+            <button
+              className="destroy"
+              onClick={[Function]}
+            />
+          </li>
+        </TodoItem>
+        <TodoItem
+          id={2}
+          key="2"
+          title="Final Todo"
+        >
+          <li
+            className="view"
+          >
+            <input
+              checked={false}
+              className="toggle"
+              onChange={[Function]}
+              type="checkbox"
+            />
             <label>
               Final Todo
             </label>
-            <button class="destroy"></button>
+            <button
+              className="destroy"
+              onClick={[Function]}
+            />
           </li>
         </TodoItem>
       </ul>
     </section>
-    <footer class="footer">
-      <span class="todo-count">
+    <footer
+      className="footer"
+    >
+      <span
+        className="todo-count"
+      >
         2
          items left
       </span>
-      <div class="filters">
+      <div
+        className="filters"
+      >
         <button
-          class="selected"
+          className="selected"
+          onClick={[Function]}
           value="all"
         >
           All
         </button>
         <button
-          class=""
+          className=""
+          onClick={[Function]}
           value="active"
         >
           Active
         </button>
         <button
-          class=""
+          className=""
+          onClick={[Function]}
           value="completed"
         >
           Completed
         </button>
       </div>
+      <button
+        className="clear-completed"
+        onClick={[Function]}
+      >
+        Clear completed
+      </button>
     </footer>
   </div>
 </App>
 `;
 
-exports[`14. Delete Test Todo 1`] = `
+exports[`TodoMVC App should toggle todo status: 06. Toggle Other Todo to completed 1`] = `
+<App>
+  <div
+    className="todoapp"
+  >
+    <header
+      className="header"
+    >
+      <h1>
+        todos
+      </h1>
+      <input
+        autoFocus={true}
+        className="new-todo"
+        onKeyUp={[Function]}
+        placeholder="What needs to be done?"
+      />
+    </header>
+    <section
+      className="main"
+    >
+      <input
+        checked={false}
+        className="toggle-all"
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <label
+        htmlFor="toggle-all"
+      >
+        Mark all as complete
+      </label>
+      <ul
+        className="todo-list"
+      >
+        <TodoItem
+          completed={true}
+          id={0}
+          key="0"
+          title="Test Todo"
+        >
+          <li
+            className="view completed"
+          >
+            <input
+              checked={true}
+              className="toggle"
+              onChange={[Function]}
+              type="checkbox"
+            />
+            <label>
+              Test Todo
+            </label>
+            <button
+              className="destroy"
+              onClick={[Function]}
+            />
+          </li>
+        </TodoItem>
+        <TodoItem
+          completed={true}
+          id={1}
+          key="1"
+          title="Other Todo"
+        >
+          <li
+            className="view completed"
+          >
+            <input
+              checked={true}
+              className="toggle"
+              onChange={[Function]}
+              type="checkbox"
+            />
+            <label>
+              Other Todo
+            </label>
+            <button
+              className="destroy"
+              onClick={[Function]}
+            />
+          </li>
+        </TodoItem>
+        <TodoItem
+          id={2}
+          key="2"
+          title="Final Todo"
+        >
+          <li
+            className="view"
+          >
+            <input
+              checked={false}
+              className="toggle"
+              onChange={[Function]}
+              type="checkbox"
+            />
+            <label>
+              Final Todo
+            </label>
+            <button
+              className="destroy"
+              onClick={[Function]}
+            />
+          </li>
+        </TodoItem>
+      </ul>
+    </section>
+    <footer
+      className="footer"
+    >
+      <span
+        className="todo-count"
+      >
+        1
+         items left
+      </span>
+      <div
+        className="filters"
+      >
+        <button
+          className="selected"
+          onClick={[Function]}
+          value="all"
+        >
+          All
+        </button>
+        <button
+          className=""
+          onClick={[Function]}
+          value="active"
+        >
+          Active
+        </button>
+        <button
+          className=""
+          onClick={[Function]}
+          value="completed"
+        >
+          Completed
+        </button>
+      </div>
+      <button
+        className="clear-completed"
+        onClick={[Function]}
+      >
+        Clear completed
+      </button>
+    </footer>
+  </div>
+</App>
+`;
+
+exports[`TodoMVC App should toggle todo status: 07. Toggle Test Todo to active 1`] = `
 <App>
   <div
     className="todoapp"
@@ -2639,6 +1596,54 @@ exports[`14. Delete Test Todo 1`] = `
         <TodoItem
           completed={false}
           id={0}
+          key="0"
+          title="Test Todo"
+        >
+          <li
+            className="view"
+          >
+            <input
+              checked={false}
+              className="toggle"
+              onChange={[Function]}
+              type="checkbox"
+            />
+            <label>
+              Test Todo
+            </label>
+            <button
+              className="destroy"
+              onClick={[Function]}
+            />
+          </li>
+        </TodoItem>
+        <TodoItem
+          completed={true}
+          id={1}
+          key="1"
+          title="Other Todo"
+        >
+          <li
+            className="view completed"
+          >
+            <input
+              checked={true}
+              className="toggle"
+              onChange={[Function]}
+              type="checkbox"
+            />
+            <label>
+              Other Todo
+            </label>
+            <button
+              className="destroy"
+              onClick={[Function]}
+            />
+          </li>
+        </TodoItem>
+        <TodoItem
+          id={2}
+          key="2"
           title="Final Todo"
         >
           <li
@@ -2667,7 +1672,7 @@ exports[`14. Delete Test Todo 1`] = `
       <span
         className="todo-count"
       >
-        1
+        2
          items left
       </span>
       <div
@@ -2695,70 +1700,12 @@ exports[`14. Delete Test Todo 1`] = `
           Completed
         </button>
       </div>
-    </footer>
-  </div>
-</App>
-------------HTML PREVIEW---------------
-<App>
-  <div class="todoapp">
-    <header class="header">
-      <h1>
-        todos
-      </h1>
-      <input
-        autoFocus
-        class="new-todo"
-        placeholder="What needs to be done?"
+      <button
+        className="clear-completed"
+        onClick={[Function]}
       >
-    </header>
-    <section class="main">
-      <input
-        class="toggle-all"
-        type="checkbox"
-      >
-      <label for="toggle-all">
-        Mark all as complete
-      </label>
-      <ul class="todo-list">
-        <TodoItem title="Final Todo">
-          <li class="view">
-            <input
-              class="toggle"
-              type="checkbox"
-            >
-            <label>
-              Final Todo
-            </label>
-            <button class="destroy"></button>
-          </li>
-        </TodoItem>
-      </ul>
-    </section>
-    <footer class="footer">
-      <span class="todo-count">
-        1
-         items left
-      </span>
-      <div class="filters">
-        <button
-          class="selected"
-          value="all"
-        >
-          All
-        </button>
-        <button
-          class=""
-          value="active"
-        >
-          Active
-        </button>
-        <button
-          class=""
-          value="completed"
-        >
-          Completed
-        </button>
-      </div>
+        Clear completed
+      </button>
     </footer>
   </div>
 </App>

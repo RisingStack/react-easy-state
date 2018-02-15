@@ -27,6 +27,7 @@ Simple React state management. Made with :heart: and ES6 Proxies.
   + [When do renders run?](#when-do-renders-run)
   + [My store methods are broken](#my-store-methods-are-broken)
   + [My views are not rendering](#my-views-are-not-rendering)
+  + [Naming local stores as state](#naming-local-stores-as-state)
 * [Platform support](#platform-support)
 * [Performance](#performance)
 * [How does it work?](#how-does-it-work)

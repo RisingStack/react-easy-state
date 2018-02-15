@@ -1,6 +1,5 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import toJSON from 'enzyme-to-json'
 import sinon from 'sinon'
 import App from '../examples/clock/App'
 
@@ -15,13 +14,13 @@ describe('Clock App', () => {
   })
 
   test('should update to display the current time every second', async () => {
-    expect(toJSON(app)).toMatchSnapshot('01. Initial state')
+    expect(app.text()).toBe('12:00:00 AM')
 
     clock.tick(2000)
-    expect(toJSON(app)).toMatchSnapshot('02. After 2 seconds')
+    expect(app.text()).toBe('12:00:02 AM')
 
     clock.tick(8500)
-    expect(toJSON(app)).toMatchSnapshot('03. After 10.5 seconds')
+    expect(app.text()).toBe('12:00:10 AM')
   })
 
   test('should clean up the interval timer when the component is unmounted', () => {

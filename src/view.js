@@ -77,7 +77,7 @@ export default function view (Comp, { devtool: rawDevtool } = {}) {
       if (super.componentWillUnmount) {
         super.componentWillUnmount()
       }
-      // clean up memory used by easyState
+      // clean up memory used by Easy State
       unobserve(this.render)
     }
   }
