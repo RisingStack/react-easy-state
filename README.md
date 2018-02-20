@@ -192,12 +192,13 @@ That's it, You know everything to master React state management! Check some of t
 
 - [TodoMVC](https://solkimicreb.github.io/react-easy-state/examples/todoMVC/dist) ([source](/examples/todoMVC/)): a classic TodoMVC implementation with a lot of computed data and implicit reactivity.
 - [Contacts Table](https://solkimicreb.github.io/react-easy-state/examples/contacts/dist) ([source](/examples/contacts/)): a data grid implementation with a mix of global and local state.
-- [Beer Finder](https://solkimicreb.github.io/react-easy-state/examples/beerFinder/dist) ([source](/examples/beerFinder/)): an app with async actions and a mix of local and global state, which finds matching beers for your meal.
+- [Beer Finder](https://solkimicreb.github.io/react-easy-state/examples/beerFinder/dist) ([source](/examples/beerFinder/))([tutorial](https://medium.com/@solkimicreb/design-patterns-with-react-easy-state-830b927acc7c)): an app with async actions and a mix of local and global state, which finds matching beers for your meal.
 
 ## Articles
 
 - [Introducing React Easy State](https://blog.risingstack.com/introducing-react-easy-state/): making a simple stopwatch.
 - [Stress Testing React Easy State](https://medium.com/@solkimicreb/stress-testing-react-easy-state-ac321fa3becf): demonstrating Easy State's reactivity with increasingly exotic state mutations.
+- [Design Patterns with React Easy State](https://medium.com/@solkimicreb/design-patterns-with-react-easy-state-830b927acc7c): demonstrating async actions and local and global state management through a beer finder app.
 - [The Ideas Behind React Easy State](https://medium.com/dailyjs/the-ideas-behind-react-easy-state-901d70e4d03e): a deep dive under the hood of Easy State.
 
 ## FAQ and Gotchas

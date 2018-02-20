@@ -6,7 +6,7 @@ import appStore from './appStore'
 
 export default view(() =>
   <div className='searchbar'>
-    <SearchBar onRequestSearch={appStore.fetchBeers} placeholder='Some food ...'/>
-    {appStore.isLoading && <LinearProgress/>}
+    <SearchBar onRequestSearch={appStore.fetchBeers} placeholder='Some food ...' />
+    {appStore.isLoading && <LinearProgress />}
   </div>
 )
