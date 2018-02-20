@@ -1,6 +1,7 @@
 import { store } from 'react-easy-state'
 import moment from 'moment'
 
+// use 'clock' instead of 'this' in the store methods to make them passable as callbacks
 const clock = store({
   ticks: 0,
   start () {
