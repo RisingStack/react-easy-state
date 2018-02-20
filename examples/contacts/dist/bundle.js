@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 483);
+/******/ 	return __webpack_require__(__webpack_require__.s = 481);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -256,7 +256,7 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
-/***/ 11:
+/***/ 10:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -486,7 +486,7 @@ module.exports = shallowEqual;
 
 
 if (process.env.NODE_ENV !== 'production') {
-  var invariant = __webpack_require__(11);
+  var invariant = __webpack_require__(10);
   var warning = __webpack_require__(12);
   var ReactPropTypesSecret = __webpack_require__(27);
   var loggedTypeFailures = {};
@@ -680,6 +680,32 @@ function containsNode(outerNode, innerNode) {
 }
 
 module.exports = containsNode;
+
+/***/ }),
+
+/***/ 219:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_easy_state__ = __webpack_require__(15);
+
+
+// store the central data and logic of the application in a global app store
+// use 'appStore' instead of 'this' in the store methods to make them passable as callbacks
+const appStore = Object(__WEBPACK_IMPORTED_MODULE_0_react_easy_state__["a" /* store */])({
+  contacts: [],
+  addContact(contact) {
+    contact.name = contact.name || 'Placeholder';
+    contact.email = contact.email || 'Placeholder';
+    appStore.contacts.push(contact);
+  },
+  deleteContact(contact) {
+    const idx = appStore.contacts.indexOf(contact);
+    appStore.contacts.splice(idx, 1);
+  }
+});
+
+/* harmony default export */ __webpack_exports__["a"] = (appStore);
 
 /***/ }),
 
@@ -1123,32 +1149,6 @@ function raw(obj) {
 
 /***/ }),
 
-/***/ 220:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_easy_state__ = __webpack_require__(15);
-
-
-// store the central data and logic of the application in a global app store
-// use 'appStore' instead of 'this' in the store methods to make them passable as callbacks
-const appStore = Object(__WEBPACK_IMPORTED_MODULE_0_react_easy_state__["a" /* store */])({
-  contacts: [],
-  addContact(contact) {
-    contact.name = contact.name || 'Placeholder';
-    contact.email = contact.email || 'Placeholder';
-    appStore.contacts.push(contact);
-  },
-  deleteContact(contact) {
-    const idx = appStore.contacts.indexOf(contact);
-    appStore.contacts.splice(idx, 1);
-  }
-});
-
-/* harmony default export */ __webpack_exports__["a"] = (appStore);
-
-/***/ }),
-
 /***/ 24:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1268,7 +1268,7 @@ if (process.env.NODE_ENV !== "production") {
 
 var _assign = __webpack_require__(8);
 var emptyObject = __webpack_require__(9);
-var invariant = __webpack_require__(11);
+var invariant = __webpack_require__(10);
 var warning = __webpack_require__(12);
 var emptyFunction = __webpack_require__(4);
 var checkPropTypes = __webpack_require__(17);
@@ -2974,7 +2974,7 @@ if (process.env.NODE_ENV !== "production") {
 'use strict';
 
 var React = __webpack_require__(2);
-var invariant = __webpack_require__(11);
+var invariant = __webpack_require__(10);
 var warning = __webpack_require__(12);
 var ExecutionEnvironment = __webpack_require__(19);
 var _assign = __webpack_require__(8);
@@ -19307,7 +19307,7 @@ function view(Comp, { devtool: rawDevtool } = {}) {
 
 /***/ }),
 
-/***/ 483:
+/***/ 481:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19316,7 +19316,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__App__ = __webpack_require__(484);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__App__ = __webpack_require__(482);
 
 
 
@@ -19325,16 +19325,16 @@ __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODU
 
 /***/ }),
 
-/***/ 484:
+/***/ 482:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_easy_state__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Contact__ = __webpack_require__(485);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ContactCreator__ = __webpack_require__(486);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__appStore__ = __webpack_require__(220);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Contact__ = __webpack_require__(483);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ContactCreator__ = __webpack_require__(484);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__appStore__ = __webpack_require__(219);
 
 
 
@@ -19383,14 +19383,14 @@ function App() {
 
 /***/ }),
 
-/***/ 485:
+/***/ 483:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_easy_state__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__appStore__ = __webpack_require__(220);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__appStore__ = __webpack_require__(219);
 
 
 
@@ -19512,14 +19512,14 @@ class Contact extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
 
 /***/ }),
 
-/***/ 486:
+/***/ 484:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_easy_state__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__appStore__ = __webpack_require__(220);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__appStore__ = __webpack_require__(219);
 
 
 

@@ -192,7 +192,7 @@ That's it, You know everything to master React state management! Check some of t
 
 - [TodoMVC](https://solkimicreb.github.io/react-easy-state/examples/todoMVC/dist) ([source](/examples/todoMVC/)): a classic TodoMVC implementation with a lot of computed data and implicit reactivity.
 - [Contacts Table](https://solkimicreb.github.io/react-easy-state/examples/contacts/dist) ([source](/examples/contacts/)): a data grid implementation with a mix of global and local state.
-- [Beer Finder](https://solkimicreb.github.io/react-easy-state/examples/beerFinder/dist) ([source](/examples/beerFinder/))([tutorial](https://medium.com/@solkimicreb/design-patterns-with-react-easy-state-830b927acc7c)): an app with async actions and a mix of local and global state, which finds matching beers for your meal.
+- [Beer Finder](https://solkimicreb.github.io/react-easy-state/examples/beerFinder/dist) ([source](/examples/beerFinder/)) ([tutorial](https://medium.com/@solkimicreb/design-patterns-with-react-easy-state-830b927acc7c)): an app with async actions and a mix of local and global state, which finds matching beers for your meal.
 
 ## Articles
 
