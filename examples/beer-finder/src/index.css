@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.searchbar {
+  position: fixed;
+  top: 10px;
+  left: 3%;
+  right: 3%;
+}
+
+.beerlist {
+  margin: 10px;
+  margin-top: 70px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.beer {
+  width: 100%;
+  max-width: 340px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.beer .media {
+  height: 180px;
+  background-position: center 80%;
+  background-size: 102%;
+  background-color: rgb(180, 100, 0);
+}
+
+.beer h3 {
+  text-align: center;
+}
+
+.beer ul {
+  list-style-type: decimal;
+  padding: 0 30px;
+}
+
+.beer li {
+  margin-top: 8px;
+}
