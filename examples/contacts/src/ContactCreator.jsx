@@ -7,18 +7,18 @@ class ContactCreator extends Component {
   // newContact is the skeleton for the next contact before it is added to the list
   compStore = store({
     newContact: { name: '', email: '' }
-  })
+  });
 
   // transfer finalized contact from the component store to the app store
   addContact = () => {
     appStore.addContact(this.compStore.newContact)
     this.compStore.newContact = { name: '', email: '' }
-  }
+  };
 
-  onChange = (ev) => {
+  onChange = ev => {
     const { newContact } = this.compStore
     newContact[ev.target.name] = ev.target.value
-  }
+  };
 
   // render is triggered whenever the relevant parts of the component store or app store change
   render () {
@@ -27,9 +27,25 @@ class ContactCreator extends Component {
 
     return (
       <tr className='contact-creator'>
-        <td><input name='name' value={newContact.name} onChange={onChange} placeholder='Contact name...' /></td>
-        <td><input name='email' value={newContact.email} onChange={onChange} placeholder='Contact email...' /></td>
-        <td><button onClick={addContact}>Add Contact</button></td>
+        <td>
+          <input
+            name='name'
+            value={newContact.name}
+            onChange={onChange}
+            placeholder='Contact name...'
+          />
+        </td>
+        <td>
+          <input
+            name='email'
+            value={newContact.email}
+            onChange={onChange}
+            placeholder='Contact email...'
+          />
+        </td>
+        <td>
+          <button onClick={addContact}>Add Contact</button>
+        </td>
       </tr>
     )
   }

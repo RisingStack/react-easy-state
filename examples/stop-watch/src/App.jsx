@@ -8,7 +8,10 @@ function StopWatch () {
 
   return (
     <div>
-      <div>{time.seconds}<small>{time.fraction}</small></div>
+      <div>
+        {time.seconds}
+        <small>{time.fraction}</small>
+      </div>
       <button onClick={toggle}>{label}</button>
       <button onClick={reset}>Reset</button>
     </div>

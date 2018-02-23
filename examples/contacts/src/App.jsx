@@ -16,9 +16,9 @@ function App () {
         </tr>
       </thead>
       <tbody>
-        {appStore.contacts.map(
-          contact => <Contact contact={contact} key={contact.email} />
-        )}
+        {appStore.contacts.map(contact => (
+          <Contact contact={contact} key={contact.email} />
+        ))}
         <ContactCreator />
       </tbody>
     </table>

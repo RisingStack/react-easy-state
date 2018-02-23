@@ -16,7 +16,7 @@
     "test-builds": "node ./scripts/testBuilds.js",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
     "lint": "standard",
-    "lint-fix": "prettier --ignore-path '.gitignore' --write '{,**/!(build)/**/}*.{js,jsx}' && standard --fix",
+    "lint-fix": "prettier --ignore-path '.gitignore' --write '**/*.{js,jsx}' '!**/build/**' && standard --fix",
     "build-examples": "node ./scripts/buildExamples.js",
     "build-examples-watch": "node ./scripts/buildExamples.js --watch",
     "build": "node ./scripts/build.js",
@@ -110,7 +110,8 @@
       "jest"
     ],
     "ignore": [
-      "build"
+      "build",
+      "node_modules"
     ]
   },
   "pre-push": [

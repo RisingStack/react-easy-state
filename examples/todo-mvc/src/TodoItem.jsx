@@ -6,11 +6,11 @@ import todos from './todosStore'
 class TodoItem extends Component {
   remove = () => {
     todos.remove(this.props.id)
-  }
+  };
 
   toggle = () => {
     todos.toggle(this.props.id)
-  }
+  };
 
   // render is triggered whenever the relevant parts of the component props or global todos store change
   render () {
@@ -21,7 +21,12 @@ class TodoItem extends Component {
 
     return (
       <li className={itemClass}>
-        <input className='toggle' type='checkbox' checked={completed} onChange={toggle} />
+        <input
+          className='toggle'
+          type='checkbox'
+          checked={completed}
+          onChange={toggle}
+        />
         <label>{title}</label>
         <button onClick={remove} className='destroy' />
       </li>

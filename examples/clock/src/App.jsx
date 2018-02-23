@@ -14,7 +14,9 @@ class App extends Component {
 
   // the clock store can be manipulated as a plain JS object
   setTime () {
-    this.clock.time = moment().utc().format('hh:mm:ss A')
+    this.clock.time = moment()
+      .utc()
+      .format('hh:mm:ss A')
   }
 
   // clean up the timer before the component is unmounted
