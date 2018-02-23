@@ -1,7 +1,7 @@
 import React from 'react'
 import { mount } from 'enzyme'
 import sinon from 'sinon'
-import App from '../examples/clock/App'
+import App from '../examples/clock/src/App'
 
 describe('Clock App', () => {
   const clock = sinon.useFakeTimers()

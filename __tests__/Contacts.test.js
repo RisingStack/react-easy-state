@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import App from '../examples/contacts/App'
+import App from '../examples/contacts/src/App'
 
 describe('Contacts App', () => {
   const app = mount(<App />)

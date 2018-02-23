@@ -1,0 +1,19 @@
+{
+  "name": "stop-watch",
+  "homepage": "https://solkimicreb.github.io/react-easy-state/examples/stop-watch/build/",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "moment": "^2.20.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-easy-state": "^5.0.0",
+    "react-scripts": "1.1.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

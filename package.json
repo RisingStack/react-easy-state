@@ -16,7 +16,7 @@
     "test-builds": "node ./scripts/testBuilds.js",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
     "lint": "standard",
-    "lint-fix": "prettier --ignore-path '.gitignore' --write '**/!(bundle).js' && standard --fix",
+    "lint-fix": "prettier --ignore-path '.gitignore' --write '{,**/!(build)/**/}*.{js,jsx}' && standard --fix",
     "build-examples": "node ./scripts/buildExamples.js",
     "build-examples-watch": "node ./scripts/buildExamples.js --watch",
     "build": "node ./scripts/build.js",
@@ -28,11 +28,11 @@
     ],
     "collectCoverageFrom": [
       "**/src/**",
-      "**/examples/**",
-      "!**/examples/**/dist/**",
-      "!**/examples/**/index.jsx",
-      "!**/examples/stopWatch/**",
-      "!**/examples/beerFinder/**"
+      "**/examples/**/*.{js,jsx}",
+      "!**/examples/**/build/",
+      "!**/examples/**/index.js",
+      "!**/examples/stop-watch/**",
+      "!**/examples/**/beer-finder/**"
     ],
     "setupTestFrameworkScriptFile": "./scripts/testSetup.js"
   },
@@ -108,6 +108,9 @@
     "parser": "babel-eslint",
     "env": [
       "jest"
+    ],
+    "ignore": [
+      "build"
     ]
   },
   "pre-push": [
