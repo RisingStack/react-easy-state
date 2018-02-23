@@ -18,7 +18,8 @@
     "lint": "standard",
     "lint-fix": "prettier --ignore-path '.gitignore' --write '**/*.{js,jsx}' '!**/build/**' && standard --fix",
     "build-examples": "node ./scripts/buildExamples.js",
-    "build-examples-watch": "node ./scripts/buildExamples.js --watch",
+    "link-examples": "node ./scripts/linkExamples.js",
+    "unlink-examples": "node ./scripts/unlinkExamples.js",
     "build": "node ./scripts/build.js",
     "build-toc": "node ./scripts/buildToc.js"
   },
@@ -29,7 +30,7 @@
     "collectCoverageFrom": [
       "**/src/**",
       "**/examples/**/*.{js,jsx}",
-      "!**/examples/**/build/",
+      "!**/examples/**/build/**",
       "!**/examples/**/index.js",
       "!**/examples/stop-watch/**",
       "!**/examples/**/beer-finder/**"
@@ -116,7 +117,6 @@
   },
   "pre-push": [
     "lint",
-    "test",
-    "build-examples"
+    "test"
   ]
 }

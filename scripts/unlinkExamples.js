@@ -10,7 +10,11 @@ const examples = fs
 
 for (let example of examples) {
   example = path.join(examplesPath, example)
-  exec('npm run build', {
+  exec('npm uninstall react-easy-state', {
+    cwd: example,
+    stdio: 'inherit'
+  })
+  exec('npm install react-easy-state', {
     cwd: example,
     stdio: 'inherit'
   })

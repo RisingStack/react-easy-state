@@ -8,9 +8,13 @@ const examples = fs
   .readdirSync(examplesPath)
   .filter(dir => fs.statSync(path.join(examplesPath, dir)).isDirectory())
 
+exec('npm link', {
+  stdio: 'inherit'
+})
+
 for (let example of examples) {
   example = path.join(examplesPath, example)
-  exec('npm run build', {
+  exec('npm link react-easy-state', {
     cwd: example,
     stdio: 'inherit'
   })
