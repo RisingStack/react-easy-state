@@ -3,7 +3,7 @@ import moment from 'moment'
 import { view, store } from 'react-easy-state'
 
 class App extends Component {
-  // create a local
+  // create a local store
   clock = store({
     id: setInterval(() => this.setTime(), 1000),
     time: moment()
