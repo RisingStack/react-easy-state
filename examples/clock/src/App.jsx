@@ -3,14 +3,13 @@ import moment from 'moment'
 import { view, store } from 'react-easy-state'
 
 class App extends Component {
-  constructor () {
-    super()
-
-    this.clock = store({
-      time: setInterval(() => this.setTime(), 1000)
-    })
-    this.setTime()
-  }
+  // create a local
+  clock = store({
+    id: setInterval(() => this.setTime(), 1000),
+    time: moment()
+      .utc()
+      .format('hh:mm:ss A')
+  });
 
   // the clock store can be manipulated as a plain JS object
   setTime () {
@@ -21,7 +20,7 @@ class App extends Component {
 
   // clean up the timer before the component is unmounted
   componentWillUnmount () {
-    clearInterval(this.clock.time)
+    clearInterval(this.clock.id)
   }
 
   // render is automatically triggered whenever this.clock.time changes
