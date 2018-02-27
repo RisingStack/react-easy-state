@@ -80,7 +80,6 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "buble": "^0.19.3",
-    "classnames": "2.2.5",
     "coveralls": "^3.0.0",
     "del": "^3.0.0",
     "enzyme": "^3.3.0",
@@ -99,8 +98,7 @@
     "rollup-plugin-babel": "^3.0.2",
     "rollup-plugin-node-resolve": "^3.0.0",
     "sinon": "^4.3.0",
-    "standard": "10.0.3",
-    "webpack": "^3.5.2"
+    "standard": "10.0.3"
   },
   "engines": {
     "node": ">=6.0.0"
@@ -111,8 +109,8 @@
       "jest"
     ],
     "ignore": [
-      "build",
-      "node_modules"
+      "**/build/**",
+      "**/node_modules/**"
     ]
   },
   "pre-push": [
