@@ -228,7 +228,7 @@ export default view(() =>
 )
 ```
 
-The above snippet won't work, because `increment` is passed as a callback and looses its `this`. You should use the direct object reference - `counter` in this case - instead of `this`.
+The above snippet won't work, because `increment` is passed as a callback and loses its `this`. You should use the direct object reference - `counter` in this case - instead of `this`.
 
 ```js
 const counter = store({
