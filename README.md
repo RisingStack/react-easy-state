@@ -52,7 +52,7 @@ import { store, view } from 'react-easy-state'
 const clock = store({ time: new Date() })
 setInterval(() => clock.time = new Date(), 1000)
 
-export default view(() => <div>{clock.time}</div>)
+export default view(() => <div>{clock.time.toString()}</div>)
 ```
 
 This is enough for it to automatically update your views when needed - no matter how exotically you mutate your state stores. With this freedom you can invent and use your personal favorite state management patterns.
