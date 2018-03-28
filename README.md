@@ -42,8 +42,8 @@ Simple React state management. Made with :heart: and ES6 Proxies.
 
 Easy State has two rules.
 
-1. Always wrap you components with `view`.
-2. Always wrap you state store objects with `store`.
+1. Always wrap your components with `view`.
+2. Always wrap your state store objects with `store`.
 
 ```js
 import React from 'react'
