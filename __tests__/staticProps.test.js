@@ -24,4 +24,15 @@ describe('static props', () => {
     expect(ViewFuncComp.propTypes).toBe(FuncComp.propTypes)
     expect(ViewFuncComp.defaultProps).toBe(FuncComp.defaultProps)
   })
+
+  test('view() should proxy react specific static getters', () => {
+    class Comp extends Component {
+      static get defaultProps () {
+        return { key: 'value' }
+      }
+    }
+
+    const ViewComp = view(Comp)
+    expect(ViewComp.defaultProps).toEqual(Comp.defaultProps)
+  })
 })

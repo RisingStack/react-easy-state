@@ -11,13 +11,7 @@ export default function view (Comp, { devtool: rawDevtool } = {}) {
 
   // return a HOC which overwrites render, shouldComponentUpdate and componentWillUnmount
   // it decides when to run the new reactive methods and when to proxy to the original methods
-  return class ReactiveHOC extends BaseComp {
-    static displayName = Comp.displayName || Comp.name;
-    static contextTypes = Comp.contextTypes;
-    static childContextTypes = Comp.childContextTypes;
-    static propTypes = Comp.propTypes;
-    static defaultProps = Comp.defaultProps;
-
+  class ReactiveHOC extends BaseComp {
     constructor (props, context) {
       super(props, context)
 
@@ -81,4 +75,16 @@ export default function view (Comp, { devtool: rawDevtool } = {}) {
       unobserve(this.render)
     }
   }
+
+  ReactiveHOC.displayName = Comp.displayName || Comp.name;
+  // these are inherited by class components,
+  // but have to be copied for function components
+  if (isStatelessComp) {
+    ReactiveHOC.contextTypes = Comp.contextTypes;
+    ReactiveHOC.childContextTypes = Comp.childContextTypes;
+    ReactiveHOC.propTypes = Comp.propTypes;
+    ReactiveHOC.defaultProps = Comp.defaultProps;
+  }
+
+  return ReactiveHOC
 }

@@ -91,15 +91,15 @@
     "moment": "2.20.1",
     "pre-push": "0.1.1",
     "prettier": "^1.6.1",
-    "react": "^16.3.0-alpha.1",
-    "react-dom": "^16.3.0-alpha.1",
-    "react-test-renderer": "^16.3.0-alpha.1",
+    "react": "^16.3.0",
+    "react-dom": "^16.3.0",
+    "react-test-renderer": "^16.3.0",
     "rollup": "^0.56.0",
     "rollup-plugin-auto-external": "^1.0.0",
     "rollup-plugin-babel": "^3.0.2",
     "rollup-plugin-node-resolve": "^3.0.0",
     "sinon": "^4.3.0",
-    "standard": "10.0.3"
+    "standard": "^10.0.3"
   },
   "engines": {
     "node": ">=6.0.0"
