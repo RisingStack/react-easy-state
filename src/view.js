@@ -77,13 +77,12 @@ export default function view (Comp, { devtool: rawDevtool } = {}) {
   }
 
   ReactiveHOC.displayName = Comp.displayName || Comp.name
-  // these are inherited by class components,
+  // static props are inherited by class components,
   // but have to be copied for function components
   if (isStatelessComp) {
-    ReactiveHOC.contextTypes = Comp.contextTypes
-    ReactiveHOC.childContextTypes = Comp.childContextTypes
-    ReactiveHOC.propTypes = Comp.propTypes
-    ReactiveHOC.defaultProps = Comp.defaultProps
+    for (let key of Object.keys(Comp)) {
+      ReactiveHOC[key] = Comp[key]
+    }
   }
 
   return ReactiveHOC
