@@ -2,7 +2,7 @@
 
 Simple React state management. Made with :heart: and ES6 Proxies.
 
-[![Build](https://img.shields.io/circleci/project/github/solkimicreb/react-easy-state/master.svg)](https://circleci.com/gh/solkimicreb/react-easy-state/tree/master) [![Coverage Status](https://coveralls.io/repos/github/solkimicreb/react-easy-state/badge.svg)](https://coveralls.io/github/solkimicreb/react-easy-state) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) [![Package size](http://img.badgesize.io/https://unpkg.com/react-easy-state/dist/umd.es6.min.js?compression=gzip&label=minzip_size)](https://unpkg.com/react-easy-state/dist/umd.es6.min.js)  [![Version](https://img.shields.io/npm/v/react-easy-state.svg)](https://www.npmjs.com/package/react-easy-state) [![dependencies Status](https://david-dm.org/solkimicreb/react-easy-state/status.svg)](https://david-dm.org/solkimicreb/react-easy-state) [![License](https://img.shields.io/npm/l/react-easy-state.svg)](https://www.npmjs.com/package/react-easy-state)
+[![Build](https://img.shields.io/circleci/project/github/solkimicreb/react-easy-state/master.svg)](https://circleci.com/gh/solkimicreb/react-easy-state/tree/master) [![Coverage Status](https://coveralls.io/repos/github/solkimicreb/react-easy-state/badge.svg)](https://coveralls.io/github/solkimicreb/react-easy-state) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) [![Package size](http://img.badgesize.io/https://unpkg.com/react-easy-state/dist/umd.es6.min.js?compression=gzip&label=minzip_size)](https://unpkg.com/react-easy-state/dist/umd.es6.min.js) [![Version](https://img.shields.io/npm/v/react-easy-state.svg)](https://www.npmjs.com/package/react-easy-state) [![dependencies Status](https://david-dm.org/solkimicreb/react-easy-state/status.svg)](https://david-dm.org/solkimicreb/react-easy-state) [![License](https://img.shields.io/npm/l/react-easy-state.svg)](https://www.npmjs.com/package/react-easy-state)
 
 <a href="#platform-support"><img src="images/browser_support.png" alt="Browser support" width="450px" /></a>
 
@@ -17,17 +17,17 @@ Simple React state management. Made with :heart: and ES6 Proxies.
 * [Introduction](#introduction)
 * [Installation](#installation)
 * [Usage](#usage)
-  + [Creating stores](#creating-stores)
-  + [Creating reactive views](#creating-reactive-views)
-  + [Creating local stores](#creating-local-stores)
+  * [Creating stores](#creating-stores)
+  * [Creating reactive views](#creating-reactive-views)
+  * [Creating local stores](#creating-local-stores)
 * [Examples with live demos](#examples-with-live-demos)
 * [Articles](#articles)
 * [FAQ and Gotchas](#faq-and-gotchas)
-  + [What triggers a re-render?](#what-triggers-a-re-render)
-  + [When do renders run?](#when-do-renders-run)
-  + [My store methods are broken](#my-store-methods-are-broken)
-  + [My views are not rendering](#my-views-are-not-rendering)
-  + [Naming local stores as state](#naming-local-stores-as-state)
+  * [What triggers a re-render?](#what-triggers-a-re-render)
+  * [When do renders run?](#when-do-renders-run)
+  * [My store methods are broken](#my-store-methods-are-broken)
+  * [My views are not rendering](#my-views-are-not-rendering)
+  * [Naming local stores as state](#naming-local-stores-as-state)
 * [Platform support](#platform-support)
 * [Performance](#performance)
 * [How does it work?](#how-does-it-work)
@@ -42,17 +42,17 @@ Simple React state management. Made with :heart: and ES6 Proxies.
 
 Easy State has two rules.
 
-1. Always wrap your components with `view`.
-2. Always wrap your state store objects with `store`.
+1.  Always wrap your components with `view`.
+2.  Always wrap your state store objects with `store`.
 
 ```js
-import React from 'react'
-import { store, view } from 'react-easy-state'
+import React from 'react';
+import { store, view } from 'react-easy-state';
 
-const clock = store({ time: new Date() })
-setInterval(() => clock.time = new Date(), 1000)
+const clock = store({ time: new Date() });
+setInterval(() => (clock.time = new Date()), 1000);
 
-export default view(() => <div>{clock.time.toString()}</div>)
+export default view(() => <div>{clock.time.toString()}</div>);
 ```
 
 This is enough for it to automatically update your views when needed - no matter how exotically you mutate your state stores. With this freedom you can invent and use your personal favorite state management patterns.
@@ -60,7 +60,6 @@ This is enough for it to automatically update your views when needed - no matter
 ## Installation
 
 `npm install react-easy-state`
-
 
 <details>
 <summary><strong>Setting up a quick project</strong></summary>
@@ -74,7 +73,8 @@ npm install react-easy-state
 npm start
 ```
 
-*You need npm 5.2+ to use npx.*
+_You need npm 5.2+ to use npx._
+
 </details>
 
 ## Usage
@@ -84,14 +84,14 @@ npm start
 `store` creates a state store from the passed object and returns it. State stores are just like normal JS objects. (To be precise, they are transparent reactive proxies of the original object.)
 
 ```js
-import { store } from 'react-easy-state'
+import { store } from 'react-easy-state';
 
 const user = store({
   name: 'Rick'
-})
+});
 
 // stores behave like normal JS objects
-user.name = 'Bob'
+user.name = 'Bob';
 ```
 
 ### Creating reactive views
@@ -99,27 +99,27 @@ user.name = 'Bob'
 Wrapping your components with `view` turns them into reactive views. A reactive view re-renders whenever a store's property - used inside its render - changes.
 
 ```js
-import React, { Component } from 'react'
-import { view, store } from 'react-easy-state'
+import React, { Component } from 'react';
+import { view, store } from 'react-easy-state';
 
-const user = store({ name: 'Bob' })
+const user = store({ name: 'Bob' });
 
 class HelloComp extends Component {
-  onChange = (ev) => (user.name = ev.target.value)
+  onChange = ev => (user.name = ev.target.value);
 
   // the render is triggered whenever user.name changes
-  render () {
+  render() {
     return (
       <div>
         <input value={user.name} onChange={this.onChange} />
         <div>Hello {user.name}!</div>
       </div>
-    )
+    );
   }
 }
 
 // the component must be wrapped with `view`
-export default view(HelloComp)
+export default view(HelloComp);
 ```
 
 **Make sure to wrap all of your components with `view` - including stateful and stateless ones. If you do not wrap a component, it will not properly render on store mutations.**
@@ -130,30 +130,31 @@ export default view(HelloComp)
 `view` can also be used as a class decorator with the `@view` syntax. You can learn more about decorators [here](https://medium.com/google-developers/exploring-es7-decorators-76ecb65fb841).
 
 ```js
-import React, { Component } from 'react'
-import { view, store } from 'react-easy-state'
+import React, { Component } from 'react';
+import { view, store } from 'react-easy-state';
 
 const user = store({
   name: 'Bob'
-})
+});
 
 @view
 class HelloComp extends Component {
-  onChange = (ev) => (user.name = ev.target.value)
+  onChange = ev => (user.name = ev.target.value);
 
   // the render is triggered whenever user.name changes
-  render () {
+  render() {
     return (
       <div>
         <input value={user.name} onChange={this.onChange} />
         <div>Hello {user.name}!</div>
       </div>
-    )
+    );
   }
 }
 ```
 
-*Decorators are not a standardized JavaScript feature and create-react-app does not support them yet.*
+_Decorators are not a standardized JavaScript feature and create-react-app does not support them yet._
+
 </details>
 
 ### Creating local stores
@@ -161,45 +162,45 @@ class HelloComp extends Component {
 A singleton global store is perfect for something like the current user, but sometimes having local component states is a better fit. Just create a store as a component property in these cases.
 
 ```js
-import React, { Component } from 'react'
-import { view, store } from 'react-easy-state'
+import React, { Component } from 'react';
+import { view, store } from 'react-easy-state';
 
 class ClockComp extends Component {
-  clock = store({ time: new Date() })
+  clock = store({ time: new Date() });
 
-  componentDidMount () {
-    setInterval(() => this.clock.time = new Date(), 1000)
+  componentDidMount() {
+    setInterval(() => (this.clock.time = new Date()), 1000);
   }
 
-  render () {
-    return <div>{this.clock.time}</div>
+  render() {
+    return <div>{this.clock.time}</div>;
   }
 }
 
-export default view(ClockComp)
+export default view(ClockComp);
 ```
 
 That's it, You know everything to master React state management! Check some of the [examples](#examples-with-live-demos) and [articles](#articles) for more inspiration or the [FAQ section](#faq-and-gotchas) for common issues.
 
 ## Examples with live demos
 
-*Beginner*
+_Beginner_
 
-- [Clock Widget](https://solkimicreb.github.io/react-easy-state/examples/clock/build) ([source](/examples/clock/)) ([codesandbox](https://codesandbox.io/s/github/solkimicreb/react-easy-state/tree/master/examples/clock)): a reusable clock widget with a tiny local state store.
-- [Stopwatch](https://solkimicreb.github.io/react-easy-state/examples/stop-watch/build) ([source](/examples/stop-watch/)) ([codesandbox](https://codesandbox.io/s/github/solkimicreb/react-easy-state/tree/master/examples/stop-watch)) ([tutorial](https://hackernoon.com/introducing-react-easy-state-1210a156fa16)): a stopwatch with a mix of normal and computed state properties.
+* [Clock Widget](https://solkimicreb.github.io/react-easy-state/examples/clock/build) ([source](/examples/clock/)) ([codesandbox](https://codesandbox.io/s/github/solkimicreb/react-easy-state/tree/master/examples/clock)): a reusable clock widget with a tiny local state store.
+* [Stopwatch](https://solkimicreb.github.io/react-easy-state/examples/stop-watch/build) ([source](/examples/stop-watch/)) ([codesandbox](https://codesandbox.io/s/github/solkimicreb/react-easy-state/tree/master/examples/stop-watch)) ([tutorial](https://hackernoon.com/introducing-react-easy-state-1210a156fa16)): a stopwatch with a mix of normal and computed state properties.
 
-*Advanced*
+_Advanced_
 
-- [TodoMVC](https://solkimicreb.github.io/react-easy-state/examples/todo-mvc/build) ([source](/examples/todo-mvc/)) ([codesandbox](https://codesandbox.io/s/github/solkimicreb/react-easy-state/tree/master/examples/todo-mvc)): a classic TodoMVC implementation with a lot of computed data and implicit reactivity.
-- [Contacts Table](https://solkimicreb.github.io/react-easy-state/examples/contacts/build) ([source](/examples/contacts/)) ([codesandbox](https://codesandbox.io/s/github/solkimicreb/react-easy-state/tree/master/examples/contacts)): a data grid implementation with a mix of global and local state.
-- [Beer Finder](https://solkimicreb.github.io/react-easy-state/examples/beer-finder/build) ([source](/examples/beer-finder/)) ([codesandbox](https://codesandbox.io/s/github/solkimicreb/react-easy-state/tree/master/examples/beer-finder))  ([tutorial](https://medium.com/@solkimicreb/design-patterns-with-react-easy-state-830b927acc7c)): an app with async actions and a mix of local and global state, which finds matching beers for your meal.
+* [TodoMVC](https://solkimicreb.github.io/react-easy-state/examples/todo-mvc/build) ([source](/examples/todo-mvc/)) ([codesandbox](https://codesandbox.io/s/github/solkimicreb/react-easy-state/tree/master/examples/todo-mvc)): a classic TodoMVC implementation with a lot of computed data and implicit reactivity.
+* [Contacts Table](https://solkimicreb.github.io/react-easy-state/examples/contacts/build) ([source](/examples/contacts/)) ([codesandbox](https://codesandbox.io/s/github/solkimicreb/react-easy-state/tree/master/examples/contacts)): a data grid implementation with a mix of global and local state.
+* [Beer Finder](https://solkimicreb.github.io/react-easy-state/examples/beer-finder/build) ([source](/examples/beer-finder/)) ([codesandbox](https://codesandbox.io/s/github/solkimicreb/react-easy-state/tree/master/examples/beer-finder)) ([tutorial](https://medium.com/@solkimicreb/design-patterns-with-react-easy-state-830b927acc7c)): an app with async actions and a mix of local and global state, which finds matching beers for your meal.
 
 ## Articles
 
-- [Introducing React Easy State](https://blog.risingstack.com/introducing-react-easy-state/): making a simple stopwatch.
-- [Stress Testing React Easy State](https://medium.com/@solkimicreb/stress-testing-react-easy-state-ac321fa3becf): demonstrating Easy State's reactivity with increasingly exotic state mutations.
-- [Design Patterns with React Easy State](https://medium.com/@solkimicreb/design-patterns-with-react-easy-state-830b927acc7c): demonstrating async actions and local and global state management through a beer finder app.
-- [The Ideas Behind React Easy State](https://medium.com/dailyjs/the-ideas-behind-react-easy-state-901d70e4d03e): a deep dive under the hood of Easy State.
+* [Introducing React Easy State](https://blog.risingstack.com/introducing-react-easy-state/): making a simple stopwatch.
+* [Stress Testing React Easy State](https://medium.com/@solkimicreb/stress-testing-react-easy-state-ac321fa3becf): demonstrating Easy State's reactivity with increasingly exotic state mutations.
+* [Design Patterns with React Easy State](https://medium.com/@solkimicreb/design-patterns-with-react-easy-state-830b927acc7c): demonstrating async actions and local and global state management through a beer finder app.
+* [The Ideas Behind React Easy State](https://medium.com/dailyjs/the-ideas-behind-react-easy-state-901d70e4d03e): a deep dive under the hood of Easy State.
 
 ## FAQ and Gotchas
 
@@ -211,6 +212,31 @@ Easy State monitors which store properties are used inside each component's rend
 
 Triggered renders are passed to React for execution, there is no `forceUpdate` behind the scenes. This means that component lifecycle hooks behave as expected and that React Fiber works nicely together with Easy State. On top of this, you can use your favorite testing frameworks without any added hassle.
 
+### How do I derive local stores from props (getDerivedStateFromProps)?
+
+Components wrapped with `view` have an extra static `deriveStoresFromProps` lifecycle method, which works similarly to the vanilla `getDerivedStateFromProps`.
+
+```js
+import React, { Component } from 'react';
+import { view, store } from 'react-easy-state';
+
+class NameCard extends Component {
+  userStore = store({ name: 'Bob' });
+
+  static deriveStoresFromProps(props, userStore) {
+    userStore.name = props.name || userStore.name;
+  }
+
+  render() {
+    return <div>{this.userStore.name}</div>;
+  }
+}
+
+export default view(NameCard);
+```
+
+Instead of returning an object, you should directly mutate the passed in stores. If you have multiple local stores on a single component, they are all passed as arguments - in their definition order - after the first props argument.
+
 ### My store methods are broken
 
 You should not use the `this` keyword in the methods of your state stores.
@@ -218,14 +244,12 @@ You should not use the `this` keyword in the methods of your state stores.
 ```js
 const counter = store({
   num: 0,
-  increment () {
-    this.num++
+  increment() {
+    this.num++;
   }
-})
+});
 
-export default view(() =>
-  <div onClick={counter.increment}>{counter.num}</div>
-)
+export default view(() => <div onClick={counter.increment}>{counter.num}</div>);
 ```
 
 The above snippet won't work, because `increment` is passed as a callback and loses its `this`. You should use the direct object reference - `counter` in this case - instead of `this`.
@@ -233,10 +257,10 @@ The above snippet won't work, because `increment` is passed as a callback and lo
 ```js
 const counter = store({
   num: 0,
-  increment () {
-    counter.num++
+  increment() {
+    counter.num++;
   }
-})
+});
 ```
 
 This works as expected, even when you pass store methods as callbacks.
@@ -246,10 +270,10 @@ This works as expected, even when you pass store methods as callbacks.
 You should wrap your state stores with `store` as early as possible to make them reactive.
 
 ```js
-const person = { name: 'Bob' }
-person.name = 'Ann'
+const person = { name: 'Bob' };
+person.name = 'Ann';
 
-export default store(person)
+export default store(person);
 ```
 
 The above example wouldn't trigger re-renders on the `person.name = 'Ann'` mutation, because it is targeted at the raw object. Mutating the raw - none `store` wrapped object - won't schedule renders.
@@ -257,10 +281,10 @@ The above example wouldn't trigger re-renders on the `person.name = 'Ann'` mutat
 Do this instead of the above code.
 
 ```js
-const person = store({ name: 'Bob' })
-person.name = 'Ann'
+const person = store({ name: 'Bob' });
+person.name = 'Ann';
 
-export default person
+export default person;
 ```
 
 ### Naming local stores as state
@@ -269,24 +293,24 @@ Naming your local state stores as `state` may conflict with React linter rules, 
 
 ## Platform support
 
-- Node: 6 and above
-- Chrome: 49 and above
-- Firefox: 38 and above
-- Safari: 10 and above
-- Edge: 12 and above
-- Opera: 36 and above
-- React Native: iOS 10 and above and Android with [community JSC](https://github.com/SoftwareMansion/jsc-android-buildscripts)
-- IE is not supported and never will be
+* Node: 6 and above
+* Chrome: 49 and above
+* Firefox: 38 and above
+* Safari: 10 and above
+* Edge: 12 and above
+* Opera: 36 and above
+* React Native: iOS 10 and above and Android with [community JSC](https://github.com/SoftwareMansion/jsc-android-buildscripts)
+* IE is not supported and never will be
 
-*This library is based on non polyfillable ES6 Proxies. Because of this, it will never support IE.*
+_This library is based on non polyfillable ES6 Proxies. Because of this, it will never support IE._
 
-*React Native is supported on iOS and Android is supported with the community JavaScriptCore. Learn how to set it up [here](https://github.com/SoftwareMansion/jsc-android-buildscripts#how-to-use-it-with-my-react-native-app). It is pretty simple.*
+_React Native is supported on iOS and Android is supported with the community JavaScriptCore. Learn how to set it up [here](https://github.com/SoftwareMansion/jsc-android-buildscripts#how-to-use-it-with-my-react-native-app). It is pretty simple._
 
 ## Performance
 
 You can compare Easy State with plain React and other state management libraries with the below benchmarks. It performs a bit better than MobX and a bit worse than Redux.
 
-- [js-framework-benchmark](https://github.com/krausest/js-framework-benchmark) ([source](https://github.com/krausest/js-framework-benchmark/tree/master/react-v16.1.0-easy-state-v4.0.1-keyed)) ([results](https://rawgit.com/krausest/js-framework-benchmark/master/webdriver-ts-results/table.html))
+* [js-framework-benchmark](https://github.com/krausest/js-framework-benchmark) ([source](https://github.com/krausest/js-framework-benchmark/tree/master/react-v16.1.0-easy-state-v4.0.1-keyed)) ([results](https://rawgit.com/krausest/js-framework-benchmark/master/webdriver-ts-results/table.html))
 
 ## How does it work?
 
@@ -296,10 +320,10 @@ Under the hood Easy State uses the [@nx-js/observer-util](https://github.com/nx-
 
 This library detects if you use ES6 or commonJS modules and serve the right format to you. The exposed bundles are transpiled to ES5 to support common tools - like UglifyJS minifying. If you would like a finer control over the provided build, you can specify them in your imports.
 
-- `react-easy-state/dist/es.es6.js` exposes an ES6 build with ES6 modules.
-- `react-easy-state/dist/es.es5.js` exposes an ES5 build with ES6 modules.
-- `react-easy-state/dist/cjs.es6.js` exposes an ES6 build with commonJS modules.
-- `react-easy-state/dist/cjs.es5.js` exposes an ES5 build with commonJS modules.
+* `react-easy-state/dist/es.es6.js` exposes an ES6 build with ES6 modules.
+* `react-easy-state/dist/es.es5.js` exposes an ES5 build with ES6 modules.
+* `react-easy-state/dist/cjs.es6.js` exposes an ES6 build with commonJS modules.
+* `react-easy-state/dist/cjs.es5.js` exposes an ES5 build with commonJS modules.
 
 If you use a bundler, set up an alias for `react-easy-state` to point to your desired build. You can learn how to do it with webpack [here](https://webpack.js.org/configuration/resolve/#resolve-alias) and with rollup [here](https://github.com/rollup/rollup-plugin-alias#usage).
 
