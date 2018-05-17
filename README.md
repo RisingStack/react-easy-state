@@ -212,6 +212,44 @@ Easy State monitors which store properties are used inside each component's rend
 
 Triggered renders are passed to React for execution, there is no `forceUpdate` behind the scenes. This means that component lifecycle hooks behave as expected and that React Fiber works nicely together with Easy State. On top of this, you can use your favorite testing frameworks without any added hassle.
 
+### My component renders multiple times unnecessarily
+
+If you mutate your stores inside React event handlers, this will never happen.
+
+If you mutate your stores multiple times synchronously from outside event handlers, it can happen though. You can wrap the mutating code with `ReactDOM.flushSync` to batch the updates and trigger a single re-render only. (It works similarly to MobX's actions.)
+
+```js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { view, store } from 'react-easy-state';
+
+const user = store({ name: 'Bob', age: 30 });
+
+function mutateUser() {
+  user.name = 'Ann';
+  user.age = 32;
+}
+
+// this renders the component 2 times
+mutateUser();
+// this renders the component only once, after all the mutations
+ReactDOM.flushSync(mutateUser);
+
+// clicking on the inner div renders the component only once,
+// because mutateUser is invoked as an event handler
+export default view(() => (
+  <div onClick={mutateUser}>
+    name: {user.name}, age: {user.age}
+  </div>
+));
+```
+
+This will not be necessary once React's new scheduler is ready. It currently batches `setState` calls inside event handlers only, but this will change soon.
+
+> We realize it's inconvenient that the behavior is different depending on whether you're in an event handler or not. This will change in a future React version that will batch all updates by default (and provide an opt-in API to flush changes synchronously). Until we switch the default behavior (potentially in React 17), there is an API you can use to force batching.
+
+You can find the whole post by Dan Abramov [here](https://stackoverflow.com/a/48610973). Once the new default React scheduler is ready, you won't have to worry about multiple renders. Until then you can use `ReactDOM.flushSync` or just let it go, if you do not experience performance issues.
+
 ### How do I derive local stores from props (getDerivedStateFromProps)?
 
 Components wrapped with `view` have an extra static `deriveStoresFromProps` lifecycle method, which works similarly to the vanilla `getDerivedStateFromProps`.
