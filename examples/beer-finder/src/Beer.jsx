@@ -8,7 +8,12 @@ class Beer extends Component {
   toggleDetails = () => (this.store.details = !this.store.details);
 
   render () {
-    const { name, image_url: imageUrl, food_pairing, description } = this.props
+    const {
+      name,
+      image_url: imageUrl,
+      food_pairing: foodPairing,
+      description
+    } = this.props
     const { details } = this.store
 
     return (
@@ -19,7 +24,7 @@ class Beer extends Component {
           {details ? (
             <p>{description}</p>
           ) : (
-            <ul>{food_pairing.map(food => <li key={food}>{food}</li>)}</ul>
+            <ul>{foodPairing.map(food => <li key={food}>{food}</li>)}</ul>
           )}
         </CardContent>
       </Card>
