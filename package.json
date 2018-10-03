@@ -3,8 +3,8 @@
   "version": "5.1.0",
   "description":
     "React state management with a minimal API. Made with ES6 Proxies.",
-  "main": "dist/cjs.es5.js",
-  "module": "dist/es.es5.js",
+  "main": "dist/cjs.es6.js",
+  "module": "dist/es.es6.js",
   "types": "types/index.d.ts",
   "files": ["dist", "types"],
   "scripts": {
