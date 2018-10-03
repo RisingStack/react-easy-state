@@ -6,6 +6,8 @@ Simple React state management. Made with :heart: and ES6 Proxies.
 
 <a href="#platform-support"><img src="images/browser_support.png" alt="Browser support" width="450px" /></a>
 
+_Please try out Easy State v6 beta to quicken the release process. Release notes are [here](https://github.com/solkimicreb/react-easy-state/releases/tag/v6.0.0), you can try it with the `npm i react-easy-state@beta` command. Thanks!_
+
 <details>
 <summary><strong>Table of Contents</strong></summary>
 <!-- Do not edit the Table of Contents, instead regenerate with `npm run build-toc` -->
