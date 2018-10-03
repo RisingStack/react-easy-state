@@ -6,8 +6,6 @@ Simple React state management. Made with :heart: and ES6 Proxies.
 
 <a href="#platform-support"><img src="images/browser_support.png" alt="Browser support" width="450px" /></a>
 
-**Breaking change in [v5](https://github.com/solkimicreb/react-easy-state/releases/tag/v5.0.0)**: the auto bind feature got removed. See the alternatives for your components at the [official React docs](https://reactjs.org/docs/handling-events.html) and for you stores at [the FAQ docs section](#my-store-methods-are-broken).
-
 <details>
 <summary><strong>Table of Contents</strong></summary>
 <!-- Do not edit the Table of Contents, instead regenerate with `npm run build-toc` -->
@@ -17,19 +15,19 @@ Simple React state management. Made with :heart: and ES6 Proxies.
 * [Introduction](#introduction)
 * [Installation](#installation)
 * [Usage](#usage)
-  + [Creating stores](#creating-stores)
-  + [Creating reactive views](#creating-reactive-views)
-  + [Creating local stores](#creating-local-stores)
+  * [Creating stores](#creating-stores)
+  * [Creating reactive views](#creating-reactive-views)
+  * [Creating local stores](#creating-local-stores)
 * [Examples with live demos](#examples-with-live-demos)
 * [Articles](#articles)
 * [FAQ and Gotchas](#faq-and-gotchas)
-  + [What triggers a re-render?](#what-triggers-a-re-render)
-  + [When do renders run?](#when-do-renders-run)
-  + [My component renders multiple times unnecessarily](#my-component-renders-multiple-times-unnecessarily)
-  + [How do I derive local stores from props (getDerivedStateFromProps)?](#how-do-i-derive-local-stores-from-props-getderivedstatefromprops)
-  + [My store methods are broken](#my-store-methods-are-broken)
-  + [My views are not rendering](#my-views-are-not-rendering)
-  + [Naming local stores as state](#naming-local-stores-as-state)
+  * [What triggers a re-render?](#what-triggers-a-re-render)
+  * [When do renders run?](#when-do-renders-run)
+  * [My component renders multiple times unnecessarily](#my-component-renders-multiple-times-unnecessarily)
+  * [How do I derive local stores from props (getDerivedStateFromProps)?](#how-do-i-derive-local-stores-from-props-getderivedstatefromprops)
+  * [My store methods are broken](#my-store-methods-are-broken)
+  * [My views are not rendering](#my-views-are-not-rendering)
+  * [Naming local stores as state](#naming-local-stores-as-state)
 * [Platform support](#platform-support)
 * [Performance](#performance)
 * [How does it work?](#how-does-it-work)
@@ -48,13 +46,13 @@ Easy State has two rules.
 2.  Always wrap your state store objects with `store`.
 
 ```js
-import React from 'react';
-import { store, view } from 'react-easy-state';
+import React from 'react'
+import { store, view } from 'react-easy-state'
 
-const clock = store({ time: new Date() });
-setInterval(() => (clock.time = new Date()), 1000);
+const clock = store({ time: new Date() })
+setInterval(() => (clock.time = new Date()), 1000)
 
-export default view(() => <div>{clock.time.toString()}</div>);
+export default view(() => <div>{clock.time.toString()}</div>)
 ```
 
 This is enough for it to automatically update your views when needed - no matter how exotically you mutate your state stores. With this freedom you can invent and use your personal favorite state management patterns.
@@ -86,14 +84,14 @@ _You need npm 5.2+ to use npx._
 `store` creates a state store from the passed object and returns it. State stores are just like normal JS objects. (To be precise, they are transparent reactive proxies of the original object.)
 
 ```js
-import { store } from 'react-easy-state';
+import { store } from 'react-easy-state'
 
 const user = store({
   name: 'Rick'
-});
+})
 
 // stores behave like normal JS objects
-user.name = 'Bob';
+user.name = 'Bob'
 ```
 
 ### Creating reactive views
@@ -101,13 +99,13 @@ user.name = 'Bob';
 Wrapping your components with `view` turns them into reactive views. A reactive view re-renders whenever a store's property - used inside its render - changes.
 
 ```js
-import React, { Component } from 'react';
-import { view, store } from 'react-easy-state';
+import React, { Component } from 'react'
+import { view, store } from 'react-easy-state'
 
-const user = store({ name: 'Bob' });
+const user = store({ name: 'Bob' })
 
 class HelloComp extends Component {
-  onChange = ev => (user.name = ev.target.value);
+  onChange = ev => (user.name = ev.target.value)
 
   // the render is triggered whenever user.name changes
   render() {
@@ -116,12 +114,12 @@ class HelloComp extends Component {
         <input value={user.name} onChange={this.onChange} />
         <div>Hello {user.name}!</div>
       </div>
-    );
+    )
   }
 }
 
 // the component must be wrapped with `view`
-export default view(HelloComp);
+export default view(HelloComp)
 ```
 
 **Make sure to wrap all of your components with `view` - including stateful and stateless ones. If you do not wrap a component, it will not properly render on store mutations.**
@@ -132,16 +130,16 @@ export default view(HelloComp);
 `view` can also be used as a class decorator with the `@view` syntax. You can learn more about decorators [here](https://medium.com/google-developers/exploring-es7-decorators-76ecb65fb841).
 
 ```js
-import React, { Component } from 'react';
-import { view, store } from 'react-easy-state';
+import React, { Component } from 'react'
+import { view, store } from 'react-easy-state'
 
 const user = store({
   name: 'Bob'
-});
+})
 
 @view
 class HelloComp extends Component {
-  onChange = ev => (user.name = ev.target.value);
+  onChange = ev => (user.name = ev.target.value)
 
   // the render is triggered whenever user.name changes
   render() {
@@ -150,7 +148,7 @@ class HelloComp extends Component {
         <input value={user.name} onChange={this.onChange} />
         <div>Hello {user.name}!</div>
       </div>
-    );
+    )
   }
 }
 ```
@@ -164,22 +162,22 @@ _Decorators are not a standardized JavaScript feature and create-react-app does 
 A singleton global store is perfect for something like the current user, but sometimes having local component states is a better fit. Just create a store as a component property in these cases.
 
 ```js
-import React, { Component } from 'react';
-import { view, store } from 'react-easy-state';
+import React, { Component } from 'react'
+import { view, store } from 'react-easy-state'
 
 class ClockComp extends Component {
-  clock = store({ time: new Date() });
+  clock = store({ time: new Date() })
 
   componentDidMount() {
-    setInterval(() => (this.clock.time = new Date()), 1000);
+    setInterval(() => (this.clock.time = new Date()), 1000)
   }
 
   render() {
-    return <div>{this.clock.time}</div>;
+    return <div>{this.clock.time}</div>
   }
 }
 
-export default view(ClockComp);
+export default view(ClockComp)
 ```
 
 That's it, You know everything to master React state management! Check some of the [examples](#examples-with-live-demos) and [articles](#articles) for more inspiration or the [FAQ section](#faq-and-gotchas) for common issues.
@@ -221,21 +219,21 @@ If you mutate your stores inside React event handlers, this will never happen.
 If you mutate your stores multiple times synchronously from outside event handlers, it can happen though. You can wrap the mutating code with `ReactDOM.flushSync` to batch the updates and trigger a single re-render only. (It works similarly to MobX's actions.)
 
 ```js
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { view, store } from 'react-easy-state';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { view, store } from 'react-easy-state'
 
-const user = store({ name: 'Bob', age: 30 });
+const user = store({ name: 'Bob', age: 30 })
 
 function mutateUser() {
-  user.name = 'Ann';
-  user.age = 32;
+  user.name = 'Ann'
+  user.age = 32
 }
 
 // this renders the component 2 times
-mutateUser();
+mutateUser()
 // this renders the component only once, after all the mutations
-ReactDOM.flushSync(mutateUser);
+ReactDOM.flushSync(mutateUser)
 
 // clicking on the inner div renders the component only once,
 // because mutateUser is invoked as an event handler
@@ -243,7 +241,7 @@ export default view(() => (
   <div onClick={mutateUser}>
     name: {user.name}, age: {user.age}
   </div>
-));
+))
 ```
 
 This will not be necessary once React's new scheduler is ready. It currently batches `setState` calls inside event handlers only, but this will change soon.
@@ -257,22 +255,22 @@ You can find the whole post by Dan Abramov [here](https://stackoverflow.com/a/48
 Components wrapped with `view` have an extra static `deriveStoresFromProps` lifecycle method, which works similarly to the vanilla `getDerivedStateFromProps`.
 
 ```js
-import React, { Component } from 'react';
-import { view, store } from 'react-easy-state';
+import React, { Component } from 'react'
+import { view, store } from 'react-easy-state'
 
 class NameCard extends Component {
-  userStore = store({ name: 'Bob' });
+  userStore = store({ name: 'Bob' })
 
   static deriveStoresFromProps(props, userStore) {
-    userStore.name = props.name || userStore.name;
+    userStore.name = props.name || userStore.name
   }
 
   render() {
-    return <div>{this.userStore.name}</div>;
+    return <div>{this.userStore.name}</div>
   }
 }
 
-export default view(NameCard);
+export default view(NameCard)
 ```
 
 Instead of returning an object, you should directly mutate the passed in stores. If you have multiple local stores on a single component, they are all passed as arguments - in their definition order - after the first props argument.
@@ -285,11 +283,11 @@ You should not use the `this` keyword in the methods of your state stores.
 const counter = store({
   num: 0,
   increment() {
-    this.num++;
+    this.num++
   }
-});
+})
 
-export default view(() => <div onClick={counter.increment}>{counter.num}</div>);
+export default view(() => <div onClick={counter.increment}>{counter.num}</div>)
 ```
 
 The above snippet won't work, because `increment` is passed as a callback and loses its `this`. You should use the direct object reference - `counter` in this case - instead of `this`.
@@ -298,9 +296,9 @@ The above snippet won't work, because `increment` is passed as a callback and lo
 const counter = store({
   num: 0,
   increment() {
-    counter.num++;
+    counter.num++
   }
-});
+})
 ```
 
 This works as expected, even when you pass store methods as callbacks.
@@ -310,10 +308,10 @@ This works as expected, even when you pass store methods as callbacks.
 You should wrap your state stores with `store` as early as possible to make them reactive.
 
 ```js
-const person = { name: 'Bob' };
-person.name = 'Ann';
+const person = { name: 'Bob' }
+person.name = 'Ann'
 
-export default store(person);
+export default store(person)
 ```
 
 The above example wouldn't trigger re-renders on the `person.name = 'Ann'` mutation, because it is targeted at the raw object. Mutating the raw - none `store` wrapped object - won't schedule renders.
@@ -321,10 +319,10 @@ The above example wouldn't trigger re-renders on the `person.name = 'Ann'` mutat
 Do this instead of the above code.
 
 ```js
-const person = store({ name: 'Bob' });
-person.name = 'Ann';
+const person = store({ name: 'Bob' })
+person.name = 'Ann'
 
-export default person;
+export default person
 ```
 
 ### Naming local stores as state
