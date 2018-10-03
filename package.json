@@ -1,14 +1,12 @@
 {
   "name": "react-easy-state",
   "version": "6.0.0",
-  "description": "React state management with a minimal API. Made with ES6 Proxies.",
+  "description":
+    "React state management with a minimal API. Made with ES6 Proxies.",
   "main": "dist/cjs.es6.js",
   "module": "dist/es.es6.js",
   "types": "types/index.d.ts",
-  "files": [
-    "dist",
-    "types"
-  ],
+  "files": ["dist", "types"],
   "scripts": {
     "test": "jest --coverage",
     "test-watch": "jest --watch",
@@ -16,7 +14,8 @@
     "test-builds": "node ./scripts/testBuilds.js",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
     "lint": "standard",
-    "lint-fix": "prettier --ignore-path '.gitignore' --write '**/*.{js,jsx}' '!**/build/**' && standard --fix",
+    "lint-fix":
+      "prettier --ignore-path '.gitignore' --write '**/*.{js,jsx}' '!**/build/**' && standard --fix",
     "build-examples": "node ./scripts/buildExamples.js",
     "link-examples": "node ./scripts/linkExamples.js",
     "unlink-examples": "node ./scripts/unlinkExamples.js",
@@ -24,9 +23,7 @@
     "build-toc": "node ./scripts/buildToc.js"
   },
   "jest": {
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ],
+    "snapshotSerializers": ["enzyme-to-json/serializer"],
     "collectCoverageFrom": [
       "**/src/**",
       "**/examples/**/*.{js,jsx}",
@@ -35,7 +32,8 @@
       "!**/examples/stop-watch/**",
       "!**/examples/**/beer-finder/**"
     ],
-    "setupTestFrameworkScriptFile": "./scripts/testSetup.js"
+    "setupTestFrameworkScriptFile": "./scripts/testSetup.js",
+    "testURL": "http://react-easy-state.js"
   },
   "author": {
     "name": "Miklos Bertalan",
@@ -106,16 +104,8 @@
   },
   "standard": {
     "parser": "babel-eslint",
-    "env": [
-      "jest"
-    ],
-    "ignore": [
-      "**/build/**",
-      "**/node_modules/**"
-    ]
+    "env": ["jest"],
+    "ignore": ["**/build/**", "**/node_modules/**"]
   },
-  "pre-push": [
-    "lint",
-    "test"
-  ]
+  "pre-push": ["lint", "test"]
 }
