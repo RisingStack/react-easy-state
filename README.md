@@ -6,7 +6,7 @@ Simple React state management. Made with :heart: and ES6 Proxies.
 
 <a href="#platform-support"><img src="images/browser_support.png" alt="Browser support" width="450px" /></a>
 
-**Breaking change in v6: the default bundle changed from the ES5 version to the ES6 version. If you experience problems during the build process, please check [this docs section](#alternative-builds)**
+**Breaking change in v6:** the default bundle changed from the ES5 version to the ES6 version. If you experience problems during the build process, please check [this docs section](#alternative-builds)
 
 <details>
 <summary><strong>Table of Contents</strong></summary>
