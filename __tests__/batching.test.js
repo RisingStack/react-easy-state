@@ -129,4 +129,31 @@ describe('batching', () => {
     expect(comp.text()).toBe('Rick')
     expect(renderCount).toBe(2)
   })
+
+  test('should not break Promises', async () => {
+    await Promise.resolve(12)
+      .then(value => {
+        expect(value).toBe(12)
+        throw 15
+      })
+      .catch(err => {
+        expect(err).toBe(15)
+      })
+  })
+
+  test('should not break setTimeout', async () => {
+    await new Promise(resolve => {
+      setTimeout(
+        (arg1, arg2, arg3) => {
+          expect(arg1).toBe('Hello')
+          expect(arg2).toBe('World')
+          expect(arg3).toBe(undefined)
+          resolve()
+        },
+        100,
+        'Hello',
+        'World'
+      )
+    })
+  })
 })
