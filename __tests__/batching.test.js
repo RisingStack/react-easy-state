@@ -1,5 +1,5 @@
 import React from 'react'
-import { view, store } from 'react-easy-state'
+import { view, store, batch } from 'react-easy-state'
 import { mount } from 'enzyme'
 
 describe('batching', () => {
@@ -18,6 +18,25 @@ describe('batching', () => {
     person.name = 'Rick'
     expect(comp.text()).toBe('Rick')
     expect(renderCount).toBe(3)
+  })
+
+  test('should batch state changes inside a batch() wrapper', () => {
+    let renderCount = 0
+    const person = store({ name: 'Bob' })
+    const MyComp = view(() => {
+      renderCount++
+      return <div>{person.name}</div>
+    })
+
+    const comp = mount(<MyComp />)
+    expect(renderCount).toBe(1)
+    expect(comp.text()).toBe('Bob')
+    batch(() => {
+      person.name = 'Ann'
+      person.name = 'Rick'
+    })
+    expect(comp.text()).toBe('Rick')
+    expect(renderCount).toBe(2)
   })
 
   test('should batch changes in setTimeout and setInterval', async () => {

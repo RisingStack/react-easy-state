@@ -1,7 +1,7 @@
 const tasks = new Set()
 let isStopped = false
 
-export function add (task) {
+export function add(task) {
   if (isStopped) {
     tasks.add(task)
   } else {
@@ -9,34 +9,35 @@ export function add (task) {
   }
 }
 
-export function remove (task) {
+export function remove(task) {
   tasks.delete(task)
 }
 
 // this replaces the passed function with a function
 // that batches all of its callback arguments
-function batch (fn) {
-  return function batchingCallbacks (...args) {
+function batchCallbacks(fn) {
+  return function batchedCallbacks(...args) {
     const batchedArgs = args.map(
-      arg =>
-        typeof arg === 'function'
-          ? function batchedCallback () {
-            try {
-              isStopped = true
-              return arg.apply(this, arguments)
-            } finally {
-              tasks.forEach(runTask)
-              tasks.clear()
-              isStopped = false
-            }
-          }
-          : arg
+      arg => (typeof arg === 'function' ? () => batch(arg) : arg)
     )
     return fn.apply(this, batchedArgs)
   }
 }
 
-function runTask (task) {
+// this runs the passed function and delays all re-renders
+// until the function is finished running
+export function batch(fn) {
+  try {
+    isStopped = true
+    return fn.apply(this, arguments)
+  } finally {
+    tasks.forEach(runTask)
+    tasks.clear()
+    isStopped = false
+  }
+}
+
+function runTask(task) {
   task()
 }
 
@@ -52,18 +53,22 @@ if (typeof window !== 'undefined') {
 // do a sync batching for the most common task sources
 // this should be removed when React's own batching is improved in the future
 if (globalObj) {
-  globalObj.setTimeout = batch(globalObj.setTimeout)
-  globalObj.setInterval = batch(globalObj.setInterval)
+  globalObj.setTimeout = batchCallbacks(globalObj.setTimeout)
+  globalObj.setInterval = batchCallbacks(globalObj.setInterval)
   if (globalObj.requestAnimationFrame) {
-    globalObj.requestAnimationFrame = batch(globalObj.requestAnimationFrame)
+    globalObj.requestAnimationFrame = batchCallbacks(
+      globalObj.requestAnimationFrame
+    )
   }
   if (globalObj.requestIdleCallback) {
-    globalObj.requestIdleCallback = batch(globalObj.requestIdleCallback)
+    globalObj.requestIdleCallback = batchCallbacks(
+      globalObj.requestIdleCallback
+    )
   }
   // eslint-disable-next-line
-  Promise.prototype.then = batch(Promise.prototype.then);
+  Promise.prototype.then = batchCallbacks(Promise.prototype.then)
   // eslint-disable-next-line
-  Promise.prototype.catch = batch(Promise.prototype.catch);
+  Promise.prototype.catch = batchCallbacks(Promise.prototype.catch)
 }
 
 // DOM event handlers and HTTP event handlers don't have to be batched
