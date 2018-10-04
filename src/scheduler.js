@@ -54,6 +54,12 @@ if (typeof window !== 'undefined') {
 if (globalObj) {
   globalObj.setTimeout = batch(globalObj.setTimeout)
   globalObj.setInterval = batch(globalObj.setInterval)
+  if (globalObj.requestAnimationFrame) {
+    globalObj.requestAnimationFrame = batch(globalObj.requestAnimationFrame)
+  }
+  if (globalObj.requestIdleCallback) {
+    globalObj.requestIdleCallback = batch(globalObj.requestIdleCallback)
+  }
   // eslint-disable-next-line
   Promise.prototype.then = batch(Promise.prototype.then);
   // eslint-disable-next-line

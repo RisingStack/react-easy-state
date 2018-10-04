@@ -42,7 +42,30 @@ describe('batching', () => {
     expect(renderCount).toBe(2)
   })
 
-  test('should batch changes in Promise.then', async () => {
+  test('should batch changes in requestAnimationFrame and requestIdleCallback', async () => {
+    let renderCount = 0
+    const person = store({ name: 'Bob' })
+    const MyComp = view(() => {
+      renderCount++
+      return <div>{person.name}</div>
+    })
+
+    const comp = mount(<MyComp />)
+    expect(renderCount).toBe(1)
+    expect(comp.text()).toBe('Bob')
+    await new Promise(resolve =>
+      // eslint-disable-next-line
+      requestAnimationFrame(() => {
+        person.name = 'Ann'
+        person.name = 'Rick'
+        resolve()
+      })
+    )
+    expect(comp.text()).toBe('Rick')
+    expect(renderCount).toBe(2)
+  })
+
+  test('should batch changes in Promise.then and Promise.catch', async () => {
     let renderCount = 0
     const person = store({ name: 'Bob' })
     const MyComp = view(() => {
@@ -59,6 +82,13 @@ describe('batching', () => {
     })
     expect(comp.text()).toBe('Rick')
     expect(renderCount).toBe(2)
+
+    await Promise.reject(new Error()).catch(() => {
+      person.name = 'Ben'
+      person.name = 'Morty'
+    })
+    expect(comp.text()).toBe('Morty')
+    expect(renderCount).toBe(3)
   })
 
   test('should batch changes in async function parts', async () => {
