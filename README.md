@@ -6,7 +6,7 @@ Simple React state management. Made with :heart: and ES6 Proxies.
 
 <a href="#platform-support"><img src="images/browser_support.png" alt="Browser support" width="450px" /></a>
 
-_Please try out Easy State v6 beta to quicken the release process. Release notes are [here](https://github.com/solkimicreb/react-easy-state/releases/tag/v6.0.0), you can try it with the `npm i react-easy-state@beta` command. Thanks!_
+**Breaking change in v6: the default bundle changed from the ES5 version to the ES6 version. If you experience problems during the build process, please check [this docs section](#alternative-builds)**
 
 <details>
 <summary><strong>Table of Contents</strong></summary>
@@ -24,7 +24,6 @@ _Please try out Easy State v6 beta to quicken the release process. Release notes
 * [Articles](#articles)
 * [FAQ and Gotchas](#faq-and-gotchas)
   * [What triggers a re-render?](#what-triggers-a-re-render)
-  * [When do renders run?](#when-do-renders-run)
   * [My component renders multiple times unnecessarily](#my-component-renders-multiple-times-unnecessarily)
   * [How do I derive local stores from props (getDerivedStateFromProps)?](#how-do-i-derive-local-stores-from-props-getderivedstatefromprops)
   * [My store methods are broken](#my-store-methods-are-broken)
@@ -210,47 +209,35 @@ _Advanced_
 
 Easy State monitors which store properties are used inside each component's render method. If a store property changes, the relevant renders are automatically triggered. You can do **anything** with stores without worrying about edge cases. Use nested properties, computed properties with getters/setters, dynamic properties, arrays, ES6 collections and prototypal inheritance - as a few examples. Easy State will monitor all state mutations and trigger renders when needed. (Big cheer for [ES6 Proxies](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy)!)
 
-### When do renders run?
-
-Triggered renders are passed to React for execution, there is no `forceUpdate` behind the scenes. This means that component lifecycle hooks behave as expected and that React Fiber works nicely together with Easy State. On top of this, you can use your favorite testing frameworks without any added hassle.
-
 ### My component renders multiple times unnecessarily
 
-If you mutate your stores inside React event handlers, this will never happen.
+Re-renders are batched 99% percent of the time until the end of the state changing function. You can mutate your state stores multiple times in event handlers, async functions and timer and networking callbacks without worrying about multiple renders and performance.
 
-If you mutate your stores multiple times synchronously from outside event handlers, it can happen though. You can wrap the mutating code with `ReactDOM.flushSync` to batch the updates and trigger a single re-render only. (It works similarly to MobX's actions.)
+If you mutate your stores multiple times synchronously from exotic task sources, multiple renders may happen though. In these rare occasions you can batch changes manually with the `batch` function. `batch(fn)` executes the passed function immediately and batches any subsequent re-renders until the function execution finishes.
 
 ```js
 import React from 'react'
-import ReactDOM from 'react-dom'
-import { view, store } from 'react-easy-state'
+import { view, store, batch } from 'react-easy-state'
 
 const user = store({ name: 'Bob', age: 30 })
 
+// this makes sure the state changes will cause maximum one re-render,
+// no matter where this function is getting invoked from
 function mutateUser() {
-  user.name = 'Ann'
-  user.age = 32
+  batch(() => {
+    user.name = 'Ann'
+    user.age = 32
+  })
 }
 
-// this renders the component 2 times
-mutateUser()
-// this renders the component only once, after all the mutations
-ReactDOM.flushSync(mutateUser)
-
-// clicking on the inner div renders the component only once,
-// because mutateUser is invoked as an event handler
 export default view(() => (
-  <div onClick={mutateUser}>
+  <div>
     name: {user.name}, age: {user.age}
   </div>
 ))
 ```
 
-This will not be necessary once React's new scheduler is ready. It currently batches `setState` calls inside event handlers only, but this will change soon.
-
-> We realize it's inconvenient that the behavior is different depending on whether you're in an event handler or not. This will change in a future React version that will batch all updates by default (and provide an opt-in API to flush changes synchronously). Until we switch the default behavior (potentially in React 17), there is an API you can use to force batching.
-
-You can find the whole post by Dan Abramov [here](https://stackoverflow.com/a/48610973). Once the new default React scheduler is ready, you won't have to worry about multiple renders. Until then you can use `ReactDOM.flushSync` or just let it go, if you do not experience performance issues.
+**NOTE:** The React team plans to improve render batching in the future. The `batch` function and built-in batching may be deprecated and removed in the future in favor of React's own batching.
 
 ### How do I derive local stores from props (getDerivedStateFromProps)?
 
@@ -279,7 +266,7 @@ Instead of returning an object, you should directly mutate the passed in stores.
 
 ### My store methods are broken
 
-You should not use the `this` keyword in the methods of your state stores.
+You should avoid using the `this` keyword in the methods of your state stores.
 
 ```js
 const counter = store({
@@ -358,7 +345,7 @@ Under the hood Easy State uses the [@nx-js/observer-util](https://github.com/nx-
 
 ## Alternative builds
 
-This library detects if you use ES6 or commonJS modules and serve the right format to you. The exposed bundles are transpiled to ES5 to support common tools - like UglifyJS minifying. If you would like a finer control over the provided build, you can specify them in your imports.
+This library detects if you use ES6 or commonJS modules and serve the right format to you. The default bundles use ES6 features, which may not yet be supported by some minifier tools. If you experience issues during the build process, you can switch to one of the ES5 builds from below.
 
 * `react-easy-state/dist/es.es6.js` exposes an ES6 build with ES6 modules.
 * `react-easy-state/dist/es.es5.js` exposes an ES5 build with ES6 modules.

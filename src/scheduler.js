@@ -1,7 +1,7 @@
 const tasks = new Set()
 let isStopped = false
 
-export function add(task) {
+export function add (task) {
   if (isStopped) {
     tasks.add(task)
   } else {
@@ -9,14 +9,14 @@ export function add(task) {
   }
 }
 
-export function remove(task) {
+export function remove (task) {
   tasks.delete(task)
 }
 
 // this replaces the passed function with a function
 // that batches all of its callback arguments
-function batchCallbacks(fn) {
-  return function batchedCallbacks(...args) {
+function batchCallbacks (fn) {
+  return function batchedCallbacks (...args) {
     const batchedArgs = args.map(
       arg => (typeof arg === 'function' ? () => batch(arg) : arg)
     )
@@ -26,7 +26,7 @@ function batchCallbacks(fn) {
 
 // this runs the passed function and delays all re-renders
 // until the function is finished running
-export function batch(fn) {
+export function batch (fn) {
   try {
     isStopped = true
     return fn.apply(this, arguments)
@@ -37,7 +37,7 @@ export function batch(fn) {
   }
 }
 
-function runTask(task) {
+function runTask (task) {
   task()
 }
 
@@ -66,9 +66,9 @@ if (globalObj) {
     )
   }
   // eslint-disable-next-line
-  Promise.prototype.then = batchCallbacks(Promise.prototype.then)
+  Promise.prototype.then = batchCallbacks(Promise.prototype.then);
   // eslint-disable-next-line
-  Promise.prototype.catch = batchCallbacks(Promise.prototype.catch)
+  Promise.prototype.catch = batchCallbacks(Promise.prototype.catch);
 }
 
 // DOM event handlers and HTTP event handlers don't have to be batched
