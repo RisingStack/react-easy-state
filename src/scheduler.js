@@ -24,6 +24,19 @@ function batchCallbacks (fn) {
   }
 }
 
+// bathes obj.onevent = fn like calls
+function batchMethod (obj, method) {
+  const descriptor = Object.getOwnPropertyDescriptor(obj, method)
+  const newDescriptor = Object.assign({}, descriptor, {
+    set (value) {
+      const batched =
+        typeof value === 'function' ? (...args) => batch(value, args) : value
+      return descriptor.set.call(this, batched)
+    }
+  })
+  Object.defineProperty(obj, method, newDescriptor)
+}
+
 // this runs the passed function and delays all re-renders
 // until the function is finished running
 export function batch (fn, args) {
@@ -69,6 +82,14 @@ if (globalObj) {
   Promise.prototype.then = batchCallbacks(Promise.prototype.then);
   // eslint-disable-next-line
   Promise.prototype.catch = batchCallbacks(Promise.prototype.catch);
+
+  // this batches websocket event handlers
+  if (globalObj.WebSocket) {
+    const websocketHandlers = ['onopen', 'onmessage', 'onerror', 'onclose']
+    websocketHandlers.forEach(method =>
+      batchMethod(globalObj.WebSocket.prototype, method)
+    )
+  }
 }
 
 // DOM event handlers and HTTP event handlers don't have to be batched
