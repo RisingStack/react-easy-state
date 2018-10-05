@@ -1,6 +1,13 @@
 {
-  "main.css": "static/css/main.fd4d4524.css",
-  "main.css.map": "static/css/main.fd4d4524.css.map",
-  "main.js": "static/js/main.a31ee937.js",
-  "main.js.map": "static/js/main.a31ee937.js.map"
+  "main.css": "/react-easy-state/examples/todo-mvc/build/static/css/main.7fa0431d.chunk.css",
+  "main.js": "/react-easy-state/examples/todo-mvc/build/static/js/main.302318a1.chunk.js",
+  "main.js.map": "/react-easy-state/examples/todo-mvc/build/static/js/main.302318a1.chunk.js.map",
+  "static/js/1.bb0b1d5e.chunk.js": "/react-easy-state/examples/todo-mvc/build/static/js/1.bb0b1d5e.chunk.js",
+  "static/js/1.bb0b1d5e.chunk.js.map": "/react-easy-state/examples/todo-mvc/build/static/js/1.bb0b1d5e.chunk.js.map",
+  "runtime~main.js": "/react-easy-state/examples/todo-mvc/build/static/js/runtime~main.74399215.js",
+  "runtime~main.js.map": "/react-easy-state/examples/todo-mvc/build/static/js/runtime~main.74399215.js.map",
+  "static/css/main.7fa0431d.chunk.css.map": "/react-easy-state/examples/todo-mvc/build/static/css/main.7fa0431d.chunk.css.map",
+  "index.html": "/react-easy-state/examples/todo-mvc/build/index.html",
+  "precache-manifest.4e7d429aeac772b03b94e14007fddee7.js": "/react-easy-state/examples/todo-mvc/build/precache-manifest.4e7d429aeac772b03b94e14007fddee7.js",
+  "service-worker.js": "/react-easy-state/examples/todo-mvc/build/service-worker.js"
 }
