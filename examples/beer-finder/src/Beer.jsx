@@ -5,11 +5,11 @@ import CardMedia from '@material-ui/core/CardMedia'
 import CardContent from '@material-ui/core/CardContent'
 
 class Beer extends Component {
-  store = store({ details: false })
+  store = store({ details: false });
 
-  toggleDetails = () => (this.store.details = !this.store.details)
+  toggleDetails = () => (this.store.details = !this.store.details);
 
-  render() {
+  render () {
     const {
       name,
       image_url: imageUrl,
@@ -19,8 +19,8 @@ class Beer extends Component {
     const { details } = this.store
 
     return (
-      <Card onClick={this.toggleDetails} className="beer">
-        {!details && <CardMedia image={imageUrl} className="media" />}
+      <Card onClick={this.toggleDetails} className='beer'>
+        {!details && <CardMedia image={imageUrl} className='media' />}
         <CardContent>
           <h3>{name}</h3>
           {details ? (
