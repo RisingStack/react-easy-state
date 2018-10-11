@@ -95,9 +95,32 @@ const user = store({
 user.name = 'Bob'
 ```
 
+State stores may have arbitrary structure and they may be mutated in any syntactically valid way.
+
+```js
+import { store } from 'react-easy-state'
+
+// stores can include any valid JS structure (nested data, arrays, getters, Sets, ...)
+const user = store({
+  profile: {
+    firstName: 'Bob',
+    lastName: 'Smith',
+    get name () {
+      return `${user.firstName} ${user.lastName}`
+    }  
+  }
+  hobbies: ['programming', 'sports']
+})
+
+// stores can be mutated in any syntactically valid way
+user.profile.firstName = 'Bob'
+delete user.profile.lastName
+user.hobbies.push('reading')
+```
+
 ### Creating reactive views
 
-Wrapping your components with `view` turns them into reactive views. A reactive view re-renders whenever a store's property - used inside its render - changes.
+Wrapping your components with `view` turns them into reactive views. A reactive view re-renders whenever a piece of store - used inside its render - changes.
 
 ```js
 import React, { Component } from 'react'
@@ -121,6 +144,33 @@ class HelloComp extends Component {
 
 // the component must be wrapped with `view`
 export default view(HelloComp)
+```
+
+A single reactive component may use multiple stores inside its render.
+
+```js
+import React, { Component } from 'react'
+import { view, store } from 'react-easy-state'
+
+const user = store({ name: 'Bob' })
+const timeline = store({ posts: ['react-easy-state'] })
+
+class App extends Component {
+  onChange = ev => (user.name = ev.target.value)
+
+  // render is triggered whenever user.name or timeline.posts[0] changes
+  render() {
+    return (
+      <div>
+        <div>Hello {user.name}!</div>
+        <div>Your first post is: {timeline.posts[0]}</div>
+      </div>
+    )
+  }
+}
+
+// the component must be wrapped with `view`
+export default view(App)
 ```
 
 **Make sure to wrap all of your components with `view` - including stateful and stateless ones. If you do not wrap a component, it will not properly render on store mutations.**
