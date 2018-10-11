@@ -178,41 +178,9 @@ export default view(App)
 ```
 
 </details>
+<br />
 
 **Make sure to wrap all of your components with `view` - including stateful and stateless ones. If you do not wrap a component, it will not properly render on store mutations.**
-
-<details>
-<summary><strong>Usage as a decorator</strong></summary>
-
-`view` can also be used as a class decorator with the `@view` syntax. You can learn more about decorators [here](https://medium.com/google-developers/exploring-es7-decorators-76ecb65fb841).
-
-```js
-import React, { Component } from 'react'
-import { view, store } from 'react-easy-state'
-
-const user = store({
-  name: 'Bob'
-})
-
-@view
-class HelloComp extends Component {
-  onChange = ev => (user.name = ev.target.value)
-
-  // the render is triggered whenever user.name changes
-  render() {
-    return (
-      <div>
-        <input value={user.name} onChange={this.onChange} />
-        <div>Hello {user.name}!</div>
-      </div>
-    )
-  }
-}
-```
-
-_Decorators are not a standardized JavaScript feature and create-react-app does not support them yet._
-
-</details>
 
 ### Creating local stores
 
