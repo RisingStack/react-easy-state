@@ -95,7 +95,8 @@ const user = store({
 user.name = 'Bob'
 ```
 
-State stores may have arbitrary structure and they may be mutated in any syntactically valid way.
+<details>
+<summary>State stores may have arbitrary structure and they may be mutated in any syntactically valid way.</summary>
 
 ```js
 import { store } from 'react-easy-state'
@@ -117,6 +118,8 @@ user.profile.firstName = 'Bob'
 delete user.profile.lastName
 user.hobbies.push('reading')
 ```
+
+</details>
 
 ### Creating reactive views
 
@@ -146,7 +149,8 @@ class HelloComp extends Component {
 export default view(HelloComp)
 ```
 
-A single reactive component may use multiple stores inside its render.
+<details>
+<summary>A single reactive component may use multiple stores inside its render.</summary>
 
 ```js
 import React, { Component } from 'react'
@@ -172,6 +176,8 @@ class App extends Component {
 // the component must be wrapped with `view`
 export default view(App)
 ```
+
+</details>
 
 **Make sure to wrap all of your components with `view` - including stateful and stateless ones. If you do not wrap a component, it will not properly render on store mutations.**
 
