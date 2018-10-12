@@ -58,7 +58,7 @@ export default view(() => <div>{clock.time.toString()}</div>)
 
 This is enough for it to automatically update your views when needed. It doesn't matter how you structure or mutate your state stores, any syntactically valid code works.
 
-Check this [TodoMVC source](/examples/todo-mvc/src/todosStore.js) or [codesandbox](https://codesandbox.io/s/github/solkimicreb/react-easy-state/tree/master/examples/todo-mvc?module=%2Fsrc%2FtodosStore.js) for a more exciting example with nested data, arrays and computed values.
+Check this TodoMVC [codesandbox](https://codesandbox.io/s/github/solkimicreb/react-easy-state/tree/master/examples/todo-mvc?module=%2Fsrc%2FtodosStore.js) or [raw code](/examples/todo-mvc/src/todosStore.js) for a more exciting example with nested data, arrays and computed values.
 
 ## Installation
 
