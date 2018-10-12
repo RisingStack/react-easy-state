@@ -6,7 +6,7 @@ Simple React state management. Made with :heart: and ES6 Proxies.
 
 <a href="#platform-support"><img src="images/browser_support.png" alt="Browser support" width="450px" /></a>
 
-**Breaking change in v6:** the default bundle changed from the ES5 version to the ES6 version. If you experience **problems during the build process**, please check [this docs section](#alternative-builds).
+**Breaking change in v6:** the default bundle changed from the ES5 version to the ES6 version. If you experience problems during the build process, please check [this docs section](#alternative-builds).
 
 <details>
 <summary><strong>Table of Contents</strong></summary>
@@ -56,7 +56,9 @@ setInterval(() => (clock.time = new Date()), 1000)
 export default view(() => <div>{clock.time.toString()}</div>)
 ```
 
-This is enough for it to automatically update your views when needed. It doesn't matter how you structure or mutate your state stores, any syntactically valid code works. Check [this TodoMVC codesandbox](https://codesandbox.io/s/github/solkimicreb/react-easy-state/tree/master/examples/todo-mvc?module=%2Fsrc%2FtodosStore.js) for a more exciting example with nested data, arrays and computed values.
+This is enough for it to automatically update your views when needed. It doesn't matter how you structure or mutate your state stores, any syntactically valid code works.
+
+Check this [TodoMVC codesandbox](https://codesandbox.io/s/github/solkimicreb/react-easy-state/tree/master/examples/todo-mvc?module=%2Fsrc%2FtodosStore.js) for a more exciting example with nested data, arrays and computed values.
 
 ## Installation
 
