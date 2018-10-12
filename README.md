@@ -6,7 +6,7 @@ Simple React state management. Made with :heart: and ES6 Proxies.
 
 <a href="#platform-support"><img src="images/browser_support.png" alt="Browser support" width="450px" /></a>
 
-**Breaking change in v6:** the default bundle changed from the ES5 version to the ES6 version. If you experience problems during the build process, please check [this docs section](#alternative-builds).
+**Breaking change in v6:** the default bundle changed from the ES5 version to the ES6 version. **If you experience problems during the build process, please check [this docs section](#alternative-builds).**
 
 <details>
 <summary><strong>Table of Contents</strong></summary>
@@ -17,18 +17,18 @@ Simple React state management. Made with :heart: and ES6 Proxies.
 * [Introduction](#introduction)
 * [Installation](#installation)
 * [Usage](#usage)
-  * [Creating stores](#creating-stores)
-  * [Creating reactive views](#creating-reactive-views)
-  * [Creating local stores](#creating-local-stores)
+  + [Creating stores](#creating-stores)
+  + [Creating reactive views](#creating-reactive-views)
+  + [Creating local stores](#creating-local-stores)
 * [Examples with live demos](#examples-with-live-demos)
 * [Articles](#articles)
 * [FAQ and Gotchas](#faq-and-gotchas)
-  * [What triggers a re-render?](#what-triggers-a-re-render)
-  * [My component renders multiple times unnecessarily](#my-component-renders-multiple-times-unnecessarily)
-  * [How do I derive local stores from props (getDerivedStateFromProps)?](#how-do-i-derive-local-stores-from-props-getderivedstatefromprops)
-  * [My store methods are broken](#my-store-methods-are-broken)
-  * [My views are not rendering](#my-views-are-not-rendering)
-  * [Naming local stores as state](#naming-local-stores-as-state)
+  + [What triggers a re-render?](#what-triggers-a-re-render)
+  + [My store methods are broken](#my-store-methods-are-broken)
+  + [My views are not rendering](#my-views-are-not-rendering)
+  + [My views render multiple times unnecessarily](#my-views-render-multiple-times-unnecessarily)
+  + [How do I derive local stores from props (getDerivedStateFromProps)?](#how-do-i-derive-local-stores-from-props-getderivedstatefromprops)
+  + [Naming local stores as state](#naming-local-stores-as-state)
 * [Platform support](#platform-support)
 * [Performance](#performance)
 * [How does it work?](#how-does-it-work)
@@ -46,7 +46,7 @@ Easy State has two rules.
 1.  Always wrap your components with `view`.
 2.  Always wrap your state store objects with `store`.
 
-```js
+```jsx
 import React from 'react'
 import { store, view } from 'react-easy-state'
 
@@ -56,7 +56,7 @@ setInterval(() => (clock.time = new Date()), 1000)
 export default view(() => <div>{clock.time.toString()}</div>)
 ```
 
-This is enough for it to automatically update your views when needed - no matter how exotically you mutate your state stores. With this freedom you can invent and use your personal favorite state management patterns.
+This is enough for it to automatically update your views when needed. It doesn't matter how you structure or mutate your state stores, any syntactically valid code works. Check [this TodoMVC codesandbox](https://codesandbox.io/s/github/solkimicreb/react-easy-state/tree/master/examples/todo-mvc?module=%2Fsrc%2FtodosStore.js) for a more exciting example with nested data, arrays and computed values.
 
 ## Installation
 
@@ -125,7 +125,7 @@ user.hobbies.push('reading')
 
 Wrapping your components with `view` turns them into reactive views. A reactive view re-renders whenever a piece of store - used inside its render - changes.
 
-```js
+```jsx
 import React, { Component } from 'react'
 import { view, store } from 'react-easy-state'
 
@@ -152,7 +152,7 @@ export default view(HelloComp)
 <details>
 <summary>A single reactive component may use multiple stores inside its render.</summary>
 
-```js
+```jsx
 import React, { Component } from 'react'
 import { view, store } from 'react-easy-state'
 
@@ -186,7 +186,7 @@ export default view(App)
 
 A singleton global store is perfect for something like the current user, but sometimes having local component states is a better fit. Just create a store as a component property in these cases.
 
-```js
+```jsx
 import React, { Component } from 'react'
 import { view, store } from 'react-easy-state'
 
@@ -233,66 +233,11 @@ _Advanced_
 
 Easy State monitors which store properties are used inside each component's render method. If a store property changes, the relevant renders are automatically triggered. You can do **anything** with stores without worrying about edge cases. Use nested properties, computed properties with getters/setters, dynamic properties, arrays, ES6 collections and prototypal inheritance - as a few examples. Easy State will monitor all state mutations and trigger renders when needed. (Big cheer for [ES6 Proxies](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy)!)
 
-### My component renders multiple times unnecessarily
-
-Re-renders are batched 99% percent of the time until the end of the state changing function. You can mutate your state stores multiple times in event handlers, async functions and timer and networking callbacks without worrying about multiple renders and performance.
-
-If you mutate your stores multiple times synchronously from exotic task sources, multiple renders may happen though. In these rare occasions you can batch changes manually with the `batch` function. `batch(fn)` executes the passed function immediately and batches any subsequent re-renders until the function execution finishes.
-
-```js
-import React from 'react'
-import { view, store, batch } from 'react-easy-state'
-
-const user = store({ name: 'Bob', age: 30 })
-
-// this makes sure the state changes will cause maximum one re-render,
-// no matter where this function is getting invoked from
-function mutateUser() {
-  batch(() => {
-    user.name = 'Ann'
-    user.age = 32
-  })
-}
-
-export default view(() => (
-  <div>
-    name: {user.name}, age: {user.age}
-  </div>
-))
-```
-
-**NOTE:** The React team plans to improve render batching in the future. The `batch` function and built-in batching may be deprecated and removed in the future in favor of React's own batching.
-
-### How do I derive local stores from props (getDerivedStateFromProps)?
-
-Components wrapped with `view` have an extra static `deriveStoresFromProps` lifecycle method, which works similarly to the vanilla `getDerivedStateFromProps`.
-
-```js
-import React, { Component } from 'react'
-import { view, store } from 'react-easy-state'
-
-class NameCard extends Component {
-  userStore = store({ name: 'Bob' })
-
-  static deriveStoresFromProps(props, userStore) {
-    userStore.name = props.name || userStore.name
-  }
-
-  render() {
-    return <div>{this.userStore.name}</div>
-  }
-}
-
-export default view(NameCard)
-```
-
-Instead of returning an object, you should directly mutate the passed in stores. If you have multiple local stores on a single component, they are all passed as arguments - in their definition order - after the first props argument.
-
 ### My store methods are broken
 
 You should avoid using the `this` keyword in the methods of your state stores.
 
-```js
+```jsx
 const counter = store({
   num: 0,
   increment() {
@@ -337,6 +282,61 @@ person.name = 'Ann'
 
 export default person
 ```
+
+### My views render multiple times unnecessarily
+
+Re-renders are batched 99% percent of the time until the end of the state changing function. You can mutate your state stores multiple times in event handlers, async functions and timer and networking callbacks without worrying about multiple renders and performance.
+
+If you mutate your stores multiple times synchronously from exotic task sources, multiple renders may happen though. In these rare occasions you can batch changes manually with the `batch` function. `batch(fn)` executes the passed function immediately and batches any subsequent re-renders until the function execution finishes.
+
+```jsx
+import React from 'react'
+import { view, store, batch } from 'react-easy-state'
+
+const user = store({ name: 'Bob', age: 30 })
+
+// this makes sure the state changes will cause maximum one re-render,
+// no matter where this function is getting invoked from
+function mutateUser() {
+  batch(() => {
+    user.name = 'Ann'
+    user.age = 32
+  })
+}
+
+export default view(() => (
+  <div>
+    name: {user.name}, age: {user.age}
+  </div>
+))
+```
+
+**NOTE:** The React team plans to improve render batching in the future. The `batch` function and built-in batching may be deprecated and removed in the future in favor of React's own batching.
+
+### How do I derive local stores from props (getDerivedStateFromProps)?
+
+Components wrapped with `view` have an extra static `deriveStoresFromProps` lifecycle method, which works similarly to the vanilla `getDerivedStateFromProps`.
+
+```jsx
+import React, { Component } from 'react'
+import { view, store } from 'react-easy-state'
+
+class NameCard extends Component {
+  userStore = store({ name: 'Bob' })
+
+  static deriveStoresFromProps(props, userStore) {
+    userStore.name = props.name || userStore.name
+  }
+
+  render() {
+    return <div>{this.userStore.name}</div>
+  }
+}
+
+export default view(NameCard)
+```
+
+Instead of returning an object, you should directly mutate the passed in stores. If you have multiple local stores on a single component, they are all passed as arguments - in their definition order - after the first props argument.
 
 ### Naming local stores as state
 
