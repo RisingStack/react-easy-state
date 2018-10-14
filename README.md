@@ -50,10 +50,16 @@ Easy State is a transparent reactive state management library with two functions
 import React from 'react'
 import { store, view } from 'react-easy-state'
 
-const clock = store({ time: new Date() })
-setInterval(() => (clock.time = new Date()), 1000)
+const counter = store({
+  num: 0,
+  increment() {
+    counter.num++
+  }
+})
 
-export default view(() => <div>{clock.time.toString()}</div>)
+export default view(() => (
+  <button onClick={counter.increment}>{counter.num}</button>
+))
 ```
 
 This is enough for it to automatically update your views when needed. It doesn't matter how you structure or mutate your state stores, any syntactically valid code works.
