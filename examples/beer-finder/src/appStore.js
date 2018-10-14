@@ -8,7 +8,6 @@ const appStore = store({
     appStore.isLoading = true
     appStore.beers = await api.fetchBeers(filter)
     appStore.isLoading = false
-    window.scrollTo({ top: 0 })
   }
 })
 
