@@ -11,8 +11,7 @@
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-easy-state": "^6.0.3",
-    "react-scripts": "2.0.4",
-    "serve": "^10.0.2"
+    "react-scripts": "2.0.4"
   },
   "scripts": {
     "start": "react-scripts start",
