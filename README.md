@@ -52,14 +52,10 @@ import { store, view } from 'react-easy-state'
 
 const counter = store({
   num: 0,
-  increment() {
-    counter.num++
-  }
+  incr: () => counter.num++
 })
 
-export default view(() => (
-  <button onClick={counter.increment}>{counter.num}</button>
-))
+export default view(() => <button onClick={counter.incr}>{counter.num}</button>)
 ```
 
 This is enough for it to automatically update your views when needed. It doesn't matter how you structure or mutate your state stores, any syntactically valid code works.
