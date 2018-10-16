@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.2/workbox-sw.js");
 
 importScripts(
-  "/react-easy-state/examples/beer-finder/build/precache-manifest.14778014978853983402af482d1c9a43.js"
+  "/react-easy-state/examples/beer-finder/build/precache-manifest.84700166d7395ef6f786d1adb090a26c.js"
 );
 
 workbox.clientsClaim();

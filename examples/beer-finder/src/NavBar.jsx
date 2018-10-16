@@ -9,6 +9,7 @@ export default view(() => (
     <SearchBar
       onRequestSearch={appStore.fetchBeers}
       placeholder='Add some food ...'
+      autoFocus
     />
     {appStore.isLoading && <LinearProgress />}
   </div>
