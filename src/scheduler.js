@@ -27,6 +27,7 @@ function batchCallbacks (fn) {
 // bathes obj.onevent = fn like calls
 function batchMethod (obj, method) {
   const descriptor = Object.getOwnPropertyDescriptor(obj, method)
+  if (!descriptor) return
   const newDescriptor = Object.assign({}, descriptor, {
     set (value) {
       const batched =
