@@ -24,7 +24,7 @@ export function view(Comp, { devtool: rawDevtool } = {}) {
   let ReactiveComp
 
   if (isStatelessComp && hasHooks) {
-    ReactiveComp = function ReactiveComp(props) {
+    function ReactiveFunctionComp(props) {
       const [, setState] = useState()
 
       const render = useMemo(
@@ -37,8 +37,8 @@ export function view(Comp, { devtool: rawDevtool } = {}) {
               add: () => scheduler.add(updater),
               delete: () => scheduler.remove(updater)
             },
-            lazy: true,
-            debugger: devtool
+            lazy: true
+            // debugger: devtool
           })
         },
         [true]
@@ -59,11 +59,11 @@ export function view(Comp, { devtool: rawDevtool } = {}) {
       }
     }
 
-    ReactiveComp = memo(ReactiveComp)
+    ReactiveComp = memo(ReactiveFunctionComp)
   } else {
     // return a HOC which overwrites render, shouldComponentUpdate and componentWillUnmount
     // it decides when to run the new reactive methods and when to proxy to the original methods
-    ReactiveComp = class ReactiveComp extends BaseComp {
+    class ReactiveClassComp extends BaseComp {
       constructor(props, context) {
         super(props, context)
 
@@ -149,6 +149,8 @@ export function view(Comp, { devtool: rawDevtool } = {}) {
         unobserve(this.render)
       }
     }
+
+    ReactiveComp = ReactiveClassComp
   }
 
   ReactiveComp.displayName = Comp.displayName || Comp.name
