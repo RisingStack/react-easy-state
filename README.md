@@ -17,18 +17,19 @@ Simple React state management. Made with :heart: and ES6 Proxies.
 * [Introduction](#introduction)
 * [Installation](#installation)
 * [Usage](#usage)
-  * [Creating stores](#creating-stores)
-  * [Creating reactive views](#creating-reactive-views)
-  * [Creating local stores](#creating-local-stores)
+  + [Creating stores](#creating-stores)
+  + [Creating reactive views](#creating-reactive-views)
+  + [Creating local stores](#creating-local-stores)
 * [Examples with live demos](#examples-with-live-demos)
 * [Articles](#articles)
 * [FAQ and Gotchas](#faq-and-gotchas)
-  * [What triggers a re-render?](#what-triggers-a-re-render)
-  * [My store methods are broken](#my-store-methods-are-broken)
-  * [My views are not rendering](#my-views-are-not-rendering)
-  * [My views render multiple times unnecessarily](#my-views-render-multiple-times-unnecessarily)
-  * [How do I derive local stores from props (getDerivedStateFromProps)?](#how-do-i-derive-local-stores-from-props-getderivedstatefromprops)
-  * [Naming local stores as state](#naming-local-stores-as-state)
+  + [What triggers a re-render?](#what-triggers-a-re-render)
+  + [My store methods are broken](#my-store-methods-are-broken)
+  + [My views are not rendering](#my-views-are-not-rendering)
+  + [My views render multiple times unnecessarily](#my-views-render-multiple-times-unnecessarily)
+  + [Usage with third party components](#usage-with-third-party-components)
+  + [How do I derive local stores from props (getDerivedStateFromProps)?](#how-do-i-derive-local-stores-from-props-getderivedstatefromprops)
+  + [Naming local stores as state](#naming-local-stores-as-state)
 * [Platform support](#platform-support)
 * [Performance](#performance)
 * [How does it work?](#how-does-it-work)
@@ -316,6 +317,28 @@ export default view(() => (
 ```
 
 **NOTE:** The React team plans to improve render batching in the future. The `batch` function and built-in batching may be deprecated and removed in the future in favor of React's own batching.
+
+### Usage with third party components
+
+Third party helpers - like data grids - may consist of many internal components which can not be wrapped by `view`, but sometimes you would like them to re-render when the passed data mutates. Traditional React components re-render when their props change by reference, so mutating the passed store won't work in these cases. You can solve this issue by deep cloning the observable data before passing it to the component. This creates a new reference for the consuming component on every store mutation.
+
+```jsx
+import React from 'react'
+import { view, store } from 'react-easy-state'
+import Table from 'rc-table'
+import deepClone from 'clone'
+
+const dataStore = store({
+  items: [{
+    product: 'Car',
+    value: 12
+  }]
+})
+
+export default view(() =>
+  <Table data={deepClone(dataStore.items)} />
+)
+```
 
 ### How do I derive local stores from props (getDerivedStateFromProps)?
 
