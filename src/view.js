@@ -28,29 +28,23 @@ export function view(Comp, { devtool: rawDevtool } = {}) {
     function ReactiveFunctionComp(props) {
       const [, setState] = useState()
 
-      const render = useMemo(
-        () => {
-          // run a dummy setState to schedule a new render, avoid forceUpdate
-          const updater = () => setState(DUMMY_STATE)
+      const render = useMemo(() => {
+        // run a dummy setState to schedule a new render, avoid forceUpdate
+        const updater = () => setState(DUMMY_STATE)
 
-          return observe(Comp, {
-            scheduler: {
-              add: () => scheduler.add(updater),
-              delete: () => scheduler.remove(updater)
-            },
-            lazy: true
-            // debugger: devtool
-          })
-        },
-        [true]
-      )
+        return observe(Comp, {
+          scheduler: {
+            add: () => scheduler.add(updater),
+            delete: () => scheduler.remove(updater)
+          },
+          lazy: true,
+          debugger: devtool
+        })
+      }, [])
 
-      useEffect(
-        () => {
-          return () => unobserve(render)
-        },
-        [true]
-      )
+      useEffect(() => {
+        return () => unobserve(render)
+      }, [])
 
       isInsideFunctionComponent = true
       try {
