@@ -68,9 +68,6 @@
     "classnames": "2.2.5",
     "coveralls": "^3.0.0",
     "del": "^3.0.0",
-    "enzyme": "^3.3.0",
-    "enzyme-adapter-react-16": "^1.1.1",
-    "enzyme-to-json": "^3.3.1",
     "jest": "^22.3.0",
     "jest-dom": "^2.1.1",
     "markdown-toc": "^1.1.0",
@@ -97,7 +94,6 @@
     "ignore": ["**/build/**", "**/node_modules/**"]
   },
   "jest": {
-    "snapshotSerializers": ["enzyme-to-json/serializer"],
     "collectCoverageFrom": [
       "**/src/**",
       "**/examples/**/*.{js,jsx}",
@@ -107,8 +103,7 @@
       "!**/examples/**/beer-finder/**"
     ],
     "setupTestFrameworkScriptFile": "./scripts/testSetup.js",
-    "testURL": "http://react-easy-state.js",
-    "testMatch": ["**/__tests__/**/edgeCases.test.js"]
+    "testURL": "http://react-easy-state.js"
   },
   "pre-push": ["lint", "test"]
 }
