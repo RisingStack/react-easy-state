@@ -24,6 +24,26 @@ describe('edge cases', () => {
     expect(container).toHaveTextContent('Bob')
   })
 
+  test('view() should respect componentWillUnmount', () => {
+    let didUnMount = false
+
+    const MyComp = view(
+      class extends Component {
+        componentWillUnmount() {
+          didUnMount = true
+        }
+        render() {
+          return <div>Hello</div>
+        }
+      }
+    )
+
+    const { container, unmount } = render(<MyComp />)
+    expect(didUnMount).toBe(false)
+    unmount()
+    expect(didUnMount).toBe(true)
+  })
+
   test('should not change vanilla setState behavior', () => {
     const MyComp = view(
       class extends Component {
