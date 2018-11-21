@@ -1,39 +1,40 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { render, cleanup, fireEvent } from 'react-testing-library'
 import App from '../examples/contacts/src/App'
 
 describe('Contacts App', () => {
-  const app = mount(<App />)
+  const { container } = render(<App />)
+  afterAll(cleanup)
 
   test('should add new contacts', async () => {
-    expect(app).toMatchSnapshot('01. Initial state')
+    expect(container).toMatchSnapshot('01. Initial state')
 
-    const creator = app.find('.contact-creator')
-    const nameField = creator.find('input[name="name"]')
-    const emailField = creator.find('input[name="email"]')
-    const createButton = creator.find('button')
+    const creator = container.querySelector('.contact-creator')
+    const nameField = container.querySelector('input[name="name"]')
+    const emailField = container.querySelector('input[name="email"]')
+    const createButton = container.querySelector('button')
 
-    nameField.simulate('change', {
+    fireEvent.change(nameField, {
       target: { name: 'name', value: 'Test Contact' }
     })
-    expect(app).toMatchSnapshot('02. Create Test Contact name')
+    expect(container).toMatchSnapshot('02. Create Test Contact name')
 
-    emailField.simulate('change', {
+    fireEvent.change(emailField, {
       target: { name: 'email', value: 'test.contact@gmail.com' }
     })
-    expect(app).toMatchSnapshot('03. Create Test Contact email')
+    expect(container).toMatchSnapshot('03. Create Test Contact email')
 
-    createButton.simulate('click')
-    expect(app).toMatchSnapshot('04. Add Test Contact')
+    fireEvent.click(createButton)
+    expect(container).toMatchSnapshot('04. Add Test Contact')
 
-    nameField.simulate('change', {
+    fireEvent.change(nameField, {
       target: { name: 'name', value: '' }
     })
-    emailField.simulate('change', {
+    fireEvent.change(emailField, {
       target: { name: 'email', value: '' }
     })
-    createButton.simulate('click')
-    expect(app).toMatchSnapshot('05. Add Placeholder Contact')
+    fireEvent.click(createButton)
+    expect(container).toMatchSnapshot('05. Add Placeholder Contact')
   })
 
   test('should edit contact', async () => {
@@ -45,52 +46,54 @@ describe('Contacts App', () => {
       nameField,
       emailField
 
-    display = app.find('.contact-display').at(0)
-    editButton = display.find('.zmdi-edit')
+    display = container.querySelector('.contact-display')
+    editButton = display.querySelector('.zmdi-edit')
 
-    editButton.simulate('click')
-    expect(app).toMatchSnapshot('06. Switch Test Contact to Edit Mode')
+    fireEvent.click(editButton)
+    expect(container).toMatchSnapshot('06. Switch Test Contact to Edit Mode')
 
-    editor = app.find('.contact-editor').at(0)
-    nameField = editor.find('input[name="name"]')
-    cancelButton = editor.find('.zmdi-close')
+    editor = container.querySelector('.contact-editor')
+    nameField = editor.querySelector('input[name="name"]')
+    cancelButton = editor.querySelector('.zmdi-close')
 
-    nameField.simulate('change', {
+    fireEvent.change(nameField, {
       target: { name: 'name', value: 'Edited Test Contact' }
     })
-    expect(app).toMatchSnapshot('07. Edit Test Contact name')
+    expect(container).toMatchSnapshot('07. Edit Test Contact name')
 
-    cancelButton.simulate('click')
-    expect(app).toMatchSnapshot('08. Cancel Test Contact edit')
+    fireEvent.click(cancelButton)
+    expect(container).toMatchSnapshot('08. Cancel Test Contact edit')
 
-    display = app.find('.contact-display').at(0)
-    editButton = display.find('.zmdi-edit')
+    display = container.querySelector('.contact-display')
+    editButton = display.querySelector('.zmdi-edit')
 
-    editButton.simulate('click')
-    expect(app).toMatchSnapshot('09. Switch Test Contact to edit Mode')
+    fireEvent.click(editButton)
+    expect(container).toMatchSnapshot('09. Switch Test Contact to edit Mode')
 
-    editor = app.find('.contact-editor').at(0)
-    emailField = editor.find('input[name="email"]')
-    saveButton = editor.find('.zmdi-save')
+    editor = container.querySelector('.contact-editor')
+    emailField = editor.querySelector('input[name="email"]')
+    saveButton = editor.querySelector('.zmdi-save')
 
-    emailField.simulate('change', {
+    fireEvent.change(emailField, {
       target: { name: 'email', value: 'test.contact.edited@gmail.com' }
     })
-    expect(app).toMatchSnapshot('10. Edit Test Contact email')
+    expect(container).toMatchSnapshot('10. Edit Test Contact email')
 
-    saveButton.simulate('click')
-    expect(app).toMatchSnapshot('11. Save Test Contact edit')
+    fireEvent.click(saveButton)
+    expect(container).toMatchSnapshot('11. Save Test Contact edit')
   })
 
   test('should delete contact', async () => {
-    let deleteButton = app.find('.contact-display .zmdi-delete').at(1)
+    let deleteButton = container.querySelectorAll(
+      '.contact-display .zmdi-delete'
+    )[1]
 
-    deleteButton.simulate('click')
-    expect(app).toMatchSnapshot('12. Delete Placeholder Contact')
+    fireEvent.click(deleteButton)
+    expect(container).toMatchSnapshot('12. Delete Placeholder Contact')
 
-    deleteButton = app.find('.contact-display .zmdi-delete').at(0)
+    deleteButton = container.querySelector('.contact-display .zmdi-delete')
 
-    deleteButton.simulate('click')
-    expect(app).toMatchSnapshot('13. Delete Test Contact')
+    fireEvent.click(deleteButton)
+    expect(container).toMatchSnapshot('13. Delete Test Contact')
   })
 })

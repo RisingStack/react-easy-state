@@ -25,7 +25,7 @@ class App extends Component {
 
   // render is automatically triggered whenever this.clock.time changes
   render() {
-    return <div data-testid="time">{this.clock.time}</div>
+    return <div>{this.clock.time}</div>
   }
 }
 

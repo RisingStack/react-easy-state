@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Contacts App should add new contacts: 01. Initial state 1`] = `
-<App>
+<div>
   <table>
     <thead>
       <tr>
@@ -17,42 +17,36 @@ exports[`Contacts App should add new contacts: 01. Initial state 1`] = `
       </tr>
     </thead>
     <tbody>
-      <ContactCreator>
-        <tr
-          className="contact-creator"
-        >
-          <td>
-            <input
-              name="name"
-              onChange={[Function]}
-              placeholder="Contact name..."
-              value=""
-            />
-          </td>
-          <td>
-            <input
-              name="email"
-              onChange={[Function]}
-              placeholder="Contact email..."
-              value=""
-            />
-          </td>
-          <td>
-            <button
-              onClick={[Function]}
-            >
-              Add Contact
-            </button>
-          </td>
-        </tr>
-      </ContactCreator>
+      <tr
+        class="contact-creator"
+      >
+        <td>
+          <input
+            name="name"
+            placeholder="Contact name..."
+            value=""
+          />
+        </td>
+        <td>
+          <input
+            name="email"
+            placeholder="Contact email..."
+            value=""
+          />
+        </td>
+        <td>
+          <button>
+            Add Contact
+          </button>
+        </td>
+      </tr>
     </tbody>
   </table>
-</App>
+</div>
 `;
 
 exports[`Contacts App should add new contacts: 02. Create Test Contact name 1`] = `
-<App>
+<div>
   <table>
     <thead>
       <tr>
@@ -68,42 +62,36 @@ exports[`Contacts App should add new contacts: 02. Create Test Contact name 1`] 
       </tr>
     </thead>
     <tbody>
-      <ContactCreator>
-        <tr
-          className="contact-creator"
-        >
-          <td>
-            <input
-              name="name"
-              onChange={[Function]}
-              placeholder="Contact name..."
-              value="Test Contact"
-            />
-          </td>
-          <td>
-            <input
-              name="email"
-              onChange={[Function]}
-              placeholder="Contact email..."
-              value=""
-            />
-          </td>
-          <td>
-            <button
-              onClick={[Function]}
-            >
-              Add Contact
-            </button>
-          </td>
-        </tr>
-      </ContactCreator>
+      <tr
+        class="contact-creator"
+      >
+        <td>
+          <input
+            name="name"
+            placeholder="Contact name..."
+            value="Test Contact"
+          />
+        </td>
+        <td>
+          <input
+            name="email"
+            placeholder="Contact email..."
+            value=""
+          />
+        </td>
+        <td>
+          <button>
+            Add Contact
+          </button>
+        </td>
+      </tr>
     </tbody>
   </table>
-</App>
+</div>
 `;
 
 exports[`Contacts App should add new contacts: 03. Create Test Contact email 1`] = `
-<App>
+<div>
   <table>
     <thead>
       <tr>
@@ -119,42 +107,36 @@ exports[`Contacts App should add new contacts: 03. Create Test Contact email 1`]
       </tr>
     </thead>
     <tbody>
-      <ContactCreator>
-        <tr
-          className="contact-creator"
-        >
-          <td>
-            <input
-              name="name"
-              onChange={[Function]}
-              placeholder="Contact name..."
-              value="Test Contact"
-            />
-          </td>
-          <td>
-            <input
-              name="email"
-              onChange={[Function]}
-              placeholder="Contact email..."
-              value="test.contact@gmail.com"
-            />
-          </td>
-          <td>
-            <button
-              onClick={[Function]}
-            >
-              Add Contact
-            </button>
-          </td>
-        </tr>
-      </ContactCreator>
+      <tr
+        class="contact-creator"
+      >
+        <td>
+          <input
+            name="name"
+            placeholder="Contact name..."
+            value="Test Contact"
+          />
+        </td>
+        <td>
+          <input
+            name="email"
+            placeholder="Contact email..."
+            value="test.contact@gmail.com"
+          />
+        </td>
+        <td>
+          <button>
+            Add Contact
+          </button>
+        </td>
+      </tr>
     </tbody>
   </table>
-</App>
+</div>
 `;
 
 exports[`Contacts App should add new contacts: 04. Add Test Contact 1`] = `
-<App>
+<div>
   <table>
     <thead>
       <tr>
@@ -170,78 +152,58 @@ exports[`Contacts App should add new contacts: 04. Add Test Contact 1`] = `
       </tr>
     </thead>
     <tbody>
-      <Contact
-        contact={
-          Object {
-            "email": "test.contact@gmail.com",
-            "name": "Test Contact",
-          }
-        }
-        key="test.contact@gmail.com"
+      <tr
+        class="contact-display"
       >
-        <tr
-          className="contact-display"
-        >
-          <td>
-            Test Contact
-          </td>
-          <td>
-            test.contact@gmail.com
-          </td>
-          <td>
-            <button
-              onClick={[Function]}
-            >
-              <i
-                className="zmdi zmdi-edit"
-              />
-            </button>
-            <button
-              onClick={[Function]}
-            >
-              <i
-                className="zmdi zmdi-delete"
-              />
-            </button>
-          </td>
-        </tr>
-      </Contact>
-      <ContactCreator>
-        <tr
-          className="contact-creator"
-        >
-          <td>
-            <input
-              name="name"
-              onChange={[Function]}
-              placeholder="Contact name..."
-              value=""
+        <td>
+          Test Contact
+        </td>
+        <td>
+          test.contact@gmail.com
+        </td>
+        <td>
+          <button>
+            <i
+              class="zmdi zmdi-edit"
             />
-          </td>
-          <td>
-            <input
-              name="email"
-              onChange={[Function]}
-              placeholder="Contact email..."
-              value=""
+          </button>
+          <button>
+            <i
+              class="zmdi zmdi-delete"
             />
-          </td>
-          <td>
-            <button
-              onClick={[Function]}
-            >
-              Add Contact
-            </button>
-          </td>
-        </tr>
-      </ContactCreator>
+          </button>
+        </td>
+      </tr>
+      <tr
+        class="contact-creator"
+      >
+        <td>
+          <input
+            name="name"
+            placeholder="Contact name..."
+            value=""
+          />
+        </td>
+        <td>
+          <input
+            name="email"
+            placeholder="Contact email..."
+            value=""
+          />
+        </td>
+        <td>
+          <button>
+            Add Contact
+          </button>
+        </td>
+      </tr>
     </tbody>
   </table>
-</App>
+</div>
 `;
 
 exports[`Contacts App should add new contacts: 05. Add Placeholder Contact 1`] = `
-<App>
+<div>
   <table>
     <thead>
       <tr>
@@ -257,114 +219,80 @@ exports[`Contacts App should add new contacts: 05. Add Placeholder Contact 1`] =
       </tr>
     </thead>
     <tbody>
-      <Contact
-        contact={
-          Object {
-            "email": "test.contact@gmail.com",
-            "name": "Test Contact",
-          }
-        }
-        key="test.contact@gmail.com"
+      <tr
+        class="contact-display"
       >
-        <tr
-          className="contact-display"
-        >
-          <td>
-            Test Contact
-          </td>
-          <td>
-            test.contact@gmail.com
-          </td>
-          <td>
-            <button
-              onClick={[Function]}
-            >
-              <i
-                className="zmdi zmdi-edit"
-              />
-            </button>
-            <button
-              onClick={[Function]}
-            >
-              <i
-                className="zmdi zmdi-delete"
-              />
-            </button>
-          </td>
-        </tr>
-      </Contact>
-      <Contact
-        contact={
-          Object {
-            "email": "Placeholder",
-            "name": "Placeholder",
-          }
-        }
-        key="Placeholder"
+        <td>
+          Test Contact
+        </td>
+        <td>
+          test.contact@gmail.com
+        </td>
+        <td>
+          <button>
+            <i
+              class="zmdi zmdi-edit"
+            />
+          </button>
+          <button>
+            <i
+              class="zmdi zmdi-delete"
+            />
+          </button>
+        </td>
+      </tr>
+      <tr
+        class="contact-display"
       >
-        <tr
-          className="contact-display"
-        >
-          <td>
-            Placeholder
-          </td>
-          <td>
-            Placeholder
-          </td>
-          <td>
-            <button
-              onClick={[Function]}
-            >
-              <i
-                className="zmdi zmdi-edit"
-              />
-            </button>
-            <button
-              onClick={[Function]}
-            >
-              <i
-                className="zmdi zmdi-delete"
-              />
-            </button>
-          </td>
-        </tr>
-      </Contact>
-      <ContactCreator>
-        <tr
-          className="contact-creator"
-        >
-          <td>
-            <input
-              name="name"
-              onChange={[Function]}
-              placeholder="Contact name..."
-              value=""
+        <td>
+          Placeholder
+        </td>
+        <td>
+          Placeholder
+        </td>
+        <td>
+          <button>
+            <i
+              class="zmdi zmdi-edit"
             />
-          </td>
-          <td>
-            <input
-              name="email"
-              onChange={[Function]}
-              placeholder="Contact email..."
-              value=""
+          </button>
+          <button>
+            <i
+              class="zmdi zmdi-delete"
             />
-          </td>
-          <td>
-            <button
-              onClick={[Function]}
-            >
-              Add Contact
-            </button>
-          </td>
-        </tr>
-      </ContactCreator>
+          </button>
+        </td>
+      </tr>
+      <tr
+        class="contact-creator"
+      >
+        <td>
+          <input
+            name="name"
+            placeholder="Contact name..."
+            value=""
+          />
+        </td>
+        <td>
+          <input
+            name="email"
+            placeholder="Contact email..."
+            value=""
+          />
+        </td>
+        <td>
+          <button>
+            Add Contact
+          </button>
+        </td>
+      </tr>
     </tbody>
   </table>
-</App>
+</div>
 `;
 
 exports[`Contacts App should delete contact: 12. Delete Placeholder Contact 1`] = `
-<App>
+<div>
   <table>
     <thead>
       <tr>
@@ -380,78 +308,58 @@ exports[`Contacts App should delete contact: 12. Delete Placeholder Contact 1`] 
       </tr>
     </thead>
     <tbody>
-      <Contact
-        contact={
-          Object {
-            "email": "test.contact.edited@gmail.com",
-            "name": "Test Contact",
-          }
-        }
-        key="test.contact.edited@gmail.com"
+      <tr
+        class="contact-display"
       >
-        <tr
-          className="contact-display"
-        >
-          <td>
-            Test Contact
-          </td>
-          <td>
-            test.contact.edited@gmail.com
-          </td>
-          <td>
-            <button
-              onClick={[Function]}
-            >
-              <i
-                className="zmdi zmdi-edit"
-              />
-            </button>
-            <button
-              onClick={[Function]}
-            >
-              <i
-                className="zmdi zmdi-delete"
-              />
-            </button>
-          </td>
-        </tr>
-      </Contact>
-      <ContactCreator>
-        <tr
-          className="contact-creator"
-        >
-          <td>
-            <input
-              name="name"
-              onChange={[Function]}
-              placeholder="Contact name..."
-              value=""
+        <td>
+          Test Contact
+        </td>
+        <td>
+          test.contact.edited@gmail.com
+        </td>
+        <td>
+          <button>
+            <i
+              class="zmdi zmdi-edit"
             />
-          </td>
-          <td>
-            <input
-              name="email"
-              onChange={[Function]}
-              placeholder="Contact email..."
-              value=""
+          </button>
+          <button>
+            <i
+              class="zmdi zmdi-delete"
             />
-          </td>
-          <td>
-            <button
-              onClick={[Function]}
-            >
-              Add Contact
-            </button>
-          </td>
-        </tr>
-      </ContactCreator>
+          </button>
+        </td>
+      </tr>
+      <tr
+        class="contact-creator"
+      >
+        <td>
+          <input
+            name="name"
+            placeholder="Contact name..."
+            value=""
+          />
+        </td>
+        <td>
+          <input
+            name="email"
+            placeholder="Contact email..."
+            value=""
+          />
+        </td>
+        <td>
+          <button>
+            Add Contact
+          </button>
+        </td>
+      </tr>
     </tbody>
   </table>
-</App>
+</div>
 `;
 
 exports[`Contacts App should delete contact: 13. Delete Test Contact 1`] = `
-<App>
+<div>
   <table>
     <thead>
       <tr>
@@ -467,42 +375,36 @@ exports[`Contacts App should delete contact: 13. Delete Test Contact 1`] = `
       </tr>
     </thead>
     <tbody>
-      <ContactCreator>
-        <tr
-          className="contact-creator"
-        >
-          <td>
-            <input
-              name="name"
-              onChange={[Function]}
-              placeholder="Contact name..."
-              value=""
-            />
-          </td>
-          <td>
-            <input
-              name="email"
-              onChange={[Function]}
-              placeholder="Contact email..."
-              value=""
-            />
-          </td>
-          <td>
-            <button
-              onClick={[Function]}
-            >
-              Add Contact
-            </button>
-          </td>
-        </tr>
-      </ContactCreator>
+      <tr
+        class="contact-creator"
+      >
+        <td>
+          <input
+            name="name"
+            placeholder="Contact name..."
+            value=""
+          />
+        </td>
+        <td>
+          <input
+            name="email"
+            placeholder="Contact email..."
+            value=""
+          />
+        </td>
+        <td>
+          <button>
+            Add Contact
+          </button>
+        </td>
+      </tr>
     </tbody>
   </table>
-</App>
+</div>
 `;
 
 exports[`Contacts App should edit contact: 06. Switch Test Contact to Edit Mode 1`] = `
-<App>
+<div>
   <table>
     <thead>
       <tr>
@@ -518,123 +420,86 @@ exports[`Contacts App should edit contact: 06. Switch Test Contact to Edit Mode 
       </tr>
     </thead>
     <tbody>
-      <Contact
-        contact={
-          Object {
-            "email": "test.contact@gmail.com",
-            "name": "Test Contact",
-          }
-        }
-        key="test.contact@gmail.com"
+      <tr
+        class="contact-editor"
       >
-        <tr
-          className="contact-editor"
-        >
-          <td>
-            <input
-              autoFocus={true}
-              name="name"
-              onChange={[Function]}
-              value="Test Contact"
+        <td>
+          <input
+            name="name"
+            value="Test Contact"
+          />
+        </td>
+        <td>
+          <input
+            name="email"
+            value="test.contact@gmail.com"
+          />
+        </td>
+        <td>
+          <button>
+            <i
+              class="zmdi zmdi-save"
             />
-          </td>
-          <td>
-            <input
-              name="email"
-              onChange={[Function]}
-              value="test.contact@gmail.com"
+          </button>
+          <button>
+            <i
+              class="zmdi zmdi-close"
             />
-          </td>
-          <td>
-            <button
-              onClick={[Function]}
-            >
-              <i
-                className="zmdi zmdi-save"
-              />
-            </button>
-            <button
-              onClick={[Function]}
-            >
-              <i
-                className="zmdi zmdi-close"
-              />
-            </button>
-          </td>
-        </tr>
-      </Contact>
-      <Contact
-        contact={
-          Object {
-            "email": "Placeholder",
-            "name": "Placeholder",
-          }
-        }
-        key="Placeholder"
+          </button>
+        </td>
+      </tr>
+      <tr
+        class="contact-display"
       >
-        <tr
-          className="contact-display"
-        >
-          <td>
-            Placeholder
-          </td>
-          <td>
-            Placeholder
-          </td>
-          <td>
-            <button
-              onClick={[Function]}
-            >
-              <i
-                className="zmdi zmdi-edit"
-              />
-            </button>
-            <button
-              onClick={[Function]}
-            >
-              <i
-                className="zmdi zmdi-delete"
-              />
-            </button>
-          </td>
-        </tr>
-      </Contact>
-      <ContactCreator>
-        <tr
-          className="contact-creator"
-        >
-          <td>
-            <input
-              name="name"
-              onChange={[Function]}
-              placeholder="Contact name..."
-              value=""
+        <td>
+          Placeholder
+        </td>
+        <td>
+          Placeholder
+        </td>
+        <td>
+          <button>
+            <i
+              class="zmdi zmdi-edit"
             />
-          </td>
-          <td>
-            <input
-              name="email"
-              onChange={[Function]}
-              placeholder="Contact email..."
-              value=""
+          </button>
+          <button>
+            <i
+              class="zmdi zmdi-delete"
             />
-          </td>
-          <td>
-            <button
-              onClick={[Function]}
-            >
-              Add Contact
-            </button>
-          </td>
-        </tr>
-      </ContactCreator>
+          </button>
+        </td>
+      </tr>
+      <tr
+        class="contact-creator"
+      >
+        <td>
+          <input
+            name="name"
+            placeholder="Contact name..."
+            value=""
+          />
+        </td>
+        <td>
+          <input
+            name="email"
+            placeholder="Contact email..."
+            value=""
+          />
+        </td>
+        <td>
+          <button>
+            Add Contact
+          </button>
+        </td>
+      </tr>
     </tbody>
   </table>
-</App>
+</div>
 `;
 
 exports[`Contacts App should edit contact: 07. Edit Test Contact name 1`] = `
-<App>
+<div>
   <table>
     <thead>
       <tr>
@@ -650,123 +515,86 @@ exports[`Contacts App should edit contact: 07. Edit Test Contact name 1`] = `
       </tr>
     </thead>
     <tbody>
-      <Contact
-        contact={
-          Object {
-            "email": "test.contact@gmail.com",
-            "name": "Test Contact",
-          }
-        }
-        key="test.contact@gmail.com"
+      <tr
+        class="contact-editor"
       >
-        <tr
-          className="contact-editor"
-        >
-          <td>
-            <input
-              autoFocus={true}
-              name="name"
-              onChange={[Function]}
-              value="Edited Test Contact"
+        <td>
+          <input
+            name="name"
+            value="Edited Test Contact"
+          />
+        </td>
+        <td>
+          <input
+            name="email"
+            value="test.contact@gmail.com"
+          />
+        </td>
+        <td>
+          <button>
+            <i
+              class="zmdi zmdi-save"
             />
-          </td>
-          <td>
-            <input
-              name="email"
-              onChange={[Function]}
-              value="test.contact@gmail.com"
+          </button>
+          <button>
+            <i
+              class="zmdi zmdi-close"
             />
-          </td>
-          <td>
-            <button
-              onClick={[Function]}
-            >
-              <i
-                className="zmdi zmdi-save"
-              />
-            </button>
-            <button
-              onClick={[Function]}
-            >
-              <i
-                className="zmdi zmdi-close"
-              />
-            </button>
-          </td>
-        </tr>
-      </Contact>
-      <Contact
-        contact={
-          Object {
-            "email": "Placeholder",
-            "name": "Placeholder",
-          }
-        }
-        key="Placeholder"
+          </button>
+        </td>
+      </tr>
+      <tr
+        class="contact-display"
       >
-        <tr
-          className="contact-display"
-        >
-          <td>
-            Placeholder
-          </td>
-          <td>
-            Placeholder
-          </td>
-          <td>
-            <button
-              onClick={[Function]}
-            >
-              <i
-                className="zmdi zmdi-edit"
-              />
-            </button>
-            <button
-              onClick={[Function]}
-            >
-              <i
-                className="zmdi zmdi-delete"
-              />
-            </button>
-          </td>
-        </tr>
-      </Contact>
-      <ContactCreator>
-        <tr
-          className="contact-creator"
-        >
-          <td>
-            <input
-              name="name"
-              onChange={[Function]}
-              placeholder="Contact name..."
-              value=""
+        <td>
+          Placeholder
+        </td>
+        <td>
+          Placeholder
+        </td>
+        <td>
+          <button>
+            <i
+              class="zmdi zmdi-edit"
             />
-          </td>
-          <td>
-            <input
-              name="email"
-              onChange={[Function]}
-              placeholder="Contact email..."
-              value=""
+          </button>
+          <button>
+            <i
+              class="zmdi zmdi-delete"
             />
-          </td>
-          <td>
-            <button
-              onClick={[Function]}
-            >
-              Add Contact
-            </button>
-          </td>
-        </tr>
-      </ContactCreator>
+          </button>
+        </td>
+      </tr>
+      <tr
+        class="contact-creator"
+      >
+        <td>
+          <input
+            name="name"
+            placeholder="Contact name..."
+            value=""
+          />
+        </td>
+        <td>
+          <input
+            name="email"
+            placeholder="Contact email..."
+            value=""
+          />
+        </td>
+        <td>
+          <button>
+            Add Contact
+          </button>
+        </td>
+      </tr>
     </tbody>
   </table>
-</App>
+</div>
 `;
 
 exports[`Contacts App should edit contact: 08. Cancel Test Contact edit 1`] = `
-<App>
+<div>
   <table>
     <thead>
       <tr>
@@ -782,114 +610,80 @@ exports[`Contacts App should edit contact: 08. Cancel Test Contact edit 1`] = `
       </tr>
     </thead>
     <tbody>
-      <Contact
-        contact={
-          Object {
-            "email": "test.contact@gmail.com",
-            "name": "Test Contact",
-          }
-        }
-        key="test.contact@gmail.com"
+      <tr
+        class="contact-display"
       >
-        <tr
-          className="contact-display"
-        >
-          <td>
-            Test Contact
-          </td>
-          <td>
-            test.contact@gmail.com
-          </td>
-          <td>
-            <button
-              onClick={[Function]}
-            >
-              <i
-                className="zmdi zmdi-edit"
-              />
-            </button>
-            <button
-              onClick={[Function]}
-            >
-              <i
-                className="zmdi zmdi-delete"
-              />
-            </button>
-          </td>
-        </tr>
-      </Contact>
-      <Contact
-        contact={
-          Object {
-            "email": "Placeholder",
-            "name": "Placeholder",
-          }
-        }
-        key="Placeholder"
+        <td>
+          Test Contact
+        </td>
+        <td>
+          test.contact@gmail.com
+        </td>
+        <td>
+          <button>
+            <i
+              class="zmdi zmdi-edit"
+            />
+          </button>
+          <button>
+            <i
+              class="zmdi zmdi-delete"
+            />
+          </button>
+        </td>
+      </tr>
+      <tr
+        class="contact-display"
       >
-        <tr
-          className="contact-display"
-        >
-          <td>
-            Placeholder
-          </td>
-          <td>
-            Placeholder
-          </td>
-          <td>
-            <button
-              onClick={[Function]}
-            >
-              <i
-                className="zmdi zmdi-edit"
-              />
-            </button>
-            <button
-              onClick={[Function]}
-            >
-              <i
-                className="zmdi zmdi-delete"
-              />
-            </button>
-          </td>
-        </tr>
-      </Contact>
-      <ContactCreator>
-        <tr
-          className="contact-creator"
-        >
-          <td>
-            <input
-              name="name"
-              onChange={[Function]}
-              placeholder="Contact name..."
-              value=""
+        <td>
+          Placeholder
+        </td>
+        <td>
+          Placeholder
+        </td>
+        <td>
+          <button>
+            <i
+              class="zmdi zmdi-edit"
             />
-          </td>
-          <td>
-            <input
-              name="email"
-              onChange={[Function]}
-              placeholder="Contact email..."
-              value=""
+          </button>
+          <button>
+            <i
+              class="zmdi zmdi-delete"
             />
-          </td>
-          <td>
-            <button
-              onClick={[Function]}
-            >
-              Add Contact
-            </button>
-          </td>
-        </tr>
-      </ContactCreator>
+          </button>
+        </td>
+      </tr>
+      <tr
+        class="contact-creator"
+      >
+        <td>
+          <input
+            name="name"
+            placeholder="Contact name..."
+            value=""
+          />
+        </td>
+        <td>
+          <input
+            name="email"
+            placeholder="Contact email..."
+            value=""
+          />
+        </td>
+        <td>
+          <button>
+            Add Contact
+          </button>
+        </td>
+      </tr>
     </tbody>
   </table>
-</App>
+</div>
 `;
 
 exports[`Contacts App should edit contact: 09. Switch Test Contact to edit Mode 1`] = `
-<App>
+<div>
   <table>
     <thead>
       <tr>
@@ -905,123 +699,86 @@ exports[`Contacts App should edit contact: 09. Switch Test Contact to edit Mode 
       </tr>
     </thead>
     <tbody>
-      <Contact
-        contact={
-          Object {
-            "email": "test.contact@gmail.com",
-            "name": "Test Contact",
-          }
-        }
-        key="test.contact@gmail.com"
+      <tr
+        class="contact-editor"
       >
-        <tr
-          className="contact-editor"
-        >
-          <td>
-            <input
-              autoFocus={true}
-              name="name"
-              onChange={[Function]}
-              value="Test Contact"
+        <td>
+          <input
+            name="name"
+            value="Test Contact"
+          />
+        </td>
+        <td>
+          <input
+            name="email"
+            value="test.contact@gmail.com"
+          />
+        </td>
+        <td>
+          <button>
+            <i
+              class="zmdi zmdi-save"
             />
-          </td>
-          <td>
-            <input
-              name="email"
-              onChange={[Function]}
-              value="test.contact@gmail.com"
+          </button>
+          <button>
+            <i
+              class="zmdi zmdi-close"
             />
-          </td>
-          <td>
-            <button
-              onClick={[Function]}
-            >
-              <i
-                className="zmdi zmdi-save"
-              />
-            </button>
-            <button
-              onClick={[Function]}
-            >
-              <i
-                className="zmdi zmdi-close"
-              />
-            </button>
-          </td>
-        </tr>
-      </Contact>
-      <Contact
-        contact={
-          Object {
-            "email": "Placeholder",
-            "name": "Placeholder",
-          }
-        }
-        key="Placeholder"
+          </button>
+        </td>
+      </tr>
+      <tr
+        class="contact-display"
       >
-        <tr
-          className="contact-display"
-        >
-          <td>
-            Placeholder
-          </td>
-          <td>
-            Placeholder
-          </td>
-          <td>
-            <button
-              onClick={[Function]}
-            >
-              <i
-                className="zmdi zmdi-edit"
-              />
-            </button>
-            <button
-              onClick={[Function]}
-            >
-              <i
-                className="zmdi zmdi-delete"
-              />
-            </button>
-          </td>
-        </tr>
-      </Contact>
-      <ContactCreator>
-        <tr
-          className="contact-creator"
-        >
-          <td>
-            <input
-              name="name"
-              onChange={[Function]}
-              placeholder="Contact name..."
-              value=""
+        <td>
+          Placeholder
+        </td>
+        <td>
+          Placeholder
+        </td>
+        <td>
+          <button>
+            <i
+              class="zmdi zmdi-edit"
             />
-          </td>
-          <td>
-            <input
-              name="email"
-              onChange={[Function]}
-              placeholder="Contact email..."
-              value=""
+          </button>
+          <button>
+            <i
+              class="zmdi zmdi-delete"
             />
-          </td>
-          <td>
-            <button
-              onClick={[Function]}
-            >
-              Add Contact
-            </button>
-          </td>
-        </tr>
-      </ContactCreator>
+          </button>
+        </td>
+      </tr>
+      <tr
+        class="contact-creator"
+      >
+        <td>
+          <input
+            name="name"
+            placeholder="Contact name..."
+            value=""
+          />
+        </td>
+        <td>
+          <input
+            name="email"
+            placeholder="Contact email..."
+            value=""
+          />
+        </td>
+        <td>
+          <button>
+            Add Contact
+          </button>
+        </td>
+      </tr>
     </tbody>
   </table>
-</App>
+</div>
 `;
 
 exports[`Contacts App should edit contact: 10. Edit Test Contact email 1`] = `
-<App>
+<div>
   <table>
     <thead>
       <tr>
@@ -1037,123 +794,86 @@ exports[`Contacts App should edit contact: 10. Edit Test Contact email 1`] = `
       </tr>
     </thead>
     <tbody>
-      <Contact
-        contact={
-          Object {
-            "email": "test.contact@gmail.com",
-            "name": "Test Contact",
-          }
-        }
-        key="test.contact@gmail.com"
+      <tr
+        class="contact-editor"
       >
-        <tr
-          className="contact-editor"
-        >
-          <td>
-            <input
-              autoFocus={true}
-              name="name"
-              onChange={[Function]}
-              value="Test Contact"
+        <td>
+          <input
+            name="name"
+            value="Test Contact"
+          />
+        </td>
+        <td>
+          <input
+            name="email"
+            value="test.contact.edited@gmail.com"
+          />
+        </td>
+        <td>
+          <button>
+            <i
+              class="zmdi zmdi-save"
             />
-          </td>
-          <td>
-            <input
-              name="email"
-              onChange={[Function]}
-              value="test.contact.edited@gmail.com"
+          </button>
+          <button>
+            <i
+              class="zmdi zmdi-close"
             />
-          </td>
-          <td>
-            <button
-              onClick={[Function]}
-            >
-              <i
-                className="zmdi zmdi-save"
-              />
-            </button>
-            <button
-              onClick={[Function]}
-            >
-              <i
-                className="zmdi zmdi-close"
-              />
-            </button>
-          </td>
-        </tr>
-      </Contact>
-      <Contact
-        contact={
-          Object {
-            "email": "Placeholder",
-            "name": "Placeholder",
-          }
-        }
-        key="Placeholder"
+          </button>
+        </td>
+      </tr>
+      <tr
+        class="contact-display"
       >
-        <tr
-          className="contact-display"
-        >
-          <td>
-            Placeholder
-          </td>
-          <td>
-            Placeholder
-          </td>
-          <td>
-            <button
-              onClick={[Function]}
-            >
-              <i
-                className="zmdi zmdi-edit"
-              />
-            </button>
-            <button
-              onClick={[Function]}
-            >
-              <i
-                className="zmdi zmdi-delete"
-              />
-            </button>
-          </td>
-        </tr>
-      </Contact>
-      <ContactCreator>
-        <tr
-          className="contact-creator"
-        >
-          <td>
-            <input
-              name="name"
-              onChange={[Function]}
-              placeholder="Contact name..."
-              value=""
+        <td>
+          Placeholder
+        </td>
+        <td>
+          Placeholder
+        </td>
+        <td>
+          <button>
+            <i
+              class="zmdi zmdi-edit"
             />
-          </td>
-          <td>
-            <input
-              name="email"
-              onChange={[Function]}
-              placeholder="Contact email..."
-              value=""
+          </button>
+          <button>
+            <i
+              class="zmdi zmdi-delete"
             />
-          </td>
-          <td>
-            <button
-              onClick={[Function]}
-            >
-              Add Contact
-            </button>
-          </td>
-        </tr>
-      </ContactCreator>
+          </button>
+        </td>
+      </tr>
+      <tr
+        class="contact-creator"
+      >
+        <td>
+          <input
+            name="name"
+            placeholder="Contact name..."
+            value=""
+          />
+        </td>
+        <td>
+          <input
+            name="email"
+            placeholder="Contact email..."
+            value=""
+          />
+        </td>
+        <td>
+          <button>
+            Add Contact
+          </button>
+        </td>
+      </tr>
     </tbody>
   </table>
-</App>
+</div>
 `;
 
 exports[`Contacts App should edit contact: 11. Save Test Contact edit 1`] = `
-<App>
+<div>
   <table>
     <thead>
       <tr>
@@ -1169,108 +889,74 @@ exports[`Contacts App should edit contact: 11. Save Test Contact edit 1`] = `
       </tr>
     </thead>
     <tbody>
-      <Contact
-        contact={
-          Object {
-            "email": "test.contact.edited@gmail.com",
-            "name": "Test Contact",
-          }
-        }
-        key="test.contact.edited@gmail.com"
+      <tr
+        class="contact-display"
       >
-        <tr
-          className="contact-display"
-        >
-          <td>
-            Test Contact
-          </td>
-          <td>
-            test.contact.edited@gmail.com
-          </td>
-          <td>
-            <button
-              onClick={[Function]}
-            >
-              <i
-                className="zmdi zmdi-edit"
-              />
-            </button>
-            <button
-              onClick={[Function]}
-            >
-              <i
-                className="zmdi zmdi-delete"
-              />
-            </button>
-          </td>
-        </tr>
-      </Contact>
-      <Contact
-        contact={
-          Object {
-            "email": "Placeholder",
-            "name": "Placeholder",
-          }
-        }
-        key="Placeholder"
+        <td>
+          Test Contact
+        </td>
+        <td>
+          test.contact.edited@gmail.com
+        </td>
+        <td>
+          <button>
+            <i
+              class="zmdi zmdi-edit"
+            />
+          </button>
+          <button>
+            <i
+              class="zmdi zmdi-delete"
+            />
+          </button>
+        </td>
+      </tr>
+      <tr
+        class="contact-display"
       >
-        <tr
-          className="contact-display"
-        >
-          <td>
-            Placeholder
-          </td>
-          <td>
-            Placeholder
-          </td>
-          <td>
-            <button
-              onClick={[Function]}
-            >
-              <i
-                className="zmdi zmdi-edit"
-              />
-            </button>
-            <button
-              onClick={[Function]}
-            >
-              <i
-                className="zmdi zmdi-delete"
-              />
-            </button>
-          </td>
-        </tr>
-      </Contact>
-      <ContactCreator>
-        <tr
-          className="contact-creator"
-        >
-          <td>
-            <input
-              name="name"
-              onChange={[Function]}
-              placeholder="Contact name..."
-              value=""
+        <td>
+          Placeholder
+        </td>
+        <td>
+          Placeholder
+        </td>
+        <td>
+          <button>
+            <i
+              class="zmdi zmdi-edit"
             />
-          </td>
-          <td>
-            <input
-              name="email"
-              onChange={[Function]}
-              placeholder="Contact email..."
-              value=""
+          </button>
+          <button>
+            <i
+              class="zmdi zmdi-delete"
             />
-          </td>
-          <td>
-            <button
-              onClick={[Function]}
-            >
-              Add Contact
-            </button>
-          </td>
-        </tr>
-      </ContactCreator>
+          </button>
+        </td>
+      </tr>
+      <tr
+        class="contact-creator"
+      >
+        <td>
+          <input
+            name="name"
+            placeholder="Contact name..."
+            value=""
+          />
+        </td>
+        <td>
+          <input
+            name="email"
+            placeholder="Contact email..."
+            value=""
+          />
+        </td>
+        <td>
+          <button>
+            Add Contact
+          </button>
+        </td>
+      </tr>
     </tbody>
   </table>
-</App>
+</div>
 `;

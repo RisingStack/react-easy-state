@@ -107,7 +107,8 @@
       "!**/examples/**/beer-finder/**"
     ],
     "setupTestFrameworkScriptFile": "./scripts/testSetup.js",
-    "testURL": "http://react-easy-state.js"
+    "testURL": "http://react-easy-state.js",
+    "testMatch": ["**/__tests__/**/Contacts.test.js"]
   },
   "pre-push": ["lint", "test"]
 }
