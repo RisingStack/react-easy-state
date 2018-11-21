@@ -1,8 +1,10 @@
 import React from 'react'
+import { render, cleanup } from 'react-testing-library'
 import { view, store, batch } from 'react-easy-state'
-import { mount } from 'enzyme'
 
 describe('batching', () => {
+  afterEach(cleanup)
+
   test('should not batch "vanilla state changes"', () => {
     let renderCount = 0
     const person = store({ name: 'Bob' })
@@ -11,12 +13,12 @@ describe('batching', () => {
       return <div>{person.name}</div>
     })
 
-    const comp = mount(<MyComp />)
+    const { container } = render(<MyComp />)
     expect(renderCount).toBe(1)
-    expect(comp.text()).toBe('Bob')
+    expect(container).toHaveTextContent('Bob')
     person.name = 'Ann'
     person.name = 'Rick'
-    expect(comp.text()).toBe('Rick')
+    expect(container).toHaveTextContent('Rick')
     expect(renderCount).toBe(3)
   })
 
@@ -28,14 +30,14 @@ describe('batching', () => {
       return <div>{person.name}</div>
     })
 
-    const comp = mount(<MyComp />)
+    const { container } = render(<MyComp />)
     expect(renderCount).toBe(1)
-    expect(comp.text()).toBe('Bob')
+    expect(container).toHaveTextContent('Bob')
     batch(() => {
       person.name = 'Ann'
       person.name = 'Rick'
     })
-    expect(comp.text()).toBe('Rick')
+    expect(container).toHaveTextContent('Rick')
     expect(renderCount).toBe(2)
   })
 
@@ -47,9 +49,9 @@ describe('batching', () => {
       return <div>{person.name}</div>
     })
 
-    const comp = mount(<MyComp />)
+    const { container } = render(<MyComp />)
     expect(renderCount).toBe(1)
-    expect(comp.text()).toBe('Bob')
+    expect(container).toHaveTextContent('Bob')
     await new Promise(resolve =>
       setTimeout(() => {
         person.name = 'Ann'
@@ -57,7 +59,7 @@ describe('batching', () => {
         resolve()
       }, 100)
     )
-    expect(comp.text()).toBe('Rick')
+    expect(container).toHaveTextContent('Rick')
     expect(renderCount).toBe(2)
   })
 
@@ -69,9 +71,9 @@ describe('batching', () => {
       return <div>{person.name}</div>
     })
 
-    const comp = mount(<MyComp />)
+    const { container } = render(<MyComp />)
     expect(renderCount).toBe(1)
-    expect(comp.text()).toBe('Bob')
+    expect(container).toHaveTextContent('Bob')
     await new Promise(resolve =>
       // eslint-disable-next-line
       requestAnimationFrame(() => {
@@ -80,7 +82,7 @@ describe('batching', () => {
         resolve()
       })
     )
-    expect(comp.text()).toBe('Rick')
+    expect(container).toHaveTextContent('Rick')
     expect(renderCount).toBe(2)
   })
 
@@ -92,21 +94,21 @@ describe('batching', () => {
       return <div>{person.name}</div>
     })
 
-    const comp = mount(<MyComp />)
+    const { container } = render(<MyComp />)
     expect(renderCount).toBe(1)
-    expect(comp.text()).toBe('Bob')
+    expect(container).toHaveTextContent('Bob')
     await Promise.resolve().then(() => {
       person.name = 'Ann'
       person.name = 'Rick'
     })
-    expect(comp.text()).toBe('Rick')
+    expect(container).toHaveTextContent('Rick')
     expect(renderCount).toBe(2)
 
     await Promise.reject(new Error()).catch(() => {
       person.name = 'Ben'
       person.name = 'Morty'
     })
-    expect(comp.text()).toBe('Morty')
+    expect(container).toHaveTextContent('Morty')
     expect(renderCount).toBe(3)
   })
 
@@ -118,15 +120,15 @@ describe('batching', () => {
       return <div>{person.name}</div>
     })
 
-    const comp = mount(<MyComp />)
+    const { container } = render(<MyComp />)
     expect(renderCount).toBe(1)
-    expect(comp.text()).toBe('Bob')
+    expect(container).toHaveTextContent('Bob')
     await Promise.resolve()
     person.name = 'Ann'
     person.name = 'Rick'
     // ISSUE -> here it is not yet updated!!! -> the then block is not over I guess
     await Promise.resolve()
-    expect(comp.text()).toBe('Rick')
+    expect(container).toHaveTextContent('Rick')
     expect(renderCount).toBe(2)
   })
 
@@ -135,7 +137,7 @@ describe('batching', () => {
       .then(value => {
         expect(value).toBe(12)
         // eslint-disable-next-line
-        throw 15;
+        throw 15
       })
       .catch(err => {
         expect(err).toBe(15)
