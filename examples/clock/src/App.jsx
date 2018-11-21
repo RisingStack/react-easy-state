@@ -9,23 +9,23 @@ class App extends Component {
     time: moment()
       .utc()
       .format('hh:mm:ss A')
-  });
+  })
 
   // the clock store can be manipulated as a plain JS object
-  setTime () {
+  setTime() {
     this.clock.time = moment()
       .utc()
       .format('hh:mm:ss A')
   }
 
   // clean up the timer before the component is unmounted
-  componentWillUnmount () {
+  componentWillUnmount() {
     clearInterval(this.clock.id)
   }
 
   // render is automatically triggered whenever this.clock.time changes
-  render () {
-    return <div>{this.clock.time}</div>
+  render() {
+    return <div data-testid="time">{this.clock.time}</div>
   }
 }
 

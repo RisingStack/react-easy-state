@@ -1,14 +1,12 @@
 {
   "name": "react-easy-state",
   "version": "6.0.5",
-  "description": "React state management with a minimal API. Made with ES6 Proxies.",
+  "description":
+    "React state management with a minimal API. Made with ES6 Proxies.",
   "main": "dist/cjs.es6.js",
   "module": "dist/es.es6.js",
   "types": "types/index.d.ts",
-  "files": [
-    "dist",
-    "types"
-  ],
+  "files": ["dist", "types"],
   "scripts": {
     "test": "jest --coverage",
     "test-watch": "jest --watch",
@@ -16,27 +14,13 @@
     "test-builds": "node ./scripts/testBuilds.js",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
     "lint": "standard",
-    "lint-fix": "prettier --ignore-path '.gitignore' --write '**/*.{js,jsx}' '!**/build/**' && standard --fix",
+    "lint-fix":
+      "prettier --ignore-path '.gitignore' --write '**/*.{js,jsx}' '!**/build/**' && standard --fix",
     "build-examples": "node ./scripts/buildExamples.js",
     "link-examples": "node ./scripts/linkExamples.js",
     "unlink-examples": "node ./scripts/unlinkExamples.js",
     "build": "node ./scripts/build.js",
     "build-toc": "node ./scripts/buildToc.js"
-  },
-  "jest": {
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ],
-    "collectCoverageFrom": [
-      "**/src/**",
-      "**/examples/**/*.{js,jsx}",
-      "!**/examples/**/build/**",
-      "!**/examples/**/index.js",
-      "!**/examples/stop-watch/**",
-      "!**/examples/**/beer-finder/**"
-    ],
-    "setupTestFrameworkScriptFile": "./scripts/testSetup.js",
-    "testURL": "http://react-easy-state.js"
   },
   "author": {
     "name": "Miklos Bertalan",
@@ -88,6 +72,7 @@
     "enzyme-adapter-react-16": "^1.1.1",
     "enzyme-to-json": "^3.3.1",
     "jest": "^22.3.0",
+    "jest-dom": "^2.1.1",
     "markdown-toc": "^1.1.0",
     "moment": "2.20.1",
     "pre-push": "0.1.1",
@@ -95,6 +80,7 @@
     "react": "^16.7.0-alpha.0",
     "react-dom": "^16.7.0-alpha.0",
     "react-test-renderer": "^16.7.0-alpha.0",
+    "react-testing-library": "^5.3.0",
     "rollup": "^0.56.0",
     "rollup-plugin-auto-external": "^1.0.0",
     "rollup-plugin-babel": "^3.0.2",
@@ -107,16 +93,21 @@
   },
   "standard": {
     "parser": "babel-eslint",
-    "env": [
-      "jest"
-    ],
-    "ignore": [
-      "**/build/**",
-      "**/node_modules/**"
-    ]
+    "env": ["jest"],
+    "ignore": ["**/build/**", "**/node_modules/**"]
   },
-  "pre-push": [
-    "lint",
-    "test"
-  ]
+  "jest": {
+    "snapshotSerializers": ["enzyme-to-json/serializer"],
+    "collectCoverageFrom": [
+      "**/src/**",
+      "**/examples/**/*.{js,jsx}",
+      "!**/examples/**/build/**",
+      "!**/examples/**/index.js",
+      "!**/examples/stop-watch/**",
+      "!**/examples/**/beer-finder/**"
+    ],
+    "setupTestFrameworkScriptFile": "./scripts/testSetup.js",
+    "testURL": "http://react-easy-state.js"
+  },
+  "pre-push": ["lint", "test"]
 }
