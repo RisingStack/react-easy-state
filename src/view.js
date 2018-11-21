@@ -13,17 +13,12 @@ let isInsideFunctionComponent = false
 const COMPONENT = Symbol('owner component')
 const DUMMY_STATE = {}
 
-export function view(Comp, { devtool: rawDevtool } = {}) {
+export function view(Comp) {
   const isStatelessComp = !(Comp.prototype && Comp.prototype.isReactComponent)
   const BaseComp = isStatelessComp ? Component : Comp
 
-  const devtool = rawDevtool
-    ? operation => rawDevtool(Object.assign({ Component: Comp }, operation))
-    : undefined
-
   let ReactiveComp
 
-  // TODO: fix devtools integration
   if (isStatelessComp && hasHooks) {
     function ReactiveFunctionComp(props) {
       const [, setState] = useState()
@@ -37,8 +32,7 @@ export function view(Comp, { devtool: rawDevtool } = {}) {
             add: () => scheduler.add(updater),
             delete: () => scheduler.remove(updater)
           },
-          lazy: true,
-          debugger: devtool
+          lazy: true
         })
       }, [])
 
@@ -74,7 +68,6 @@ export function view(Comp, { devtool: rawDevtool } = {}) {
             add: () => scheduler.add(updater),
             delete: () => scheduler.remove(updater)
           },
-          debugger: devtool,
           lazy: true
         })
       }
@@ -92,33 +85,21 @@ export function view(Comp, { devtool: rawDevtool } = {}) {
           super.shouldComponentUpdate &&
           !super.shouldComponentUpdate(nextProps, nextState)
         ) {
-          devtool && devtool({ type: 'render', renderType: 'blocked' })
           return false
         }
 
         // return true if it is a reactive render or state changes
         if (state !== nextState) {
-          devtool && devtool({ type: 'render', renderType: 'reactive' })
           return true
         }
 
         // the component should update if any of its props shallowly changed value
         const keys = Object.keys(props)
         const nextKeys = Object.keys(nextProps)
-        if (
+        return (
           nextKeys.length !== keys.length ||
           nextKeys.some(key => props[key] !== nextProps[key])
-        ) {
-          devtool &&
-            devtool({
-              type: 'render',
-              renderType: 'normal',
-              props: nextProps,
-              oldProps: props
-            })
-          return true
-        }
-        return false
+        )
       }
 
       // add a custom deriveStoresFromProps lifecyle method
