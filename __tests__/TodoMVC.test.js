@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { StrictMode } from 'react'
 import { render, cleanup, fireEvent } from 'react-testing-library'
 import App from '../examples/todo-mvc/src/App'
 
 describe('TodoMVC App', () => {
-  const { container } = render(<App />)
+  const { container } = render(
+    <StrictMode>
+      <App />
+    </StrictMode>
+  )
   afterAll(cleanup)
 
   test('should add todos', () => {

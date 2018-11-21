@@ -1,11 +1,15 @@
-import React from 'react'
+import React, { StrictMode } from 'react'
 import { render, cleanup } from 'react-testing-library'
 import sinon from 'sinon'
 import App from '../examples/clock/src/App'
 
 describe('Clock App', () => {
   const clock = sinon.useFakeTimers()
-  const { container } = render(<App />)
+  const { container } = render(
+    <StrictMode>
+      <App />
+    </StrictMode>
+  )
   const clearIntervalSpy = sinon.spy(global, 'clearInterval')
 
   afterAll(() => {

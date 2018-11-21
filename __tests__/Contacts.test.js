@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { StrictMode } from 'react'
 import { render, cleanup, fireEvent } from 'react-testing-library'
 import App from '../examples/contacts/src/App'
 
 describe('Contacts App', () => {
-  const { container } = render(<App />)
+  const { container } = render(
+    <StrictMode>
+      <App />
+    </StrictMode>
+  )
   afterAll(cleanup)
 
   test('should add new contacts', () => {
