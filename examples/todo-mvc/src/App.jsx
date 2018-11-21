@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import classNames from 'classnames'
 import { view } from 'react-easy-state'
 import TodoItem from './TodoItem'
@@ -65,11 +65,7 @@ export default view(() => {
         <footer className="footer">
           <span className="todo-count">{active.length} items left</span>
           <div className="filters">
-            <button
-              className={todosClass}
-              value="all"
-              onClick={changeFilter}
-            >
+            <button className={todosClass} value="all" onClick={changeFilter}>
               All
             </button>
             <button
