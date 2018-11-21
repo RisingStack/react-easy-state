@@ -1,18 +1,22 @@
 import React, { StrictMode } from 'react'
-import { render, cleanup } from 'react-testing-library'
+import { render, cleanup, flushEffects } from 'react-testing-library'
 import sinon from 'sinon'
 import App from '../examples/clock/src/App'
 
 describe('Clock App', () => {
   const clock = sinon.useFakeTimers()
-  const { container } = render(
+  const { container, unmount } = render(
     <StrictMode>
       <App />
     </StrictMode>
   )
+  // flush the inital didMount effect
+  flushEffects()
+
   const clearIntervalSpy = sinon.spy(global, 'clearInterval')
 
   afterAll(() => {
+    cleanup()
     clock.restore()
     clearIntervalSpy.restore()
   })
@@ -28,7 +32,7 @@ describe('Clock App', () => {
   })
 
   test('should clean up the interval timer when the component is unmounted', () => {
-    cleanup()
+    unmount()
     expect(clearIntervalSpy.callCount).toBe(1)
   })
 })
