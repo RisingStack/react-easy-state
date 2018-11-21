@@ -1,52 +1,54 @@
 import React, { Component } from 'react'
+import { render, cleanup, fireEvent } from 'react-testing-library'
 import { view, store } from 'react-easy-state'
-import { mount } from 'enzyme'
 
 describe('edge cases', () => {
+  afterEach(cleanup)
+
   test('view() should respect shouldComponentUpdate', () => {
     const person = store({ name: 'Bob' })
     const MyComp = view(
       class extends Component {
-        shouldComponentUpdate () {
+        shouldComponentUpdate() {
           return false
         }
-        render () {
+        render() {
           return <div>{person.name}</div>
         }
       }
     )
 
-    const comp = mount(<MyComp />)
-    expect(comp.text()).toBe('Bob')
+    const { container } = render(<MyComp />)
+    expect(container).toHaveTextContent('Bob')
     person.name = 'Ann'
-    expect(comp.text()).toBe('Bob')
+    expect(container).toHaveTextContent('Bob')
   })
 
   test('should not change vanilla setState behavior', () => {
     const MyComp = view(
       class extends Component {
-        state = { counter: 0 };
-        increment = () => this.setState({ counter: this.state.counter + 1 });
+        state = { counter: 0 }
+        increment = () => this.setState({ counter: this.state.counter + 1 })
 
-        render () {
+        render() {
           return <div onClick={this.increment}>{this.state.counter}</div>
         }
       }
     )
 
-    const comp = mount(<MyComp />)
-    expect(comp.text()).toBe('0')
-    comp.find('div').simulate('click')
-    expect(comp.text()).toBe('1')
+    const { container } = render(<MyComp />)
+    expect(container).toHaveTextContent('0')
+    fireEvent.click(container.querySelector('div'))
+    expect(container).toHaveTextContent('1')
   })
 
   test("should not render when state or props don't change", () => {
     const MyComp = view(
       class extends Component {
-        state = { counter: 0 };
-        increment = () => this.setState({ counter: this.state.counter + 1 });
+        state = { counter: 0 }
+        increment = () => this.setState({ counter: this.state.counter + 1 })
 
-        render () {
+        render() {
           return (
             <div>
               <Child />
@@ -60,25 +62,25 @@ describe('edge cases', () => {
     const RawChild = jest.fn().mockReturnValue(<p>Test</p>)
     const Child = view(RawChild)
 
-    const comp = mount(<MyComp />)
+    const { container } = render(<MyComp />)
     expect(RawChild.mock.calls.length).toBe(1)
-    comp.find('button').simulate('click')
+    fireEvent.click(container.querySelector('button'))
     expect(RawChild.mock.calls.length).toBe(1)
   })
 
   test('view() should respect custom deriveStoresFromProps', () => {
     const MyComp = view(
       class extends Component {
-        store1 = store({ num: 0 });
-        store2 = store({ num: 1 });
+        store1 = store({ num: 0 })
+        store2 = store({ num: 1 })
 
-        static deriveStoresFromProps (props, store1, store2) {
+        static deriveStoresFromProps(props, store1, store2) {
           store1.num = props.num1 || store1.num
           store2.num = props.num2 || store2.num
         }
-        onClick = () => this.store1.num++;
+        onClick = () => this.store1.num++
 
-        render () {
+        render() {
           return (
             <div onClick={this.onClick}>
               {this.store1.num}
@@ -89,32 +91,28 @@ describe('edge cases', () => {
       }
     )
 
-    const comp = mount(<MyComp num1={1} />)
-    expect(comp.text()).toBe('11')
-    comp.find('div').simulate('click')
-    expect(comp.text()).toBe('21')
-    comp.setProps({ num2: 4, num1: undefined })
-    expect(comp.text()).toBe('24')
-    comp.find('div').simulate('click')
-    expect(comp.text()).toBe('34')
+    const { container } = render(<MyComp num1={1} />)
+    expect(container).toHaveTextContent('11')
+    fireEvent.click(container.querySelector('div'))
+    expect(container).toHaveTextContent('11')
   })
 
   test('view() should respect getDerivedStateFromProps', () => {
     const MyComp = view(
       class extends Component {
-        state = { num: 2 };
-        static getDerivedStateFromProps (props, state) {
+        state = { num: 2 }
+        static getDerivedStateFromProps(props, state) {
           return {
             num: props.num || state.num
           }
         }
-        render () {
+        render() {
           return <div>{this.state.num}</div>
         }
       }
     )
 
-    const comp = mount(<MyComp num={2} />)
-    expect(comp.text()).toBe('2')
+    const { container } = render(<MyComp num={2} />)
+    expect(container).toHaveTextContent('2')
   })
 })
