@@ -8,8 +8,6 @@
     "@material-ui/icons": "^1.0.0",
     "axios": "^0.18.0",
     "material-ui-search-bar": "^1.0.0-beta.4",
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2",
     "react-easy-state": "^6.0.3",
     "react-scripts": "2.0.4"
   },

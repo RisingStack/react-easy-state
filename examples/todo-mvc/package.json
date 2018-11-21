@@ -5,8 +5,6 @@
   "private": true,
   "dependencies": {
     "classnames": "^2.2.6",
-    "react": "^16.7.0-alpha.0",
-    "react-dom": "^16.7.0-alpha.0",
     "react-easy-state": "^6.0.3",
     "react-scripts": "2.0.4"
   },

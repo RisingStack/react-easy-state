@@ -37,7 +37,7 @@ export default view(() => {
       <header className="header">
         <h1>todos</h1>
         <input
-          onKeyUp={this.createTodo}
+          onKeyUp={createTodo}
           className="new-todo"
           placeholder="What needs to be done?"
           autoFocus
@@ -68,21 +68,21 @@ export default view(() => {
             <button
               className={todosClass}
               value="all"
-              onClick={this.changeFilter}
+              onClick={changeFilter}
             >
               All
             </button>
             <button
               className={activeClass}
               value="active"
-              onClick={this.changeFilter}
+              onClick={changeFilter}
             >
               Active
             </button>
             <button
               className={completedClass}
               value="completed"
-              onClick={this.changeFilter}
+              onClick={changeFilter}
             >
               Completed
             </button>
