@@ -108,7 +108,7 @@
     ],
     "setupTestFrameworkScriptFile": "./scripts/testSetup.js",
     "testURL": "http://react-easy-state.js",
-    "testMatch": ["**/__tests__/**/batching.test.js"]
+    "testMatch": ["**/__tests__/**/devtool.test.js"]
   },
   "pre-push": ["lint", "test"]
 }

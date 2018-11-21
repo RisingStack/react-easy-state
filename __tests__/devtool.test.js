@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
+import { render, cleanup } from 'react-testing-library'
 import { view, store } from 'react-easy-state'
-import { mount } from 'enzyme'
 
 describe('devtool', () => {
   let devtool
@@ -11,6 +11,7 @@ describe('devtool', () => {
   afterAll(() => {
     devtool = undefined
   })
+  afterEach(cleanup)
 
   test('devtool should be called on store mutations, renders and get operations - related to a view', () => {
     const rawPerson = { name: 'Bob' }
@@ -18,7 +19,7 @@ describe('devtool', () => {
     const rawComp = () => <div>{person.name}</div>
     const MyComp = view(rawComp, { devtool })
 
-    mount(<MyComp />)
+    render(<MyComp />)
 
     devtool.mockClear()
     person.name = 'Ann'
@@ -55,7 +56,7 @@ describe('devtool', () => {
     const rawComp = () => <Child name={person.name} />
     const MyComp = view(rawComp, { devtool })
 
-    mount(<MyComp />)
+    render(<MyComp />)
     devtool.mockClear()
 
     person.name = 'Ann'
@@ -95,16 +96,16 @@ describe('devtool', () => {
     const rawPerson = { name: 'Bob' }
     const person = store(rawPerson)
     class RawComp extends Component {
-      render () {
+      render() {
         return <div>{person.name}</div>
       }
-      shouldComponentUpdate () {
+      shouldComponentUpdate() {
         return false
       }
     }
     const MyComp = view(RawComp, { devtool })
 
-    mount(<MyComp />)
+    render(<MyComp />)
 
     devtool.mockClear()
     person.name = 'Ann'
@@ -132,7 +133,7 @@ describe('devtool', () => {
     const rawComp = () => <div>{person.name}</div>
     const MyComp = view(rawComp, { devtool })
 
-    mount(<MyComp />)
+    render(<MyComp />)
 
     devtool.mockClear()
     person.age = 40

@@ -23,6 +23,7 @@ export function view(Comp, { devtool: rawDevtool } = {}) {
 
   let ReactiveComp
 
+  // TODO: fix devtools integration
   if (isStatelessComp && hasHooks) {
     function ReactiveFunctionComp(props) {
       const [, setState] = useState()
