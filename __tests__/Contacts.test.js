@@ -6,7 +6,7 @@ describe('Contacts App', () => {
   const { container } = render(<App />)
   afterAll(cleanup)
 
-  test('should add new contacts', async () => {
+  test('should add new contacts', () => {
     expect(container).toMatchSnapshot('01. Initial state')
 
     const creator = container.querySelector('.contact-creator')
@@ -37,7 +37,7 @@ describe('Contacts App', () => {
     expect(container).toMatchSnapshot('05. Add Placeholder Contact')
   })
 
-  test('should edit contact', async () => {
+  test('should edit contact', () => {
     let display,
       editor,
       editButton,
@@ -83,7 +83,7 @@ describe('Contacts App', () => {
     expect(container).toMatchSnapshot('11. Save Test Contact edit')
   })
 
-  test('should delete contact', async () => {
+  test('should delete contact', () => {
     let deleteButton = container.querySelectorAll(
       '.contact-display .zmdi-delete'
     )[1]

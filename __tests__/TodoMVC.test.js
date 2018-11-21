@@ -1,87 +1,88 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { render, cleanup, fireEvent } from 'react-testing-library'
 import App from '../examples/todo-mvc/src/App'
 
 describe('TodoMVC App', () => {
-  const app = mount(<App />)
+  const { container } = render(<App />)
+  afterAll(cleanup)
 
-  test('should add todos', async () => {
-    expect(app).toMatchSnapshot('01. Initial state')
+  test('should add todos', () => {
+    expect(container).toMatchSnapshot('01. Initial state')
 
-    const input = app.find('.new-todo')
+    const input = container.querySelector('.new-todo')
 
-    input.simulate('keyUp', {
+    fireEvent.keyUp(input, {
       keyCode: 13,
       target: { value: 'Test Todo' }
     })
-    expect(app).toMatchSnapshot('02. Add Test Todo')
+    expect(container).toMatchSnapshot('02. Add Test Todo')
 
-    input.simulate('keyUp', {
+    fireEvent.keyUp(input, {
       keyCode: 13,
       target: { value: 'Other Todo' }
     })
-    expect(app).toMatchSnapshot('03. Add Other Todo')
+    expect(container).toMatchSnapshot('03. Add Other Todo')
 
-    input.simulate('keyUp', {
+    fireEvent.keyUp(input, {
       keyCode: 27,
       target: { value: 'Final Tod' }
     })
-    input.simulate('keyUp', {
+    fireEvent.keyUp(input, {
       keyCode: 13,
       target: { value: 'Final Todo' }
     })
-    expect(app).toMatchSnapshot('04. Add Final Todo')
+    expect(container).toMatchSnapshot('04. Add Final Todo')
   })
 
-  test('should toggle todo status', async () => {
-    const toggles = app.find('.todo-list .toggle')
+  test('should toggle todo status', () => {
+    const toggles = container.querySelectorAll('.todo-list .toggle')
 
-    toggles.at(0).simulate('change')
-    expect(app).toMatchSnapshot('05. Toggle Test Todo to completed')
+    fireEvent.change(toggles[0])
+    expect(container).toMatchSnapshot('05. Toggle Test Todo to completed')
 
-    toggles.at(1).simulate('change')
-    expect(app).toMatchSnapshot('06. Toggle Other Todo to completed')
+    fireEvent.change(toggles[1])
+    expect(container).toMatchSnapshot('06. Toggle Other Todo to completed')
 
-    toggles.at(0).simulate('change')
-    expect(app).toMatchSnapshot('07. Toggle Test Todo to active')
+    fireEvent.change(toggles[0])
+    expect(container).toMatchSnapshot('07. Toggle Test Todo to active')
   })
 
-  test('should filter todos', async () => {
-    const completedFilter = app.find('button[value="completed"]')
-    const activeFilter = app.find('button[value="active"]')
-    const allFilter = app.find('button[value="all"]')
+  test('should filter todos', () => {
+    const completedFilter = container.querySelector('button[value="completed"]')
+    const activeFilter = container.querySelector('button[value="active"]')
+    const allFilter = container.querySelector('button[value="all"]')
 
-    completedFilter.simulate('click')
-    expect(app).toMatchSnapshot('08. Filter completed')
+    fireEvent.click(completedFilter)
+    expect(container).toMatchSnapshot('08. Filter completed')
 
-    activeFilter.simulate('click')
-    expect(app).toMatchSnapshot('09. Filter active')
+    fireEvent.click(activeFilter)
+    expect(container).toMatchSnapshot('09. Filter active')
 
-    allFilter.simulate('click')
-    expect(app).toMatchSnapshot('10. Filter all')
+    fireEvent.click(allFilter)
+    expect(container).toMatchSnapshot('10. Filter all')
   })
 
-  test('should clear completed', async () => {
-    const clearCompleted = app.find('.clear-completed')
+  test('should clear completed', () => {
+    const clearCompleted = container.querySelector('.clear-completed')
 
-    clearCompleted.simulate('click')
-    expect(app).toMatchSnapshot('11. Clear completed')
+    fireEvent.click(clearCompleted)
+    expect(container).toMatchSnapshot('11. Clear completed')
   })
 
-  test('should toggle all todo state at once', async () => {
-    const toggleAll = app.find('.toggle-all')
+  test('should toggle all todo state at once', () => {
+    const toggleAll = container.querySelector('.toggle-all')
 
-    toggleAll.simulate('change')
-    expect(app).toMatchSnapshot('12. Toggle all to completed')
+    fireEvent.change(toggleAll)
+    expect(container).toMatchSnapshot('12. Toggle all to completed')
 
-    toggleAll.simulate('change')
-    expect(app).toMatchSnapshot('13. Toggle all to active')
+    fireEvent.change(toggleAll)
+    expect(container).toMatchSnapshot('13. Toggle all to active')
   })
 
-  test('should delete todo', async () => {
-    const deleters = app.find('.todo-list .destroy')
+  test('should delete todo', () => {
+    const deleter = container.querySelector('.todo-list .destroy')
 
-    deleters.at(0).simulate('click')
-    expect(app).toMatchSnapshot('14. Delete Test Todo')
+    fireEvent.click(deleter)
+    expect(container).toMatchSnapshot('14. Delete Test Todo')
   })
 })

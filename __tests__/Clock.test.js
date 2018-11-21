@@ -13,7 +13,7 @@ describe('Clock App', () => {
     clearIntervalSpy.restore()
   })
 
-  test('should update to display the current time every second', async () => {
+  test('should update to display the current time every second', () => {
     expect(container).toHaveTextContent('12:00:00 AM')
 
     clock.tick(2000)
