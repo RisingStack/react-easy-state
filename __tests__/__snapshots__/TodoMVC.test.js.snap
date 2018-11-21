@@ -311,6 +311,103 @@ exports[`TodoMVC App should add todos: 04. Add Final Todo 1`] = `
 </div>
 `;
 
+exports[`TodoMVC App should clear completed: 11. Clear completed 1`] = `
+<div>
+  <div
+    class="todoapp"
+  >
+    <header
+      class="header"
+    >
+      <h1>
+        todos
+      </h1>
+      <input
+        class="new-todo"
+        placeholder="What needs to be done?"
+      />
+    </header>
+    <section
+      class="main"
+    >
+      <input
+        class="toggle-all"
+        type="checkbox"
+      />
+      <label
+        for="toggle-all"
+      >
+        Mark all as complete
+      </label>
+      <ul
+        class="todo-list"
+      >
+        <li
+          class="view"
+        >
+          <input
+            class="toggle"
+            type="checkbox"
+          />
+          <label>
+            Test Todo
+          </label>
+          <button
+            class="destroy"
+          />
+        </li>
+        <li
+          class="view"
+        >
+          <input
+            class="toggle"
+            type="checkbox"
+          />
+          <label>
+            Final Todo
+          </label>
+          <button
+            class="destroy"
+          />
+        </li>
+      </ul>
+    </section>
+    <footer
+      class="footer"
+    >
+      <span
+        class="todo-count"
+      >
+        2
+         items left
+      </span>
+      <div
+        class="filters"
+      >
+        <button
+          class="selected"
+          value="all"
+        >
+          All
+        </button>
+        <button
+          class=""
+          value="active"
+        >
+          Active
+        </button>
+        <button
+          class=""
+          value="completed"
+        >
+          Completed
+        </button>
+      </div>
+    </footer>
+  </div>
+</div>
+`;
+
 exports[`TodoMVC App should delete todo: 14. Delete Test Todo 1`] = `
 <div>
   <div
@@ -350,20 +447,6 @@ exports[`TodoMVC App should delete todo: 14. Delete Test Todo 1`] = `
             type="checkbox"
           />
           <label>
-            Other Todo
-          </label>
-          <button
-            class="destroy"
-          />
-        </li>
-        <li
-          class="view"
-        >
-          <input
-            class="toggle"
-            type="checkbox"
-          />
-          <label>
             Final Todo
           </label>
           <button
@@ -378,7 +461,7 @@ exports[`TodoMVC App should delete todo: 14. Delete Test Todo 1`] = `
       <span
         class="todo-count"
       >
-        2
+        1
          items left
       </span>
       <div
@@ -438,7 +521,22 @@ exports[`TodoMVC App should filter todos: 08. Filter completed 1`] = `
       </label>
       <ul
         class="todo-list"
-      />
+      >
+        <li
+          class="view completed"
+        >
+          <input
+            class="toggle"
+            type="checkbox"
+          />
+          <label>
+            Other Todo
+          </label>
+          <button
+            class="destroy"
+          />
+        </li>
+      </ul>
     </section>
     <footer
       class="footer"
@@ -446,7 +544,7 @@ exports[`TodoMVC App should filter todos: 08. Filter completed 1`] = `
       <span
         class="todo-count"
       >
-        3
+        2
          items left
       </span>
       <div
@@ -471,6 +569,11 @@ exports[`TodoMVC App should filter todos: 08. Filter completed 1`] = `
           Completed
         </button>
       </div>
+      <button
+        class="clear-completed"
+      >
+        Clear completed
+      </button>
     </footer>
   </div>
 </div>
@@ -529,20 +632,6 @@ exports[`TodoMVC App should filter todos: 09. Filter active 1`] = `
             type="checkbox"
           />
           <label>
-            Other Todo
-          </label>
-          <button
-            class="destroy"
-          />
-        </li>
-        <li
-          class="view"
-        >
-          <input
-            class="toggle"
-            type="checkbox"
-          />
-          <label>
             Final Todo
           </label>
           <button
@@ -557,7 +646,7 @@ exports[`TodoMVC App should filter todos: 09. Filter active 1`] = `
       <span
         class="todo-count"
       >
-        3
+        2
          items left
       </span>
       <div
@@ -582,6 +671,11 @@ exports[`TodoMVC App should filter todos: 09. Filter active 1`] = `
           Completed
         </button>
       </div>
+      <button
+        class="clear-completed"
+      >
+        Clear completed
+      </button>
     </footer>
   </div>
 </div>
@@ -633,7 +727,7 @@ exports[`TodoMVC App should filter todos: 10. Filter all 1`] = `
           />
         </li>
         <li
-          class="view"
+          class="view completed"
         >
           <input
             class="toggle"
@@ -668,7 +762,7 @@ exports[`TodoMVC App should filter todos: 10. Filter all 1`] = `
       <span
         class="todo-count"
       >
-        3
+        2
          items left
       </span>
       <div
@@ -693,6 +787,11 @@ exports[`TodoMVC App should filter todos: 10. Filter all 1`] = `
           Completed
         </button>
       </div>
+      <button
+        class="clear-completed"
+      >
+        Clear completed
+      </button>
     </footer>
   </div>
 </div>
@@ -730,7 +829,7 @@ exports[`TodoMVC App should toggle all todo state at once: 12. Toggle all to com
         class="todo-list"
       >
         <li
-          class="view"
+          class="view completed"
         >
           <input
             class="toggle"
@@ -744,21 +843,7 @@ exports[`TodoMVC App should toggle all todo state at once: 12. Toggle all to com
           />
         </li>
         <li
-          class="view"
-        >
-          <input
-            class="toggle"
-            type="checkbox"
-          />
-          <label>
-            Other Todo
-          </label>
-          <button
-            class="destroy"
-          />
-        </li>
-        <li
-          class="view"
+          class="view completed"
         >
           <input
             class="toggle"
@@ -779,7 +864,7 @@ exports[`TodoMVC App should toggle all todo state at once: 12. Toggle all to com
       <span
         class="todo-count"
       >
-        3
+        0
          items left
       </span>
       <div
@@ -804,6 +889,11 @@ exports[`TodoMVC App should toggle all todo state at once: 12. Toggle all to com
           Completed
         </button>
       </div>
+      <button
+        class="clear-completed"
+      >
+        Clear completed
+      </button>
     </footer>
   </div>
 </div>
@@ -862,20 +952,6 @@ exports[`TodoMVC App should toggle all todo state at once: 13. Toggle all to act
             type="checkbox"
           />
           <label>
-            Other Todo
-          </label>
-          <button
-            class="destroy"
-          />
-        </li>
-        <li
-          class="view"
-        >
-          <input
-            class="toggle"
-            type="checkbox"
-          />
-          <label>
             Final Todo
           </label>
           <button
@@ -890,7 +966,7 @@ exports[`TodoMVC App should toggle all todo state at once: 13. Toggle all to act
       <span
         class="todo-count"
       >
-        3
+        2
          items left
       </span>
       <div
@@ -952,7 +1028,7 @@ exports[`TodoMVC App should toggle todo status: 05. Toggle Test Todo to complete
         class="todo-list"
       >
         <li
-          class="view"
+          class="view completed"
         >
           <input
             class="toggle"
@@ -1001,7 +1077,7 @@ exports[`TodoMVC App should toggle todo status: 05. Toggle Test Todo to complete
       <span
         class="todo-count"
       >
-        3
+        2
          items left
       </span>
       <div
@@ -1026,6 +1102,11 @@ exports[`TodoMVC App should toggle todo status: 05. Toggle Test Todo to complete
           Completed
         </button>
       </div>
+      <button
+        class="clear-completed"
+      >
+        Clear completed
+      </button>
     </footer>
   </div>
 </div>
@@ -1063,7 +1144,7 @@ exports[`TodoMVC App should toggle todo status: 06. Toggle Other Todo to complet
         class="todo-list"
       >
         <li
-          class="view"
+          class="view completed"
         >
           <input
             class="toggle"
@@ -1077,7 +1158,7 @@ exports[`TodoMVC App should toggle todo status: 06. Toggle Other Todo to complet
           />
         </li>
         <li
-          class="view"
+          class="view completed"
         >
           <input
             class="toggle"
@@ -1112,7 +1193,7 @@ exports[`TodoMVC App should toggle todo status: 06. Toggle Other Todo to complet
       <span
         class="todo-count"
       >
-        3
+        1
          items left
       </span>
       <div
@@ -1137,6 +1218,11 @@ exports[`TodoMVC App should toggle todo status: 06. Toggle Other Todo to complet
           Completed
         </button>
       </div>
+      <button
+        class="clear-completed"
+      >
+        Clear completed
+      </button>
     </footer>
   </div>
 </div>
@@ -1188,7 +1274,7 @@ exports[`TodoMVC App should toggle todo status: 07. Toggle Test Todo to active 1
           />
         </li>
         <li
-          class="view"
+          class="view completed"
         >
           <input
             class="toggle"
@@ -1223,7 +1309,7 @@ exports[`TodoMVC App should toggle todo status: 07. Toggle Test Todo to active 1
       <span
         class="todo-count"
       >
-        3
+        2
          items left
       </span>
       <div
@@ -1248,6 +1334,11 @@ exports[`TodoMVC App should toggle todo status: 07. Toggle Test Todo to active 1
           Completed
         </button>
       </div>
+      <button
+        class="clear-completed"
+      >
+        Clear completed
+      </button>
     </footer>
   </div>
 </div>

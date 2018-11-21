@@ -41,13 +41,13 @@ describe('TodoMVC App', () => {
   test('should toggle todo status', () => {
     const toggles = container.querySelectorAll('.todo-list .toggle')
 
-    fireEvent.change(toggles[0])
+    fireEvent.click(toggles[0])
     expect(container).toMatchSnapshot('05. Toggle Test Todo to completed')
 
-    fireEvent.change(toggles[1])
+    fireEvent.click(toggles[1])
     expect(container).toMatchSnapshot('06. Toggle Other Todo to completed')
 
-    fireEvent.change(toggles[0])
+    fireEvent.click(toggles[0])
     expect(container).toMatchSnapshot('07. Toggle Test Todo to active')
   })
 
@@ -76,10 +76,10 @@ describe('TodoMVC App', () => {
   test('should toggle all todo state at once', () => {
     const toggleAll = container.querySelector('.toggle-all')
 
-    fireEvent.change(toggleAll)
+    fireEvent.click(toggleAll)
     expect(container).toMatchSnapshot('12. Toggle all to completed')
 
-    fireEvent.change(toggleAll)
+    fireEvent.click(toggleAll)
     expect(container).toMatchSnapshot('13. Toggle all to active')
   })
 
