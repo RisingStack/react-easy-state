@@ -2,7 +2,7 @@ import React from 'react'
 import { view } from 'react-easy-state'
 import clock from './clock'
 
-function StopWatch () {
+export default view(() => {
   const { time, toggle, reset, isTicking } = clock
   const label = isTicking ? 'Stop' : 'Start'
 
@@ -16,6 +16,4 @@ function StopWatch () {
       <button onClick={reset}>Reset</button>
     </div>
   )
-}
-
-export default view(StopWatch)
+})

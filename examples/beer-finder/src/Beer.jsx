@@ -1,37 +1,29 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { view, store } from 'react-easy-state'
 import Card from '@material-ui/core/Card'
 import CardMedia from '@material-ui/core/CardMedia'
 import CardContent from '@material-ui/core/CardContent'
 
-class Beer extends Component {
-  store = store({ details: false });
-
-  toggleDetails = () => (this.store.details = !this.store.details);
-
-  render () {
-    const {
-      name,
-      image_url: imageUrl,
-      food_pairing: foodPairing,
-      description
-    } = this.props
-    const { details } = this.store
+export default view(
+  ({ name, description, image_url: imageUrl, food_pairing: foodPairing }) => {
+    const beer = store({ details: false })
 
     return (
-      <Card onClick={this.toggleDetails} className='beer'>
-        {!details && <CardMedia image={imageUrl} className='media' />}
+      <Card onClick={() => (beer.details = !beer.details)} className="beer">
+        {!beer.details && <CardMedia image={imageUrl} className="media" />}
         <CardContent>
           <h3>{name}</h3>
-          {details ? (
+          {beer.details ? (
             <p>{description}</p>
           ) : (
-            <ul>{foodPairing.map(food => <li key={food}>{food}</li>)}</ul>
+            <ul>
+              {foodPairing.map(food => (
+                <li key={food}>{food}</li>
+              ))}
+            </ul>
           )}
         </CardContent>
       </Card>
     )
   }
-}
-
-export default view(Beer)
+)
