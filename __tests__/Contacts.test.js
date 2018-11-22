@@ -13,7 +13,6 @@ describe('Contacts App', () => {
   test('should add new contacts', () => {
     expect(container).toMatchSnapshot('01. Initial state')
 
-    const creator = container.querySelector('.contact-creator')
     const nameField = container.querySelector('input[name="name"]')
     const emailField = container.querySelector('input[name="email"]')
     const createButton = container.querySelector('button')

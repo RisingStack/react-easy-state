@@ -10,18 +10,14 @@ export default view(
     const beer = store({ details: false })
 
     return (
-      <Card onClick={() => (beer.details = !beer.details)} className="beer">
-        {!beer.details && <CardMedia image={imageUrl} className="media" />}
+      <Card onClick={() => (beer.details = !beer.details)} className='beer'>
+        {!beer.details && <CardMedia image={imageUrl} className='media' />}
         <CardContent>
           <h3>{name}</h3>
           {beer.details ? (
             <p>{description}</p>
           ) : (
-            <ul>
-              {foodPairing.map(food => (
-                <li key={food}>{food}</li>
-              ))}
-            </ul>
+            <ul>{foodPairing.map(food => <li key={food}>{food}</li>)}</ul>
           )}
         </CardContent>
       </Card>

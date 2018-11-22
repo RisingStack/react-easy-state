@@ -52,7 +52,9 @@ describe('TodoMVC App', () => {
   })
 
   test('should filter todos', () => {
-    const completedFilter = container.querySelector('button[value="completed"]')
+    const completedFilter = container.querySelector(
+      'button[value="completed"]'
+    )
     const activeFilter = container.querySelector('button[value="active"]')
     const allFilter = container.querySelector('button[value="all"]')
 

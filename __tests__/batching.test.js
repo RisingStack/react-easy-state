@@ -159,7 +159,7 @@ describe('batching', () => {
       .then(value => {
         expect(value).toBe(12)
         // eslint-disable-next-line
-        throw 15
+        throw 15;
       })
       .catch(err => {
         expect(err).toBe(15)

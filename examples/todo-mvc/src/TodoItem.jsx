@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import classNames from 'classnames'
 import { view } from 'react-easy-state'
 import todos from './todosStore'
@@ -10,13 +10,13 @@ export default view(({ id, title, completed = false }) => {
   return (
     <li className={itemClass}>
       <input
-        className="toggle"
-        type="checkbox"
+        className='toggle'
+        type='checkbox'
         checked={completed}
         onChange={() => todos.toggle(id)}
       />
       <label>{title}</label>
-      <button onClick={() => todos.remove(id)} className="destroy" />
+      <button onClick={() => todos.remove(id)} className='destroy' />
     </li>
   )
 })

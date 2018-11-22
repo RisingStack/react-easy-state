@@ -7,14 +7,14 @@ export let isInsideFunctionComponent = false
 const COMPONENT = Symbol('owner component')
 const DUMMY_STATE = {}
 
-export default function view(Comp) {
+export default function view (Comp) {
   const isStatelessComp = !(Comp.prototype && Comp.prototype.isReactComponent)
 
   let ReactiveComp
 
   if (isStatelessComp && hasHooks) {
     // use a hook based reactive wrapper when we can
-    function ReactiveFunctionComp(props) {
+    ReactiveComp = memo(props => {
       const [, setState] = useState()
 
       // create a memoized reactive wrapper of the original component (render)
@@ -46,15 +46,13 @@ export default function view(Comp) {
       } finally {
         isInsideFunctionComponent = false
       }
-    }
-
-    ReactiveComp = memo(ReactiveFunctionComp)
+    })
   } else {
     const BaseComp = isStatelessComp ? Component : Comp
     // a HOC which overwrites render, shouldComponentUpdate and componentWillUnmount
     // it decides when to run the new reactive methods and when to proxy to the original methods
     class ReactiveClassComp extends BaseComp {
-      constructor(props, context) {
+      constructor (props, context) {
         super(props, context)
 
         this.state = this.state || {}
@@ -73,12 +71,14 @@ export default function view(Comp) {
         })
       }
 
-      render() {
-        return isStatelessComp ? Comp(this.props, this.context) : super.render()
+      render () {
+        return isStatelessComp
+          ? Comp(this.props, this.context)
+          : super.render()
       }
 
       // react should trigger updates on prop changes, while easyState handles store changes
-      shouldComponentUpdate(nextProps, nextState) {
+      shouldComponentUpdate (nextProps, nextState) {
         const { props, state } = this
 
         // respect the case when user prohibits updates
@@ -104,7 +104,7 @@ export default function view(Comp) {
       }
 
       // add a custom deriveStoresFromProps lifecyle method
-      static getDerivedStateFromProps(props, state) {
+      static getDerivedStateFromProps (props, state) {
         if (super.deriveStoresFromProps) {
           // inject all local stores and let the user mutate them directly
           const stores = mapStateToStores(state)
@@ -117,7 +117,7 @@ export default function view(Comp) {
         return null
       }
 
-      componentWillUnmount() {
+      componentWillUnmount () {
         // call user defined componentWillUnmount
         if (super.componentWillUnmount) {
           super.componentWillUnmount()
@@ -142,7 +142,7 @@ export default function view(Comp) {
   return ReactiveComp
 }
 
-function mapStateToStores(state) {
+function mapStateToStores (state) {
   // find store properties and map them to their none observable raw value
   // to do not trigger none static this.setState calls
   // from the static getDerivedStateFromProps lifecycle method
