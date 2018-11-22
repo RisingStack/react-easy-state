@@ -1,30 +1,26 @@
 import { Component, useState, useEffect, useMemo, memo } from 'react'
-import {
-  observe,
-  unobserve,
-  observable,
-  raw,
-  isObservable
-} from '@nx-js/observer-util'
+import { observe, unobserve, raw, isObservable } from '@nx-js/observer-util'
 import * as scheduler from './scheduler'
 import hasHooks from './hasHooks'
 
-let isInsideFunctionComponent = false
+export let isInsideFunctionComponent = false
 const COMPONENT = Symbol('owner component')
 const DUMMY_STATE = {}
 
-export function view(Comp) {
+export default function view(Comp) {
   const isStatelessComp = !(Comp.prototype && Comp.prototype.isReactComponent)
-  const BaseComp = isStatelessComp ? Component : Comp
 
   let ReactiveComp
 
   if (isStatelessComp && hasHooks) {
+    // use a hook based reactive wrapper when we can
     function ReactiveFunctionComp(props) {
       const [, setState] = useState()
 
+      // create a memoized reactive wrapper of the original component (render)
+      // at the very first run of the component function
       const render = useMemo(() => {
-        // run a dummy setState to schedule a new render, avoid forceUpdate
+        // run a dummy setState to schedule a new render
         const updater = () => setState(DUMMY_STATE)
 
         return observe(Comp, {
@@ -36,12 +32,16 @@ export function view(Comp) {
         })
       }, [])
 
+      // cleanup the reactive connections after the very last render of the component
       useEffect(() => {
         return () => unobserve(render)
       }, [])
 
+      // the isInsideFunctionComponent flag is used to toggle `store` behavior
+      // based on where it was called from
       isInsideFunctionComponent = true
       try {
+        // run the reactive render instead of the original one
         return render(props)
       } finally {
         isInsideFunctionComponent = false
@@ -50,7 +50,8 @@ export function view(Comp) {
 
     ReactiveComp = memo(ReactiveFunctionComp)
   } else {
-    // return a HOC which overwrites render, shouldComponentUpdate and componentWillUnmount
+    const BaseComp = isStatelessComp ? Component : Comp
+    // a HOC which overwrites render, shouldComponentUpdate and componentWillUnmount
     // it decides when to run the new reactive methods and when to proxy to the original methods
     class ReactiveClassComp extends BaseComp {
       constructor(props, context) {
@@ -150,11 +151,4 @@ function mapStateToStores(state) {
     .map(key => component[key])
     .filter(isObservable)
     .map(raw)
-}
-
-export function store(obj) {
-  if (hasHooks && isInsideFunctionComponent) {
-    return useMemo(() => observable(obj), [true])
-  }
-  return observable(obj)
 }
