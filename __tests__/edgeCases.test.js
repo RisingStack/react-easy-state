@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import { render, cleanup, fireEvent } from 'react-testing-library'
 import { view, store } from 'react-easy-state'
 
@@ -134,5 +134,17 @@ describe('edge cases', () => {
 
     const { container } = render(<MyComp num={2} />)
     expect(container).toHaveTextContent('2')
+  })
+
+  test('view() should work with hooks', () => {
+    const MyComp = view(() => {
+      const [num, setNum] = useState(0)
+      return <button onClick={() => setNum(num + 1)}>{num}</button>
+    })
+
+    const { container } = render(<MyComp />)
+    expect(container).toHaveTextContent('0')
+    fireEvent.click(container.querySelector('button'))
+    expect(container).toHaveTextContent('1')
   })
 })
