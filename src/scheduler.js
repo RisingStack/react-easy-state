@@ -13,37 +13,12 @@ export function remove(task) {
   tasks.delete(task)
 }
 
-const argMap = new Map()
-// this replaces the passed function with a function
-// that batches all of its callback arguments
-function batchCallbacks(fn) {
-  return function batchedCallbacks(...args) {
-    const batchedArgs = args.map(arg => {
-      if (argMap.has(arg)) {
-        return argMap.get(arg)
-      }
-      const newArg =
-        typeof arg === 'function' ? (...args) => batch(arg, args) : arg
-      argMap.set(arg, newArg)
-      return newArg
-    })
-    return fn.apply(this, batchedArgs)
-  }
-}
-
-// batches obj.onevent = fn like calls
-function batchMethod(obj, method) {
-  const descriptor = Object.getOwnPropertyDescriptor(obj, method)
-  if (descriptor) {
-    const newDescriptor = Object.assign({}, descriptor, {
-      set(value) {
-        const batched =
-          typeof value === 'function' ? (...args) => batch(value, args) : value
-        return descriptor.set.call(this, batched)
-      }
-    })
-    Object.defineProperty(obj, method, newDescriptor)
-  }
+// must remove the task before executing it
+// toherwise executed task caould start a new task list execution
+// and recursively run itself infinite times
+function runTask(task) {
+  remove(task)
+  task()
 }
 
 // this runs the passed function and delays all re-renders
@@ -60,9 +35,40 @@ export function batch(fn, args) {
   }
 }
 
-function runTask(task) {
-  tasks.delete(task)
-  task()
+// this creates and returns a batched version of the passed function
+// the cache is necessary to always map the same thing to the same function
+// which makes sure that addEventListener/removeEventListener pairs don't break
+const cache = new Map()
+function batchFn(fn) {
+  if (typeof fn !== 'function') {
+    return fn
+  }
+  let batched = cache.get(fn)
+  if (!batched) {
+    batched = (...args) => batch(fn, args)
+    cache.set(fn, batched)
+  }
+  return batched
+}
+
+// batched window.addEventListener(cb) like callbacks
+function batchCallbacks(functionWithCallbacks) {
+  return function batchedCallbacks(...args) {
+    return functionWithCallbacks.apply(this, args.map(batchFn))
+  }
+}
+
+// batches obj.onevent = fn like calls
+function batchMethod(obj, method) {
+  const descriptor = Object.getOwnPropertyDescriptor(obj, method)
+  if (descriptor) {
+    const newDescriptor = Object.assign({}, descriptor, {
+      set(value) {
+        return descriptor.set.call(this, batchFn(value))
+      }
+    })
+    Object.defineProperty(obj, method, newDescriptor)
+  }
 }
 
 // try to find the global object
@@ -103,6 +109,7 @@ if (globalObj) {
   }
 }
 
+// batch addEventListener calls
 if (globalObj.EventTarget) {
   EventTarget.prototype.addEventListener = batchCallbacks(
     EventTarget.prototype.addEventListener
@@ -112,6 +119,4 @@ if (globalObj.EventTarget) {
   )
 }
 
-// DOM event handlers and HTTP event handlers don't have to be batched
-// event handlers are batched by React
 // HTTP event handlers are usually wrapped by Promises, which is covered above
