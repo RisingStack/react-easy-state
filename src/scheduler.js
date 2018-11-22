@@ -1,57 +1,67 @@
 const tasks = new Set()
-let isStopped = false
+let batchCount = 0
 
-export function add (task) {
-  if (isStopped) {
+export function add(task) {
+  if (batchCount !== 0) {
     tasks.add(task)
   } else {
     runTask(task)
   }
 }
 
-export function remove (task) {
+export function remove(task) {
   tasks.delete(task)
 }
 
+const argMap = new Map()
 // this replaces the passed function with a function
 // that batches all of its callback arguments
-function batchCallbacks (fn) {
-  return function batchedCallbacks (...args) {
-    const batchedArgs = args.map(
-      arg => (typeof arg === 'function' ? (...args) => batch(arg, args) : arg)
-    )
+function batchCallbacks(fn) {
+  return function batchedCallbacks(...args) {
+    const batchedArgs = args.map(arg => {
+      if (argMap.has(arg)) {
+        return argMap.get(arg)
+      }
+      const newArg =
+        typeof arg === 'function' ? (...args) => batch(arg, args) : arg
+      argMap.set(arg, newArg)
+      return newArg
+    })
     return fn.apply(this, batchedArgs)
   }
 }
 
-// bathes obj.onevent = fn like calls
-function batchMethod (obj, method) {
+// batches obj.onevent = fn like calls
+function batchMethod(obj, method) {
   const descriptor = Object.getOwnPropertyDescriptor(obj, method)
-  if (!descriptor) return
-  const newDescriptor = Object.assign({}, descriptor, {
-    set (value) {
-      const batched =
-        typeof value === 'function' ? (...args) => batch(value, args) : value
-      return descriptor.set.call(this, batched)
-    }
-  })
-  Object.defineProperty(obj, method, newDescriptor)
+  if (descriptor) {
+    const newDescriptor = Object.assign({}, descriptor, {
+      set(value) {
+        const batched =
+          typeof value === 'function' ? (...args) => batch(value, args) : value
+        return descriptor.set.call(this, batched)
+      }
+    })
+    Object.defineProperty(obj, method, newDescriptor)
+  }
 }
 
 // this runs the passed function and delays all re-renders
 // until the function is finished running
-export function batch (fn, args) {
+export function batch(fn, args) {
   try {
-    isStopped = true
+    batchCount++
     return fn.apply(this, args)
   } finally {
-    tasks.forEach(runTask)
-    tasks.clear()
-    isStopped = false
+    batchCount--
+    if (batchCount === 0) {
+      tasks.forEach(runTask)
+    }
   }
 }
 
-function runTask (task) {
+function runTask(task) {
+  tasks.delete(task)
   task()
 }
 
@@ -80,9 +90,9 @@ if (globalObj) {
     )
   }
   // eslint-disable-next-line
-  Promise.prototype.then = batchCallbacks(Promise.prototype.then);
+  Promise.prototype.then = batchCallbacks(Promise.prototype.then)
   // eslint-disable-next-line
-  Promise.prototype.catch = batchCallbacks(Promise.prototype.catch);
+  Promise.prototype.catch = batchCallbacks(Promise.prototype.catch)
 
   // this batches websocket event handlers
   if (globalObj.WebSocket) {
@@ -91,6 +101,15 @@ if (globalObj) {
       batchMethod(globalObj.WebSocket.prototype, method)
     )
   }
+}
+
+if (globalObj.EventTarget) {
+  EventTarget.prototype.addEventListener = batchCallbacks(
+    EventTarget.prototype.addEventListener
+  )
+  EventTarget.prototype.removeEventListener = batchCallbacks(
+    EventTarget.prototype.removeEventListener
+  )
 }
 
 // DOM event handlers and HTTP event handlers don't have to be batched

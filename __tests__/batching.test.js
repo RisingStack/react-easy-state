@@ -41,6 +41,28 @@ describe('batching', () => {
     expect(renderCount).toBe(2)
   })
 
+  test('should batch state changes inside native event listeners', () => {
+    let renderCount = 0
+    const person = store({ name: 'Bob' })
+    const MyComp = view(() => {
+      renderCount++
+      return <div>{person.name}</div>
+    })
+
+    const { container } = render(<MyComp />)
+    expect(renderCount).toBe(1)
+    expect(container).toHaveTextContent('Bob')
+    const batched = () => {
+      person.name = 'Ann'
+      person.name = 'Rick'
+    }
+    document.body.addEventListener('click', batched)
+    document.body.dispatchEvent(new Event('click'))
+    expect(container).toHaveTextContent('Rick')
+    expect(renderCount).toBe(2)
+    document.body.removeEventListener('click', batched)
+  })
+
   test('should batch changes in setTimeout and setInterval', async () => {
     let renderCount = 0
     const person = store({ name: 'Bob' })
@@ -158,5 +180,18 @@ describe('batching', () => {
         'World'
       )
     })
+  })
+
+  test('should not break event listeners', () => {
+    let callCount = 0
+    const fn = () => callCount++
+    document.body.addEventListener('click', fn)
+
+    expect(callCount).toBe(0)
+    document.body.dispatchEvent(new Event('click'))
+    expect(callCount).toBe(1)
+    document.body.removeEventListener('click', fn)
+    document.body.dispatchEvent(new Event('click'))
+    expect(callCount).toBe(1)
   })
 })
