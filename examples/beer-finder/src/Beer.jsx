@@ -4,6 +4,7 @@ import Card from '@material-ui/core/Card'
 import CardMedia from '@material-ui/core/CardMedia'
 import CardContent from '@material-ui/core/CardContent'
 
+// this is re-rendered whenever the relevant parts of the used data stores change
 export default view(
   ({ name, description, image_url: imageUrl, food_pairing: foodPairing }) => {
     const beer = store({ details: false })

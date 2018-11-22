@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import { view } from 'react-easy-state'
 import todos from './todosStore'
 
-// wrap the component with view() before exporting it
+// this is re-rendered whenever the relevant parts of the used data stores change
 export default view(({ id, title, completed = false }) => {
   const itemClass = classNames({ view: true, completed })
 

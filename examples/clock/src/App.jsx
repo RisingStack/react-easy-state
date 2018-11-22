@@ -8,8 +8,9 @@ function getFormattedTime() {
     .format('hh:mm:ss A')
 }
 
+// this is re-rendered whenever the relevant parts of the used data stores change
 export default view(() => {
-  // create a local store
+  // create a local store which is NOT shared between component instances
   const clock = store({
     time: getFormattedTime()
   })

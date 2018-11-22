@@ -4,6 +4,9 @@ import { view } from 'react-easy-state'
 import TodoItem from './TodoItem'
 import todos from './todosStore'
 
+// these functions mutate the global store
+// abstracting away events and view specific details here is a nice practice
+// the global store methods should only handle pure data
 function changeFilter(ev) {
   todos.filter = ev.target.value
 }
@@ -16,7 +19,7 @@ function createTodo(ev) {
   }
 }
 
-// render is triggered whenever the relevant parts of the global todos store change
+// this is re-rendered whenever the relevant parts of the used data stores change
 export default view(() => {
   const {
     isEmpty,
