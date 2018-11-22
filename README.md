@@ -84,7 +84,7 @@ _You need npm 5.2+ to use npx._
 
 ## Usage
 
-### Creating stores
+### Creating global stores
 
 `store` creates a state store from the passed object and returns it. State stores are just like normal JS objects. (To be precise, they are transparent reactive proxies of the original object.)
 
@@ -130,75 +130,77 @@ user.hobbies.push('reading')
 Wrapping your components with `view` turns them into reactive views. A reactive view re-renders whenever a piece of store - used inside its render - changes.
 
 ```jsx
-import React, { Component } from 'react'
+import React from 'react'
 import { view, store } from 'react-easy-state'
 
+// this is a global state store
 const user = store({ name: 'Bob' })
 
-class HelloComp extends Component {
-  onChange = ev => (user.name = ev.target.value)
-
-  // the render is triggered whenever user.name changes
-  render() {
-    return (
-      <div>
-        <input value={user.name} onChange={this.onChange} />
-        <div>Hello {user.name}!</div>
-      </div>
-    )
-  }
-}
-
-// the component must be wrapped with `view`
-export default view(HelloComp)
+// this is re-rendered whenever user.name changes
+export default view(() => (
+  <div>
+    <input value={user.name} onChange={ev => (user.name = ev.target.value)} />
+    <div>Hello {user.name}!</div>
+  </div>
+))
 ```
 
 <details>
 <summary>A single reactive component may use multiple stores inside its render.</summary>
 
 ```jsx
-import React, { Component } from 'react'
+import React from 'react'
 import { view, store } from 'react-easy-state'
 
 const user = store({ name: 'Bob' })
 const timeline = store({ posts: ['react-easy-state'] })
 
-class App extends Component {
-  onChange = ev => (user.name = ev.target.value)
-
-  // render is triggered whenever user.name or timeline.posts[0] changes
-  render() {
-    return (
-      <div>
-        <div>Hello {user.name}!</div>
-        <div>Your first post is: {timeline.posts[0]}</div>
-      </div>
-    )
-  }
-}
-
-// the component must be wrapped with `view`
-export default view(App)
+// this is re-rendered whenever user.name or timeline.posts[0] changes
+export default view(() => (
+  <div>
+    <div>Hello {user.name}!</div>
+    <div>Your first post is: {timeline.posts[0]}</div>
+  </div>
+))
 ```
 
 </details>
 <br />
 
-**Make sure to wrap all of your components with `view` - including stateful and stateless ones. If you do not wrap a component, it will not properly render on store mutations.**
+**Make sure to wrap all of your components with `view` - including class and function ones. If you do not wrap a component, it will not properly render on store mutations.**
 
 ### Creating local stores
 
-A singleton global store is perfect for something like the current user, but sometimes having local component states is a better fit. Just create a store as a component property in these cases.
+A singleton global store is perfect for something like the current user, but sometimes having local component states is a better fit. Just create a store inside a function component or as a class component property in these cases.
+
+#### Local stores in function components
+
+```jsx
+import React, { useEffect } from 'react'
+import { view, store } from 'react-easy-state'
+
+export default view(() => {
+  const clock = store({ time: Date.now() })
+
+  useEffect(() => {
+    setInterval(() => (clock.time = Date.now()), 1000)
+  }, [])
+
+  return <div>{clock.time}</div>
+})
+```
+
+#### Local stores in class components
 
 ```jsx
 import React, { Component } from 'react'
 import { view, store } from 'react-easy-state'
 
 class ClockComp extends Component {
-  clock = store({ time: new Date() })
+  clock = store({ time: Date.now() })
 
   componentDidMount() {
-    setInterval(() => (this.clock.time = new Date()), 1000)
+    setInterval(() => (this.clock.time = Date.now()), 1000)
   }
 
   render() {
@@ -319,7 +321,7 @@ export default view(() => (
 
 ### How do I derive local stores from props (getDerivedStateFromProps)?
 
-Components wrapped with `view` have an extra static `deriveStoresFromProps` lifecycle method, which works similarly to the vanilla `getDerivedStateFromProps`.
+Class components wrapped with `view` have an extra static `deriveStoresFromProps` lifecycle method, which works similarly to the vanilla `getDerivedStateFromProps`.
 
 ```jsx
 import React, { Component } from 'react'
