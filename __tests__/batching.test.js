@@ -195,26 +195,31 @@ describe('batching', () => {
     expect(callCount).toBe(1)
   })
 
-  test('should not break callback this value', done => {
-    const ctx = {}
-    const fn = function() {
-      expect(this).toBe(ctx)
-      done()
-    }.bind(ctx)
-
-    document.body.addEventListener('click', fn)
-    document.body.dispatchEvent(new Event('click'))
-    document.body.removeEventListener('click', fn)
-  })
-
-  test('should not break method this value', done => {
+  test('should not break method this value and args', done => {
     const socket = new WebSocket('ws://www.example.com')
 
-    socket.onclose = function() {
+    socket.onclose = function(ev) {
+      expect(ev).toBeDefined()
       expect(this).toBe(socket)
       done()
     }
 
     socket.close()
+  })
+
+  test('should not break callback this value and args', done => {
+    const ctx = {}
+
+    setTimeout(
+      function(arg1, arg2) {
+        expect(arg1).toBe('Test')
+        expect(arg2).toBe('Test2')
+        expect(this).toBe(ctx)
+        done()
+      }.bind(ctx),
+      0,
+      'Test',
+      'Test2'
+    )
   })
 })

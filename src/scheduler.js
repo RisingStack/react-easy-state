@@ -23,10 +23,10 @@ function runTask(task) {
 
 // this runs the passed function and delays all re-renders
 // until the function is finished running
-export function batch(fn, args) {
+export function batch(fn, ctx, args) {
   try {
     batchCount++
-    return fn.apply(this, args)
+    return fn.apply(ctx, args)
   } finally {
     batchCount--
     if (batchCount === 0) {
@@ -46,7 +46,7 @@ function batchFn(fn) {
   let batched = cache.get(fn)
   if (!batched) {
     batched = function(...args) {
-      return batch.call(this, fn, args)
+      return batch(fn, this, args)
     }
     cache.set(fn, batched)
   }
