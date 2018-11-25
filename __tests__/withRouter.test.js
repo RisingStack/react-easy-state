@@ -11,8 +11,7 @@ import {
 describe('withRouter interaction', () => {
   afterEach(() => {
     cleanup()
-    // set up an empty url before the next one
-    history.replaceState('', '/')
+    window.history.replaceState({}, '', '/')
   })
 
   describe('function components', () => {
@@ -81,6 +80,7 @@ describe('withRouter interaction', () => {
           <MyComp />
         </Router>
       )
+
       expect(container.querySelector('p')).toBe(null)
       fireEvent.click(getByText('To Settings'))
       expect(container.querySelector('p')).toHaveTextContent('Settings')
@@ -130,6 +130,61 @@ describe('withRouter interaction', () => {
       expect(container).toHaveTextContent('0')
       counter.num++
       expect(container).toHaveTextContent('1')
+    })
+
+    test('should properly route with view(withRouter(Comp))', () => {
+      const counter = store({ num: 0 })
+      const MyComp = view(
+        withRouter(
+          class MayComp extends Component {
+            render() {
+              return (
+                <div>
+                  <Link to="/settings">To Settings</Link>
+                  <Route path="/settings" render={() => <p>Settings</p>} />
+                </div>
+              )
+            }
+          }
+        )
+      )
+
+      const { container, getByText } = render(
+        <Router>
+          <MyComp />
+        </Router>
+      )
+      expect(container.querySelector('p')).toBe(null)
+      fireEvent.click(getByText('To Settings'))
+      expect(container.querySelector('p')).toHaveTextContent('Settings')
+    })
+
+    test('should properly route with withRouter(view(Comp))', () => {
+      const counter = store({ num: 0 })
+      const MyComp = view(
+        withRouter(
+          class MayComp extends Component {
+            render() {
+              return (
+                <div>
+                  <Link to="/settings">To Settings</Link>
+                  <Route path="/settings" render={() => <p>Settings</p>} />
+                </div>
+              )
+            }
+          }
+        )
+      )
+
+      const { container, getByText } = render(
+        <Router>
+          <MyComp />
+        </Router>
+      )
+
+      expect(container.querySelector('p')).toBe(null)
+      fireEvent.click(getByText('To Settings'))
+      expect(container.querySelector('p')).toHaveTextContent('Settings')
     })
   })
 })

@@ -69,7 +69,7 @@
     "classnames": "2.2.5",
     "coveralls": "^3.0.0",
     "del": "^3.0.0",
-    "jest": "^22.3.0",
+    "jest": "^23.6.0",
     "jest-dom": "^2.1.1",
     "markdown-toc": "^1.1.0",
     "moment": "2.20.1",
@@ -111,7 +111,7 @@
       "!**/examples/**/beer-finder/**"
     ],
     "setupTestFrameworkScriptFile": "./scripts/testSetup.js",
-    "testURL": "http://react-easy-state.js"
+    "testURL": "http://react-easy-state.com"
   },
   "pre-push": [
     "lint",
