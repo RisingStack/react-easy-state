@@ -1,7 +1,7 @@
 const tasks = new Set()
 let isStopped = false
 
-export function add(task) {
+export function add (task) {
   if (isStopped) {
     tasks.add(task)
   } else {
@@ -9,20 +9,20 @@ export function add(task) {
   }
 }
 
-export function remove(task) {
+export function remove (task) {
   tasks.delete(task)
 }
 
 // this replaces the passed function with a function
 // that batches all of its callback arguments
-function batchCallbacks(fn) {
-  return function batchedCallbacks(...args) {
+function batchCallbacks (fn) {
+  return function batchedCallbacks (...args) {
     const batchedArgs = args.map(
       arg =>
         typeof arg === 'function'
-          ? function(...args) {
-              return batch(arg, this, args)
-            }
+          ? function (...args) {
+            return batch(arg, this, args)
+          }
           : arg
     )
     return fn.apply(this, batchedArgs)
@@ -30,16 +30,16 @@ function batchCallbacks(fn) {
 }
 
 // bathes obj.onevent = fn like calls
-function batchMethod(obj, method) {
+function batchMethod (obj, method) {
   const descriptor = Object.getOwnPropertyDescriptor(obj, method)
   if (!descriptor) return
   const newDescriptor = Object.assign({}, descriptor, {
-    set(value) {
+    set (value) {
       const batched =
         typeof value === 'function'
-          ? function(...args) {
-              return batch(value, this, args)
-            }
+          ? function (...args) {
+            return batch(value, this, args)
+          }
           : value
       return descriptor.set.call(this, batched)
     }
@@ -49,7 +49,7 @@ function batchMethod(obj, method) {
 
 // this runs the passed function and delays all re-renders
 // until the function is finished running
-export function batch(fn, ctx, args) {
+export function batch (fn, ctx, args) {
   try {
     isStopped = true
     return fn.apply(ctx, args)
@@ -60,7 +60,7 @@ export function batch(fn, ctx, args) {
   }
 }
 
-function runTask(task) {
+function runTask (task) {
   task()
 }
 
@@ -89,9 +89,9 @@ if (globalObj) {
     )
   }
   // eslint-disable-next-line
-  Promise.prototype.then = batchCallbacks(Promise.prototype.then)
+  Promise.prototype.then = batchCallbacks(Promise.prototype.then);
   // eslint-disable-next-line
-  Promise.prototype.catch = batchCallbacks(Promise.prototype.catch)
+  Promise.prototype.catch = batchCallbacks(Promise.prototype.catch);
 
   // this batches websocket event handlers
   if (globalObj.WebSocket) {
