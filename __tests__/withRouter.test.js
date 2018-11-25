@@ -136,7 +136,7 @@ describe('withRouter interaction', () => {
       const counter = store({ num: 0 })
       const MyComp = view(
         withRouter(
-          class MayComp extends Component {
+          class MyComp extends Component {
             render() {
               return (
                 <div>
@@ -163,7 +163,7 @@ describe('withRouter interaction', () => {
       const counter = store({ num: 0 })
       const MyComp = view(
         withRouter(
-          class MayComp extends Component {
+          class MyComp extends Component {
             render() {
               return (
                 <div>
