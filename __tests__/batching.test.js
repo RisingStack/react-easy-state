@@ -135,7 +135,7 @@ describe('batching', () => {
       .then(value => {
         expect(value).toBe(12)
         // eslint-disable-next-line
-        throw 15;
+        throw 15
       })
       .catch(err => {
         expect(err).toBe(15)
@@ -156,5 +156,16 @@ describe('batching', () => {
         'World'
       )
     })
+  })
+
+  test('should not break method this value', done => {
+    const socket = new WebSocket('ws://www.example.com')
+
+    socket.onclose = function() {
+      expect(this).toBe(socket)
+      done()
+    }
+
+    socket.close()
   })
 })
