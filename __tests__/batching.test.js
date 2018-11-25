@@ -159,7 +159,7 @@ describe('batching', () => {
       .then(value => {
         expect(value).toBe(12)
         // eslint-disable-next-line
-        throw 15;
+        throw 15
       })
       .catch(err => {
         expect(err).toBe(15)
@@ -193,5 +193,28 @@ describe('batching', () => {
     document.body.removeEventListener('click', fn)
     document.body.dispatchEvent(new Event('click'))
     expect(callCount).toBe(1)
+  })
+
+  test('should not break callback this value', done => {
+    const ctx = {}
+    const fn = function() {
+      expect(this).toBe(ctx)
+      done()
+    }.bind(ctx)
+
+    document.body.addEventListener('click', fn)
+    document.body.dispatchEvent(new Event('click'))
+    document.body.removeEventListener('click', fn)
+  })
+
+  test('should not break method this value', done => {
+    const socket = new WebSocket('ws://www.example.com')
+
+    socket.onclose = function() {
+      expect(this).toBe(socket)
+      done()
+    }
+
+    socket.close()
   })
 })
