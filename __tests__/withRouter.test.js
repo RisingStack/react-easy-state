@@ -112,8 +112,8 @@ describe('withRouter interaction', () => {
 
     test('should be reactive with view(withRouter(Comp))', () => {
       const counter = store({ num: 0 })
-      const MyComp = withRouter(
-        view(
+      const MyComp = view(
+        withRouter(
           class MyComp extends Component {
             render() {
               return <div>{counter.num}</div>
@@ -161,8 +161,8 @@ describe('withRouter interaction', () => {
 
     test('should properly route with withRouter(view(Comp))', () => {
       const counter = store({ num: 0 })
-      const MyComp = view(
-        withRouter(
+      const MyComp = withRouter(
+        view(
           class MyComp extends Component {
             render() {
               return (
