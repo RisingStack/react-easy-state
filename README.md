@@ -17,18 +17,19 @@ Simple React state management. Made with :heart: and ES6 Proxies.
 * [Introduction](#introduction)
 * [Installation](#installation)
 * [Usage](#usage)
-  * [Creating stores](#creating-stores)
-  * [Creating reactive views](#creating-reactive-views)
-  * [Creating local stores](#creating-local-stores)
+  + [Creating global stores](#creating-global-stores)
+  + [Creating reactive views](#creating-reactive-views)
+  + [Creating local stores](#creating-local-stores)
 * [Examples with live demos](#examples-with-live-demos)
 * [Articles](#articles)
 * [FAQ and Gotchas](#faq-and-gotchas)
-  * [What triggers a re-render?](#what-triggers-a-re-render)
-  * [My store methods are broken](#my-store-methods-are-broken)
-  * [My views are not rendering](#my-views-are-not-rendering)
-  * [My views render multiple times unnecessarily](#my-views-render-multiple-times-unnecessarily)
-  * [How do I derive local stores from props (getDerivedStateFromProps)?](#how-do-i-derive-local-stores-from-props-getderivedstatefromprops)
-  * [Naming local stores as state](#naming-local-stores-as-state)
+  + [Broken `this` in store methods](#broken-this-in-store-methods)
+  + [Views not rendering](#views-not-rendering)
+  + [Views rendering multiple times unnecessarily](#views-rendering-multiple-times-unnecessarily)
+  + [PureComponent and memo](#purecomponent-and-memo)
+  + [Deriving local stores from props (getDerivedStateFromProps)](#deriving-local-stores-from-props-getderivedstatefromprops)
+  + [Naming local stores as state](#naming-local-stores-as-state)
+  + [Usage with React Router](#usage-with-react-router)
 * [Platform support](#platform-support)
 * [Performance](#performance)
 * [How does it work?](#how-does-it-work)
@@ -176,19 +177,16 @@ A singleton global store is perfect for something like the current user, but som
 #### Local stores in function components
 
 ```jsx
-import React, { useEffect } from 'react'
+import React from 'react'
 import { view, store } from 'react-easy-state'
 
 export default view(() => {
-  const clock = store({ time: Date.now() })
-
-  useEffect(() => {
-    setInterval(() => (clock.time = Date.now()), 1000)
-  }, [])
-
-  return <div>{clock.time}</div>
+  const counter = store({ num: 0 })
+  return <button={() => counter.num++}>{counter.num}</div>
 })
 ```
+
+You can use any React hook - including `useState` - in function components, Easy State won't interfere with them.
 
 #### Local stores in class components
 
@@ -197,19 +195,20 @@ import React, { Component } from 'react'
 import { view, store } from 'react-easy-state'
 
 class ClockComp extends Component {
-  clock = store({ time: Date.now() })
-
-  componentDidMount() {
-    setInterval(() => (this.clock.time = Date.now()), 1000)
-  }
+  counter = store({ num: 0 })
+  increment = () => counter.num++
 
   render() {
-    return <div>{this.clock.time}</div>
+    return <button onClick={this.increment}>{this.counter.num}</button>
   }
 }
 
 export default view(ClockComp)
 ```
+
+You can also use vanilla `setState` in your class components, Easy State won't interfere with it.
+
+---
 
 That's it, You know everything to master React state management! Check some of the [examples](#examples-with-live-demos) and [articles](#articles) for more inspiration or the [FAQ section](#faq-and-gotchas) for common issues.
 
@@ -235,11 +234,7 @@ _Advanced_
 
 ## FAQ and Gotchas
 
-### What triggers a re-render?
-
-Easy State monitors which store properties are used inside each component's render method. If a store property changes, the relevant renders are automatically triggered. You can do **anything** with stores without worrying about edge cases. Use nested properties, computed properties with getters/setters, dynamic properties, arrays, ES6 collections and prototypal inheritance - as a few examples. Easy State will monitor all state mutations and trigger renders when needed. (Big cheer for [ES6 Proxies](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy)!)
-
-### My store methods are broken
+### Broken `this` in store methods
 
 You should avoid using the `this` keyword in the methods of your state stores.
 
@@ -267,7 +262,7 @@ const counter = store({
 
 This works as expected, even when you pass store methods as callbacks.
 
-### My views are not rendering
+### Views not rendering
 
 You should wrap your state stores with `store` as early as possible to make them reactive.
 
@@ -289,7 +284,7 @@ person.name = 'Ann'
 export default person
 ```
 
-### My views render multiple times unnecessarily
+### Views rendering multiple times unnecessarily
 
 Re-renders are batched 99% percent of the time until the end of the state changing function. You can mutate your state stores multiple times in event handlers, async functions and timer and networking callbacks without worrying about multiple renders and performance.
 
@@ -319,7 +314,11 @@ export default view(() => (
 
 **NOTE:** The React team plans to improve render batching in the future. The `batch` function and built-in batching may be deprecated and removed in the future in favor of React's own batching.
 
-### How do I derive local stores from props (getDerivedStateFromProps)?
+### PureComponent and memo
+
+You don't have to worry about the. The `view` wrapper optimizes the passed component with a custom `shouldComponentUpdate` or `memo`. You can use PureComponent or memo in addition to these but they will provide no additional performance benefits.
+
+### Deriving local stores from props (getDerivedStateFromProps)
 
 Class components wrapped with `view` have an extra static `deriveStoresFromProps` lifecycle method, which works similarly to the vanilla `getDerivedStateFromProps`.
 
@@ -347,6 +346,14 @@ Instead of returning an object, you should directly mutate the passed in stores.
 ### Naming local stores as state
 
 Naming your local state stores as `state` may conflict with React linter rules, which guard against direct state mutations. Please use a more descriptive name instead.
+
+### Usage with React Router
+
+Using React Router together with `view` can be tricky. You have to use the same tricks that apply Redux's `connect` and MobX's `observer`.
+
+* If routing is not updated properly, wrap your `view(Comp)` in `withRouter(view(Comp))`. This lets react-router know when to update.
+
+* The order of the HOCs matter. Always use `withRouter(view(Comp))` and **never** use `view(withRouter(Comp))`.
 
 ## Platform support
 
