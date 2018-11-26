@@ -136,7 +136,7 @@ describe('edge cases', () => {
     expect(container).toHaveTextContent('2')
   })
 
-  test('view() should work with hooks', () => {
+  test('view() should work with other hooks', () => {
     const MyComp = view(() => {
       const [num, setNum] = useState(0)
       return <button onClick={() => setNum(num + 1)}>{num}</button>
