@@ -41,6 +41,30 @@ describe('batching', () => {
     expect(renderCount).toBe(2)
   })
 
+  test('should work with nested batch() calls', () => {
+    let renderCount = 0
+    const person = store({ name: 'Bob' })
+    const MyComp = view(() => {
+      renderCount++
+      return <div>{person.name}</div>
+    })
+
+    const { container } = render(<MyComp />)
+    expect(renderCount).toBe(1)
+    expect(container).toHaveTextContent('Bob')
+    batch(() => {
+      batch(() => {
+        person.name = 'Rob'
+        person.name = 'David'
+      })
+      expect(container).toHaveTextContent('Bob')
+      person.name = 'Ann'
+      person.name = 'Rick'
+    })
+    expect(container).toHaveTextContent('Rick')
+    expect(renderCount).toBe(2)
+  })
+
   test('should batch state changes inside native event listeners', () => {
     let renderCount = 0
     const person = store({ name: 'Bob' })
