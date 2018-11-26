@@ -30,6 +30,7 @@ Simple React state management. Made with :heart: and ES6 Proxies.
   + [Deriving local stores from props (getDerivedStateFromProps)](#deriving-local-stores-from-props-getderivedstatefromprops)
   + [Naming local stores as state](#naming-local-stores-as-state)
   + [Usage with React Router](#usage-with-react-router)
+  + [Usage with third party components](#usage-with-third-party-components)
 * [Platform support](#platform-support)
 * [Performance](#performance)
 * [How does it work?](#how-does-it-work)
@@ -351,9 +352,34 @@ Naming your local state stores as `state` may conflict with React linter rules, 
 
 Using React Router together with `view` can be tricky. You have to use the same tricks that apply Redux's `connect` and MobX's `observer`.
 
-* If routing is not updated properly, wrap your `view(Comp)` in `withRouter(view(Comp))`. This lets react-router know when to update.
+* If routing is not updated properly, wrap your `view(Comp)` - with the `Route`s inside - in `withRouter(view(Comp))`. This lets react-router know when to update.
 
 * The order of the HOCs matter. Always use `withRouter(view(Comp))` and **never** use `view(withRouter(Comp))`.
+
+You can find more details and some reasoning about this in [this react-router docs page](https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/guides/blocked-updates.md).
+
+
+### Usage with third party components
+
+Third party helpers - like data grids - may consist of many internal components which can not be wrapped by `view`, but sometimes you would like them to re-render when the passed data mutates. Traditional React components re-render when their props change by reference, so mutating the passed store won't work in these cases. You can solve this issue by deep cloning the observable data before passing it to the component. This creates a new reference for the consuming component on every store mutation.
+
+```jsx
+import React from 'react'
+import { view, store } from 'react-easy-state'
+import Table from 'rc-table'
+import deepClone from 'clone'
+
+const dataStore = store({
+  items: [{
+    product: 'Car',
+    value: 12
+  }]
+})
+
+export default view(() =>
+  <Table data={deepClone(dataStore.items)} />
+)
+```
 
 ## Platform support
 
