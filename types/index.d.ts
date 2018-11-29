@@ -5,4 +5,6 @@ declare module 'react-easy-state' {
   function store<Store extends object>(obj?: Store): Store
   // takes class or function component and returns a class HOC
   function view<Comp extends ComponentType<any>>(comp: Comp): Comp
+  // this runs the passed function and delays all re-renders until the function is finished running
+  function batch<T = any>(fn: (...args: any[]) => T, ctx?: any, args?: any[]): T;
 }
