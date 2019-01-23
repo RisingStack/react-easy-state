@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+/*import React, { Component } from 'react'
 import { render, cleanup, fireEvent } from 'react-testing-library'
 import { view, store } from 'react-easy-state'
 import {
@@ -184,3 +184,4 @@ describe('withRouter interaction', () => {
     })
   })
 })
+*/
