@@ -16,7 +16,7 @@ export function add(task) {
 }
 
 export function remove(task) {
-  tasks.splice(task.priority, 1)
+  delete tasks[task.priority]
 }
 
 // must remove the task before executing it
