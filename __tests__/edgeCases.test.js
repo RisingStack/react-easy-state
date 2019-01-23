@@ -148,38 +148,83 @@ describe('edge cases', () => {
     expect(container).toHaveTextContent('1')
   })
 
-  test('reactive renders should run in parent - child order with no duplicate child runs from props', () => {
-    const appStore = store({ num: 1, nested: { num: 12 } })
+  describe('reactive renders should run in parent - child order with no duplicate child runs from props', () => {
+    test('should work with function components', () => {
+      const appStore = store({ num: 1, nested: { num: 12 } })
 
-    function change() {
-      appStore.num = 0
-      appStore.nested = undefined
-    }
+      function change() {
+        appStore.num = 0
+        appStore.nested = undefined
+      }
 
-    let parentCalls = 0
-    let childCalls = 0
+      let parentCalls = 0
+      let childCalls = 0
 
-    const Child = view(function Child() {
-      childCalls++
-      return (
-        <div>
-          {appStore.nested.num}, {appStore.num}
-        </div>
+      const Child = view(function Child() {
+        childCalls++
+        return (
+          <div>
+            {appStore.nested.num}, {appStore.num}
+          </div>
+        )
+      })
+
+      const Parent = view(function Parent() {
+        parentCalls++
+        return appStore.nested ? <Child /> : null
+      })
+
+      const { container } = render(<Parent />)
+      expect(container).toHaveTextContent('12, 1')
+      expect(parentCalls).toBe(1)
+      expect(childCalls).toBe(1)
+      batch(change)
+      expect(container).toHaveTextContent('')
+      expect(parentCalls).toBe(2)
+      expect(childCalls).toBe(1)
+    })
+
+    test('should work with class components', () => {
+      const appStore = store({ num: 1, nested: { num: 12 } })
+
+      function change() {
+        appStore.num = 0
+        appStore.nested = undefined
+      }
+
+      let parentCalls = 0
+      let childCalls = 0
+
+      const Child = view(
+        class Child extends Component {
+          render() {
+            childCalls++
+            return (
+              <div>
+                {appStore.nested.num}, {appStore.num}
+              </div>
+            )
+          }
+        }
       )
-    })
 
-    const Parent = view(function Parent() {
-      parentCalls++
-      return appStore.nested ? <Child /> : null
-    })
+      const Parent = view(
+        class Parent extends Component {
+          render() {
+            parentCalls++
+            return appStore.nested ? <Child /> : null
+          }
+        }
+      )
 
-    const { container } = render(<Parent />)
-    expect(container).toHaveTextContent('12, 1')
-    expect(parentCalls).toBe(1)
-    expect(childCalls).toBe(1)
-    batch(change)
-    expect(container).toHaveTextContent('')
-    expect(parentCalls).toBe(2)
-    expect(childCalls).toBe(1)
+      const { container } = render(<Parent />)
+      expect(container).toHaveTextContent('12, 1')
+      expect(parentCalls).toBe(1)
+      expect(childCalls).toBe(1)
+      batch(change)
+      expect(container).toHaveTextContent('')
+      expect(parentCalls).toBe(2)
+      expect(childCalls).toBe(1)
+    })
   })
 })

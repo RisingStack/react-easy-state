@@ -11,6 +11,7 @@ import * as scheduler from './scheduler'
 import hasHooks from './hasHooks'
 
 export let isInsideFunctionComponent = false
+const UPDATER = Symbol('reactive updater')
 const COMPONENT = Symbol('owner component')
 const DUMMY_STATE = {}
 let priority = 0
@@ -74,6 +75,9 @@ export default function view(Comp) {
 
         // run a dummy setState to schedule a new render, avoid forceUpdate
         const updater = () => this.setState(DUMMY_STATE)
+        updater.priority = priority++
+        // avoid polluting the 'this' namespace with none symbol properties
+        this[UPDATER] = updater
 
         // create a reactive render for the component
         this.render = observe(this.render, {
@@ -86,6 +90,7 @@ export default function view(Comp) {
       }
 
       render() {
+        scheduler.remove(this[UPDATER])
         return isStatelessComp ? Comp(this.props, this.context) : super.render()
       }
 
