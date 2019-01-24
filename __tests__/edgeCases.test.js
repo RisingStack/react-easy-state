@@ -9,10 +9,10 @@ describe('edge cases', () => {
     const person = store({ name: 'Bob' })
     const MyComp = view(
       class extends Component {
-        shouldComponentUpdate() {
+        shouldComponentUpdate () {
           return false
         }
-        render() {
+        render () {
           return <div>{person.name}</div>
         }
       }
@@ -29,10 +29,10 @@ describe('edge cases', () => {
 
     const MyComp = view(
       class extends Component {
-        componentWillUnmount() {
+        componentWillUnmount () {
           didUnMount = true
         }
-        render() {
+        render () {
           return <div>Hello</div>
         }
       }
@@ -47,10 +47,10 @@ describe('edge cases', () => {
   test('should not change vanilla setState behavior', () => {
     const MyComp = view(
       class extends Component {
-        state = { counter: 0 }
-        increment = () => this.setState({ counter: this.state.counter + 1 })
+        state = { counter: 0 };
+        increment = () => this.setState({ counter: this.state.counter + 1 });
 
-        render() {
+        render () {
           return <div onClick={this.increment}>{this.state.counter}</div>
         }
       }
@@ -65,10 +65,10 @@ describe('edge cases', () => {
   test("should not render when state or props don't change", () => {
     const MyComp = view(
       class extends Component {
-        state = { counter: 0 }
-        increment = () => this.setState({ counter: this.state.counter + 1 })
+        state = { counter: 0 };
+        increment = () => this.setState({ counter: this.state.counter + 1 });
 
-        render() {
+        render () {
           return (
             <div>
               <Child />
@@ -91,16 +91,16 @@ describe('edge cases', () => {
   test('view() should respect custom deriveStoresFromProps', () => {
     const MyComp = view(
       class extends Component {
-        store1 = store({ num: 0 })
-        store2 = store({ num: 1 })
+        store1 = store({ num: 0 });
+        store2 = store({ num: 1 });
 
-        static deriveStoresFromProps(props, store1, store2) {
+        static deriveStoresFromProps (props, store1, store2) {
           store1.num = props.num1 || store1.num
           store2.num = props.num2 || store2.num
         }
-        onClick = () => this.store1.num++
+        onClick = () => this.store1.num++;
 
-        render() {
+        render () {
           return (
             <div onClick={this.onClick}>
               {this.store1.num}
@@ -120,13 +120,13 @@ describe('edge cases', () => {
   test('view() should respect getDerivedStateFromProps', () => {
     const MyComp = view(
       class extends Component {
-        state = { num: 2 }
-        static getDerivedStateFromProps(props, state) {
+        state = { num: 2 };
+        static getDerivedStateFromProps (props, state) {
           return {
             num: props.num || state.num
           }
         }
-        render() {
+        render () {
           return <div>{this.state.num}</div>
         }
       }
@@ -152,7 +152,7 @@ describe('edge cases', () => {
     test('should work with function components', () => {
       const appStore = store({ num: 1, nested: { num: 12 } })
 
-      function change() {
+      function change () {
         appStore.num = 0
         appStore.nested = undefined
       }
@@ -160,7 +160,7 @@ describe('edge cases', () => {
       let parentCalls = 0
       let childCalls = 0
 
-      const Child = view(function Child() {
+      const Child = view(function Child () {
         childCalls++
         return (
           <div>
@@ -169,7 +169,7 @@ describe('edge cases', () => {
         )
       })
 
-      const Parent = view(function Parent() {
+      const Parent = view(function Parent () {
         parentCalls++
         return appStore.nested ? <Child /> : null
       })
@@ -187,7 +187,7 @@ describe('edge cases', () => {
     test('should work with class components', () => {
       const appStore = store({ num: 1, nested: { num: 12 } })
 
-      function change() {
+      function change () {
         appStore.num = 0
         appStore.nested = undefined
       }
@@ -197,7 +197,7 @@ describe('edge cases', () => {
 
       const Child = view(
         class Child extends Component {
-          render() {
+          render () {
             childCalls++
             return (
               <div>
@@ -210,7 +210,7 @@ describe('edge cases', () => {
 
       const Parent = view(
         class Parent extends Component {
-          render() {
+          render () {
             parentCalls++
             return appStore.nested ? <Child /> : null
           }
