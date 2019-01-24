@@ -17,20 +17,20 @@ Simple React state management. Made with :heart: and ES6 Proxies.
 * [Introduction](#introduction)
 * [Installation](#installation)
 * [Usage](#usage)
-  + [Creating global stores](#creating-global-stores)
-  + [Creating reactive views](#creating-reactive-views)
-  + [Creating local stores](#creating-local-stores)
+  * [Creating global stores](#creating-global-stores)
+  * [Creating reactive views](#creating-reactive-views)
+  * [Creating local stores](#creating-local-stores)
 * [Examples with live demos](#examples-with-live-demos)
 * [Articles](#articles)
 * [FAQ and Gotchas](#faq-and-gotchas)
-  + [Broken `this` in store methods](#broken-this-in-store-methods)
-  + [Views not rendering](#views-not-rendering)
-  + [Views rendering multiple times unnecessarily](#views-rendering-multiple-times-unnecessarily)
-  + [PureComponent and memo](#purecomponent-and-memo)
-  + [Deriving local stores from props (getDerivedStateFromProps)](#deriving-local-stores-from-props-getderivedstatefromprops)
-  + [Naming local stores as state](#naming-local-stores-as-state)
-  + [Usage with React Router](#usage-with-react-router)
-  + [Usage with third party components](#usage-with-third-party-components)
+  * [Broken `this` in store methods](#broken-this-in-store-methods)
+  * [Views not rendering](#views-not-rendering)
+  * [Views rendering multiple times unnecessarily](#views-rendering-multiple-times-unnecessarily)
+  * [PureComponent and memo](#purecomponent-and-memo)
+  * [Deriving local stores from props (getDerivedStateFromProps)](#deriving-local-stores-from-props-getderivedstatefromprops)
+  * [Naming local stores as state](#naming-local-stores-as-state)
+  * [Usage with React Router](#usage-with-react-router)
+  * [Usage with third party components](#usage-with-third-party-components)
 * [Platform support](#platform-support)
 * [Performance](#performance)
 * [How does it work?](#how-does-it-work)
@@ -170,6 +170,27 @@ export default view(() => (
 <br />
 
 **Make sure to wrap all of your components with `view` - including class and function ones. If you do not wrap a component, it will not properly render on store mutations.**
+
+<details>
+<summary>Always apply `view` as the latest (innermost) wrapper when you combine it with other Higher Order Components.</summary>
+
+```jsx
+import { view } from 'react-easy-state'
+import { withRouter } from 'react-router-dom'
+import { withTheme } from 'styled-components'
+
+const Comp = () => <div>A reactive component</div>
+
+// DO THIS
+withRouter(view(Comp))
+withTheme(view(Comp))
+
+// DON'T DO THIS
+view(withRouter(Comp))
+view(withTheme(Comp))
+```
+
+</details>
 
 ### Creating local stores
 
@@ -358,7 +379,6 @@ Using React Router together with `view` can be tricky. You have to use the same 
 
 You can find more details and some reasoning about this in [this react-router docs page](https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/guides/blocked-updates.md).
 
-
 ### Usage with third party components
 
 Third party helpers - like data grids - may consist of many internal components which can not be wrapped by `view`, but sometimes you would like them to re-render when the passed data mutates. Traditional React components re-render when their props change by reference, so mutating the passed store won't work in these cases. You can solve this issue by deep cloning the observable data before passing it to the component. This creates a new reference for the consuming component on every store mutation.
@@ -370,15 +390,15 @@ import Table from 'rc-table'
 import deepClone from 'clone'
 
 const dataStore = store({
-  items: [{
-    product: 'Car',
-    value: 12
-  }]
+  items: [
+    {
+      product: 'Car',
+      value: 12
+    }
+  ]
 })
 
-export default view(() =>
-  <Table data={deepClone(dataStore.items)} />
-)
+export default view(() => <Table data={deepClone(dataStore.items)} />)
 ```
 
 ## Platform support
