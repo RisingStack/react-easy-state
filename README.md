@@ -403,7 +403,9 @@ export default view(() => {
 })
 ```
 
-* You can use any React hook - including `useState` - in function components, Easy State won't interfere with them.
+<details>
+<summary>You can use any React hook - including <code>useState</code> - in function components, Easy State won't interfere with them.</summary>
+</details>
 
 #### Local stores in class components
 
@@ -423,7 +425,10 @@ class ClockComp extends Component {
 export default view(ClockComp)
 ```
 
-* You can also use vanilla `setState` in your class components, Easy State won't interfere with it.
+<details>
+<summary>You can also use vanilla <code>setState</code> in your class components, Easy State won't interfere with it.</summary>
+</details>
+<br/>
 
 <details>
 <summary>Don't name local stores as <code>state</code>. It may conflict with linter rules, which guard against direct state mutations.</summary>
