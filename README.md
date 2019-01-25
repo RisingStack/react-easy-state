@@ -99,7 +99,7 @@ user.name = 'Bob'
 import { store } from 'react-easy-state'
 
 // stores can include any valid JS structure
-// nested data, arrays, Maps, Sets, getters, setters, inheritance, ...
+// including nested data, arrays, Maps, Sets, getters, setters, inheritance, ...
 const user = store({
   profile: {
     firstName: 'Bob',
@@ -112,7 +112,7 @@ const user = store({
   friends: new Map()
 })
 
-// stores can be mutated in any syntactically valid way
+// stores may be mutated in any syntactically valid way
 user.profile.firstName = 'Bob'
 delete user.profile.lastName
 user.hobbies.push('reading')
@@ -192,8 +192,6 @@ person.name = 'Ann'
 export default store(person)
 ```
 
-The above example wouldn't trigger re-renders on the `person.name = 'Ann'` mutation, because it is targeted at the raw object. Mutating the raw - none `store` wrapped object - won't schedule renders.
-
 ```js
 // DO THIS INSTEAD
 const person = store({ name: 'Bob' })
@@ -201,6 +199,8 @@ person.name = 'Ann'
 
 export default person
 ```
+
+The first example wouldn't trigger re-renders on the `person.name = 'Ann'` mutation, because it is targeted at the raw object. Mutating the raw - none `store`-wrapped object - won't schedule renders.
 
 </details>
 <p></p>
@@ -215,27 +215,15 @@ const counter = store({
   increment() {
     // DON'T DO THIS
     this.num++
+    // DO THIS INSTEAD
+    counter.num++
   }
 })
 
 export default view(() => <div onClick={counter.increment}>{counter.num}</div>)
 ```
 
-The above snippet won't work, because `increment` is passed as a callback and loses its `this`. You should use the direct object reference - `counter` - instead of `this`.
-
-```js
-const counter = store({
-  num: 0,
-  increment() {
-    // DO THIS
-    counter.num++
-  }
-})
-
-export default counter
-```
-
-This works as expected, even when you pass store methods as callbacks.
+`this.num++` won't work, because `increment` is passed as a callback and loses its `this`. You should use the direct object reference - `counter` - instead of `this`.
 
 </details>
 
@@ -270,19 +258,19 @@ const appStore = store({
   user: { name: 'Ann' }
 })
 
-const App = view(() =>
+const App = view(() => (
   <div>
     <h1>My App</h1>
     <Profile user={appStore.user}>
   </div>
-)
+))
 
 // DO THIS
 const Profile = view(({ user }) => <p>Name: {user.name}</p>)
 
 // DON'T DO THIS
 // This won't re-render on appStore.user.name = 'newName' like mutations
-const Profile = ({ user }) => <p>Name: {user.name}</p>
+const Profile = ({ user }) => (<p>Name: {user.name}</p>)
 ```
 
 </details>
