@@ -67,7 +67,7 @@ Check this [TodoMVC codesandbox](https://codesandbox.io/s/github/solkimicreb/rea
 `npm install react-easy-state`
 
 <details>
-<summary>Setting up a quick project</summary>
+<summary><strong>Setting up a quick project</strong></summary>
 
 Easy State supports [Create React App](https://github.com/facebookincubator/create-react-app) without additional configuration. Just run the following commands to get started.
 
@@ -150,7 +150,6 @@ export default userStore
 <details>
 <summary>State stores may import and use other state stores in their methods.</summary>
 
-<br/>
 Splitting large stores into multiple files is totally okay.
 
 _userStore.js_
@@ -188,6 +187,32 @@ export default recipesStore
 <br/>
 
 <details>
+<summary>Wrap your state stores with <code>store</code> as early as possible.</summary>
+
+```js
+// DON'T DO THIS
+const person = { name: 'Bob' }
+person.name = 'Ann'
+
+export default store(person)
+```
+
+The above example wouldn't trigger re-renders on the `person.name = 'Ann'` mutation, because it is targeted at the raw object. Mutating the raw - none `store` wrapped object - won't schedule renders.
+
+Do this instead of the above code.
+
+```js
+// DO THIS
+const person = store({ name: 'Bob' })
+person.name = 'Ann'
+
+export default person
+```
+
+</details>
+<br/>
+
+<details>
 <summary>Avoid using the <code>this</code> keyword in the methods of your state stores.</summary>
 
 ```jsx
@@ -219,32 +244,6 @@ export default counter
 This works as expected, even when you pass store methods as callbacks.
 
 </details>
-<br/>
-
-<details>
-<summary>Wrap your state stores with `store` as early as possible.</summary>
-
-```js
-// DON'T DO THIS
-const person = { name: 'Bob' }
-person.name = 'Ann'
-
-export default store(person)
-```
-
-The above example wouldn't trigger re-renders on the `person.name = 'Ann'` mutation, because it is targeted at the raw object. Mutating the raw - none `store` wrapped object - won't schedule renders.
-
-Do this instead of the above code.
-
-```js
-// DO THIS
-const person = store({ name: 'Bob' })
-person.name = 'Ann'
-
-export default person
-```
-
-</details>
 
 ### Creating reactive views
 
@@ -266,7 +265,32 @@ export default view(() => (
 ))
 ```
 
-**Wrap ALL of your components with `view` - including class and function ones - even if they don't seem to directly use a store.**
+<details>
+<summary><strong>Wrap ALL of your components with `view` - including class and function ones - even if they don't seem to directly use a store.</strong></summary>
+
+```jsx
+import { view, store } from 'react-easy-state'
+
+const appStore = store({
+  user: { name: 'Ann' }
+})
+
+const App = view(() =>
+  <div>
+    <h1>My App</h1>
+    <Profile user={appStore.user}>
+  </div>
+)
+
+// DO THIS
+const Profile = view(({ user }) => <p>Name: {user.name}</p>)
+
+// DON'T DO THIS
+// This won't re-render on appStore.user.name = 'newName' like mutations
+const Profile = ({ user }) => <p>Name: {user.name}</p>
+```
+
+</details>
 
 <details>
 <summary>A single reactive component may use multiple stores inside its render.</summary>
@@ -293,7 +317,6 @@ export default view(() => (
 <details>
 <summary><code>view</code> implements an optimal <code>shouldComponentUpdate</code> for your components.</summary>
 
-<br/>
 The `view` wrapper optimizes the passed component with an optimal `shouldComponentUpdate` or `memo`, which shallow compares the current state and props with the next ones.
 
 * Using `PureComponent` or `memo` will provide no additional performance benefits.
@@ -326,9 +349,8 @@ view(withTheme(Comp))
 <br/>
 
 <details>
-<summary>Usage with React Router (pre 4.4 version)</summary>
+<summary>Usage with (pre v4.4) React Router.</summary>
 
-<br/>
 When you use React Router together with `view` you have to do the same trick that applies to Redux's `connect` and MobX's `observer`.
 
 * If routing is not updated properly, wrap your `view(Comp)` - with the `Route`s inside - in `withRouter(view(Comp))`. This lets react-router know when to update.
@@ -343,7 +365,6 @@ This is not necessary if you use React Router 4.4+. You can find more details an
 <details>
 <summary>Passing nested data to third party components.</summary>
 
-<br/>
 Third party helpers - like data grids - may consist of many internal components which can not be wrapped by `view`, but sometimes you would like them to re-render when the passed data mutates. Traditional React components re-render when their props change by reference, so mutating the passed reactive data won't work in these cases. You can solve this issue by deep cloning the observable data before passing it to the component. This creates a new reference for the consuming component on every store mutation.
 
 ```jsx
@@ -382,7 +403,7 @@ export default view(() => {
 })
 ```
 
-You can use any React hook - including `useState` - in function components, Easy State won't interfere with them.
+* You can use any React hook - including `useState` - in function components, Easy State won't interfere with them.
 
 #### Local stores in class components
 
@@ -402,13 +423,10 @@ class ClockComp extends Component {
 export default view(ClockComp)
 ```
 
-You can also use vanilla `setState` in your class components, Easy State won't interfere with it.
+* You can also use vanilla `setState` in your class components, Easy State won't interfere with it.
 
 <details>
-<summary>Don't name local stores as <code>state</code>.</summary>
-
-<br/>
-Naming your local state stores as `state` may conflict with React linter rules, which guard against direct state mutations. Please use a more descriptive name instead.
+<summary>Don't name local stores as <code>state</code>. It may conflict with linter rules, which guard against direct state mutations.</summary>
 
 ```jsx
 import React, { Component } from 'react'
@@ -427,9 +445,8 @@ class Profile extends Component {
 <br/>
 
 <details>
-<summary>Deriving local stores from props (<code>getDerivedStateFromProps</code>)</summary>
+<summary>Deriving local stores from props (<code>getDerivedStateFromProps</code>).</summary>
 
-<br/>
 Class components wrapped with `view` have an extra static `deriveStoresFromProps` lifecycle method, which works similarly to the vanilla `getDerivedStateFromProps`.
 
 ```jsx
