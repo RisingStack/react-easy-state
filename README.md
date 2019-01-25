@@ -94,6 +94,7 @@ user.name = 'Bob'
 <details>
 <summary>State stores may have arbitrary structure and they may be mutated in any syntactically valid way.</summary>
 <p></p>
+
 ```js
 import { store } from 'react-easy-state'
 
@@ -115,8 +116,8 @@ user.profile.firstName = 'Bob'
 delete user.profile.lastName
 user.hobbies.push('reading')
 user.friends.set('id', otherUser)
+```
 
-````
 </details>
 <p></p>
 
@@ -135,7 +136,7 @@ const userStore = store({
 })
 
 export default userStore
-````
+```
 
 </details>
 <p></p>
@@ -143,7 +144,6 @@ export default userStore
 <details>
 <summary>State stores may import and use other state stores in their methods.</summary>
 <p></p>
-Splitting large stores into multiple files is totally okay.
 
 _userStore.js_
 
@@ -188,8 +188,8 @@ const person = { name: 'Bob' }
 person.name = 'Ann'
 
 export default store(person)
+```
 
-````
 The above example wouldn't trigger re-renders on the `person.name = 'Ann'` mutation, because it is targeted at the raw object. Mutating the raw - none `store` wrapped object - won't schedule renders.
 
 Do this instead of the above code.
@@ -200,7 +200,7 @@ const person = store({ name: 'Bob' })
 person.name = 'Ann'
 
 export default person
-````
+```
 
 </details>
 <p></p>
