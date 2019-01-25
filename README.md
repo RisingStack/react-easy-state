@@ -15,20 +15,11 @@ Simple React state management. Made with :heart: and ES6 Proxies.
 * [Introduction](#introduction)
 * [Installation](#installation)
 * [Usage](#usage)
-  * [Creating global stores](#creating-global-stores)
-  * [Creating reactive views](#creating-reactive-views)
-  * [Creating local stores](#creating-local-stores)
+  + [Creating global stores](#creating-global-stores)
+  + [Creating reactive views](#creating-reactive-views)
+  + [Creating local stores](#creating-local-stores)
 * [Examples with live demos](#examples-with-live-demos)
 * [Articles](#articles)
-* [FAQ and Gotchas](#faq-and-gotchas)
-  * [Broken `this` in store methods](#broken-this-in-store-methods)
-  * [Views not rendering](#views-not-rendering)
-  * [Views rendering multiple times unnecessarily](#views-rendering-multiple-times-unnecessarily)
-  * [PureComponent and memo](#purecomponent-and-memo)
-  * [Deriving local stores from props (getDerivedStateFromProps)](#deriving-local-stores-from-props-getderivedstatefromprops)
-  * [Naming local stores as state](#naming-local-stores-as-state)
-  * [Usage with React Router](#usage-with-react-router)
-  * [Usage with third party components](#usage-with-third-party-components)
 * [Platform support](#platform-support)
 * [Performance](#performance)
 * [How does it work?](#how-does-it-work)
@@ -68,7 +59,7 @@ Check this [TodoMVC codesandbox](https://codesandbox.io/s/github/solkimicreb/rea
 
 <details>
 <summary><strong>Setting up a quick project</strong></summary>
-
+<p></p>
 Easy State supports [Create React App](https://github.com/facebookincubator/create-react-app) without additional configuration. Just run the following commands to get started.
 
 ```sh
@@ -101,21 +92,21 @@ user.name = 'Bob'
 
 <details>
 <summary>State stores may have arbitrary structure and they may be mutated in any syntactically valid way.</summary>
-
+<p></p>
 ```js
 import { store } from 'react-easy-state'
 
 // stores can include any valid JS structure (nested data, arrays, Maps, Sets, getters, setters, inheritance, ...)
 const user = store({
-  profile: {
-    firstName: 'Bob',
-    lastName: 'Smith',
-    get name () {
-      return `${user.firstName} ${user.lastName}`
-    }  
-  }
-  hobbies: ['programming', 'sports'],
-  friends: new Map()
+profile: {
+firstName: 'Bob',
+lastName: 'Smith',
+get name () {
+return `${user.firstName} ${user.lastName}`
+}  
+ }
+hobbies: ['programming', 'sports'],
+friends: new Map()
 })
 
 // stores can be mutated in any syntactically valid way
@@ -123,13 +114,14 @@ user.profile.firstName = 'Bob'
 delete user.profile.lastName
 user.hobbies.push('reading')
 user.friends.set('id', otherUser)
-```
 
+````
 </details>
-<br/>
+<p></p>
 
 <details>
 <summary>Async operations can be expressed with the standard async/await syntax.</summary>
+<p></p>
 
 ```js
 import { store } from 'react-easy-state'
@@ -142,14 +134,14 @@ const userStore = store({
 })
 
 export default userStore
-```
+````
 
 </details>
-<br/>
+<p></p>
 
 <details>
 <summary>State stores may import and use other state stores in their methods.</summary>
-
+<p></p>
 Splitting large stores into multiple files is totally okay.
 
 _userStore.js_
@@ -184,19 +176,19 @@ export default recipesStore
 ```
 
 </details>
-<br/>
+<p></p>
 
 <details>
 <summary>Wrap your state stores with <code>store</code> as early as possible.</summary>
-
+<p></p>
 ```js
 // DON'T DO THIS
 const person = { name: 'Bob' }
 person.name = 'Ann'
 
 export default store(person)
-```
 
+````
 The above example wouldn't trigger re-renders on the `person.name = 'Ann'` mutation, because it is targeted at the raw object. Mutating the raw - none `store` wrapped object - won't schedule renders.
 
 Do this instead of the above code.
@@ -207,13 +199,14 @@ const person = store({ name: 'Bob' })
 person.name = 'Ann'
 
 export default person
-```
+````
 
 </details>
-<br/>
+<p></p>
 
 <details>
 <summary>Avoid using the <code>this</code> keyword in the methods of your state stores.</summary>
+<p></p>
 
 ```jsx
 const counter = store({
@@ -267,6 +260,7 @@ export default view(() => (
 
 <details>
 <summary><strong>Wrap ALL of your components with `view` - including class and function ones - even if they don't seem to directly use a store.</strong></summary>
+<p></p>
 
 ```jsx
 import { view, store } from 'react-easy-state'
@@ -291,9 +285,11 @@ const Profile = ({ user }) => <p>Name: {user.name}</p>
 ```
 
 </details>
+<p></p>
 
 <details>
 <summary>A single reactive component may use multiple stores inside its render.</summary>
+<p></p>
 
 ```jsx
 import React from 'react'
@@ -312,10 +308,11 @@ export default view(() => (
 ```
 
 </details>
-<br/>
+<p></p>
 
 <details>
 <summary><code>view</code> implements an optimal <code>shouldComponentUpdate</code> for your components.</summary>
+<p></p>
 
 The `view` wrapper optimizes the passed component with an optimal `shouldComponentUpdate` or `memo`, which shallow compares the current state and props with the next ones.
 
@@ -324,10 +321,64 @@ The `view` wrapper optimizes the passed component with an optimal `shouldCompone
 * Defining a custom `shouldComponentUpdate` may rarely provide performance benefits when you apply some use case specific heuristics inside it.
 
 </details>
-<br/>
+<p></p>
+
+<details>
+<summary>Reactive renders are batched. A batch of synchronous store mutations won't result in multiple re-renders of the same component.</summary>
+<p></p>
+
+```jsx
+import React from 'react'
+import { view, store, batch } from 'react-easy-state'
+
+const user = store({ name: 'Bob', age: 30 })
+
+function mutateUser() {
+  user.name = 'Ann'
+  user.age = 32
+}
+
+// calling `mutateUser` will only trigger a single re-render of the below component
+// even though it mutates the store two times in quick succession
+export default view(() => (
+  <div onClick={mutateUser}>
+    name: {user.name}, age: {user.age}
+  </div>
+))
+```
+
+If you mutate your stores multiple times synchronously from **exotic task sources**, multiple renders may rarely happen. If you experience performance issues you can batch changes manually with the `batch` function. `batch(fn)` executes the passed function immediately and batches any subsequent re-renders until the function execution finishes.
+
+```jsx
+import React from 'react'
+import { view, store, batch } from 'react-easy-state'
+
+const user = store({ name: 'Bob', age: 30 })
+
+function mutateUser() {
+  // this makes sure the state changes will cause maximum one re-render,
+  // no matter where this function is getting invoked from
+  batch(() => {
+    user.name = 'Ann'
+    user.age = 32
+  })
+}
+
+export default view(() => (
+  <div>
+    name: {user.name}, age: {user.age}
+  </div>
+))
+```
+
+**NOTE:** The React team plans to improve render batching in the future. The `batch` function and built-in batching may be deprecated and removed in the future in favor of React's own batching.
+
+</details>
+<p></p>
 
 <details>
 <summary>Always apply view as the latest (innermost) wrapper when you combine it with other Higher Order Components.</summary>
+<p></p>
 
 ```jsx
 import { view } from 'react-easy-state'
@@ -346,10 +397,11 @@ view(withTheme(Comp))
 ```
 
 </details>
-<br/>
+<p></p>
 
 <details>
 <summary>Usage with (pre v4.4) React Router.</summary>
+<p></p>
 
 When you use React Router together with `view` you have to do the same trick that applies to Redux's `connect` and MobX's `observer`.
 
@@ -360,10 +412,11 @@ When you use React Router together with `view` you have to do the same trick tha
 This is not necessary if you use React Router 4.4+. You can find more details and some reasoning about this in [this react-router docs page](https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/guides/blocked-updates.md).
 
 </details>
-<br/>
+<p></p>
 
 <details>
 <summary>Passing nested data to third party components.</summary>
+<p></p>
 
 Third party helpers - like data grids - may consist of many internal components which can not be wrapped by `view`, but sometimes you would like them to re-render when the passed data mutates. Traditional React components re-render when their props change by reference, so mutating the passed reactive data won't work in these cases. You can solve this issue by deep cloning the observable data before passing it to the component. This creates a new reference for the consuming component on every store mutation.
 
@@ -405,6 +458,26 @@ export default view(() => {
 
 <details>
 <summary>You can use any React hook - including <code>useState</code> - in function components, Easy State won't interfere with them.</summary>
+<p></p>
+
+This may be handy for gradually refactoring big components.
+
+```jsx
+import React from 'react'
+import { view, store } from 'react-easy-state'
+
+export default view(() => {
+  const [name, setName] = useState('Ann')
+  const user = store({ age: 30 })
+  return (
+    <div>
+      <input value={name} onChange={ev => setName(ev.target.value)} />
+      <input value={user.age} onChange={ev => (user.age = ev.target.value)} />
+    </div>
+  )
+})
+```
+
 </details>
 
 #### Local stores in class components
@@ -413,7 +486,7 @@ export default view(() => {
 import React, { Component } from 'react'
 import { view, store } from 'react-easy-state'
 
-class ClockComp extends Component {
+class Counter extends Component {
   counter = store({ num: 0 })
   increment = () => counter.num++
 
@@ -422,16 +495,45 @@ class ClockComp extends Component {
   }
 }
 
-export default view(ClockComp)
+export default view(Counter)
 ```
 
 <details>
 <summary>You can also use vanilla <code>setState</code> in your class components, Easy State won't interfere with it.</summary>
+<p></p>
+
+This may be handy for gradually refactoring big components.
+
+```jsx
+import React, { Component } from 'react'
+import { view, store } from 'react-easy-state'
+
+class Profile extends Component {
+  state = { name: 'Ann' }
+  user = store({ age: 30 })
+
+  setName = ev => this.setState({ name: ev.target.value })
+  setAge = ev => (this.user.age = ev.target.value)
+
+  render() {
+    return (
+      <div>
+        <input value={this.state.name} onChange={this.setName} />
+        <input value={this.user.age} onChange={this.setAge} />
+      </div>
+    )
+  }
+}
+
+export default view(Profile)
+```
+
 </details>
-<br/>
+<p></p>
 
 <details>
 <summary>Don't name local stores as <code>state</code>. It may conflict with linter rules, which guard against direct state mutations.</summary>
+<p></p>
 
 ```jsx
 import React, { Component } from 'react'
@@ -447,10 +549,11 @@ class Profile extends Component {
 ```
 
 </details>
-<br/>
+<p></p>
 
 <details>
 <summary>Deriving local stores from props (<code>getDerivedStateFromProps</code>).</summary>
+<p></p>
 
 Class components wrapped with `view` have an extra static `deriveStoresFromProps` lifecycle method, which works similarly to the vanilla `getDerivedStateFromProps`.
 
@@ -500,38 +603,6 @@ _Advanced_
 * [Stress Testing React Easy State](https://medium.com/@solkimicreb/stress-testing-react-easy-state-ac321fa3becf): demonstrating Easy State's reactivity with increasingly exotic state mutations.
 * [Design Patterns with React Easy State](https://medium.com/@solkimicreb/design-patterns-with-react-easy-state-830b927acc7c): demonstrating async actions and local and global state management through a beer finder app.
 * [The Ideas Behind React Easy State](https://medium.com/dailyjs/the-ideas-behind-react-easy-state-901d70e4d03e): a deep dive under the hood of Easy State.
-
-## FAQ and Gotchas
-
-### Views rendering multiple times unnecessarily
-
-Re-renders are batched 99% percent of the time until the end of the state changing function. You can mutate your state stores multiple times in event handlers, async functions and timer and networking callbacks without worrying about multiple renders and performance.
-
-If you mutate your stores multiple times synchronously from exotic task sources, multiple renders may happen though. In these rare occasions you can batch changes manually with the `batch` function. `batch(fn)` executes the passed function immediately and batches any subsequent re-renders until the function execution finishes.
-
-```jsx
-import React from 'react'
-import { view, store, batch } from 'react-easy-state'
-
-const user = store({ name: 'Bob', age: 30 })
-
-// this makes sure the state changes will cause maximum one re-render,
-// no matter where this function is getting invoked from
-function mutateUser() {
-  batch(() => {
-    user.name = 'Ann'
-    user.age = 32
-  })
-}
-
-export default view(() => (
-  <div>
-    name: {user.name}, age: {user.age}
-  </div>
-))
-```
-
-**NOTE:** The React team plans to improve render batching in the future. The `batch` function and built-in batching may be deprecated and removed in the future in favor of React's own batching.
 
 ## Platform support
 
