@@ -15,9 +15,9 @@ Simple React state management. Made with :heart: and ES6 Proxies.
 * [Introduction](#introduction)
 * [Installation](#installation)
 * [Usage](#usage)
-  + [Creating global stores](#creating-global-stores)
-  + [Creating reactive views](#creating-reactive-views)
-  + [Creating local stores](#creating-local-stores)
+  * [Creating global stores](#creating-global-stores)
+  * [Creating reactive views](#creating-reactive-views)
+  * [Creating local stores](#creating-local-stores)
 * [Examples with live demos](#examples-with-live-demos)
 * [Articles](#articles)
 * [Platform support](#platform-support)
@@ -60,7 +60,8 @@ Check this [TodoMVC codesandbox](https://codesandbox.io/s/github/solkimicreb/rea
 <details>
 <summary><strong>Setting up a quick project</strong></summary>
 <p></p>
-Easy State supports [Create React App](https://github.com/facebookincubator/create-react-app) without additional configuration. Just run the following commands to get started.
+
+Easy State supports <a href="https://github.com/facebookincubator/create-react-app">Create React App</a> without additional configuration. Just run the following commands to get started.
 
 ```sh
 npx create-react-app my-app
