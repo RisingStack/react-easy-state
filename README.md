@@ -6,8 +6,6 @@ Simple React state management. Made with :heart: and ES6 Proxies.
 
 <a href="#platform-support"><img src="images/browser_support.png" alt="Browser support" width="450px" /></a>
 
-**Breaking change in v6:** the default bundle changed from the ES5 version to the ES6 version. If you experience problems during the build process, please check [this docs section](#alternative-builds).
-
 <details>
 <summary><strong>Table of Contents</strong></summary>
 <!-- Do not edit the Table of Contents, instead regenerate with `npm run build-toc` -->
@@ -69,7 +67,7 @@ Check this [TodoMVC codesandbox](https://codesandbox.io/s/github/solkimicreb/rea
 `npm install react-easy-state`
 
 <details>
-<summary><strong>Setting up a quick project</strong></summary>
+<summary>Setting up a quick project</summary>
 
 Easy State supports [Create React App](https://github.com/facebookincubator/create-react-app) without additional configuration. Just run the following commands to get started.
 
@@ -88,7 +86,7 @@ _You need npm 5.2+ to use npx._
 
 ### Creating global stores
 
-`store` creates a state store from the passed object and returns it. State stores are just like normal JS objects. (To be precise, they are transparent reactive proxies of the original object.)
+`store` creates a state store from the passed object and returns it. A state store behaves just like the passed object. (To be precise, it is a transparent reactive proxy of the original object.)
 
 ```js
 import { store } from 'react-easy-state'
@@ -107,7 +105,7 @@ user.name = 'Bob'
 ```js
 import { store } from 'react-easy-state'
 
-// stores can include any valid JS structure (nested data, arrays, getters, Sets, ...)
+// stores can include any valid JS structure (nested data, arrays, Maps, Sets, getters, setters, inheritance, ...)
 const user = store({
   profile: {
     firstName: 'Bob',
@@ -116,13 +114,129 @@ const user = store({
       return `${user.firstName} ${user.lastName}`
     }  
   }
-  hobbies: ['programming', 'sports']
+  hobbies: ['programming', 'sports'],
+  friends: new Map()
 })
 
 // stores can be mutated in any syntactically valid way
 user.profile.firstName = 'Bob'
 delete user.profile.lastName
 user.hobbies.push('reading')
+user.friends.set('id', otherUser)
+```
+
+</details>
+
+<details>
+<summary>Async operations can be expressed with the standard async/await syntax.</summary>
+
+```js
+import { store } from 'react-easy-state'
+
+const userStore = store({
+  user: {},
+  async fetchUser() {
+    userStore.user = await fetch('/user')
+  }
+})
+
+export default userStore
+```
+
+</details>
+
+<details>
+<summary>State stores may import and use other state stores in their methods.</summary>
+
+Splitting large stores into multiple files is totally okay.
+
+_userStore.js_
+
+```js
+import { store } from 'react-easy-state'
+
+const userStore = store({
+  user: {},
+  async fetchUser() {
+    userStore.user = await fetch('/user')
+  }
+})
+
+export default userStore
+```
+
+_recipesStore.js_
+
+```js
+import { store } from 'react-easy-state'
+import userStore from './userStore'
+
+const recipesStore = store({
+  recipes: [],
+  async fetchRecipes() {
+    recipesStore.recipes = await fetch(`/recipes?user=${userStore.user.id}`)
+  }
+})
+
+export default recipesStore
+```
+
+</details>
+
+<details>
+<summary>Avoid using the <code>this</code> keyword in the methods of your state stores.</summary>
+
+```jsx
+const counter = store({
+  num: 0,
+  increment() {
+    // DON'T DO THIS
+    this.num++
+  }
+})
+
+export default view(() => <div onClick={counter.increment}>{counter.num}</div>)
+```
+
+The above snippet won't work, because `increment` is passed as a callback and loses its `this`. You should use the direct object reference - `counter` - instead of `this`.
+
+```js
+const counter = store({
+  num: 0,
+  increment() {
+    // DO THIS
+    counter.num++
+  }
+})
+
+export default counter
+```
+
+This works as expected, even when you pass store methods as callbacks.
+
+</details>
+
+<details>
+<summary>Wrap your state stores with `store` as early as possible.</summary>
+
+```js
+// DON'T DO THIS
+const person = { name: 'Bob' }
+person.name = 'Ann'
+
+export default store(person)
+```
+
+The above example wouldn't trigger re-renders on the `person.name = 'Ann'` mutation, because it is targeted at the raw object. Mutating the raw - none `store` wrapped object - won't schedule renders.
+
+Do this instead of the above code.
+
+```js
+// DO THIS
+const person = store({ name: 'Bob' })
+person.name = 'Ann'
+
+export default person
 ```
 
 </details>
@@ -147,6 +261,8 @@ export default view(() => (
 ))
 ```
 
+**Wrap ALL of your components with `view` - including class and function ones - even if they don't seem to directly use a store.**
+
 <details>
 <summary>A single reactive component may use multiple stores inside its render.</summary>
 
@@ -167,12 +283,20 @@ export default view(() => (
 ```
 
 </details>
-<br />
-
-**Make sure to wrap all of your components with `view` - including class and function ones. If you do not wrap a component, it will not properly render on store mutations.**
 
 <details>
-<summary>Always apply `view` as the latest (innermost) wrapper when you combine it with other Higher Order Components.</summary>
+<summary><code>view</code> implements an optimal <code>shouldComponentUpdate</code> for your components.</summary>
+
+The `view` wrapper optimizes the passed component with an optimal `shouldComponentUpdate` or `memo`, which shallow compares the current state and props with the next ones.
+
+* Using `PureComponent` or `memo` will provide no additional performance benefits.
+
+* Defining a custom `shouldComponentUpdate` may rarely provide performance benefits when you apply some use case specific heuristics inside it.
+
+</details>
+
+<details>
+<summary>Always apply view as the latest (innermost) wrapper when you combine it with other Higher Order Components.</summary>
 
 ```jsx
 import { view } from 'react-easy-state'
@@ -188,6 +312,44 @@ withTheme(view(Comp))
 // DON'T DO THIS
 view(withRouter(Comp))
 view(withTheme(Comp))
+```
+
+</details>
+
+<details>
+<summary>Usage with React Router (pre 4.4 version)</summary>
+
+When you use React Router together with `view` you have to do the same trick that applies to Redux's `connect` and MobX's `observer`.
+
+* If routing is not updated properly, wrap your `view(Comp)` - with the `Route`s inside - in `withRouter(view(Comp))`. This lets react-router know when to update.
+
+* The order of the HOCs matter, always use `withRouter(view(Comp))`.
+
+This is not necessary if you use React Router 4.4+. You can find more details and some reasoning about this in [this react-router docs page](https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/guides/blocked-updates.md).
+
+</details>
+
+<details>
+<summary>Passing nested data to third party components.</summary>
+
+Third party helpers - like data grids - may consist of many internal components which can not be wrapped by `view`, but sometimes you would like them to re-render when the passed data mutates. Traditional React components re-render when their props change by reference, so mutating the passed reactive data won't work in these cases. You can solve this issue by deep cloning the observable data before passing it to the component. This creates a new reference for the consuming component on every store mutation.
+
+```jsx
+import React from 'react'
+import { view, store } from 'react-easy-state'
+import Table from 'rc-table'
+import cloneDeep from 'lodash/cloneDeep'
+
+const dataStore = store({
+  items: [
+    {
+      product: 'Car',
+      value: 12
+    }
+  ]
+})
+
+export default view(() => <Table data={cloneDeep(dataStore.items)} />)
 ```
 
 </details>
@@ -210,6 +372,8 @@ export default view(() => {
 
 You can use any React hook - including `useState` - in function components, Easy State won't interfere with them.
 
+</details>
+
 #### Local stores in class components
 
 ```jsx
@@ -229,6 +393,54 @@ export default view(ClockComp)
 ```
 
 You can also use vanilla `setState` in your class components, Easy State won't interfere with it.
+
+<details>
+<summary>Don't name local stores as <code>state</code>.</summary>
+
+Naming your local state stores as `state` may conflict with React linter rules, which guard against direct state mutations. Please use a more descriptive name instead.
+
+```jsx
+import React, { Component } from 'react'
+import { view, store } from 'react-easy-state'
+
+class Profile extends Component {
+  // DON'T DO THIS
+  state = store({})
+  // DO THIS
+  user = store({})
+  render() {}
+}
+```
+
+</details>
+
+<details>
+<summary>Deriving local stores from props (getDerivedStateFromProps)</summary>
+
+Class components wrapped with `view` have an extra static `deriveStoresFromProps` lifecycle method, which works similarly to the vanilla `getDerivedStateFromProps`.
+
+```jsx
+import React, { Component } from 'react'
+import { view, store } from 'react-easy-state'
+
+class NameCard extends Component {
+  userStore = store({ name: 'Bob' })
+
+  static deriveStoresFromProps(props, userStore) {
+    userStore.name = props.name || userStore.name
+  }
+
+  render() {
+    return <div>{this.userStore.name}</div>
+  }
+}
+
+export default view(NameCard)
+```
+
+Instead of returning an object, you should directly mutate the received stores. If you have multiple local stores on a single component, they are all passed as arguments - in their definition order - after the first props argument.
+
+</details>
 
 ---
 
@@ -255,56 +467,6 @@ _Advanced_
 * [The Ideas Behind React Easy State](https://medium.com/dailyjs/the-ideas-behind-react-easy-state-901d70e4d03e): a deep dive under the hood of Easy State.
 
 ## FAQ and Gotchas
-
-### Broken `this` in store methods
-
-You should avoid using the `this` keyword in the methods of your state stores.
-
-```jsx
-const counter = store({
-  num: 0,
-  increment() {
-    this.num++
-  }
-})
-
-export default view(() => <div onClick={counter.increment}>{counter.num}</div>)
-```
-
-The above snippet won't work, because `increment` is passed as a callback and loses its `this`. You should use the direct object reference - `counter` in this case - instead of `this`.
-
-```js
-const counter = store({
-  num: 0,
-  increment() {
-    counter.num++
-  }
-})
-```
-
-This works as expected, even when you pass store methods as callbacks.
-
-### Views not rendering
-
-You should wrap your state stores with `store` as early as possible to make them reactive.
-
-```js
-const person = { name: 'Bob' }
-person.name = 'Ann'
-
-export default store(person)
-```
-
-The above example wouldn't trigger re-renders on the `person.name = 'Ann'` mutation, because it is targeted at the raw object. Mutating the raw - none `store` wrapped object - won't schedule renders.
-
-Do this instead of the above code.
-
-```js
-const person = store({ name: 'Bob' })
-person.name = 'Ann'
-
-export default person
-```
 
 ### Views rendering multiple times unnecessarily
 
@@ -335,71 +497,6 @@ export default view(() => (
 ```
 
 **NOTE:** The React team plans to improve render batching in the future. The `batch` function and built-in batching may be deprecated and removed in the future in favor of React's own batching.
-
-### PureComponent and memo
-
-You don't have to worry about the. The `view` wrapper optimizes the passed component with a custom `shouldComponentUpdate` or `memo`. You can use PureComponent or memo in addition to these but they will provide no additional performance benefits.
-
-### Deriving local stores from props (getDerivedStateFromProps)
-
-Class components wrapped with `view` have an extra static `deriveStoresFromProps` lifecycle method, which works similarly to the vanilla `getDerivedStateFromProps`.
-
-```jsx
-import React, { Component } from 'react'
-import { view, store } from 'react-easy-state'
-
-class NameCard extends Component {
-  userStore = store({ name: 'Bob' })
-
-  static deriveStoresFromProps(props, userStore) {
-    userStore.name = props.name || userStore.name
-  }
-
-  render() {
-    return <div>{this.userStore.name}</div>
-  }
-}
-
-export default view(NameCard)
-```
-
-Instead of returning an object, you should directly mutate the passed in stores. If you have multiple local stores on a single component, they are all passed as arguments - in their definition order - after the first props argument.
-
-### Naming local stores as state
-
-Naming your local state stores as `state` may conflict with React linter rules, which guard against direct state mutations. Please use a more descriptive name instead.
-
-### Usage with React Router
-
-Using React Router together with `view` can be tricky. You have to use the same tricks that apply Redux's `connect` and MobX's `observer`.
-
-* If routing is not updated properly, wrap your `view(Comp)` - with the `Route`s inside - in `withRouter(view(Comp))`. This lets react-router know when to update.
-
-* The order of the HOCs matter. Always use `withRouter(view(Comp))` and **never** use `view(withRouter(Comp))`.
-
-You can find more details and some reasoning about this in [this react-router docs page](https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/guides/blocked-updates.md).
-
-### Usage with third party components
-
-Third party helpers - like data grids - may consist of many internal components which can not be wrapped by `view`, but sometimes you would like them to re-render when the passed data mutates. Traditional React components re-render when their props change by reference, so mutating the passed store won't work in these cases. You can solve this issue by deep cloning the observable data before passing it to the component. This creates a new reference for the consuming component on every store mutation.
-
-```jsx
-import React from 'react'
-import { view, store } from 'react-easy-state'
-import Table from 'rc-table'
-import deepClone from 'clone'
-
-const dataStore = store({
-  items: [
-    {
-      product: 'Car',
-      value: 12
-    }
-  ]
-})
-
-export default view(() => <Table data={deepClone(dataStore.items)} />)
-```
 
 ## Platform support
 
