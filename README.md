@@ -126,6 +126,7 @@ user.friends.set('id', otherUser)
 ```
 
 </details>
+<br/>
 
 <details>
 <summary>Async operations can be expressed with the standard async/await syntax.</summary>
@@ -144,10 +145,12 @@ export default userStore
 ```
 
 </details>
+<br/>
 
 <details>
 <summary>State stores may import and use other state stores in their methods.</summary>
 
+<br/>
 Splitting large stores into multiple files is totally okay.
 
 _userStore.js_
@@ -182,6 +185,7 @@ export default recipesStore
 ```
 
 </details>
+<br/>
 
 <details>
 <summary>Avoid using the <code>this</code> keyword in the methods of your state stores.</summary>
@@ -215,6 +219,7 @@ export default counter
 This works as expected, even when you pass store methods as callbacks.
 
 </details>
+<br/>
 
 <details>
 <summary>Wrap your state stores with `store` as early as possible.</summary>
@@ -283,10 +288,12 @@ export default view(() => (
 ```
 
 </details>
+<br/>
 
 <details>
 <summary><code>view</code> implements an optimal <code>shouldComponentUpdate</code> for your components.</summary>
 
+<br/>
 The `view` wrapper optimizes the passed component with an optimal `shouldComponentUpdate` or `memo`, which shallow compares the current state and props with the next ones.
 
 * Using `PureComponent` or `memo` will provide no additional performance benefits.
@@ -294,6 +301,7 @@ The `view` wrapper optimizes the passed component with an optimal `shouldCompone
 * Defining a custom `shouldComponentUpdate` may rarely provide performance benefits when you apply some use case specific heuristics inside it.
 
 </details>
+<br/>
 
 <details>
 <summary>Always apply view as the latest (innermost) wrapper when you combine it with other Higher Order Components.</summary>
@@ -315,10 +323,12 @@ view(withTheme(Comp))
 ```
 
 </details>
+<br/>
 
 <details>
 <summary>Usage with React Router (pre 4.4 version)</summary>
 
+<br/>
 When you use React Router together with `view` you have to do the same trick that applies to Redux's `connect` and MobX's `observer`.
 
 * If routing is not updated properly, wrap your `view(Comp)` - with the `Route`s inside - in `withRouter(view(Comp))`. This lets react-router know when to update.
@@ -328,10 +338,12 @@ When you use React Router together with `view` you have to do the same trick tha
 This is not necessary if you use React Router 4.4+. You can find more details and some reasoning about this in [this react-router docs page](https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/guides/blocked-updates.md).
 
 </details>
+<br/>
 
 <details>
 <summary>Passing nested data to third party components.</summary>
 
+<br/>
 Third party helpers - like data grids - may consist of many internal components which can not be wrapped by `view`, but sometimes you would like them to re-render when the passed data mutates. Traditional React components re-render when their props change by reference, so mutating the passed reactive data won't work in these cases. You can solve this issue by deep cloning the observable data before passing it to the component. This creates a new reference for the consuming component on every store mutation.
 
 ```jsx
@@ -372,8 +384,6 @@ export default view(() => {
 
 You can use any React hook - including `useState` - in function components, Easy State won't interfere with them.
 
-</details>
-
 #### Local stores in class components
 
 ```jsx
@@ -397,6 +407,7 @@ You can also use vanilla `setState` in your class components, Easy State won't i
 <details>
 <summary>Don't name local stores as <code>state</code>.</summary>
 
+<br/>
 Naming your local state stores as `state` may conflict with React linter rules, which guard against direct state mutations. Please use a more descriptive name instead.
 
 ```jsx
@@ -413,10 +424,12 @@ class Profile extends Component {
 ```
 
 </details>
+<br/>
 
 <details>
-<summary>Deriving local stores from props (getDerivedStateFromProps)</summary>
+<summary>Deriving local stores from props (<code>getDerivedStateFromProps</code>)</summary>
 
+<br/>
 Class components wrapped with `view` have an extra static `deriveStoresFromProps` lifecycle method, which works similarly to the vanilla `getDerivedStateFromProps`.
 
 ```jsx
