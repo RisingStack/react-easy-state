@@ -15,13 +15,13 @@ Simple React state management. Made with :heart: and ES6 Proxies.
 * [Introduction](#introduction)
 * [Installation](#installation)
 * [Usage](#usage)
-  * [Creating global stores](#creating-global-stores)
-  * [Creating reactive views](#creating-reactive-views)
-  * [Creating local stores](#creating-local-stores)
+  + [Creating global stores](#creating-global-stores)
+  + [Creating reactive views](#creating-reactive-views)
+  + [Creating local stores](#creating-local-stores)
 * [Examples with live demos](#examples-with-live-demos)
 * [Articles](#articles)
-* [Platform support](#platform-support)
 * [Performance](#performance)
+* [Platform support](#platform-support)
 * [How does it work?](#how-does-it-work)
 * [Alternative builds](#alternative-builds)
 * [Contributing](#contributing)
@@ -261,7 +261,7 @@ const appStore = store({
 const App = view(() => (
   <div>
     <h1>My App</h1>
-    <Profile user={appStore.user}>
+    <Profile user={appStore.user} />
   </div>
 ))
 
@@ -270,7 +270,7 @@ const Profile = view(({ user }) => <p>Name: {user.name}</p>)
 
 // DON'T DO THIS
 // This won't re-render on appStore.user.name = 'newName' like mutations
-const Profile = ({ user }) => (<p>Name: {user.name}</p>)
+const Profile = ({ user }) => <p>Name: {user.name}</p>
 ```
 
 </details>
@@ -300,10 +300,8 @@ export default view(() => (
 <p></p>
 
 <details>
-<summary><code>view</code> implements an optimal <code>shouldComponentUpdate</code> for your components.</summary>
+<summary><code>view</code> implements an optimal <code>shouldComponentUpdate</code> (or <code>memo</code>) for your components.</summary>
 <p></p>
-
-The `view` wrapper optimizes the passed component with an optimal `shouldComponentUpdate` or `memo`, which shallow compares the current state and props with the next ones.
 
 * Using `PureComponent` or `memo` will provide no additional performance benefits.
 
@@ -360,13 +358,13 @@ export default view(() => (
 ))
 ```
 
-**NOTE:** The React team plans to improve render batching in the future. The `batch` function and built-in batching may be deprecated and removed in the future in favor of React's own batching.
+> **NOTE:** The React team plans to improve render batching in the future. The `batch` function and built-in batching may be deprecated and removed in the future in favor of React's own batching.
 
 </details>
 <p></p>
 
 <details>
-<summary>Always apply view as the latest (innermost) wrapper when you combine it with other Higher Order Components.</summary>
+<summary>Always apply <code>view</code> as the latest (innermost) wrapper when you combine it with other Higher Order Components.</summary>
 <p></p>
 
 ```jsx
@@ -391,8 +389,6 @@ view(withTheme(Comp))
 <details>
 <summary>Usage with (pre v4.4) React Router.</summary>
 <p></p>
-
-When you use React Router together with `view` you have to do the same trick that applies to Redux's `connect` and MobX's `observer`.
 
 * If routing is not updated properly, wrap your `view(Comp)` - with the `Route`s inside - in `withRouter(view(Comp))`. This lets react-router know when to update.
 
@@ -449,8 +445,6 @@ export default view(() => {
 <summary>You can use any React hook - including <code>useState</code> - in function components, Easy State won't interfere with them.</summary>
 <p></p>
 
-This may be handy for gradually refactoring big components.
-
 ```jsx
 import React from 'react'
 import { view, store } from 'react-easy-state'
@@ -490,8 +484,6 @@ export default view(Counter)
 <details>
 <summary>You can also use vanilla <code>setState</code> in your class components, Easy State won't interfere with it.</summary>
 <p></p>
-
-This may be handy for gradually refactoring big components.
 
 ```jsx
 import React, { Component } from 'react'
@@ -571,7 +563,7 @@ Instead of returning an object, you should directly mutate the received stores. 
 
 ---
 
-That's it, You know everything to master React state management! Check some of the [examples](#examples-with-live-demos) and [articles](#articles) for more inspiration or the [FAQ section](#faq-and-gotchas) for common issues.
+That's it, you know everything to master React state management! Check some of the [examples](#examples-with-live-demos) and [articles](#articles) for more inspiration.
 
 ## Examples with live demos
 
@@ -593,6 +585,12 @@ _Advanced_
 * [Design Patterns with React Easy State](https://medium.com/@solkimicreb/design-patterns-with-react-easy-state-830b927acc7c): demonstrating async actions and local and global state management through a beer finder app.
 * [The Ideas Behind React Easy State](https://medium.com/dailyjs/the-ideas-behind-react-easy-state-901d70e4d03e): a deep dive under the hood of Easy State.
 
+## Performance
+
+You can compare Easy State with plain React and other state management libraries with the below benchmarks. It performs a bit better than MobX and similarly to Redux.
+
+* [js-framework-benchmark](https://github.com/krausest/js-framework-benchmark) ([source](https://github.com/krausest/js-framework-benchmark/tree/master/react-v16.1.0-easy-state-v4.0.1-keyed)) ([results](https://rawgit.com/krausest/js-framework-benchmark/master/webdriver-ts-results/table.html))
+
 ## Platform support
 
 * Node: 6 and above
@@ -607,12 +605,6 @@ _Advanced_
 _This library is based on non polyfillable ES6 Proxies. Because of this, it will never support IE._
 
 _React Native is supported on iOS and Android is supported with the community JavaScriptCore. Learn how to set it up [here](https://github.com/SoftwareMansion/jsc-android-buildscripts#how-to-use-it-with-my-react-native-app). It is pretty simple._
-
-## Performance
-
-You can compare Easy State with plain React and other state management libraries with the below benchmarks. It performs a bit better than MobX and a bit worse than Redux.
-
-* [js-framework-benchmark](https://github.com/krausest/js-framework-benchmark) ([source](https://github.com/krausest/js-framework-benchmark/tree/master/react-v16.1.0-easy-state-v4.0.1-keyed)) ([results](https://rawgit.com/krausest/js-framework-benchmark/master/webdriver-ts-results/table.html))
 
 ## How does it work?
 
