@@ -98,17 +98,18 @@ user.name = 'Bob'
 ```js
 import { store } from 'react-easy-state'
 
-// stores can include any valid JS structure (nested data, arrays, Maps, Sets, getters, setters, inheritance, ...)
+// stores can include any valid JS structure
+// nested data, arrays, Maps, Sets, getters, setters, inheritance, ...
 const user = store({
-profile: {
-firstName: 'Bob',
-lastName: 'Smith',
-get name () {
-return `${user.firstName} ${user.lastName}`
-}  
- }
-hobbies: ['programming', 'sports'],
-friends: new Map()
+  profile: {
+    firstName: 'Bob',
+    lastName: 'Smith',
+    get name() {
+      return `${user.firstName} ${user.lastName}`
+    }
+  },
+  hobbies: ['programming', 'sports'],
+  friends: new Map()
 })
 
 // stores can be mutated in any syntactically valid way
@@ -182,6 +183,7 @@ export default recipesStore
 <details>
 <summary>Wrap your state stores with <code>store</code> as early as possible.</summary>
 <p></p>
+
 ```js
 // DON'T DO THIS
 const person = { name: 'Bob' }
@@ -192,10 +194,8 @@ export default store(person)
 
 The above example wouldn't trigger re-renders on the `person.name = 'Ann'` mutation, because it is targeted at the raw object. Mutating the raw - none `store` wrapped object - won't schedule renders.
 
-Do this instead of the above code.
-
 ```js
-// DO THIS
+// DO THIS INSTEAD
 const person = store({ name: 'Bob' })
 person.name = 'Ann'
 
