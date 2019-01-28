@@ -32,7 +32,7 @@ Simple React state management. Made with :heart: and ES6 Proxies.
 
 ## Introduction
 
-Easy State is a transparent reactive state management library with two functions and two accompanying rules.
+React Easy State is a practical state management library with two functions and two accompanying rules.
 
 1.  Always wrap your components with `view()`.
 2.  Always wrap your state store objects with `store()`.
@@ -46,7 +46,7 @@ const counter = store({
   incr: () => counter.num++
 })
 
-export default view(() => <button onClick={counter.incr}>{counter.num}</button>)
+export default view(() => (<button onClick={counter.incr}>{counter.num}</button>))
 ```
 
 This is enough for it to automatically update your views when needed. It doesn't matter how you structure or mutate your state stores, any syntactically valid code works.
@@ -210,6 +210,8 @@ The first example wouldn't trigger re-renders on the `person.name = 'Ann'` mutat
 <p></p>
 
 ```jsx
+import { store, view } from 'react-easy-state'
+
 const counter = store({
   num: 0,
   increment() {
@@ -220,7 +222,7 @@ const counter = store({
   }
 })
 
-export default view(() => <div onClick={counter.increment}>{counter.num}</div>)
+export default view(() => (<div onClick={counter.increment}>{counter.num}</div>))
 ```
 
 `this.num++` won't work, because `increment` is passed as a callback and loses its `this`. You should use the direct object reference - `counter` - instead of `this`.
@@ -248,7 +250,7 @@ export default view(() => (
 ```
 
 <details>
-<summary><strong>Wrap ALL of your components with `view` - including class and function ones - even if they don't seem to directly use a store.</strong></summary>
+<summary><strong>Wrap ALL of your components with <code>view</code> - including class and function ones - even if they don't seem to directly use a store.</strong></summary>
 <p></p>
 
 ```jsx
