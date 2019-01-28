@@ -22,7 +22,6 @@ Simple React state management. Made with :heart: and ES6 Proxies.
 * [Articles](#articles)
 * [Performance](#performance)
 * [Platform support](#platform-support)
-* [How does it work?](#how-does-it-work)
 * [Alternative builds](#alternative-builds)
 * [Contributing](#contributing)
 
@@ -268,11 +267,11 @@ const App = view(() => (
 ))
 
 // DO THIS
-const Profile = view(({ user }) => <p>Name: {user.name}</p>)
+const Profile = view(({ user }) => (<p>Name: {user.name}</p>))
 
 // DON'T DO THIS
 // This won't re-render on appStore.user.name = 'newName' like mutations
-const Profile = ({ user }) => <p>Name: {user.name}</p>
+const Profile = ({ user }) => (<p>Name: {user.name}</p>)
 ```
 
 </details>
@@ -313,7 +312,7 @@ export default view(() => (
 <p></p>
 
 <details>
-<summary>Reactive renders are batched. A batch of synchronous store mutations won't result in multiple re-renders of the same component.</summary>
+<summary>Reactive renders are batched. Multiple synchronous store mutations won't result in multiple re-renders of the same component.</summary>
 <p></p>
 
 ```jsx
@@ -422,7 +421,7 @@ const dataStore = store({
   ]
 })
 
-export default view(() => <Table data={cloneDeep(dataStore.items)} />)
+export default view(() => (<Table data={cloneDeep(dataStore.items)} />))
 ```
 
 </details>
@@ -565,16 +564,14 @@ Instead of returning an object, you should directly mutate the received stores. 
 
 ---
 
-That's it, you know everything to master React state management! Check some of the [examples](#examples-with-live-demos) and [articles](#articles) for more inspiration.
-
 ## Examples with live demos
 
-_Beginner_
+#### Beginner
 
 * [Clock Widget](https://solkimicreb.github.io/react-easy-state/examples/clock/build) ([source](/examples/clock/)) ([codesandbox](https://codesandbox.io/s/github/solkimicreb/react-easy-state/tree/master/examples/clock)): a reusable clock widget with a tiny local state store.
 * [Stopwatch](https://solkimicreb.github.io/react-easy-state/examples/stop-watch/build) ([source](/examples/stop-watch/)) ([codesandbox](https://codesandbox.io/s/github/solkimicreb/react-easy-state/tree/master/examples/stop-watch)) ([tutorial](https://hackernoon.com/introducing-react-easy-state-1210a156fa16)): a stopwatch with a mix of normal and computed state properties.
 
-_Advanced_
+#### Advanced
 
 * [TodoMVC](https://solkimicreb.github.io/react-easy-state/examples/todo-mvc/build) ([source](/examples/todo-mvc/)) ([codesandbox](https://codesandbox.io/s/github/solkimicreb/react-easy-state/tree/master/examples/todo-mvc)): a classic TodoMVC implementation with a lot of computed data and implicit reactivity.
 * [Contacts Table](https://solkimicreb.github.io/react-easy-state/examples/contacts/build) ([source](/examples/contacts/)) ([codesandbox](https://codesandbox.io/s/github/solkimicreb/react-easy-state/tree/master/examples/contacts)): a data grid implementation with a mix of global and local state.
@@ -607,10 +604,6 @@ You can compare Easy State with plain React and other state management libraries
 _This library is based on non polyfillable ES6 Proxies. Because of this, it will never support IE._
 
 _React Native is supported on iOS and Android is supported with the community JavaScriptCore. Learn how to set it up [here](https://github.com/SoftwareMansion/jsc-android-buildscripts#how-to-use-it-with-my-react-native-app). It is pretty simple._
-
-## How does it work?
-
-Under the hood Easy State uses the [@nx-js/observer-util](https://github.com/nx-js/observer-util) library, which relies on [ES6 Proxies](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) to observe state changes. [This blog post](https://blog.risingstack.com/writing-a-javascript-framework-data-binding-es6-proxy/) gives a little sneak peek under the hood of the `observer-util`.
 
 ## Alternative builds
 
