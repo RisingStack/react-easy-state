@@ -70,6 +70,8 @@ describe('batching', () => {
     document.body.removeEventListener('click', batched)
   })
 
+  // async/await is only batched when it is transpiled to promises and/or generators
+  // by the time transpilation won't be necessary, the batching will change to use async React
   test('should batch changes in setTimeout and setInterval', async () => {
     let renderCount = 0
     const person = store({ name: 'Bob' })

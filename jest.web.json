@@ -8,7 +8,7 @@
     "!**/examples/stop-watch/**",
     "!**/examples/**/beer-finder/**"
   ],
-  "setupTestFrameworkScriptFile": "./scripts/testSetup.js",
+  "setupFilesAfterEnv": ["./scripts/testSetup.js"],
   "testURL": "http://react-easy-state.com",
   "testRegex": "\\.test\\.js$"
 }
