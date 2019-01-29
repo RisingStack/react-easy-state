@@ -168,7 +168,7 @@ describe('batching', () => {
       .then(value => {
         expect(value).toBe(12)
         // eslint-disable-next-line
-        throw 15
+        throw 15;
       })
       .catch(err => {
         expect(err).toBe(15)
@@ -207,7 +207,7 @@ describe('batching', () => {
   test('should not break method this value and args', done => {
     const socket = new WebSocket('ws://www.example.com')
 
-    socket.onclose = function(ev) {
+    socket.onclose = function (ev) {
       expect(ev).toBeDefined()
       expect(this).toBe(socket)
       done()
@@ -220,7 +220,7 @@ describe('batching', () => {
     const ctx = {}
 
     setTimeout(
-      function(arg1, arg2) {
+      function (arg1, arg2) {
         expect(arg1).toBe('Test')
         expect(arg2).toBe('Test2')
         expect(this).toBe(ctx)

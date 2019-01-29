@@ -1,8 +1,6 @@
 const fs = require('fs')
 const path = require('path')
 const del = require('del')
-const babel = require('@babel/core')
-const buble = require('buble')
 const rollup = require('rollup')
 const resolvePlugin = require('rollup-plugin-node-resolve')
 const babelPlugin = require('rollup-plugin-babel')
@@ -81,7 +79,7 @@ const bundles = [
   }
 ]
 
-async function build() {
+async function build () {
   // Clean up the output directory
   await del(path.resolve('dist'))
   fs.mkdirSync(path.resolve('dist'))

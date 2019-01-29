@@ -1,4 +1,4 @@
-import React, { Component, StrictMode } from 'react'
+import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { view } from 'react-easy-state'
 import renderer from 'react-test-renderer'

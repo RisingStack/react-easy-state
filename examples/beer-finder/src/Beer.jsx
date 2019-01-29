@@ -17,7 +17,11 @@ export default view(
           {beer.details ? (
             <p>{description}</p>
           ) : (
-            <ul>{foodPairing.map(food => <li key={food}>{food}</li>)}</ul>
+            <ul>
+              {foodPairing.map(food => (
+                <li key={food}>{food}</li>
+              ))}
+            </ul>
           )}
         </CardContent>
       </Card>
