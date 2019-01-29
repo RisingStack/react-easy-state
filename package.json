@@ -51,7 +51,9 @@
     "@nx-js/observer-util": "^4.1.1"
   },
   "peerDependencies": {
-    "react": "*",
+    "react": "*"
+  },
+  "optionalDependencies": {
     "react-dom": "*",
     "react-native": "*"
   },
