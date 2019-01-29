@@ -51,7 +51,8 @@
     "@nx-js/observer-util": "^4.1.1"
   },
   "peerDependencies": {
-    "react": "*"
+    "react": "*",
+    "react-dom": "*"
   },
   "devDependencies": {
     "@types/react": "^16.0.35",

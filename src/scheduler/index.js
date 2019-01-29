@@ -1,47 +1,9 @@
-const tasks = []
-let batchCount = 0
-
-// scheduled renders should run in first run order not register order
-// to guarantee the parent - child ordering
-// maybe add a priority num (incremental to the updater)
-// and order them by this num before running them
-// use a sparse array instead of a set -> will work perfectly!!
-// each fn will have a simple id -> it will be ordered and uniqueu
-export function add(task) {
-  if (batchCount !== 0) {
-    tasks[task.priority] = task
-  } else {
-    runTask(task)
-  }
-}
-
-export function remove(task) {
-  delete tasks[task.priority]
-}
-
-// must remove the task before executing it
-// otherwise executed task could start a new task list execution
-// and recursively run itself infinite times
-function runTask(task) {
-  remove(task)
-  task()
-}
+import batchedUpdates from './batchedUpdates'
 
 // this runs the passed function and delays all re-renders
 // until the function is finished running
 export function batch(fn, ctx, args) {
-  try {
-    batchCount++
-    return fn.apply(ctx, args)
-  } finally {
-    if (batchCount === 1) {
-      tasks.forEach(runTask)
-    }
-    // decrease the batch count after the iteration batched
-    // in case the iteration introduces another batch
-    // to avoid the newly introduced batch being a top level one
-    batchCount--
-  }
+  batchedUpdates(() => fn.apply(ctx, args))
 }
 
 // this creates and returns a batched version of the passed function
