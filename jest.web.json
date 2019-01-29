@@ -1,0 +1,14 @@
+{
+  "collectCoverageFrom": [
+    "**/src/**",
+    "!**/src/**/*.native.js",
+    "**/examples/**/*.{js,jsx}",
+    "!**/examples/**/build/**",
+    "!**/examples/**/index.js",
+    "!**/examples/stop-watch/**",
+    "!**/examples/**/beer-finder/**"
+  ],
+  "setupTestFrameworkScriptFile": "./scripts/testSetup.js",
+  "testURL": "http://react-easy-state.com",
+  "testRegex": "\\.test\\.js$"
+}

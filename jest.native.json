@@ -1,0 +1,4 @@
+{
+  "preset": "react-native",
+  "testRegex": "\\.test\\.native\\.js$"
+}
