@@ -1,6 +1,6 @@
 import { Component, useState, useEffect, useMemo, memo } from 'react'
 import { observe, unobserve, raw, isObservable } from '@nx-js/observer-util'
-import hasHooks from './hasHooks'
+import { hasHooks } from './utils'
 
 export let isInsideFunctionComponent = false
 const COMPONENT = Symbol('owner component')

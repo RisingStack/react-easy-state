@@ -1,10 +1,13 @@
-import batchedUpdates from './batchedUpdates'
+import { isDOM, globalObj } from './utils'
+const { unstable_batchedUpdates } = isDOM
+  ? require('react-dom')
+  : require('react-native')
 
 // this runs the passed function and delays all re-renders
 // until the function is finished running
 export function batch(fn, ctx, args) {
   let result
-  batchedUpdates(() => (result = fn.apply(ctx, args)))
+  unstable_batchedUpdates(() => (result = fn.apply(ctx, args)))
   return result
 }
 
@@ -44,15 +47,6 @@ function batchMethod(obj, method) {
     })
     Object.defineProperty(obj, method, newDescriptor)
   }
-}
-
-// try to find the global object
-// it is window in the DOM and global in NodeJS and React Native
-let globalObj
-if (typeof window !== 'undefined') {
-  globalObj = window
-} else if (typeof global !== 'undefined') {
-  globalObj = global
 }
 
 // do a sync batching for the most common task sources
