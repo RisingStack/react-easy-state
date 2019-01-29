@@ -1,12 +1,14 @@
 {
   "name": "react-easy-state",
   "version": "6.1.0-beta.0",
-  "description":
-    "React state management with a minimal API. Made with ES6 Proxies.",
+  "description": "React state management with a minimal API. Made with ES6 Proxies.",
   "main": "dist/cjs.es6.js",
   "module": "dist/es.es6.js",
   "types": "types/index.d.ts",
-  "files": ["dist", "types"],
+  "files": [
+    "dist",
+    "types"
+  ],
   "scripts": {
     "test-native": "jest --config ./jest.native.json",
     "test-web": "jest --config ./jest.web.json --coverage ",
@@ -14,8 +16,7 @@
     "test-builds": "node ./scripts/testBuilds.js",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
     "lint": "standard",
-    "lint-fix":
-      "prettier --ignore-path '.gitignore' --write '**/*.{js,jsx}' '!**/build/**' && standard --fix",
+    "lint-fix": "prettier --ignore-path '.gitignore' --write '**/*.{js,jsx}' '!**/build/**' && standard --fix",
     "build-examples": "node ./scripts/buildExamples.js",
     "link-examples": "node ./scripts/linkExamples.js",
     "unlink-examples": "node ./scripts/unlinkExamples.js",
@@ -79,6 +80,7 @@
     "react": "^16.8.0-alpha.1",
     "react-dom": "^16.8.0-alpha.1",
     "react-native": "^0.58.3",
+    "react-native-testing-library": "^1.5.0",
     "react-router-dom": "^4.3.1",
     "react-test-renderer": "^16.8.0-alpha.1",
     "react-testing-library": "^5.4.4",
@@ -95,8 +97,17 @@
   },
   "standard": {
     "parser": "babel-eslint",
-    "env": ["browser", "jest"],
-    "ignore": ["**/build/**", "**/node_modules/**"]
+    "env": [
+      "browser",
+      "jest"
+    ],
+    "ignore": [
+      "**/build/**",
+      "**/node_modules/**"
+    ]
   },
-  "pre-push": ["lint", "test"]
+  "pre-push": [
+    "lint",
+    "test"
+  ]
 }
