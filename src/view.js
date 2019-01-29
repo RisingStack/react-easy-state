@@ -15,12 +15,11 @@ export default function view(Comp) {
   if (isStatelessComp && hasHooks) {
     // use a hook based reactive wrapper when we can
     ReactiveComp = memo(props => {
-      // todo: try to move this inside
-      const [, setState] = useState()
-
       // create a memoized reactive wrapper of the original component (render)
       // at the very first run of the component function
       const render = useMemo(() => {
+        const [, setState] = useState()
+
         return observe(Comp, {
           scheduler: () => setState(DUMMY_STATE),
           lazy: true

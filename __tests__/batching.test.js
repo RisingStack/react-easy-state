@@ -5,23 +5,6 @@ import { view, store, batch } from 'react-easy-state'
 describe('batching', () => {
   afterEach(cleanup)
 
-  test('should not batch "vanilla state changes"', () => {
-    let renderCount = 0
-    const person = store({ name: 'Bob' })
-    const MyComp = view(() => {
-      renderCount++
-      return <div>{person.name}</div>
-    })
-
-    const { container } = render(<MyComp />)
-    expect(renderCount).toBe(1)
-    expect(container).toHaveTextContent('Bob')
-    person.name = 'Ann'
-    person.name = 'Rick'
-    expect(container).toHaveTextContent('Rick')
-    expect(renderCount).toBe(3)
-  })
-
   test('should batch state changes inside a batch() wrapper', () => {
     let renderCount = 0
     const person = store({ name: 'Bob' })
@@ -183,7 +166,7 @@ describe('batching', () => {
       .then(value => {
         expect(value).toBe(12)
         // eslint-disable-next-line
-        throw 15;
+        throw 15
       })
       .catch(err => {
         expect(err).toBe(15)
@@ -222,7 +205,7 @@ describe('batching', () => {
   test('should not break method this value and args', done => {
     const socket = new WebSocket('ws://www.example.com')
 
-    socket.onclose = function (ev) {
+    socket.onclose = function(ev) {
       expect(ev).toBeDefined()
       expect(this).toBe(socket)
       done()
@@ -235,7 +218,7 @@ describe('batching', () => {
     const ctx = {}
 
     setTimeout(
-      function (arg1, arg2) {
+      function(arg1, arg2) {
         expect(arg1).toBe('Test')
         expect(arg2).toBe('Test2')
         expect(this).toBe(ctx)
@@ -245,5 +228,10 @@ describe('batching', () => {
       'Test',
       'Test2'
     )
+  })
+
+  test('should not break return value', () => {
+    const result = batch(() => 12)
+    expect(result).toBe(12)
   })
 })

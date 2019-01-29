@@ -3,7 +3,9 @@ import batchedUpdates from './batchedUpdates'
 // this runs the passed function and delays all re-renders
 // until the function is finished running
 export function batch(fn, ctx, args) {
-  batchedUpdates(() => fn.apply(ctx, args))
+  let result
+  batchedUpdates(() => (result = fn.apply(ctx, args)))
+  return result
 }
 
 // this creates and returns a batched version of the passed function
