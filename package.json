@@ -1,6 +1,6 @@
 {
   "name": "react-easy-state",
-  "version": "6.1.0-beta.7",
+  "version": "6.1.0-beta.8",
   "description": "React state management with a minimal API. Made with ES6 Proxies.",
   "main": "dist/cjs.es6.js",
   "module": "dist/es.es6.js",
@@ -54,8 +54,8 @@
     "@nx-js/observer-util": "^4.2.1"
   },
   "peerDependencies": {
-    "react": "^15.0.0",
-    "react-dom": "^15.0.0",
+    "react": "*",
+    "react-dom": "*",
     "react-native": "*"
   },
   "devDependencies": {
