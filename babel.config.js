@@ -15,7 +15,7 @@ const test = {
 }
 
 const bundle = process.env.BUNDLE
-if (bundle.indexOf('es5') !== -1) {
+if (bundle && bundle.indexOf('es5') !== -1) {
   test.presets.push('@babel/preset-env')
 }
 
