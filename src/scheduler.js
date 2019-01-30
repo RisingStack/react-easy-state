@@ -1,12 +1,14 @@
 /* eslint camelcase: 0 */
 
-import { batchedUpdates, globalObj } from './utils'
+// react platform is set to either react-dom or react-native during test and execution
+import { unstable_batchedUpdates } from './react-platform'
+import { globalObj } from './utils'
 
 // this runs the passed function and delays all re-renders
 // until the function is finished running
-export function batch (fn, ctx, args) {
+export function batch(fn, ctx, args) {
   let result
-  batchedUpdates(() => (result = fn.apply(ctx, args)))
+  unstable_batchedUpdates(() => (result = fn.apply(ctx, args)))
   return result
 }
 
@@ -14,13 +16,13 @@ export function batch (fn, ctx, args) {
 // the cache is necessary to always map the same thing to the same function
 // which makes sure that addEventListener/removeEventListener pairs don't break
 const cache = new Map()
-function batchFn (fn) {
+function batchFn(fn) {
   if (typeof fn !== 'function') {
     return fn
   }
   let batched = cache.get(fn)
   if (!batched) {
-    batched = function (...args) {
+    batched = function(...args) {
       return batch(fn, this, args)
     }
     cache.set(fn, batched)
@@ -29,18 +31,18 @@ function batchFn (fn) {
 }
 
 // batched window.addEventListener(cb) like callbacks
-function batchCallbacks (functionWithCallbacks) {
-  return function batchedCallbacks (...args) {
+function batchCallbacks(functionWithCallbacks) {
+  return function batchedCallbacks(...args) {
     return functionWithCallbacks.apply(this, args.map(batchFn))
   }
 }
 
 // batches obj.onevent = fn like calls
-function batchMethod (obj, method) {
+function batchMethod(obj, method) {
   const descriptor = Object.getOwnPropertyDescriptor(obj, method)
   if (descriptor) {
     const newDescriptor = Object.assign({}, descriptor, {
-      set (value) {
+      set(value) {
         return descriptor.set.call(this, batchFn(value))
       }
     })
@@ -66,9 +68,9 @@ if (globalObj) {
   }
 
   // eslint-disable-next-line
-  Promise.prototype.then = batchCallbacks(Promise.prototype.then);
+  Promise.prototype.then = batchCallbacks(Promise.prototype.then)
   // eslint-disable-next-line
-  Promise.prototype.catch = batchCallbacks(Promise.prototype.catch);
+  Promise.prototype.catch = batchCallbacks(Promise.prototype.catch)
 
   // batch addEventListener calls
   if (globalObj.EventTarget) {

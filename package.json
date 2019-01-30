@@ -1,6 +1,6 @@
 {
   "name": "react-easy-state",
-  "version": "6.1.0-beta.8",
+  "version": "6.1.0-beta.12",
   "description": "React state management with a minimal API. Made with ES6 Proxies.",
   "main": "dist/cjs.es6.js",
   "module": "dist/es.es6.js",
@@ -10,7 +10,7 @@
     "types"
   ],
   "scripts": {
-    "test-native": "jest --config ./jest.native.json && mv coverage/coverage-final.json coverage/coverage-native.json",
+    "test-native": "NATIVE=true jest --config ./jest.native.json && mv coverage/coverage-final.json coverage/coverage-native.json",
     "test-web": "jest --config ./jest.web.json && mv coverage/coverage-final.json coverage/coverage-web.json",
     "test": "npm run test-web && npm run test-native && npm run coverage",
     "coverage": "nyc report --reporter=lcov --reporter=text --temp-dir=./coverage",
@@ -22,7 +22,7 @@
     "build-examples": "node ./scripts/buildExamples.js",
     "link-examples": "node ./scripts/linkExamples.js",
     "unlink-examples": "node ./scripts/unlinkExamples.js",
-    "build": "node ./scripts/build.js",
+    "build": "rm -rf dist && mkdir dist && cp -R platforms/. dist/ && node ./scripts/build.js",
     "build-toc": "node ./scripts/buildToc.js"
   },
   "author": {
@@ -71,7 +71,6 @@
     "babel-eslint": "^10.0.1",
     "classnames": "2.2.6",
     "coveralls": "^3.0.2",
-    "del": "^3.0.0",
     "jest": "^24.0.0",
     "jest-dom": "^3.0.1",
     "markdown-toc": "^1.2.0",
@@ -90,6 +89,7 @@
     "rollup-plugin-auto-external": "^2.0.0",
     "rollup-plugin-babel": "^4.3.2",
     "rollup-plugin-node-resolve": "^4.0.0",
+    "rollup-plugin-replace": "^2.1.0",
     "sinon": "^7.2.3",
     "standard": "^12.0.1",
     "styled-components": "^4.1.3"

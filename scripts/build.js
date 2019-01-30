@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
-const del = require('del')
 const rollup = require('rollup')
+const replacePlugin = require('rollup-plugin-replace')
 const resolvePlugin = require('rollup-plugin-node-resolve')
 const babelPlugin = require('rollup-plugin-babel')
 const externalsPlugin = require('rollup-plugin-auto-external')
@@ -10,6 +10,7 @@ const bundles = [
   {
     input: {
       input: path.resolve('src/index.js'),
+      external: ['./react-platform'],
       plugins: [
         resolvePlugin(),
         babelPlugin({ exclude: 'node_modules/**' }),
@@ -26,6 +27,7 @@ const bundles = [
   {
     input: {
       input: path.resolve('src/index.js'),
+      external: ['./react-platform'],
       plugins: [
         resolvePlugin(),
         babelPlugin({
@@ -45,7 +47,9 @@ const bundles = [
   {
     input: {
       input: path.resolve('src/index.js'),
+      external: ['./react-platform.cjs'],
       plugins: [
+        replacePlugin({ 'react-platform': 'react-platform.cjs' }),
         resolvePlugin(),
         babelPlugin({ exclude: 'node_modules/**' }),
         externalsPlugin({ dependencies: true, peerDependecies: true })
@@ -61,7 +65,9 @@ const bundles = [
   {
     input: {
       input: path.resolve('src/index.js'),
+      external: ['./react-platform.cjs'],
       plugins: [
+        replacePlugin({ 'react-platform': 'react-platform.cjs' }),
         resolvePlugin(),
         babelPlugin({
           exclude: 'node_modules/**',
@@ -79,11 +85,7 @@ const bundles = [
   }
 ]
 
-async function build () {
-  // Clean up the output directory
-  await del(path.resolve('dist'))
-  fs.mkdirSync(path.resolve('dist'))
-
+async function build() {
   // Compile source code into a distributable format with Babel and Rollup
   for (const config of bundles) {
     const bundle = await rollup.rollup(config.input)
