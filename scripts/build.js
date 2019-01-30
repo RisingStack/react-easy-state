@@ -1,4 +1,3 @@
-const fs = require('fs')
 const path = require('path')
 const rollup = require('rollup')
 const replacePlugin = require('rollup-plugin-replace')
@@ -87,7 +86,7 @@ const bundles = [
   }
 ]
 
-async function build() {
+async function build () {
   // Compile source code into a distributable format with Babel and Rollup
   for (const config of bundles) {
     const bundle = await rollup.rollup(config.input)
