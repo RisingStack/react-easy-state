@@ -1,25 +1,37 @@
-import React from 'react'
-import { Text } from 'react-native'
-import { render } from 'react-native-testing-library'
-import { view, store, batch } from 'react-easy-state'
+import React, { StrictMode } from 'react'
+import { render, flushMicrotasksQueue } from 'react-native-testing-library'
+import sinon from 'sinon'
+import App from '../examples/native-clock/App'
 
-describe('batching', () => {
-  test('should batch state changes inside a batch() wrapper', () => {
-    let renderCount = 0
-    const person = store({ name: 'Bob' })
-    const MyComp = view(() => {
-      renderCount++
-      return <Text>{person.name}</Text>
-    })
+describe('Clock App', () => {
+  const clock = sinon.useFakeTimers()
+  const { getByText, unmount } = render(
+    <StrictMode>
+      <App />
+    </StrictMode>
+  )
+  // flush the inital didMount effect
+  flushMicrotasksQueue()
 
-    const { getByText } = render(<MyComp />)
-    expect(getByText('Bob')).toBeDefined()
-    expect(renderCount).toBe(1)
-    batch(() => {
-      person.name = 'Ann'
-      person.name = 'Rick'
-    })
-    expect(getByText('Rick')).toBeDefined()
-    expect(renderCount).toBe(2)
+  const clearIntervalSpy = sinon.spy(global, 'clearInterval')
+
+  afterAll(() => {
+    clock.restore()
+    clearIntervalSpy.restore()
+  })
+
+  test('should update to display the current time every second', () => {
+    expect(getByText('12:00:00 AM')).toBeDefined()
+
+    clock.tick(2000)
+    expect(getByText('12:00:02 AM')).toBeDefined()
+
+    clock.tick(8500)
+    expect(getByText('12:00:10 AM')).toBeDefined()
+  })
+
+  test('should clean up the interval timer when the component is unmounted', () => {
+    unmount()
+    expect(clearIntervalSpy.callCount).toBe(1)
   })
 })
