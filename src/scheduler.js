@@ -1,7 +1,19 @@
 /* eslint camelcase: 0 */
 
 import { isDOM, globalObj } from './utils'
-const { unstable_batchedUpdates } = require(`react-${isDOM ? 'dom' : 'native'}`)
+
+let unstable_batchedUpdates
+try {
+  const ReactDOM = require('react-dom')
+  unstable_batchedUpdates = ReactDOM.unstable_batchedUpdates
+} catch (err) {
+  try {
+    const ReactNative = require('react-native')
+    unstable_batchedUpdates = ReactNative.unstable_batchedUpdates
+  } catch (err) {
+    unstable_batchedUpdates = fn => fn()
+  }
+}
 
 // this runs the passed function and delays all re-renders
 // until the function is finished running
