@@ -464,7 +464,7 @@ export default view(() => {
 
 </details>
 
-**Local stores rely on experimental React hooks. They are not yet supported in React Native and they require React v16.8.0-alpha to work.**
+**Local stores in functions rely on experimental React hooks. They are not yet supported in React Native and they require React v16.8.0-alpha to work.**
 
 #### Local stores in class components
 
