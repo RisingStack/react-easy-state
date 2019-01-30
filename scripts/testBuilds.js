@@ -7,7 +7,7 @@ const files = fs
   .readdirSync(distPath)
   .filter(dist => dist.indexOf('map') === -1)
 
-async function testBuilds() {
+async function testBuilds () {
   for (let file of files) {
     const err = await execPromise(`BUNDLE=${file} npm run test`)
     if (err) {
@@ -20,7 +20,7 @@ async function testBuilds() {
   }
 }
 
-function execPromise(cmd) {
+function execPromise (cmd) {
   return new Promise(resolve => exec(cmd, resolve))
 }
 
