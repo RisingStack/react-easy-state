@@ -18,4 +18,6 @@ jobs:
       - run: npm install
       - run: npm run lint
       - run: npm test
+      - run: npm run build
+      - run: npm run test-builds
       - run: npm run coveralls
