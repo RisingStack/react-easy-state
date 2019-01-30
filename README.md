@@ -442,6 +442,8 @@ export default view(() => {
 })
 ```
 
+**Local stores in functions rely on experimental React hooks. They are not yet supported in React Native and they require React v16.8.0-alpha to work.**
+
 <details>
 <summary>You can use any React hook - including <code>useState</code> - in function components, Easy State won't interfere with them.</summary>
 <p></p>
@@ -463,8 +465,6 @@ export default view(() => {
 ```
 
 </details>
-
-**Local stores in functions rely on experimental React hooks. They are not yet supported in React Native and they require React v16.8.0-alpha to work.**
 
 #### Local stores in class components
 
