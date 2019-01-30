@@ -12,10 +12,10 @@
   "scripts": {
     "test-native": "jest --config ./jest.native.json && mv coverage/coverage-final.json coverage/coverage-native.json",
     "test-web": "jest --config ./jest.web.json && mv coverage/coverage-final.json coverage/coverage-web.json",
-    "test": "npm run test-web && npm run test-native",
+    "test": "npm run test-web && npm run test-native && npm run coverage",
     "coverage": "nyc report --reporter=lcov --reporter=text --temp-dir=./coverage",
-    "test-builds": "node ./scripts/testBuilds.js",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
+    "test-builds": "node ./scripts/testBuilds.js",
     "lint": "standard",
     "lint-fix": "prettier --ignore-path '.gitignore' --write '**/*.{js,jsx}' '!**/build/**' && standard --fix",
     "build-examples": "node ./scripts/buildExamples.js",
