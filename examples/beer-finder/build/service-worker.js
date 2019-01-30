@@ -11,10 +11,10 @@
  * See https://goo.gl/2aRDsh
  */
 
-importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.2/workbox-sw.js");
+importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/react-easy-state/examples/beer-finder/build/precache-manifest.84700166d7395ef6f786d1adb090a26c.js"
+  "/react-easy-state/examples/beer-finder/build/precache-manifest.dd36774a7a13cb9e7077323824a13293.js"
 );
 
 workbox.clientsClaim();

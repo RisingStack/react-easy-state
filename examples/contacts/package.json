@@ -4,7 +4,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react-easy-state": "^6.0.3",
+    "react": "^16.8.0-alpha.1",
+    "react-dom": "^16.8.0-alpha.1",
+    "react-easy-state": "^6.1.0-beta.1",
     "react-scripts": "2.0.4"
   },
   "scripts": {
