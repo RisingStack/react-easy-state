@@ -2,6 +2,10 @@
   "preset": "react-native",
   "testRegex": "\\.test\\.native\\.js$",
   "transform": {
-    "^.+\\.js$": "<rootDir>/node_modules/react-native/jest/preprocessor.js"
-  }
+    "^.+\\.js$": "react-native/jest/preprocessor.js"
+  },
+  "collectCoverage": true,
+  "coverageReporters": ["json", "text"],
+  "collectCoverageFrom": ["src/**/*.{js,jsx}", "examples/native-clock/App.js"],
+  "coverageDirectory": "coverage"
 }
