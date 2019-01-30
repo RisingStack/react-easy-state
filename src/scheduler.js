@@ -1,7 +1,7 @@
 /* eslint camelcase: 0 */
 
 // react platform is set to either react-dom or react-native during test and execution
-import { unstable_batchedUpdates } from './react-platform'
+import { unstable_batchedUpdates } from 'react-platform'
 import { globalObj } from './utils'
 
 // this runs the passed function and delays all re-renders

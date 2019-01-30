@@ -12,6 +12,7 @@ const bundles = [
       input: path.resolve('src/index.js'),
       external: ['./react-platform'],
       plugins: [
+        replacePlugin({ 'react-platform': './react-platform' }),
         resolvePlugin(),
         babelPlugin({ exclude: 'node_modules/**' }),
         externalsPlugin({ dependencies: true, peerDependecies: true })
@@ -29,6 +30,7 @@ const bundles = [
       input: path.resolve('src/index.js'),
       external: ['./react-platform'],
       plugins: [
+        replacePlugin({ 'react-platform': './react-platform' }),
         resolvePlugin(),
         babelPlugin({
           exclude: 'node_modules/**',
@@ -49,7 +51,7 @@ const bundles = [
       input: path.resolve('src/index.js'),
       external: ['./react-platform.cjs'],
       plugins: [
-        replacePlugin({ 'react-platform': 'react-platform.cjs' }),
+        replacePlugin({ 'react-platform': './react-platform.cjs' }),
         resolvePlugin(),
         babelPlugin({ exclude: 'node_modules/**' }),
         externalsPlugin({ dependencies: true, peerDependecies: true })
@@ -67,7 +69,7 @@ const bundles = [
       input: path.resolve('src/index.js'),
       external: ['./react-platform.cjs'],
       plugins: [
-        replacePlugin({ 'react-platform': 'react-platform.cjs' }),
+        replacePlugin({ 'react-platform': './react-platform.cjs' }),
         resolvePlugin(),
         babelPlugin({
           exclude: 'node_modules/**',
