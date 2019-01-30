@@ -1,13 +1,13 @@
 {
-  "main.css": "/react-easy-state/examples/stop-watch/build/static/css/main.1a122f7e.chunk.css",
-  "main.js": "/react-easy-state/examples/stop-watch/build/static/js/main.00706c0e.chunk.js",
-  "main.js.map": "/react-easy-state/examples/stop-watch/build/static/js/main.00706c0e.chunk.js.map",
-  "static/js/1.f4df1166.chunk.js": "/react-easy-state/examples/stop-watch/build/static/js/1.f4df1166.chunk.js",
-  "static/js/1.f4df1166.chunk.js.map": "/react-easy-state/examples/stop-watch/build/static/js/1.f4df1166.chunk.js.map",
+  "main.css": "/react-easy-state/examples/stop-watch/build/static/css/main.5ddc09ce.chunk.css",
+  "main.js": "/react-easy-state/examples/stop-watch/build/static/js/main.0aeddc01.chunk.js",
+  "main.js.map": "/react-easy-state/examples/stop-watch/build/static/js/main.0aeddc01.chunk.js.map",
+  "static/js/1.bd7f36ae.chunk.js": "/react-easy-state/examples/stop-watch/build/static/js/1.bd7f36ae.chunk.js",
+  "static/js/1.bd7f36ae.chunk.js.map": "/react-easy-state/examples/stop-watch/build/static/js/1.bd7f36ae.chunk.js.map",
   "runtime~main.js": "/react-easy-state/examples/stop-watch/build/static/js/runtime~main.1eb34532.js",
   "runtime~main.js.map": "/react-easy-state/examples/stop-watch/build/static/js/runtime~main.1eb34532.js.map",
-  "static/css/main.1a122f7e.chunk.css.map": "/react-easy-state/examples/stop-watch/build/static/css/main.1a122f7e.chunk.css.map",
+  "static/css/main.5ddc09ce.chunk.css.map": "/react-easy-state/examples/stop-watch/build/static/css/main.5ddc09ce.chunk.css.map",
   "index.html": "/react-easy-state/examples/stop-watch/build/index.html",
-  "precache-manifest.9e52223e0a166959442b2cb1282da133.js": "/react-easy-state/examples/stop-watch/build/precache-manifest.9e52223e0a166959442b2cb1282da133.js",
+  "precache-manifest.2e66d61da8c562b98f03322dd2d12ea8.js": "/react-easy-state/examples/stop-watch/build/precache-manifest.2e66d61da8c562b98f03322dd2d12ea8.js",
   "service-worker.js": "/react-easy-state/examples/stop-watch/build/service-worker.js"
 }

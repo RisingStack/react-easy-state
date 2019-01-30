@@ -1,13 +1,13 @@
 {
-  "main.css": "/react-easy-state/examples/clock/build/static/css/main.c22d67c8.chunk.css",
-  "main.js": "/react-easy-state/examples/clock/build/static/js/main.59984b61.chunk.js",
-  "main.js.map": "/react-easy-state/examples/clock/build/static/js/main.59984b61.chunk.js.map",
-  "static/js/1.b3329841.chunk.js": "/react-easy-state/examples/clock/build/static/js/1.b3329841.chunk.js",
-  "static/js/1.b3329841.chunk.js.map": "/react-easy-state/examples/clock/build/static/js/1.b3329841.chunk.js.map",
+  "main.css": "/react-easy-state/examples/clock/build/static/css/main.3b972abc.chunk.css",
+  "main.js": "/react-easy-state/examples/clock/build/static/js/main.3dd22200.chunk.js",
+  "main.js.map": "/react-easy-state/examples/clock/build/static/js/main.3dd22200.chunk.js.map",
+  "static/js/1.510f7fbe.chunk.js": "/react-easy-state/examples/clock/build/static/js/1.510f7fbe.chunk.js",
+  "static/js/1.510f7fbe.chunk.js.map": "/react-easy-state/examples/clock/build/static/js/1.510f7fbe.chunk.js.map",
   "runtime~main.js": "/react-easy-state/examples/clock/build/static/js/runtime~main.5a34071e.js",
   "runtime~main.js.map": "/react-easy-state/examples/clock/build/static/js/runtime~main.5a34071e.js.map",
-  "static/css/main.c22d67c8.chunk.css.map": "/react-easy-state/examples/clock/build/static/css/main.c22d67c8.chunk.css.map",
+  "static/css/main.3b972abc.chunk.css.map": "/react-easy-state/examples/clock/build/static/css/main.3b972abc.chunk.css.map",
   "index.html": "/react-easy-state/examples/clock/build/index.html",
-  "precache-manifest.5ed0978544a60d7905b44d03b34a97c9.js": "/react-easy-state/examples/clock/build/precache-manifest.5ed0978544a60d7905b44d03b34a97c9.js",
+  "precache-manifest.be9206169695a2fbe56351277062c318.js": "/react-easy-state/examples/clock/build/precache-manifest.be9206169695a2fbe56351277062c318.js",
   "service-worker.js": "/react-easy-state/examples/clock/build/service-worker.js"
 }

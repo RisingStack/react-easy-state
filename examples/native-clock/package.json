@@ -9,7 +9,7 @@
   "dependencies": {
     "expo": "^32.0.0",
     "react": "^16.8.0-alpha.1",
-    "react-easy-state": "^6.1.0-beta.1",
+    "react-easy-state": "^6.1.0-beta.3",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz"
   },
   "devDependencies": {

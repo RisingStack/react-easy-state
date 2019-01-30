@@ -6,7 +6,11 @@ const examplesPath = path.resolve('examples')
 
 const examples = fs
   .readdirSync(examplesPath)
-  .filter(dir => fs.statSync(path.join(examplesPath, dir)).isDirectory())
+  .filter(
+    dir =>
+      dir.indexOf('native') === -1 &&
+      fs.statSync(path.join(examplesPath, dir)).isDirectory()
+  )
 
 for (let example of examples) {
   example = path.join(examplesPath, example)

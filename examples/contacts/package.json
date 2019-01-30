@@ -6,7 +6,7 @@
   "dependencies": {
     "react": "^16.8.0-alpha.1",
     "react-dom": "^16.8.0-alpha.1",
-    "react-easy-state": "^6.1.0-beta.1",
+    "react-easy-state": "^6.1.0-beta.3",
     "react-scripts": "2.0.4"
   },
   "scripts": {
