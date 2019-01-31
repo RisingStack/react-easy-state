@@ -10,7 +10,7 @@
     "types"
   ],
   "scripts": {
-    "test-native": "NATIVE=true jest --config ./jest.native.json && mv coverage/coverage-final.json coverage/coverage-native.json",
+    "test-native": "NATIVE=true jest --config ./jest.native.json && rm coverage/coverage-final.json",
     "test-web": "jest --config ./jest.web.json && mv coverage/coverage-final.json coverage/coverage-web.json",
     "test": "npm run test-web && npm run test-native && npm run coverage",
     "coverage": "nyc report --reporter=lcov --reporter=text --temp-dir=./coverage",

@@ -1,13 +1,13 @@
 {
-  "main.css": "/react-easy-state/examples/contacts/build/static/css/main.f3e550ac.chunk.css",
-  "main.js": "/react-easy-state/examples/contacts/build/static/js/main.a2270f7d.chunk.js",
-  "main.js.map": "/react-easy-state/examples/contacts/build/static/js/main.a2270f7d.chunk.js.map",
-  "static/js/1.b8180ded.chunk.js": "/react-easy-state/examples/contacts/build/static/js/1.b8180ded.chunk.js",
-  "static/js/1.b8180ded.chunk.js.map": "/react-easy-state/examples/contacts/build/static/js/1.b8180ded.chunk.js.map",
+  "main.css": "/react-easy-state/examples/contacts/build/static/css/main.94e80c28.chunk.css",
+  "main.js": "/react-easy-state/examples/contacts/build/static/js/main.7dfe4a5f.chunk.js",
+  "main.js.map": "/react-easy-state/examples/contacts/build/static/js/main.7dfe4a5f.chunk.js.map",
+  "static/js/1.a5c246e9.chunk.js": "/react-easy-state/examples/contacts/build/static/js/1.a5c246e9.chunk.js",
+  "static/js/1.a5c246e9.chunk.js.map": "/react-easy-state/examples/contacts/build/static/js/1.a5c246e9.chunk.js.map",
   "runtime~main.js": "/react-easy-state/examples/contacts/build/static/js/runtime~main.c62d2dc8.js",
   "runtime~main.js.map": "/react-easy-state/examples/contacts/build/static/js/runtime~main.c62d2dc8.js.map",
-  "static/css/main.f3e550ac.chunk.css.map": "/react-easy-state/examples/contacts/build/static/css/main.f3e550ac.chunk.css.map",
+  "static/css/main.94e80c28.chunk.css.map": "/react-easy-state/examples/contacts/build/static/css/main.94e80c28.chunk.css.map",
   "index.html": "/react-easy-state/examples/contacts/build/index.html",
-  "precache-manifest.da72e6263040116e57a3bd67f2bc82d2.js": "/react-easy-state/examples/contacts/build/precache-manifest.da72e6263040116e57a3bd67f2bc82d2.js",
+  "precache-manifest.86f22339d71b11bb44cfe74fad6ad8b0.js": "/react-easy-state/examples/contacts/build/precache-manifest.86f22339d71b11bb44cfe74fad6ad8b0.js",
   "service-worker.js": "/react-easy-state/examples/contacts/build/service-worker.js"
 }
