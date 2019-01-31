@@ -1,6 +1,6 @@
 {
   "name": "react-easy-state",
-  "version": "6.1.0-beta.14",
+  "version": "6.1.0",
   "description": "React state management with a minimal API. Made with ES6 Proxies.",
   "main": "dist/cjs.es6.js",
   "module": "dist/es.es6.js",
@@ -10,11 +10,10 @@
     "types"
   ],
   "scripts": {
-    "test-native": "NATIVE=true jest --config ./jest.native.json && mv coverage/coverage-final.json coverage/coverage-native.json",
-    "test-web": "jest --config ./jest.web.json && mv coverage/coverage-final.json coverage/coverage-web.json",
-    "test": "npm run test-web && npm run test-native && npm run coverage",
-    "coverage": "nyc report --reporter=lcov --reporter=text --temp-dir=./coverage",
-    "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
+    "test-native": "NATIVE=true jest --config ./jest.native.json",
+    "test-web": "jest --config ./jest.web.json",
+    "test": "npm run test-web && npm run test-native",
+    "coveralls": "cat ./coverage/lcov.info | coveralls",
     "test-builds": "node ./scripts/testBuilds.js",
     "lint": "standard",
     "lint-fix": "prettier --ignore-path '.gitignore' --write '**/*.{js,jsx}' '!**/build/**' && standard --fix",
