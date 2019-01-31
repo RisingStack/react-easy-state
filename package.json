@@ -72,6 +72,7 @@
     "coveralls": "^3.0.2",
     "jest": "^24.0.0",
     "jest-dom": "^3.0.1",
+    "lcov-result-merger": "^3.1.0",
     "markdown-toc": "^1.2.0",
     "moment": "2.24.0",
     "nyc": "^13.1.0",
