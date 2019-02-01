@@ -41,9 +41,9 @@ import React from 'react'
 import { store, view } from 'react-easy-state'
 
 const count = store({ num: 0 })
-const increment = () => count.num++
+const increment = () => counter.num++
 
-export default view(() => (<button onClick={increment}>{count.num}</button>))
+export default view(() => (<button onClick={increment}>{counter.num}</button>))
 ```
 
 This is enough for it to automatically update your views when needed. It doesn't matter how you structure or mutate your state stores, any syntactically valid code works.
@@ -80,10 +80,7 @@ _You need npm 5.2+ to use npx._
 ```js
 import { store } from 'react-easy-state'
 
-const user = store({
-  name: 'Rick'
-})
-
+const user = store({ name: 'Rick' })
 // stores behave like normal JS objects
 user.name = 'Bob'
 ```
