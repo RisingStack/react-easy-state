@@ -433,7 +433,8 @@ import { view, store } from 'react-easy-state'
 
 export default view(() => {
   const counter = store({ num: 0 })
-  return <button={() => counter.num++}>{counter.num}</div>
+  const increment = () => counter.num++
+  return <button={increment}>{counter.num}</div>
 })
 ```
 
