@@ -12,18 +12,18 @@ Simple React state management. Made with :heart: and ES6 Proxies.
 
 <!-- toc -->
 
-* [Introduction](#introduction)
-* [Installation](#installation)
-* [Usage](#usage)
-  + [Creating global stores](#creating-global-stores)
-  + [Creating reactive views](#creating-reactive-views)
-  + [Creating local stores](#creating-local-stores)
-* [Examples with live demos](#examples-with-live-demos)
-* [Articles](#articles)
-* [Performance](#performance)
-* [Platform support](#platform-support)
-* [Alternative builds](#alternative-builds)
-* [Contributing](#contributing)
+- [Introduction](#introduction)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Creating global stores](#creating-global-stores)
+  - [Creating reactive views](#creating-reactive-views)
+  - [Creating local stores](#creating-local-stores)
+- [Examples with live demos](#examples-with-live-demos)
+- [Articles](#articles)
+- [Performance](#performance)
+- [Platform support](#platform-support)
+- [Alternative builds](#alternative-builds)
+- [Contributing](#contributing)
 
 <!-- tocstop -->
 
@@ -40,10 +40,10 @@ React Easy State is a practical state management library with two functions and 
 import React from 'react'
 import { store, view } from 'react-easy-state'
 
-const count = store({ num: 0 })
+const counter = store({ num: 0 })
 const increment = () => counter.num++
 
-export default view(() => (<button onClick={increment}>{counter.num}</button>))
+export default view(() => <button onClick={increment}>{counter.num}</button>)
 ```
 
 This is enough for it to automatically update your views when needed. It doesn't matter how you structure or mutate your state stores, any syntactically valid code works.
@@ -216,7 +216,7 @@ const counter = store({
   }
 })
 
-export default view(() => (<div onClick={counter.increment}>{counter.num}</div>))
+export default view(() => <div onClick={counter.increment}>{counter.num}</div>)
 ```
 
 `this.num++` won't work, because `increment` is passed as a callback and loses its `this`. You should use the direct object reference - `counter` - instead of `this`.
@@ -262,11 +262,11 @@ const App = view(() => (
 ))
 
 // DO THIS
-const Profile = view(({ user }) => (<p>Name: {user.name}</p>))
+const Profile = view(({ user }) => <p>Name: {user.name}</p>)
 
 // DON'T DO THIS
 // This won't re-render on appStore.user.name = 'newName' like mutations
-const Profile = ({ user }) => (<p>Name: {user.name}</p>)
+const Profile = ({ user }) => <p>Name: {user.name}</p>
 ```
 
 </details>
@@ -299,9 +299,9 @@ export default view(() => (
 <summary><code>view</code> implements an optimal <code>shouldComponentUpdate</code> (or <code>memo</code>) for your components.</summary>
 <p></p>
 
-* Using `PureComponent` or `memo` will provide no additional performance benefits.
+- Using `PureComponent` or `memo` will provide no additional performance benefits.
 
-* Defining a custom `shouldComponentUpdate` may rarely provide performance benefits when you apply some use case specific heuristics inside it.
+- Defining a custom `shouldComponentUpdate` may rarely provide performance benefits when you apply some use case specific heuristics inside it.
 
 </details>
 <p></p>
@@ -386,9 +386,9 @@ view(withTheme(Comp))
 <summary>Usage with (pre v4.4) React Router.</summary>
 <p></p>
 
-* If routing is not updated properly, wrap your `view(Comp)` - with the `Route`s inside - in `withRouter(view(Comp))`. This lets react-router know when to update.
+- If routing is not updated properly, wrap your `view(Comp)` - with the `Route`s inside - in `withRouter(view(Comp))`. This lets react-router know when to update.
 
-* The order of the HOCs matter, always use `withRouter(view(Comp))`.
+- The order of the HOCs matter, always use `withRouter(view(Comp))`.
 
 This is not necessary if you use React Router 4.4+. You can find more details and some reasoning about this in [this react-router docs page](https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/guides/blocked-updates.md).
 
@@ -416,7 +416,7 @@ const dataStore = store({
   ]
 })
 
-export default view(() => (<Table data={cloneDeep(dataStore.items)} />))
+export default view(() => <Table data={cloneDeep(dataStore.items)} />)
 ```
 
 </details>
@@ -566,38 +566,38 @@ Instead of returning an object, you should directly mutate the received stores. 
 
 #### Beginner
 
-* [Clock Widget](https://solkimicreb.github.io/react-easy-state/examples/clock/build) ([source](/examples/clock/)) ([codesandbox](https://codesandbox.io/s/github/solkimicreb/react-easy-state/tree/master/examples/clock)) ([react-native source](/examples/native-clock/)) ([react-native sandbox](https://snack.expo.io/@git/github.com/solkimicreb/react-easy-state:examples/native-clock)): a reusable clock widget with a tiny local state store.
-* [Stopwatch](https://solkimicreb.github.io/react-easy-state/examples/stop-watch/build) ([source](/examples/stop-watch/)) ([codesandbox](https://codesandbox.io/s/github/solkimicreb/react-easy-state/tree/master/examples/stop-watch)) ([tutorial](https://hackernoon.com/introducing-react-easy-state-1210a156fa16)): a stopwatch with a mix of normal and computed state properties.
+- [Clock Widget](https://solkimicreb.github.io/react-easy-state/examples/clock/build) ([source](/examples/clock/)) ([codesandbox](https://codesandbox.io/s/github/solkimicreb/react-easy-state/tree/master/examples/clock)) ([react-native source](/examples/native-clock/)) ([react-native sandbox](https://snack.expo.io/@git/github.com/solkimicreb/react-easy-state:examples/native-clock)): a reusable clock widget with a tiny local state store.
+- [Stopwatch](https://solkimicreb.github.io/react-easy-state/examples/stop-watch/build) ([source](/examples/stop-watch/)) ([codesandbox](https://codesandbox.io/s/github/solkimicreb/react-easy-state/tree/master/examples/stop-watch)) ([tutorial](https://hackernoon.com/introducing-react-easy-state-1210a156fa16)): a stopwatch with a mix of normal and computed state properties.
 
 #### Advanced
 
-* [TodoMVC](https://solkimicreb.github.io/react-easy-state/examples/todo-mvc/build) ([source](/examples/todo-mvc/)) ([codesandbox](https://codesandbox.io/s/github/solkimicreb/react-easy-state/tree/master/examples/todo-mvc)): a classic TodoMVC implementation with a lot of computed data and implicit reactivity.
-* [Contacts Table](https://solkimicreb.github.io/react-easy-state/examples/contacts/build) ([source](/examples/contacts/)) ([codesandbox](https://codesandbox.io/s/github/solkimicreb/react-easy-state/tree/master/examples/contacts)): a data grid implementation with a mix of global and local state.
-* [Beer Finder](https://solkimicreb.github.io/react-easy-state/examples/beer-finder/build) ([source](/examples/beer-finder/)) ([codesandbox](https://codesandbox.io/s/github/solkimicreb/react-easy-state/tree/master/examples/beer-finder)) ([tutorial](https://medium.com/@solkimicreb/design-patterns-with-react-easy-state-830b927acc7c)): an app with async actions and a mix of local and global state, which finds matching beers for your meal.
+- [TodoMVC](https://solkimicreb.github.io/react-easy-state/examples/todo-mvc/build) ([source](/examples/todo-mvc/)) ([codesandbox](https://codesandbox.io/s/github/solkimicreb/react-easy-state/tree/master/examples/todo-mvc)): a classic TodoMVC implementation with a lot of computed data and implicit reactivity.
+- [Contacts Table](https://solkimicreb.github.io/react-easy-state/examples/contacts/build) ([source](/examples/contacts/)) ([codesandbox](https://codesandbox.io/s/github/solkimicreb/react-easy-state/tree/master/examples/contacts)): a data grid implementation with a mix of global and local state.
+- [Beer Finder](https://solkimicreb.github.io/react-easy-state/examples/beer-finder/build) ([source](/examples/beer-finder/)) ([codesandbox](https://codesandbox.io/s/github/solkimicreb/react-easy-state/tree/master/examples/beer-finder)) ([tutorial](https://medium.com/@solkimicreb/design-patterns-with-react-easy-state-830b927acc7c)): an app with async actions and a mix of local and global state, which finds matching beers for your meal.
 
 ## Articles
 
-* [Introducing React Easy State](https://blog.risingstack.com/introducing-react-easy-state/): making a simple stopwatch.
-* [Stress Testing React Easy State](https://medium.com/@solkimicreb/stress-testing-react-easy-state-ac321fa3becf): demonstrating Easy State's reactivity with increasingly exotic state mutations.
-* [Design Patterns with React Easy State](https://medium.com/@solkimicreb/design-patterns-with-react-easy-state-830b927acc7c): demonstrating async actions and local and global state management through a beer finder app.
-* [The Ideas Behind React Easy State](https://medium.com/dailyjs/the-ideas-behind-react-easy-state-901d70e4d03e): a deep dive under the hood of Easy State.
+- [Introducing React Easy State](https://blog.risingstack.com/introducing-react-easy-state/): making a simple stopwatch.
+- [Stress Testing React Easy State](https://medium.com/@solkimicreb/stress-testing-react-easy-state-ac321fa3becf): demonstrating Easy State's reactivity with increasingly exotic state mutations.
+- [Design Patterns with React Easy State](https://medium.com/@solkimicreb/design-patterns-with-react-easy-state-830b927acc7c): demonstrating async actions and local and global state management through a beer finder app.
+- [The Ideas Behind React Easy State](https://medium.com/dailyjs/the-ideas-behind-react-easy-state-901d70e4d03e): a deep dive under the hood of Easy State.
 
 ## Performance
 
 You can compare Easy State with plain React and other state management libraries with the below benchmarks. It performs a bit better than MobX and similarly to Redux.
 
-* [js-framework-benchmark](https://github.com/krausest/js-framework-benchmark) ([source](https://github.com/krausest/js-framework-benchmark/tree/master/react-v16.1.0-easy-state-v4.0.1-keyed)) ([results](https://rawgit.com/krausest/js-framework-benchmark/master/webdriver-ts-results/table.html))
+- [js-framework-benchmark](https://github.com/krausest/js-framework-benchmark) ([source](https://github.com/krausest/js-framework-benchmark/tree/master/react-v16.1.0-easy-state-v4.0.1-keyed)) ([results](https://rawgit.com/krausest/js-framework-benchmark/master/webdriver-ts-results/table.html))
 
 ## Platform support
 
-* Node: 6 and above
-* Chrome: 49 and above
-* Firefox: 38 and above
-* Safari: 10 and above
-* Edge: 12 and above
-* Opera: 36 and above
-* React Native: iOS 10 and above and Android with [community JSC](https://github.com/SoftwareMansion/jsc-android-buildscripts)
-* IE is not supported and never will be
+- Node: 6 and above
+- Chrome: 49 and above
+- Firefox: 38 and above
+- Safari: 10 and above
+- Edge: 12 and above
+- Opera: 36 and above
+- React Native: iOS 10 and above and Android with [community JSC](https://github.com/SoftwareMansion/jsc-android-buildscripts)
+- IE is not supported and never will be
 
 _This library is based on non polyfillable ES6 Proxies. Because of this, it will never support IE._
 
@@ -607,10 +607,10 @@ _React Native is supported on iOS and Android is supported with the community Ja
 
 This library detects if you use ES6 or commonJS modules and serve the right format to you. The default bundles use ES6 features, which may not yet be supported by some minifier tools. If you experience issues during the build process, you can switch to one of the ES5 builds from below.
 
-* `react-easy-state/dist/es.es6.js` exposes an ES6 build with ES6 modules.
-* `react-easy-state/dist/es.es5.js` exposes an ES5 build with ES6 modules.
-* `react-easy-state/dist/cjs.es6.js` exposes an ES6 build with commonJS modules.
-* `react-easy-state/dist/cjs.es5.js` exposes an ES5 build with commonJS modules.
+- `react-easy-state/dist/es.es6.js` exposes an ES6 build with ES6 modules.
+- `react-easy-state/dist/es.es5.js` exposes an ES5 build with ES6 modules.
+- `react-easy-state/dist/cjs.es6.js` exposes an ES6 build with commonJS modules.
+- `react-easy-state/dist/cjs.es5.js` exposes an ES5 build with commonJS modules.
 
 If you use a bundler, set up an alias for `react-easy-state` to point to your desired build. You can learn how to do it with webpack [here](https://webpack.js.org/configuration/resolve/#resolve-alias) and with rollup [here](https://github.com/rollup/rollup-plugin-alias#usage).
 
