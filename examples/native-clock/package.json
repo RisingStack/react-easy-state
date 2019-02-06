@@ -9,7 +9,7 @@
   "dependencies": {
     "expo": "^32.0.0",
     "moment": "^2.22.2",
-    "react": "^16.8.0-alpha.1",
+    "react": "^16.8.0",
     "react-easy-state": "^6.1.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz"
   },
