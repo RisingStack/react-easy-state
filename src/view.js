@@ -4,7 +4,6 @@ import { hasHooks } from './utils'
 
 export let isInsideFunctionComponent = false
 const COMPONENT = Symbol('owner component')
-const DUMMY_STATE = {}
 
 export default function view(Comp) {
   const isStatelessComp = !(Comp.prototype && Comp.prototype.isReactComponent)
@@ -22,7 +21,7 @@ export default function view(Comp) {
       const render = useMemo(
         () =>
           observe(Comp, {
-            scheduler: () => setState(DUMMY_STATE),
+            scheduler: () => setState({}),
             lazy: true
           }),
         []
@@ -56,7 +55,7 @@ export default function view(Comp) {
 
         // create a reactive render for the component
         this.render = observe(this.render, {
-          scheduler: () => this.setState(DUMMY_STATE),
+          scheduler: () => this.setState({}),
           lazy: true
         })
       }
