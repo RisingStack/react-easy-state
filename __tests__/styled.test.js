@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { act } from 'react-dom/test-utils'
 import { render, cleanup } from 'react-testing-library'
 import { view, store } from 'react-easy-state'
 import { withTheme, ThemeProvider } from 'styled-components'
@@ -24,7 +25,9 @@ describe('withRouter interaction', () => {
         </Theme>
       )
       expect(container).toHaveTextContent('0')
-      counter.num++
+      act(() => {
+        counter.num++
+      })
       expect(container).toHaveTextContent('1')
     })
 
@@ -61,7 +64,9 @@ describe('withRouter interaction', () => {
         </Theme>
       )
       expect(container).toHaveTextContent('0')
-      counter.num++
+      act(() => {
+        counter.num++
+      })
       expect(container).toHaveTextContent('1')
     })
 
