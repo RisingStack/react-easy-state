@@ -8,15 +8,15 @@ self.__precacheManifest = [
     "url": "/react-easy-state/examples/contacts/build/static/js/main.7dfe4a5f.chunk.js"
   },
   {
-    "revision": "a5c246e997d13fcb5a9a",
-    "url": "/react-easy-state/examples/contacts/build/static/js/1.a5c246e9.chunk.js"
+    "revision": "28edcf2ae83d7a799307",
+    "url": "/react-easy-state/examples/contacts/build/static/js/1.28edcf2a.chunk.js"
   },
   {
     "revision": "7dfe4a5f4d6156f5fc0f",
     "url": "/react-easy-state/examples/contacts/build/static/css/main.94e80c28.chunk.css"
   },
   {
-    "revision": "a3c794f12dd59f612f8d4d0b733266f4",
+    "revision": "0c694cda8361d4d692f4922428d5d370",
     "url": "/react-easy-state/examples/contacts/build/index.html"
   }
 ];

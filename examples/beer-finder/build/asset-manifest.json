@@ -1,13 +1,13 @@
 {
-  "main.css": "/react-easy-state/examples/beer-finder/build/static/css/main.f0b724b0.chunk.css",
-  "main.js": "/react-easy-state/examples/beer-finder/build/static/js/main.59d9ef6c.chunk.js",
-  "main.js.map": "/react-easy-state/examples/beer-finder/build/static/js/main.59d9ef6c.chunk.js.map",
-  "static/js/1.48dd41fd.chunk.js": "/react-easy-state/examples/beer-finder/build/static/js/1.48dd41fd.chunk.js",
-  "static/js/1.48dd41fd.chunk.js.map": "/react-easy-state/examples/beer-finder/build/static/js/1.48dd41fd.chunk.js.map",
+  "main.css": "/react-easy-state/examples/beer-finder/build/static/css/main.68af5759.chunk.css",
+  "main.js": "/react-easy-state/examples/beer-finder/build/static/js/main.81e79220.chunk.js",
+  "main.js.map": "/react-easy-state/examples/beer-finder/build/static/js/main.81e79220.chunk.js.map",
+  "static/js/1.51d2e19d.chunk.js": "/react-easy-state/examples/beer-finder/build/static/js/1.51d2e19d.chunk.js",
+  "static/js/1.51d2e19d.chunk.js.map": "/react-easy-state/examples/beer-finder/build/static/js/1.51d2e19d.chunk.js.map",
   "runtime~main.js": "/react-easy-state/examples/beer-finder/build/static/js/runtime~main.1467e7f9.js",
   "runtime~main.js.map": "/react-easy-state/examples/beer-finder/build/static/js/runtime~main.1467e7f9.js.map",
-  "static/css/main.f0b724b0.chunk.css.map": "/react-easy-state/examples/beer-finder/build/static/css/main.f0b724b0.chunk.css.map",
+  "static/css/main.68af5759.chunk.css.map": "/react-easy-state/examples/beer-finder/build/static/css/main.68af5759.chunk.css.map",
   "index.html": "/react-easy-state/examples/beer-finder/build/index.html",
-  "precache-manifest.c7ed87fcb07ceb771b937755d2099cb4.js": "/react-easy-state/examples/beer-finder/build/precache-manifest.c7ed87fcb07ceb771b937755d2099cb4.js",
+  "precache-manifest.0a9853de7db207784bf5874bead4f226.js": "/react-easy-state/examples/beer-finder/build/precache-manifest.0a9853de7db207784bf5874bead4f226.js",
   "service-worker.js": "/react-easy-state/examples/beer-finder/build/service-worker.js"
 }

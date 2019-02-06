@@ -8,15 +8,15 @@ self.__precacheManifest = [
     "url": "/react-easy-state/examples/todo-mvc/build/static/js/main.0e02c66a.chunk.js"
   },
   {
-    "revision": "8c4b564287125a689932",
-    "url": "/react-easy-state/examples/todo-mvc/build/static/js/1.8c4b5642.chunk.js"
+    "revision": "c1ee194e9371c9b1c674",
+    "url": "/react-easy-state/examples/todo-mvc/build/static/js/1.c1ee194e.chunk.js"
   },
   {
     "revision": "0e02c66a0e597ec0a8c7",
     "url": "/react-easy-state/examples/todo-mvc/build/static/css/main.cd3982b1.chunk.css"
   },
   {
-    "revision": "96f73d0ad57c5eb0e347b4976d577e39",
+    "revision": "6ac8fccbf3f5295a9643d484c266b0f1",
     "url": "/react-easy-state/examples/todo-mvc/build/index.html"
   }
 ];

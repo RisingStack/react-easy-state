@@ -29,6 +29,8 @@ Simple React state management. Made with :heart: and ES6 Proxies.
 
 </details>
 
+**IMPORTANT:** v6.1.1 fixed a critical issue with React hooks. Please upgrade Easy State from v6.1.0 to v6.1.1 when you upgrade React from v16.8-alpha to v16.8 stable. Thanks!
+
 ## Introduction
 
 React Easy State is a practical state management library with two functions and two accompanying rules.
@@ -438,7 +440,7 @@ export default view(() => {
 })
 ```
 
-**Local stores in functions rely on experimental React hooks. They are not yet supported in React Native and they require React v16.8.0 (alpha) to work.**
+**Local stores in functions rely on experimental React hooks. They are not yet supported in React Native and they require React v16.8.0 to work.**
 
 <details>
 <summary>You can use any React hook - including <code>useState</code> - in function components, Easy State won't interfere with them.</summary>
