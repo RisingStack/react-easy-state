@@ -29,6 +29,7 @@ Simple React state management. Made with :heart: and ES6 Proxies.
 
 </details>
 
+<p></p>
 **IMPORTANT:** v6.1.1 fixed a critical issue with React hooks. Please upgrade Easy State from v6.1.0 to v6.1.1 when you upgrade React from v16.8-alpha to v16.8 stable. Thanks!
 
 ## Introduction
