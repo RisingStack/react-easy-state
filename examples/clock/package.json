@@ -4,11 +4,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "moment": "^2.22.2",
-    "react": "^16.8.0",
-    "react-dom": "^16.8.0",
+    "moment": "^2.24.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "react-easy-state": "^6.1.1",
-    "react-scripts": "2.0.4"
+    "react-scripts": "3.0.1"
   },
   "scripts": {
     "start": "react-scripts start",

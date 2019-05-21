@@ -7,14 +7,14 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "expo": "^32.0.0",
-    "moment": "^2.22.2",
-    "react": "^16.8.0",
+    "expo": "^32.0.6",
+    "moment": "^2.24.0",
+    "react": "^16.8.6",
     "react-easy-state": "^6.1.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz"
   },
   "devDependencies": {
-    "babel-preset-expo": "^5.0.0"
+    "babel-preset-expo": "^5.1.1"
   },
   "private": true
 }

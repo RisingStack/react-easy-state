@@ -40,7 +40,7 @@ function batchCallbacks (functionWithCallbacks) {
 // batches obj.onevent = fn like calls
 function batchMethod (obj, method) {
   const descriptor = Object.getOwnPropertyDescriptor(obj, method)
-  if (descriptor) {
+  if (descriptor && descriptor.configurable) {
     const newDescriptor = Object.assign({}, descriptor, {
       set (value) {
         return descriptor.set.call(this, batchFn(value))
