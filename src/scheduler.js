@@ -15,7 +15,7 @@ export function batch (fn, ctx, args) {
 // this creates and returns a batched version of the passed function
 // the cache is necessary to always map the same thing to the same function
 // which makes sure that addEventListener/removeEventListener pairs don't break
-const cache = new Map()
+const cache = new WeakMap()
 function batchFn (fn) {
   if (typeof fn !== 'function') {
     return fn
