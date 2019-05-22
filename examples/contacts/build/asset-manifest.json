@@ -1,13 +1,15 @@
 {
-  "main.css": "/react-easy-state/examples/contacts/build/static/css/main.94e80c28.chunk.css",
-  "main.js": "/react-easy-state/examples/contacts/build/static/js/main.7dfe4a5f.chunk.js",
-  "main.js.map": "/react-easy-state/examples/contacts/build/static/js/main.7dfe4a5f.chunk.js.map",
-  "static/js/1.28edcf2a.chunk.js": "/react-easy-state/examples/contacts/build/static/js/1.28edcf2a.chunk.js",
-  "static/js/1.28edcf2a.chunk.js.map": "/react-easy-state/examples/contacts/build/static/js/1.28edcf2a.chunk.js.map",
-  "runtime~main.js": "/react-easy-state/examples/contacts/build/static/js/runtime~main.c62d2dc8.js",
-  "runtime~main.js.map": "/react-easy-state/examples/contacts/build/static/js/runtime~main.c62d2dc8.js.map",
-  "static/css/main.94e80c28.chunk.css.map": "/react-easy-state/examples/contacts/build/static/css/main.94e80c28.chunk.css.map",
-  "index.html": "/react-easy-state/examples/contacts/build/index.html",
-  "precache-manifest.60e501099b10037128b78b356b8cfc5e.js": "/react-easy-state/examples/contacts/build/precache-manifest.60e501099b10037128b78b356b8cfc5e.js",
-  "service-worker.js": "/react-easy-state/examples/contacts/build/service-worker.js"
+  "files": {
+    "main.css": "/react-easy-state/examples/contacts/build/static/css/main.0dbf9cab.chunk.css",
+    "main.js": "/react-easy-state/examples/contacts/build/static/js/main.e320f1ab.chunk.js",
+    "main.js.map": "/react-easy-state/examples/contacts/build/static/js/main.e320f1ab.chunk.js.map",
+    "runtime~main.js": "/react-easy-state/examples/contacts/build/static/js/runtime~main.6dd18d4a.js",
+    "runtime~main.js.map": "/react-easy-state/examples/contacts/build/static/js/runtime~main.6dd18d4a.js.map",
+    "static/js/2.1497a1ae.chunk.js": "/react-easy-state/examples/contacts/build/static/js/2.1497a1ae.chunk.js",
+    "static/js/2.1497a1ae.chunk.js.map": "/react-easy-state/examples/contacts/build/static/js/2.1497a1ae.chunk.js.map",
+    "index.html": "/react-easy-state/examples/contacts/build/index.html",
+    "precache-manifest.0c248d19db2ecf6350bb2845c5b9a85b.js": "/react-easy-state/examples/contacts/build/precache-manifest.0c248d19db2ecf6350bb2845c5b9a85b.js",
+    "service-worker.js": "/react-easy-state/examples/contacts/build/service-worker.js",
+    "static/css/main.0dbf9cab.chunk.css.map": "/react-easy-state/examples/contacts/build/static/css/main.0dbf9cab.chunk.css.map"
+  }
 }

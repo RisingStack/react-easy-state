@@ -1,13 +1,15 @@
 {
-  "main.css": "/react-easy-state/examples/beer-finder/build/static/css/main.68af5759.chunk.css",
-  "main.js": "/react-easy-state/examples/beer-finder/build/static/js/main.81e79220.chunk.js",
-  "main.js.map": "/react-easy-state/examples/beer-finder/build/static/js/main.81e79220.chunk.js.map",
-  "static/js/1.51d2e19d.chunk.js": "/react-easy-state/examples/beer-finder/build/static/js/1.51d2e19d.chunk.js",
-  "static/js/1.51d2e19d.chunk.js.map": "/react-easy-state/examples/beer-finder/build/static/js/1.51d2e19d.chunk.js.map",
-  "runtime~main.js": "/react-easy-state/examples/beer-finder/build/static/js/runtime~main.1467e7f9.js",
-  "runtime~main.js.map": "/react-easy-state/examples/beer-finder/build/static/js/runtime~main.1467e7f9.js.map",
-  "static/css/main.68af5759.chunk.css.map": "/react-easy-state/examples/beer-finder/build/static/css/main.68af5759.chunk.css.map",
-  "index.html": "/react-easy-state/examples/beer-finder/build/index.html",
-  "precache-manifest.0a9853de7db207784bf5874bead4f226.js": "/react-easy-state/examples/beer-finder/build/precache-manifest.0a9853de7db207784bf5874bead4f226.js",
-  "service-worker.js": "/react-easy-state/examples/beer-finder/build/service-worker.js"
+  "files": {
+    "main.css": "/react-easy-state/examples/beer-finder/build/static/css/main.150d374a.chunk.css",
+    "main.js": "/react-easy-state/examples/beer-finder/build/static/js/main.6b394069.chunk.js",
+    "main.js.map": "/react-easy-state/examples/beer-finder/build/static/js/main.6b394069.chunk.js.map",
+    "runtime~main.js": "/react-easy-state/examples/beer-finder/build/static/js/runtime~main.3f67b5d9.js",
+    "runtime~main.js.map": "/react-easy-state/examples/beer-finder/build/static/js/runtime~main.3f67b5d9.js.map",
+    "static/js/2.aca84a35.chunk.js": "/react-easy-state/examples/beer-finder/build/static/js/2.aca84a35.chunk.js",
+    "static/js/2.aca84a35.chunk.js.map": "/react-easy-state/examples/beer-finder/build/static/js/2.aca84a35.chunk.js.map",
+    "index.html": "/react-easy-state/examples/beer-finder/build/index.html",
+    "precache-manifest.e3fd8ba2bbd42ce11c87f707569901bf.js": "/react-easy-state/examples/beer-finder/build/precache-manifest.e3fd8ba2bbd42ce11c87f707569901bf.js",
+    "service-worker.js": "/react-easy-state/examples/beer-finder/build/service-worker.js",
+    "static/css/main.150d374a.chunk.css.map": "/react-easy-state/examples/beer-finder/build/static/css/main.150d374a.chunk.css.map"
+  }
 }

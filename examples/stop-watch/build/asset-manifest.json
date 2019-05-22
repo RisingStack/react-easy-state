@@ -1,13 +1,15 @@
 {
-  "main.css": "/react-easy-state/examples/stop-watch/build/static/css/main.057347ae.chunk.css",
-  "main.js": "/react-easy-state/examples/stop-watch/build/static/js/main.a9b45268.chunk.js",
-  "main.js.map": "/react-easy-state/examples/stop-watch/build/static/js/main.a9b45268.chunk.js.map",
-  "static/js/1.4890fc88.chunk.js": "/react-easy-state/examples/stop-watch/build/static/js/1.4890fc88.chunk.js",
-  "static/js/1.4890fc88.chunk.js.map": "/react-easy-state/examples/stop-watch/build/static/js/1.4890fc88.chunk.js.map",
-  "runtime~main.js": "/react-easy-state/examples/stop-watch/build/static/js/runtime~main.1eb34532.js",
-  "runtime~main.js.map": "/react-easy-state/examples/stop-watch/build/static/js/runtime~main.1eb34532.js.map",
-  "static/css/main.057347ae.chunk.css.map": "/react-easy-state/examples/stop-watch/build/static/css/main.057347ae.chunk.css.map",
-  "index.html": "/react-easy-state/examples/stop-watch/build/index.html",
-  "precache-manifest.1f73913072b2faf8378c12bd4fb111f3.js": "/react-easy-state/examples/stop-watch/build/precache-manifest.1f73913072b2faf8378c12bd4fb111f3.js",
-  "service-worker.js": "/react-easy-state/examples/stop-watch/build/service-worker.js"
+  "files": {
+    "main.css": "/react-easy-state/examples/stop-watch/build/static/css/main.fd6ed756.chunk.css",
+    "main.js": "/react-easy-state/examples/stop-watch/build/static/js/main.76359ea1.chunk.js",
+    "main.js.map": "/react-easy-state/examples/stop-watch/build/static/js/main.76359ea1.chunk.js.map",
+    "runtime~main.js": "/react-easy-state/examples/stop-watch/build/static/js/runtime~main.15e9bd6d.js",
+    "runtime~main.js.map": "/react-easy-state/examples/stop-watch/build/static/js/runtime~main.15e9bd6d.js.map",
+    "static/js/2.4558d602.chunk.js": "/react-easy-state/examples/stop-watch/build/static/js/2.4558d602.chunk.js",
+    "static/js/2.4558d602.chunk.js.map": "/react-easy-state/examples/stop-watch/build/static/js/2.4558d602.chunk.js.map",
+    "index.html": "/react-easy-state/examples/stop-watch/build/index.html",
+    "precache-manifest.d242ce06cdba4c4111f4a4d093c2dd2c.js": "/react-easy-state/examples/stop-watch/build/precache-manifest.d242ce06cdba4c4111f4a4d093c2dd2c.js",
+    "service-worker.js": "/react-easy-state/examples/stop-watch/build/service-worker.js",
+    "static/css/main.fd6ed756.chunk.css.map": "/react-easy-state/examples/stop-watch/build/static/css/main.fd6ed756.chunk.css.map"
+  }
 }

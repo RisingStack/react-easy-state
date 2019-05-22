@@ -1,13 +1,15 @@
 {
-  "main.css": "/react-easy-state/examples/clock/build/static/css/main.d8a03adb.chunk.css",
-  "main.js": "/react-easy-state/examples/clock/build/static/js/main.7f30bd7e.chunk.js",
-  "main.js.map": "/react-easy-state/examples/clock/build/static/js/main.7f30bd7e.chunk.js.map",
-  "static/js/1.9769e65d.chunk.js": "/react-easy-state/examples/clock/build/static/js/1.9769e65d.chunk.js",
-  "static/js/1.9769e65d.chunk.js.map": "/react-easy-state/examples/clock/build/static/js/1.9769e65d.chunk.js.map",
-  "runtime~main.js": "/react-easy-state/examples/clock/build/static/js/runtime~main.5a34071e.js",
-  "runtime~main.js.map": "/react-easy-state/examples/clock/build/static/js/runtime~main.5a34071e.js.map",
-  "static/css/main.d8a03adb.chunk.css.map": "/react-easy-state/examples/clock/build/static/css/main.d8a03adb.chunk.css.map",
-  "index.html": "/react-easy-state/examples/clock/build/index.html",
-  "precache-manifest.a915266c20d6011ac5a2b368415f68cc.js": "/react-easy-state/examples/clock/build/precache-manifest.a915266c20d6011ac5a2b368415f68cc.js",
-  "service-worker.js": "/react-easy-state/examples/clock/build/service-worker.js"
+  "files": {
+    "main.css": "/react-easy-state/examples/clock/build/static/css/main.784e650b.chunk.css",
+    "main.js": "/react-easy-state/examples/clock/build/static/js/main.f34af289.chunk.js",
+    "main.js.map": "/react-easy-state/examples/clock/build/static/js/main.f34af289.chunk.js.map",
+    "runtime~main.js": "/react-easy-state/examples/clock/build/static/js/runtime~main.7c39ef5b.js",
+    "runtime~main.js.map": "/react-easy-state/examples/clock/build/static/js/runtime~main.7c39ef5b.js.map",
+    "static/js/2.ef2db6ea.chunk.js": "/react-easy-state/examples/clock/build/static/js/2.ef2db6ea.chunk.js",
+    "static/js/2.ef2db6ea.chunk.js.map": "/react-easy-state/examples/clock/build/static/js/2.ef2db6ea.chunk.js.map",
+    "index.html": "/react-easy-state/examples/clock/build/index.html",
+    "precache-manifest.70b2f260234691dacb287271a61e7320.js": "/react-easy-state/examples/clock/build/precache-manifest.70b2f260234691dacb287271a61e7320.js",
+    "service-worker.js": "/react-easy-state/examples/clock/build/service-worker.js",
+    "static/css/main.784e650b.chunk.css.map": "/react-easy-state/examples/clock/build/static/css/main.784e650b.chunk.css.map"
+  }
 }

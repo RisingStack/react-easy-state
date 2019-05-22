@@ -1,13 +1,15 @@
 {
-  "main.css": "/react-easy-state/examples/todo-mvc/build/static/css/main.cd3982b1.chunk.css",
-  "main.js": "/react-easy-state/examples/todo-mvc/build/static/js/main.0e02c66a.chunk.js",
-  "main.js.map": "/react-easy-state/examples/todo-mvc/build/static/js/main.0e02c66a.chunk.js.map",
-  "static/js/1.c1ee194e.chunk.js": "/react-easy-state/examples/todo-mvc/build/static/js/1.c1ee194e.chunk.js",
-  "static/js/1.c1ee194e.chunk.js.map": "/react-easy-state/examples/todo-mvc/build/static/js/1.c1ee194e.chunk.js.map",
-  "runtime~main.js": "/react-easy-state/examples/todo-mvc/build/static/js/runtime~main.74399215.js",
-  "runtime~main.js.map": "/react-easy-state/examples/todo-mvc/build/static/js/runtime~main.74399215.js.map",
-  "static/css/main.cd3982b1.chunk.css.map": "/react-easy-state/examples/todo-mvc/build/static/css/main.cd3982b1.chunk.css.map",
-  "index.html": "/react-easy-state/examples/todo-mvc/build/index.html",
-  "precache-manifest.4ed8e0c3160453e97373d9fde62c4a31.js": "/react-easy-state/examples/todo-mvc/build/precache-manifest.4ed8e0c3160453e97373d9fde62c4a31.js",
-  "service-worker.js": "/react-easy-state/examples/todo-mvc/build/service-worker.js"
+  "files": {
+    "main.css": "/react-easy-state/examples/todo-mvc/build/static/css/main.784edd18.chunk.css",
+    "main.js": "/react-easy-state/examples/todo-mvc/build/static/js/main.04b0f995.chunk.js",
+    "main.js.map": "/react-easy-state/examples/todo-mvc/build/static/js/main.04b0f995.chunk.js.map",
+    "runtime~main.js": "/react-easy-state/examples/todo-mvc/build/static/js/runtime~main.f8f6ab85.js",
+    "runtime~main.js.map": "/react-easy-state/examples/todo-mvc/build/static/js/runtime~main.f8f6ab85.js.map",
+    "static/js/2.574a5c4f.chunk.js": "/react-easy-state/examples/todo-mvc/build/static/js/2.574a5c4f.chunk.js",
+    "static/js/2.574a5c4f.chunk.js.map": "/react-easy-state/examples/todo-mvc/build/static/js/2.574a5c4f.chunk.js.map",
+    "index.html": "/react-easy-state/examples/todo-mvc/build/index.html",
+    "precache-manifest.ca3e57fd9b2a24ec8bae14a3e691c931.js": "/react-easy-state/examples/todo-mvc/build/precache-manifest.ca3e57fd9b2a24ec8bae14a3e691c931.js",
+    "service-worker.js": "/react-easy-state/examples/todo-mvc/build/service-worker.js",
+    "static/css/main.784edd18.chunk.css.map": "/react-easy-state/examples/todo-mvc/build/static/css/main.784edd18.chunk.css.map"
+  }
 }
