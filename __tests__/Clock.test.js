@@ -1,6 +1,6 @@
 import React, { StrictMode } from 'react'
 import { act } from 'react-dom/test-utils'
-import { render, cleanup, flushEffects } from 'react-testing-library'
+import { render, cleanup } from 'react-testing-library'
 import sinon from 'sinon'
 import App from '../examples/clock/src/App'
 
@@ -11,8 +11,6 @@ describe('Clock App', () => {
       <App />
     </StrictMode>
   )
-  // flush the inital didMount effect
-  flushEffects()
 
   const clearIntervalSpy = sinon.spy(global, 'clearInterval')
 

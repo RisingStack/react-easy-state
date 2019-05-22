@@ -30,14 +30,31 @@ function batchFn (fn) {
   return batched
 }
 
-// batched window.addEventListener(cb) like callbacks
-function batchCallbacks (functionWithCallbacks) {
-  return function batchedCallbacks (...args) {
-    return functionWithCallbacks.apply(this, args.map(batchFn))
+// batched obj.addEventListener(cb) like callbacks
+function batchMethodsCallbacks (obj, methods) {
+  methods.forEach(method => batchMethodCallbacks(obj, method))
+}
+
+function batchMethodCallbacks (obj, method) {
+  const descriptor = Object.getOwnPropertyDescriptor(obj, method)
+  if (
+    descriptor &&
+    descriptor.writable &&
+    typeof descriptor.value === 'function'
+  ) {
+    obj[method] = new Proxy(descriptor.value, {
+      apply (target, ctx, args) {
+        return Reflect.apply(target, ctx, args.map(batchFn))
+      }
+    })
   }
 }
 
 // batches obj.onevent = fn like calls
+function batchMethods (obj, methods) {
+  methods.forEach(method => batchMethod(obj, method))
+}
+
 function batchMethod (obj, method) {
   const descriptor = Object.getOwnPropertyDescriptor(obj, method)
   if (descriptor && descriptor.configurable) {
@@ -52,42 +69,35 @@ function batchMethod (obj, method) {
 
 // do a sync batching for the most common task sources
 // this should be removed when React's own batching is improved in the future
-if (globalObj) {
-  // batch timer functions
-  globalObj.setTimeout = batchCallbacks(globalObj.setTimeout)
-  globalObj.setInterval = batchCallbacks(globalObj.setInterval)
-  if (globalObj.requestAnimationFrame) {
-    globalObj.requestAnimationFrame = batchCallbacks(
-      globalObj.requestAnimationFrame
-    )
-  }
-  if (globalObj.requestIdleCallback) {
-    globalObj.requestIdleCallback = batchCallbacks(
-      globalObj.requestIdleCallback
-    )
-  }
 
-  // eslint-disable-next-line
-  Promise.prototype.then = batchCallbacks(Promise.prototype.then);
-  // eslint-disable-next-line
-  Promise.prototype.catch = batchCallbacks(Promise.prototype.catch);
+// batch timer functions
+batchMethodsCallbacks(globalObj, [
+  'setTimeout',
+  'setInterval',
+  'requestAnimationFrame',
+  'requestIdleCallback'
+])
 
-  // batch addEventListener calls
-  if (globalObj.EventTarget) {
-    EventTarget.prototype.addEventListener = batchCallbacks(
-      EventTarget.prototype.addEventListener
-    )
-    EventTarget.prototype.removeEventListener = batchCallbacks(
-      EventTarget.prototype.removeEventListener
-    )
-  }
-
-  // this batches websocket event handlers
-  if (globalObj.WebSocket) {
-    const websocketHandlers = ['onopen', 'onmessage', 'onerror', 'onclose']
-    websocketHandlers.forEach(method =>
-      batchMethod(globalObj.WebSocket.prototype, method)
-    )
-  }
-  // HTTP event handlers are usually wrapped by Promises, which is covered above
+if (globalObj.Promise) {
+  batchMethodsCallbacks(Promise.prototype, ['then', 'catch'])
 }
+
+// batch addEventListener calls
+if (globalObj.EventTarget) {
+  batchMethodsCallbacks(EventTarget.prototype, [
+    'addEventListener',
+    'removeEventListener'
+  ])
+}
+
+// this batches websocket event handlers
+if (globalObj.WebSocket) {
+  batchMethods(WebSocket.prototype, [
+    'onopen',
+    'onmessage',
+    'onerror',
+    'onclose'
+  ])
+}
+
+// HTTP event handlers are usually wrapped by Promises, which is covered above
