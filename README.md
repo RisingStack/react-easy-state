@@ -442,7 +442,7 @@ export default view(() => {
 })
 ```
 
-**Local stores in functions rely on React hooks. They are supported in React Native `> 0.59` and they require React v16.8.0 to work.**
+**Local stores in functions rely on React hooks. They require React and React DOM v16.8+ or React Native v0.59+ to work.**
 
 <details>
 <summary>You can use any React hook - including <code>useState</code> - in function components, Easy State won't interfere with them.</summary>
@@ -600,12 +600,9 @@ You can compare Easy State with plain React and other state management libraries
 - Safari: 10 and above
 - Edge: 12 and above
 - Opera: 36 and above
-- React Native: iOS 10 and above and Android with [community JSC](https://github.com/SoftwareMansion/jsc-android-buildscripts)
-- IE is not supported and never will be
+- React Native: 0.59 and above
 
 _This library is based on non polyfillable ES6 Proxies. Because of this, it will never support IE._
-
-_React Native is supported on iOS and Android is supported with the community JavaScriptCore. Learn how to set it up [here](https://github.com/SoftwareMansion/jsc-android-buildscripts#how-to-use-it-with-my-react-native-app). It is pretty simple._
 
 ## Alternative builds
 
