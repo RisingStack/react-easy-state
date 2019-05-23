@@ -24,7 +24,9 @@ export default function view (Comp) {
             scheduler: () => setState({}),
             lazy: true
           }),
-        []
+        // Adding the original Comp here is necessary to make React Hot Reload work
+        // it does not affect behavior otherwise
+        [Comp]
       )
 
       // cleanup the reactive connections after the very last render of the component
