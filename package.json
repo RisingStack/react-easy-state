@@ -53,9 +53,7 @@
     "@nx-js/observer-util": "^4.2.2"
   },
   "peerDependencies": {
-    "react": "*",
-    "react-dom": "*",
-    "react-native": "*"
+    "react": "*"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
