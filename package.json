@@ -21,7 +21,7 @@
     "build-examples": "node ./scripts/buildExamples.js",
     "link-examples": "node ./scripts/linkExamples.js",
     "unlink-examples": "node ./scripts/unlinkExamples.js",
-    "build": "rm -rf dist && mkdir dist && cp -R platforms/. dist/ && node ./scripts/build.js",
+    "build": "rollup --config",
     "build-toc": "node ./scripts/buildToc.js"
   },
   "author": {
