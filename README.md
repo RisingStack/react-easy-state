@@ -6,7 +6,7 @@ Simple React state management. Made with :heart: and ES6 Proxies.
 
 <a href="#platform-support"><img src="images/browser_support.png" alt="Browser support" width="450px" /></a>
 
-**NEWS:** v6.1.2 fixed a nasty memory leak. Please upgrade Easy State to v6.1.2+ if you use a v6.x version already. Thanks!
+**NEWS:** v6.1.2 fixed a nasty memory leak. Please upgrade to v6.1.2+ if you use a v6.x version already. Thanks!
 
 <details>
 <summary><strong>Table of Contents</strong></summary>
