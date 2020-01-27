@@ -99,8 +99,8 @@ export default function view (Comp) {
           super.deriveStoresFromProps(props, ...stores)
         }
         // respect user defined getDerivedStateFromProps
-        if (super.getDerivedStateFromProps) {
-          return super.getDerivedStateFromProps(props, state)
+        if (BaseComp.getDerivedStateFromProps) {
+          return BaseComp.getDerivedStateFromProps(props, state)
         }
         return null
       }
