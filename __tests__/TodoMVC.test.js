@@ -1,5 +1,5 @@
 import React, { StrictMode } from 'react'
-import { render, cleanup, fireEvent } from 'react-testing-library'
+import { render, cleanup, fireEvent } from '@testing-library/react/pure'
 import App from '../examples/todo-mvc/src/App'
 
 describe('TodoMVC App', () => {
