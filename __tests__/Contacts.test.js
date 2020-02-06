@@ -1,5 +1,5 @@
 import React, { StrictMode } from 'react'
-import { render, cleanup, fireEvent } from 'react-testing-library'
+import { render, cleanup, fireEvent } from '@testing-library/react/pure'
 import App from '../examples/contacts/src/App'
 
 describe('Contacts App', () => {
@@ -41,6 +41,7 @@ describe('Contacts App', () => {
   })
 
   test('should edit contact', () => {
+    console.log('editTEST')
     let display,
       editor,
       editButton,

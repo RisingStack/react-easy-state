@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { act } from 'react-dom/test-utils'
-import { render, cleanup, fireEvent } from 'react-testing-library'
+import { render, cleanup, fireEvent } from '@testing-library/react/pure'
 import { view, store } from 'react-easy-state'
 import {
   BrowserRouter as Router,

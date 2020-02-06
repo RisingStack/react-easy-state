@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react'
-import { render, cleanup, fireEvent } from 'react-testing-library'
+import { render, cleanup, fireEvent } from '@testing-library/react/pure'
 import { view, store, batch } from 'react-easy-state'
 
 describe('edge cases', () => {
