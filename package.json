@@ -30,12 +30,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:solkimicreb/react-easy-state.git"
+    "url": "git@github.com:RisingStack/react-easy-state.git"
   },
   "bugs": {
-    "url": "https://github.com/solkimicreb/react-easy-state/issues"
+    "url": "https://github.com/RisingStack/react-easy-state/issues"
   },
-  "homepage": "https://github.com/solkimicreb/react-easy-state#readme",
+  "homepage": "https://github.com/RisingStack/react-easy-state#readme",
   "license": "MIT",
   "keywords": [
     "observable",
