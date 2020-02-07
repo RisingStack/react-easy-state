@@ -44,11 +44,7 @@ describe('Contacts App', () => {
     console.log('editTEST')
     let display,
       editor,
-      editButton,
-      cancelButton,
-      saveButton,
-      nameField,
-      emailField
+      editButton
 
     display = container.querySelector('.contact-display')
     editButton = display.querySelector('.zmdi-edit')
@@ -57,8 +53,8 @@ describe('Contacts App', () => {
     expect(container).toMatchSnapshot('06. Switch Test Contact to Edit Mode')
 
     editor = container.querySelector('.contact-editor')
-    nameField = editor.querySelector('input[name="name"]')
-    cancelButton = editor.querySelector('.zmdi-close')
+    const nameField = editor.querySelector('input[name="name"]')
+    const cancelButton = editor.querySelector('.zmdi-close')
 
     fireEvent.change(nameField, {
       target: { name: 'name', value: 'Edited Test Contact' }
@@ -75,8 +71,8 @@ describe('Contacts App', () => {
     expect(container).toMatchSnapshot('09. Switch Test Contact to edit Mode')
 
     editor = container.querySelector('.contact-editor')
-    emailField = editor.querySelector('input[name="email"]')
-    saveButton = editor.querySelector('.zmdi-save')
+    const emailField = editor.querySelector('input[name="email"]')
+    const saveButton = editor.querySelector('.zmdi-save')
 
     fireEvent.change(emailField, {
       target: { name: 'email', value: 'test.contact.edited@gmail.com' }

@@ -12,6 +12,7 @@ describe('edge cases', () => {
         shouldComponentUpdate () {
           return false
         }
+
         render () {
           return <div>{person.name}</div>
         }
@@ -32,6 +33,7 @@ describe('edge cases', () => {
         componentWillUnmount () {
           didUnMount = true
         }
+
         render () {
           return <div>Hello</div>
         }
@@ -48,10 +50,10 @@ describe('edge cases', () => {
     const MyComp = view(
       class extends Component {
         state = { counter: 0 };
-        increment = () => this.setState({ counter: this.state.counter + 1 });
+        handleIncrement = () => this.setState({ counter: this.state.counter + 1 });
 
         render () {
-          return <div onClick={this.increment}>{this.state.counter}</div>
+          return <div onClick={this.handleIncrement}>{this.state.counter}</div>
         }
       }
     )
@@ -66,13 +68,13 @@ describe('edge cases', () => {
     const MyComp = view(
       class extends Component {
         state = { counter: 0 };
-        increment = () => this.setState({ counter: this.state.counter + 1 });
+        handleIncrement = () => this.setState({ counter: this.state.counter + 1 });
 
         render () {
           return (
             <div>
               <Child />
-              <button onClick={this.increment}>Increment</button>
+              <button onClick={this.handleIncrement}>Increment</button>
             </div>
           )
         }
@@ -98,11 +100,12 @@ describe('edge cases', () => {
           store1.num = props.num1 || store1.num
           store2.num = props.num2 || store2.num
         }
-        onClick = () => this.store1.num++;
+
+        handleOnClick = () => this.store1.num++;
 
         render () {
           return (
-            <div onClick={this.onClick}>
+            <div onClick={this.handleOnClick}>
               {this.store1.num}
               {this.store2.num}
             </div>
@@ -126,6 +129,7 @@ describe('edge cases', () => {
             num: props.num || state.num
           }
         }
+
         render () {
           return <div>{this.state.num}</div>
         }

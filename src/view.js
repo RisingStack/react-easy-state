@@ -122,7 +122,7 @@ export default function view (Comp) {
   // static props are inherited by class components,
   // but have to be copied for function components
   if (isStatelessComp) {
-    for (let key of Object.keys(Comp)) {
+    for (const key of Object.keys(Comp)) {
       ReactiveComp[key] = Comp[key]
     }
   }

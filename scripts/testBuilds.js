@@ -10,7 +10,7 @@ const files = fs
   )
 
 async function testBuilds () {
-  for (let file of files) {
+  for (const file of files) {
     const err = await execPromise(`BUNDLE=${file} npm run test`)
     if (err) {
       console.error('\x1b[31m', `Error in ${file}`, '\x1b[30m')
