@@ -41,7 +41,6 @@ describe('Contacts App', () => {
   })
 
   test('should edit contact', () => {
-    console.log('editTEST')
     let display,
       editor,
       editButton
