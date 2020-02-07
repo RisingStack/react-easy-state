@@ -102,7 +102,8 @@
     ],
     "ignore": [
       "**/build/**",
-      "**/node_modules/**"
+      "**/node_modules/**",
+      "examples/**"
     ]
   },
   "pre-push": [
