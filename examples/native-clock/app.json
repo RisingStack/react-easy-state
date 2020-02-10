@@ -1,12 +1,13 @@
 {
   "expo": {
-    "name": "Easy State Clock Example",
+    "name": "Blank Template",
     "slug": "native-clock",
     "privacy": "public",
-    "sdkVersion": "32.0.0",
+    "sdkVersion": "36.0.0",
     "platforms": [
       "ios",
-      "android"
+      "android",
+      "web"
     ],
     "version": "1.0.0",
     "orientation": "portrait",
