@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Blank Template",
+    "name": "Easy State Clock Example",
     "slug": "native-clock",
     "privacy": "public",
     "sdkVersion": "36.0.0",
