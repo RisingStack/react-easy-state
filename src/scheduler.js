@@ -11,10 +11,13 @@ export function batch (fn, ctx, args) {
   if (isInsideBatch) {
     result = fn.apply(ctx, args)
   } else {
-    isInsideBatch = true
-    result = fn.apply(ctx, args)
-    queue.flush()
-    isInsideBatch = false
+    try {
+      isInsideBatch = true
+      result = fn.apply(ctx, args)
+    } finally {
+      queue.flush()
+      isInsideBatch = false
+    }
   }
   return result
 }
