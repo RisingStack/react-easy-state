@@ -17,18 +17,18 @@ function execPromise(cmd) {
 }
 
 async function testBuilds() {
-  await Promise.all[
-    files.map(async file => {
-      const err = await execPromise(`BUNDLE=${file} npm run test`);
-      if (err) {
-        console.error('\x1b[31m', `Error in ${file}`, '\x1b[30m');
-        console.error(err);
-        process.exit(1);
-      } else {
-        console.log(`${file} works as expected`);
-      }
-    })
-  ];
+  // eslint-disable-next-line no-restricted-syntax
+  for (const file of files) {
+    // eslint-disable-next-line no-await-in-loop
+    const err = await execPromise(`BUNDLE=${file} npm run test`);
+    if (err) {
+      console.error('\x1b[31m', `Error in ${file}`, '\x1b[30m');
+      console.error(err);
+      process.exit(1);
+    } else {
+      console.log(`${file} works as expected`);
+    }
+  }
 }
 
 testBuilds();
