@@ -1,79 +1,80 @@
 /* eslint camelcase: 0 */
 
-import { globalObj } from './utils'
-import { queue } from './queue'
+import { globalObj } from './utils';
+import { queue } from './queue';
 
 // this runs the passed function and delays all re-renders
 // until the function is finished running
-export function batch (fn, ctx, args) {
-  let result
+export function batch(fn, ctx, args) {
+  let result;
   if (queue.isInsideBatch) {
-    result = fn.apply(ctx, args)
+    result = fn.apply(ctx, args);
   } else {
     try {
-      queue.on()
-      result = fn.apply(ctx, args)
+      queue.on();
+      result = fn.apply(ctx, args);
     } finally {
-      queue.flush()
-      queue.off()
+      queue.flush();
+      queue.off();
     }
   }
-  return result
+  return result;
 }
 
 // this creates and returns a batched version of the passed function
 // the cache is necessary to always map the same thing to the same function
 // which makes sure that addEventListener/removeEventListener pairs don't break
-const cache = new WeakMap()
-function batchFn (fn) {
+const cache = new WeakMap();
+function batchFn(fn) {
   if (typeof fn !== 'function') {
-    return fn
+    return fn;
   }
-  let batched = cache.get(fn)
+  let batched = cache.get(fn);
   if (!batched) {
-    batched = function (...args) {
-      return batch(fn, this, args)
-    }
-    cache.set(fn, batched)
+    batched = function(...args) {
+      return batch(fn, this, args);
+    };
+    cache.set(fn, batched);
   }
-  return batched
+  return batched;
 }
 
-// batched obj.addEventListener(cb) like callbacks
-function batchMethodsCallbacks (obj, methods) {
-  methods.forEach(method => batchMethodCallbacks(obj, method))
-}
-
-function batchMethodCallbacks (obj, method) {
-  const descriptor = Object.getOwnPropertyDescriptor(obj, method)
+function batchMethodCallbacks(obj, method) {
+  const descriptor = Object.getOwnPropertyDescriptor(obj, method);
   if (
     descriptor &&
     descriptor.writable &&
     typeof descriptor.value === 'function'
   ) {
     obj[method] = new Proxy(descriptor.value, {
-      apply (target, ctx, args) {
-        return Reflect.apply(target, ctx, args.map(batchFn))
-      }
-    })
+      apply(target, ctx, args) {
+        return Reflect.apply(target, ctx, args.map(batchFn));
+      },
+    });
+  }
+}
+
+// batched obj.addEventListener(cb) like callbacks
+function batchMethodsCallbacks(obj, methods) {
+  methods.forEach(method => batchMethodCallbacks(obj, method));
+}
+
+function batchMethod(obj, method) {
+  const descriptor = Object.getOwnPropertyDescriptor(obj, method);
+  if (descriptor && descriptor.configurable) {
+    const newDescriptor = {
+      ...descriptor,
+      set(value) {
+        return descriptor.set.call(this, batchFn(value));
+      },
+    };
+    Object.defineProperty(obj, method, newDescriptor);
   }
 }
 
 // batches obj.onevent = fn like calls
-function batchMethods (obj, methods) {
-  methods.forEach(method => batchMethod(obj, method))
-}
-
-function batchMethod (obj, method) {
-  const descriptor = Object.getOwnPropertyDescriptor(obj, method)
-  if (descriptor && descriptor.configurable) {
-    const newDescriptor = Object.assign({}, descriptor, {
-      set (value) {
-        return descriptor.set.call(this, batchFn(value))
-      }
-    })
-    Object.defineProperty(obj, method, newDescriptor)
-  }
+function batchMethods(obj, methods) {
+  methods.forEach(method => batchMethod(obj, method));
 }
 
 // do a sync batching for the most common task sources
@@ -84,19 +85,19 @@ batchMethodsCallbacks(globalObj, [
   'setTimeout',
   'setInterval',
   'requestAnimationFrame',
-  'requestIdleCallback'
-])
+  'requestIdleCallback',
+]);
 
 if (globalObj.Promise) {
-  batchMethodsCallbacks(Promise.prototype, ['then', 'catch'])
+  batchMethodsCallbacks(Promise.prototype, ['then', 'catch']);
 }
 
 // batch addEventListener calls
 if (globalObj.EventTarget) {
   batchMethodsCallbacks(EventTarget.prototype, [
     'addEventListener',
-    'removeEventListener'
-  ])
+    'removeEventListener',
+  ]);
 }
 
 // this batches websocket event handlers
@@ -105,8 +106,8 @@ if (globalObj.WebSocket) {
     'onopen',
     'onmessage',
     'onerror',
-    'onclose'
-  ])
+    'onclose',
+  ]);
 }
 
 // HTTP event handlers are usually wrapped by Promises, which is covered above

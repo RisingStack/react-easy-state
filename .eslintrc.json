@@ -1,0 +1,19 @@
+{
+  "parser": "babel-eslint",
+  "extends": ["airbnb", "prettier"],
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": ["error"],
+    "import/prefer-default-export": "off",
+    "import/no-extraneous-dependencies": "off",
+    "import/no-mutable-exports": "off",
+    "no-nested-ternary": "off",
+    "no-param-reassign": "off",
+    "func-names": "off"
+  },
+  "globals": {
+    "window": true,
+    "EventTarget": true,
+    "WebSocket": true
+  }
+}

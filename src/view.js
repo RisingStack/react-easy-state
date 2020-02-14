@@ -4,152 +4,160 @@ import {
   useEffect,
   useMemo,
   memo,
-  useCallback
-} from 'react'
-import { observe, unobserve, raw, isObservable } from '@nx-js/observer-util'
-import { hasHooks } from './utils'
-import { queue } from './queue'
+  useCallback,
+} from 'react';
+import {
+  observe,
+  unobserve,
+  raw,
+  isObservable,
+} from '@nx-js/observer-util';
 
-export let isInsideFunctionComponent = false
-const COMPONENT = Symbol('owner component')
-const TRIGGERRENDER = Symbol('trigger render')
+import { hasHooks } from './utils';
+import { queue } from './queue';
 
-export default function view (Comp) {
-  const isStatelessComp = !(Comp.prototype && Comp.prototype.isReactComponent)
+export let isInsideFunctionComponent = false;
+const COMPONENT = Symbol('owner component');
+const TRIGGERRENDER = Symbol('trigger render');
 
-  let ReactiveComp
+function mapStateToStores(state) {
+  // find store properties and map them to their none observable raw value
+  // to do not trigger none static this.setState calls
+  // from the static getDerivedStateFromProps lifecycle method
+  const component = state[COMPONENT];
+  return Object.keys(component)
+    .map(key => component[key])
+    .filter(isObservable)
+    .map(raw);
+}
+
+export function view(Comp) {
+  const isStatelessComp = !(
+    Comp.prototype && Comp.prototype.isReactComponent
+  );
+
+  let ReactiveComp;
 
   if (isStatelessComp && hasHooks) {
     // use a hook based reactive wrapper when we can
     ReactiveComp = memo(props => {
       // use a dummy setState to update the component
-      const [, setState] = useState()
-      const triggerRender = useCallback(() => setState({}), [])
+      const [, setState] = useState();
+      const triggerRender = useCallback(() => setState({}), []);
       // create a memoized reactive wrapper of the original component (render)
       // at the very first run of the component function
       const render = useMemo(
         () =>
           observe(Comp, {
             scheduler: () => queue.add(triggerRender),
-            lazy: true
+            lazy: true,
           }),
         // Adding the original Comp here is necessary to make React Hot Reload work
         // it does not affect behavior otherwise
-        [Comp]
-      )
+        [Comp],
+      );
 
       // cleanup the reactive connections after the very last render of the component
       useEffect(() => {
-        return () => unobserve(render)
-      }, [])
+        return () => unobserve(render);
+      }, []);
 
       // the isInsideFunctionComponent flag is used to toggle `store` behavior
       // based on where it was called from
-      isInsideFunctionComponent = true
+      isInsideFunctionComponent = true;
       try {
         // run the reactive render instead of the original one
-        return render(props)
+        return render(props);
       } finally {
-        isInsideFunctionComponent = false
+        isInsideFunctionComponent = false;
       }
-    })
+    });
   } else {
-    const BaseComp = isStatelessComp ? Component : Comp
+    const BaseComp = isStatelessComp ? Component : Comp;
     // a HOC which overwrites render, shouldComponentUpdate and componentWillUnmount
     // it decides when to run the new reactive methods and when to proxy to the original methods
     class ReactiveClassComp extends BaseComp {
-      constructor (props, context) {
-        super(props, context)
+      constructor(props, context) {
+        super(props, context);
 
-        this.state = this.state || {}
-        this.state[COMPONENT] = this
+        this.state = this.state || {};
+        this.state[COMPONENT] = this;
 
         // create a reactive render for the component
         this.render = observe(this.render, {
           scheduler: () => queue.add(this[TRIGGERRENDER]),
-          lazy: true
-        })
+          lazy: true,
+        });
       }
 
       [TRIGGERRENDER] = () => {
-        this.setState({})
+        this.setState({});
       };
 
-      render () {
+      render() {
         return isStatelessComp
           ? Comp(this.props, this.context)
-          : super.render()
+          : super.render();
       }
 
       // react should trigger updates on prop changes, while easyState handles store changes
-      shouldComponentUpdate (nextProps, nextState) {
-        const { props, state } = this
+      shouldComponentUpdate(nextProps, nextState) {
+        const { props, state } = this;
 
         // respect the case when the user defines a shouldComponentUpdate
         if (super.shouldComponentUpdate) {
-          return super.shouldComponentUpdate(nextProps, nextState)
+          return super.shouldComponentUpdate(nextProps, nextState);
         }
 
         // return true if it is a reactive render or state changes
         if (state !== nextState) {
-          return true
+          return true;
         }
 
         // the component should update if any of its props shallowly changed value
-        const keys = Object.keys(props)
-        const nextKeys = Object.keys(nextProps)
+        const keys = Object.keys(props);
+        const nextKeys = Object.keys(nextProps);
         return (
           nextKeys.length !== keys.length ||
           nextKeys.some(key => props[key] !== nextProps[key])
-        )
+        );
       }
 
       // add a custom deriveStoresFromProps lifecyle method
-      static getDerivedStateFromProps (props, state) {
+      static getDerivedStateFromProps(props, state) {
         if (super.deriveStoresFromProps) {
           // inject all local stores and let the user mutate them directly
-          const stores = mapStateToStores(state)
-          super.deriveStoresFromProps(props, ...stores)
+          const stores = mapStateToStores(state);
+          super.deriveStoresFromProps(props, ...stores);
         }
         // respect user defined getDerivedStateFromProps
         if (super.getDerivedStateFromProps) {
-          return super.getDerivedStateFromProps(props, state)
+          return super.getDerivedStateFromProps(props, state);
         }
-        return null
+        return null;
       }
 
-      componentWillUnmount () {
+      componentWillUnmount() {
         // call user defined componentWillUnmount
         if (super.componentWillUnmount) {
-          super.componentWillUnmount()
+          super.componentWillUnmount();
         }
         // clean up memory used by Easy State
-        unobserve(this.render)
+        unobserve(this.render);
       }
     }
 
-    ReactiveComp = ReactiveClassComp
+    ReactiveComp = ReactiveClassComp;
   }
 
-  ReactiveComp.displayName = Comp.displayName || Comp.name
+  ReactiveComp.displayName = Comp.displayName || Comp.name;
   // static props are inherited by class components,
   // but have to be copied for function components
   if (isStatelessComp) {
-    for (const key of Object.keys(Comp)) {
-      ReactiveComp[key] = Comp[key]
-    }
+    Object.keys(Comp).forEach(key => {
+      ReactiveComp[key] = Comp[key];
+    });
   }
 
-  return ReactiveComp
-}
-
-function mapStateToStores (state) {
-  // find store properties and map them to their none observable raw value
-  // to do not trigger none static this.setState calls
-  // from the static getDerivedStateFromProps lifecycle method
-  const component = state[COMPONENT]
-  return Object.keys(component)
-    .map(key => component[key])
-    .filter(isObservable)
-    .map(raw)
+  return ReactiveComp;
 }
