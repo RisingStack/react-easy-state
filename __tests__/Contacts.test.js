@@ -41,9 +41,7 @@ describe('Contacts App', () => {
   })
 
   test('should edit contact', () => {
-    let display,
-      editor,
-      editButton
+    let display, editor, editButton
 
     display = container.querySelector('.contact-display')
     editButton = display.querySelector('.zmdi-edit')

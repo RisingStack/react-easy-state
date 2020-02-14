@@ -1,6 +1,14 @@
-import { Component, useState, useEffect, useMemo, memo } from 'react'
+import {
+  Component,
+  useState,
+  useEffect,
+  useMemo,
+  memo,
+  useCallback
+} from 'react'
 import { observe, unobserve, raw, isObservable } from '@nx-js/observer-util'
 import { hasHooks } from './utils'
+import { queue } from './queue'
 
 export let isInsideFunctionComponent = false
 const COMPONENT = Symbol('owner component')
@@ -15,13 +23,13 @@ export default function view (Comp) {
     ReactiveComp = memo(props => {
       // use a dummy setState to update the component
       const [, setState] = useState()
-
+      const triggerRender = useCallback(() => setState({}), [])
       // create a memoized reactive wrapper of the original component (render)
       // at the very first run of the component function
       const render = useMemo(
         () =>
           observe(Comp, {
-            scheduler: () => setState({}),
+            scheduler: () => queue.add(triggerRender),
             lazy: true
           }),
         // Adding the original Comp here is necessary to make React Hot Reload work
@@ -57,10 +65,14 @@ export default function view (Comp) {
 
         // create a reactive render for the component
         this.render = observe(this.render, {
-          scheduler: () => this.setState({}),
+          scheduler: () => queue.add(this.triggerRender),
           lazy: true
         })
       }
+
+      triggerRender = () => {
+        this.setState({})
+      };
 
       render () {
         return isStatelessComp

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { act } from 'react-dom/test-utils'
-import { render, cleanup } from '@testing-library/react/pure'
+import { render, cleanup, act } from '@testing-library/react/pure'
 import { view, store } from 'react-easy-state'
 import { withTheme, ThemeProvider } from 'styled-components'
 

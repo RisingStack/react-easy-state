@@ -1,14 +1,21 @@
 /* eslint camelcase: 0 */
 
-// react platform is set to either react-dom or react-native during test and execution
-import { unstable_batchedUpdates } from 'react-platform'
 import { globalObj } from './utils'
+import { queue } from './queue'
 
 // this runs the passed function and delays all re-renders
 // until the function is finished running
+export let isInsideBatch = false
 export function batch (fn, ctx, args) {
   let result
-  unstable_batchedUpdates(() => (result = fn.apply(ctx, args)))
+  if (isInsideBatch) {
+    result = fn.apply(ctx, args)
+  } else {
+    isInsideBatch = true
+    result = fn.apply(ctx, args)
+    queue.flush()
+    isInsideBatch = false
+  }
   return result
 }
 
