@@ -6,6 +6,9 @@
   },
   "collectCoverage": true,
   "coverageReporters": ["text"],
-  "collectCoverageFrom": ["src/**/*.{js,jsx}", "examples/native-clock/App.js"],
+  "collectCoverageFrom": [
+    "src/**/*.{js,jsx}",
+    "examples/native-clock/App.js"
+  ],
   "coverageDirectory": "coverage"
 }
