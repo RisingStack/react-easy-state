@@ -12,6 +12,7 @@ import { queue } from './queue'
 
 export let isInsideFunctionComponent = false
 const COMPONENT = Symbol('owner component')
+const TRIGGERRENDER = Symbol('trigger render')
 
 export default function view (Comp) {
   const isStatelessComp = !(Comp.prototype && Comp.prototype.isReactComponent)
@@ -65,12 +66,12 @@ export default function view (Comp) {
 
         // create a reactive render for the component
         this.render = observe(this.render, {
-          scheduler: () => queue.add(this.triggerRender),
+          scheduler: () => queue.add(this[TRIGGERRENDER]),
           lazy: true
         })
       }
 
-      triggerRender = () => {
+      [TRIGGERRENDER] = () => {
         this.setState({})
       };
 

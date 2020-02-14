@@ -96,6 +96,34 @@ describe('batching', () => {
     expect(renderCount).toBe(2)
   })
 
+  test('should recover when error thrown inside batch', () => {
+    let renderCount = 0
+    const person = store({ name: 'Bob' })
+    const MyComp = view(() => {
+      renderCount++
+      return <div>{person.name}</div>
+    })
+
+    const { container } = render(<MyComp />)
+    expect(renderCount).toBe(1)
+    expect(container).toHaveTextContent('Bob')
+
+    try {
+      act(() =>
+        batch(() => {
+          person.name = 'Ann'
+          person.name = 'Rick'
+          throw new Error('Totally Expected Error')
+        })
+      )
+    } catch (e) {
+      expect(e.message).toBe('Totally Expected Error')
+    }
+
+    expect(container).toHaveTextContent('Rick')
+    expect(renderCount).toBe(2)
+  })
+
   test('should batch state changes inside native event listeners', () => {
     let renderCount = 0
     const person = store({ name: 'Bob' })
