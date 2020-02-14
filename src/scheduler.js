@@ -5,18 +5,17 @@ import { queue } from './queue'
 
 // this runs the passed function and delays all re-renders
 // until the function is finished running
-export let isInsideBatch = false
 export function batch (fn, ctx, args) {
   let result
-  if (isInsideBatch) {
+  if (queue.isInsideBatch) {
     result = fn.apply(ctx, args)
   } else {
     try {
-      isInsideBatch = true
+      queue.on()
       result = fn.apply(ctx, args)
     } finally {
       queue.flush()
-      isInsideBatch = false
+      queue.off()
     }
   }
   return result
