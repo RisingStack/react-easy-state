@@ -1,12 +1,11 @@
-import { isInsideBatch } from './scheduler'
-
 class Queue {
   constructor () {
     this.taskSet = new Set()
+    this.isInsideBatch = false
   }
 
   add = task => {
-    if (isInsideBatch) {
+    if (this.isInsideBatch) {
       this.taskSet.add(task)
     } else {
       task()
@@ -18,6 +17,14 @@ class Queue {
       this.taskSet.forEach(task => task())
       this.taskSet.clear()
     }
+  };
+
+  on = () => {
+    this.isInsideBatch = true
+  };
+
+  off = () => {
+    this.isInsideBatch = false
   };
 }
 
