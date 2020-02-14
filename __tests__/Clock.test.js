@@ -1,6 +1,5 @@
 import React, { StrictMode } from 'react'
-import { act } from 'react-dom/test-utils'
-import { render, cleanup } from '@testing-library/react/pure'
+import { render, cleanup, act } from '@testing-library/react/pure'
 import sinon from 'sinon'
 import App from '../examples/clock/src/App'
 

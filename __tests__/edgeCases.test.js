@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react'
-import { render, cleanup, fireEvent } from '@testing-library/react/pure'
+import { render, cleanup, fireEvent, act } from '@testing-library/react/pure'
 import { view, store, batch } from 'react-easy-state'
 
 describe('edge cases', () => {
@@ -50,7 +50,8 @@ describe('edge cases', () => {
     const MyComp = view(
       class extends Component {
         state = { counter: 0 };
-        handleIncrement = () => this.setState({ counter: this.state.counter + 1 });
+        handleIncrement = () =>
+          this.setState({ counter: this.state.counter + 1 });
 
         render () {
           return <div onClick={this.handleIncrement}>{this.state.counter}</div>
@@ -68,7 +69,8 @@ describe('edge cases', () => {
     const MyComp = view(
       class extends Component {
         state = { counter: 0 };
-        handleIncrement = () => this.setState({ counter: this.state.counter + 1 });
+        handleIncrement = () =>
+          this.setState({ counter: this.state.counter + 1 });
 
         render () {
           return (
@@ -182,7 +184,7 @@ describe('edge cases', () => {
       expect(container).toHaveTextContent('12, 1')
       expect(parentCalls).toBe(1)
       expect(childCalls).toBe(1)
-      batch(change)
+      act(() => batch(change))
       expect(container).toHaveTextContent('')
       expect(parentCalls).toBe(2)
       expect(childCalls).toBe(1)
@@ -225,7 +227,7 @@ describe('edge cases', () => {
       expect(container).toHaveTextContent('12, 1')
       expect(parentCalls).toBe(1)
       expect(childCalls).toBe(1)
-      batch(change)
+      act(() => batch(change))
       expect(container).toHaveTextContent('')
       expect(parentCalls).toBe(2)
       expect(childCalls).toBe(1)

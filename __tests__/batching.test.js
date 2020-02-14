@@ -1,5 +1,5 @@
-import React from 'react'
-import { render, cleanup } from '@testing-library/react/pure'
+import React, { Component } from 'react'
+import { render, cleanup, act } from '@testing-library/react/pure'
 import { view, store, batch } from 'react-easy-state'
 
 describe('batching', () => {
@@ -16,12 +16,58 @@ describe('batching', () => {
     const { container } = render(<MyComp />)
     expect(renderCount).toBe(1)
     expect(container).toHaveTextContent('Bob')
+    act(() =>
+      batch(() => {
+        person.name = 'Ann'
+        person.name = 'Rick'
+      })
+    )
+    expect(container).toHaveTextContent('Rick')
+    expect(renderCount).toBe(2)
+  })
+
+  test('should batch state changes inside a batch() wrapper in a class component', () => {
+    let renderCount = 0
+    const person = store({ name: 'Bob' })
+    const MyComp = view(
+      class extends Component {
+        render () {
+          renderCount++
+          return <div>{person.name}</div>
+        }
+      }
+    )
+
+    const { container } = render(<MyComp />)
+    expect(renderCount).toBe(1)
+    expect(container).toHaveTextContent('Bob')
     batch(() => {
       person.name = 'Ann'
       person.name = 'Rick'
     })
     expect(container).toHaveTextContent('Rick')
     expect(renderCount).toBe(2)
+  })
+
+  test('should not batch state changes outside a batch() wrapper', () => {
+    let renderCount = 0
+    const person = store({ name: 'Bob' })
+    const MyComp = view(() => {
+      renderCount++
+      return <div>{person.name}</div>
+    })
+
+    const { container } = render(<MyComp />)
+    expect(renderCount).toBe(1)
+    expect(container).toHaveTextContent('Bob')
+    act(() => {
+      person.name = 'Ann'
+    })
+    act(() => {
+      person.name = 'Rick'
+    })
+    expect(container).toHaveTextContent('Rick')
+    expect(renderCount).toBe(3)
   })
 
   test('should work with nested batch() calls', () => {
@@ -35,15 +81,17 @@ describe('batching', () => {
     const { container } = render(<MyComp />)
     expect(renderCount).toBe(1)
     expect(container).toHaveTextContent('Bob')
-    batch(() => {
+    act(() =>
       batch(() => {
-        person.name = 'Rob'
-        person.name = 'David'
+        batch(() => {
+          person.name = 'Rob'
+          person.name = 'David'
+        })
+        expect(container).toHaveTextContent('Bob')
+        person.name = 'Ann'
+        person.name = 'Rick'
       })
-      expect(container).toHaveTextContent('Bob')
-      person.name = 'Ann'
-      person.name = 'Rick'
-    })
+    )
     expect(container).toHaveTextContent('Rick')
     expect(renderCount).toBe(2)
   })
@@ -59,10 +107,10 @@ describe('batching', () => {
     const { container } = render(<MyComp />)
     expect(renderCount).toBe(1)
     expect(container).toHaveTextContent('Bob')
-    const batched = () => {
+    const batched = act(() => {
       person.name = 'Ann'
       person.name = 'Rick'
-    }
+    })
     document.body.addEventListener('click', batched)
     document.body.dispatchEvent(new Event('click'))
     expect(container).toHaveTextContent('Rick')
@@ -83,12 +131,17 @@ describe('batching', () => {
     const { container } = render(<MyComp />)
     expect(renderCount).toBe(1)
     expect(container).toHaveTextContent('Bob')
-    await new Promise(resolve =>
-      setTimeout(() => {
-        person.name = 'Ann'
-        person.name = 'Rick'
-        resolve()
-      }, 100)
+    await act(
+      () =>
+        new Promise(
+          resolve =>
+            setTimeout(() => {
+              person.name = 'Ann'
+              person.name = 'Rick'
+              resolve()
+            }),
+          100
+        )
     )
     expect(container).toHaveTextContent('Rick')
     expect(renderCount).toBe(2)
@@ -105,13 +158,16 @@ describe('batching', () => {
     const { container } = render(<MyComp />)
     expect(renderCount).toBe(1)
     expect(container).toHaveTextContent('Bob')
-    await new Promise(resolve =>
-      // eslint-disable-next-line
-      requestAnimationFrame(() => {
-        person.name = 'Ann'
-        person.name = 'Rick'
-        resolve()
-      })
+    await act(
+      () =>
+        new Promise(resolve =>
+          // eslint-disable-next-line
+          requestAnimationFrame(() => {
+            person.name = 'Ann'
+            person.name = 'Rick'
+            resolve()
+          })
+        )
     )
     expect(container).toHaveTextContent('Rick')
     expect(renderCount).toBe(2)
@@ -128,17 +184,21 @@ describe('batching', () => {
     const { container } = render(<MyComp />)
     expect(renderCount).toBe(1)
     expect(container).toHaveTextContent('Bob')
-    await Promise.resolve().then(() => {
-      person.name = 'Ann'
-      person.name = 'Rick'
-    })
+    await act(() =>
+      Promise.resolve().then(() => {
+        person.name = 'Ann'
+        person.name = 'Rick'
+      })
+    )
     expect(container).toHaveTextContent('Rick')
     expect(renderCount).toBe(2)
 
-    await Promise.reject(new Error()).catch(() => {
-      person.name = 'Ben'
-      person.name = 'Morty'
-    })
+    await act(() =>
+      Promise.reject(new Error()).catch(() => {
+        person.name = 'Ben'
+        person.name = 'Morty'
+      })
+    )
     expect(container).toHaveTextContent('Morty')
     expect(renderCount).toBe(3)
   })
@@ -154,11 +214,11 @@ describe('batching', () => {
     const { container } = render(<MyComp />)
     expect(renderCount).toBe(1)
     expect(container).toHaveTextContent('Bob')
-    await Promise.resolve()
+    await act(() => Promise.resolve())
     person.name = 'Ann'
     person.name = 'Rick'
     // ISSUE -> here it is not yet updated!!! -> the then block is not over I guess
-    await Promise.resolve()
+    await act(() => Promise.resolve())
     expect(container).toHaveTextContent('Rick')
     expect(renderCount).toBe(2)
   })
