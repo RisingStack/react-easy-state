@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "solkimicreb",
+      "name": "Miklos Bertalan",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/6956014?v=4",
+      "profile": "https://bertalan-miklos.now.sh/",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "react-easy-state",
+  "projectOwner": "RisingStack",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
