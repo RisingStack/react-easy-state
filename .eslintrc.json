@@ -9,7 +9,8 @@
     "import/no-mutable-exports": "off",
     "no-nested-ternary": "off",
     "no-param-reassign": "off",
-    "func-names": "off"
+    "func-names": "off",
+    "max-classes-per-file": "off"
   },
   "globals": {
     "window": true,
