@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "rolandszoke",
+      "name": "Roland",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/14181908?v=4",
+      "profile": "https://github.com/rolandszoke",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "react-easy-state",
+  "projectOwner": "RisingStack",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
