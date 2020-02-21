@@ -6,6 +6,15 @@
   "commit": false,
   "contributors": [
     {
+      "login": "solkimicreb",
+      "name": "Miklos Bertalan",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/6956014?v=4",
+      "profile": "https://bertalan-miklos.now.sh/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
       "login": "rolandszoke",
       "name": "Roland",
       "avatar_url": "https://avatars3.githubusercontent.com/u/14181908?v=4",
