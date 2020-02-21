@@ -651,6 +651,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-disable -->
 <table>
   <tr>
+    <td align="center"><a href="https://github.com/rolandszoke"><img src="https://avatars3.githubusercontent.com/u/14181908?v=4" width="100px;" alt=""/><br /><sub><b>Roland</b></sub></a><br /><a href="https://github.com/RisingStack/react-easy-state/commits?author=rolandszoke" title="Code">💻</a></td>
     <td align="center"><a href="https://bertalan-miklos.now.sh/"><img src="https://avatars3.githubusercontent.com/u/6956014?v=4" width="100px;" alt=""/><br /><sub><b>Miklos Bertalan</b></sub></a><br /><a href="https://github.com/RisingStack/react-easy-state/commits?author=solkimicreb" title="Code">💻</a></td>
   </tr>
 </table>
