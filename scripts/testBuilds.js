@@ -6,11 +6,7 @@ const { exec } = require('child_process');
 const distPath = path.resolve('dist');
 const files = fs
   .readdirSync(distPath)
-  .filter(
-    dist =>
-      dist.indexOf('map') === -1 &&
-      dist.indexOf('react-platform') === -1,
-  );
+  .filter(dist => dist.indexOf('map') === -1);
 
 function execPromise(cmd) {
   return new Promise(resolve => exec(cmd, resolve));
