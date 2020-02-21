@@ -10,11 +10,21 @@
     "no-nested-ternary": "off",
     "no-param-reassign": "off",
     "func-names": "off",
-    "max-classes-per-file": "off"
+    "max-classes-per-file": "off",
+    "react/prefer-stateless-function": "off",
+    "react/prop-types": "off"
   },
   "globals": {
     "window": true,
     "EventTarget": true,
-    "WebSocket": true
+    "WebSocket": true,
+    "describe": true,
+    "afterAll": true,
+    "test": true,
+    "expect": true,
+    "afterEach": true,
+    "document": true,
+    "jest": true,
+    "Event": true
   }
 }

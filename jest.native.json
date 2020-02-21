@@ -1,6 +1,6 @@
 {
   "preset": "react-native",
-  "testRegex": "\\.test\\.native\\.js$",
+  "testRegex": "\\.test\\.native\\.jsx?$",
   "transform": {
     "^.+\\.(js|jsx)$": "react-native/jest/preprocessor.js"
   },

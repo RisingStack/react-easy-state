@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { render, cleanup, act } from '@testing-library/react/pure';
+// eslint-disable-next-line import/no-unresolved
 import { view, store, batch } from 'react-easy-state';
 
 describe('batching', () => {
@@ -9,7 +10,7 @@ describe('batching', () => {
     let renderCount = 0;
     const person = store({ name: 'Bob' });
     const MyComp = view(() => {
-      renderCount++;
+      renderCount += 1;
       return <div>{person.name}</div>;
     });
 
@@ -32,7 +33,7 @@ describe('batching', () => {
     const MyComp = view(
       class extends Component {
         render() {
-          renderCount++;
+          renderCount += 1;
           return <div>{person.name}</div>;
         }
       },
@@ -53,7 +54,7 @@ describe('batching', () => {
     let renderCount = 0;
     const person = store({ name: 'Bob' });
     const MyComp = view(() => {
-      renderCount++;
+      renderCount += 1;
       return <div>{person.name}</div>;
     });
 
@@ -74,7 +75,7 @@ describe('batching', () => {
     let renderCount = 0;
     const person = store({ name: 'Bob' });
     const MyComp = view(() => {
-      renderCount++;
+      renderCount += 1;
       return <div>{person.name}</div>;
     });
 
@@ -100,7 +101,7 @@ describe('batching', () => {
     let renderCount = 0;
     const person = store({ name: 'Bob' });
     const MyComp = view(() => {
-      renderCount++;
+      renderCount += 1;
       return <div>{person.name}</div>;
     });
 
@@ -128,7 +129,7 @@ describe('batching', () => {
     let renderCount = 0;
     const person = store({ name: 'Bob' });
     const MyComp = view(() => {
-      renderCount++;
+      renderCount += 1;
       return <div>{person.name}</div>;
     });
 
@@ -152,7 +153,7 @@ describe('batching', () => {
     let renderCount = 0;
     const person = store({ name: 'Bob' });
     const MyComp = view(() => {
-      renderCount++;
+      renderCount += 1;
       return <div>{person.name}</div>;
     });
 
@@ -179,7 +180,7 @@ describe('batching', () => {
     let renderCount = 0;
     const person = store({ name: 'Bob' });
     const MyComp = view(() => {
-      renderCount++;
+      renderCount += 1;
       return <div>{person.name}</div>;
     });
 
@@ -205,7 +206,7 @@ describe('batching', () => {
     let renderCount = 0;
     const person = store({ name: 'Bob' });
     const MyComp = view(() => {
-      renderCount++;
+      renderCount += 1;
       return <div>{person.name}</div>;
     });
 
@@ -235,7 +236,7 @@ describe('batching', () => {
     let renderCount = 0;
     const person = store({ name: 'Bob' });
     const MyComp = view(() => {
-      renderCount++;
+      renderCount += 1;
       return <div>{person.name}</div>;
     });
 
@@ -281,7 +282,9 @@ describe('batching', () => {
 
   test('should not break event listeners', () => {
     let callCount = 0;
-    const fn = () => callCount++;
+    const fn = () => {
+      callCount += 1;
+    };
     document.body.addEventListener('click', fn);
 
     expect(callCount).toBe(0);
