@@ -17,6 +17,8 @@
     "test-builds": "node ./scripts/testBuilds.js",
     "lint": "eslint --max-warnings 0 --ext js,jsx src scripts",
     "lint-fix": "eslint --max-warnings 0 --ext js,jsx src scripts --fix",
+    "lint-tests": "eslint --max-warnings 0 --ext js,jsx __tests__ __mocks__",
+    "lint-tests-fix": "eslint --max-warnings 0 --ext js,jsx __tests__ __mocks__ --fix",
     "install-examples": "node ./scripts/installExamples.js",
     "build-examples": "node ./scripts/buildExamples.js",
     "link-examples": "node ./scripts/linkExamples.js",
@@ -105,7 +107,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint",
+      "pre-commit": "npm run lint && npm run lint-tests",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
