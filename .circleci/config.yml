@@ -15,6 +15,7 @@ jobs:
 
     steps:
       - checkout
+      - run: sudo npm install -g npm@6.13.7
       - run: npm install
       - run: npm run lint
       # run the tests on the original source to get coverage info
