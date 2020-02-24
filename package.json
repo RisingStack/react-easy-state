@@ -13,6 +13,7 @@
     "test-native": "NATIVE=true jest --config ./jest.native.json",
     "test-web": "jest --config ./jest.web.json",
     "test": "npm run test-web && npm run test-native",
+    "old-test": "npm run test-web && npm run test-native",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "test-builds": "node ./scripts/testBuilds.js",
     "lint": "eslint --max-warnings 0 --ext js,jsx src scripts",
@@ -59,7 +60,8 @@
     "es6 proxy"
   ],
   "dependencies": {
-    "@nx-js/observer-util": "^4.2.2"
+    "@nx-js/observer-util": "^4.2.2",
+    "old-react-dom": "npm:react-dom@^16.7.0"
   },
   "peerDependencies": {
     "react": "*"
@@ -94,6 +96,8 @@
     "markdown-toc": "^1.2.0",
     "moment": "^2.24.0",
     "nyc": "^15.0.0",
+    "old-react": "npm:react@16.7.0",
+    "old-react-dom": "npm:react-dom@16.7.0",
     "prettier": "^1.19.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
