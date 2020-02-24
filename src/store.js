@@ -11,5 +11,10 @@ export function store(obj) {
   if (hasHooks && isInsideFunctionComponent) {
     return useMemo(() => observable(obj), []);
   }
+  if (!hasHooks && isInsideFunctionComponent) {
+    throw new Error(
+      'You cannot use state inside a function component with a pre-hooks version of React. Please update your React version to at least v16.8.0 to use this feature.',
+    );
+  }
   return observable(obj);
 }
