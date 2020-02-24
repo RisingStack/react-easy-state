@@ -17,6 +17,7 @@ import { hasHooks } from './utils';
 import { queue } from './queue';
 
 export let isInsideFunctionComponent = false;
+export let isInsideStatelessComp = false;
 const COMPONENT = Symbol('owner component');
 const TRIGGERRENDER = Symbol('trigger render');
 
@@ -35,6 +36,7 @@ export function view(Comp) {
   const isStatelessComp = !(
     Comp.prototype && Comp.prototype.isReactComponent
   );
+  isInsideStatelessComp = isStatelessComp;
 
   let ReactiveComp;
 
