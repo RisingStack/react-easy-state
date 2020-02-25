@@ -1,5 +1,3 @@
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/state-in-constructor */
 import React, { Component, useState } from 'react';
 import {
   render,
