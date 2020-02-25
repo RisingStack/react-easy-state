@@ -2,13 +2,7 @@
 
 Simple React state management. Made with :heart: and ES6 Proxies.
 
-[![Build](https://img.shields.io/circleci/project/github/RisingStack/react-easy-state/master.svg)](https://circleci.com/gh/RisingStack/react-easy-state/tree/master) [![dependencies Status](https://david-dm.org/RisingStack/react-easy-state/status.svg)](https://david-dm.org/RisingStack/react-easy-state) [![Coverage Status](https://coveralls.io/repos/github/RisingStack/react-easy-state/badge.svg?branch=master&service=github)](https://coveralls.io/github/RisingStack/react-easy-state?branch=master) [![Package size](https://img.shields.io/bundlephobia/minzip/react-easy-state.svg)](https://bundlephobia.com/result?p=react-easy-state) [![Version](https://img.shields.io/npm/v/react-easy-state.svg)](https://www.npmjs.com/package/react-easy-state) [![License](https://img.shields.io/npm/l/react-easy-state.svg)](https://www.npmjs.com/package/react-easy-state) [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Simple%20React%20state%20management.%20Made%20with%20%E2%9D%A4%EF%B8%8F%20and%20ES6%20Proxies.&url=https://github.com/RisingStack/react-easy-state&hashtags=reactjs,webdev,javascript)
-
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
+[![Build](https://img.shields.io/circleci/project/github/RisingStack/react-easy-state/master.svg)](https://circleci.com/gh/RisingStack/react-easy-state/tree/master) [![dependencies Status](https://david-dm.org/RisingStack/react-easy-state/status.svg)](https://david-dm.org/RisingStack/react-easy-state) [![Coverage Status](https://coveralls.io/repos/github/RisingStack/react-easy-state/badge.svg?branch=master&service=github)](https://coveralls.io/github/RisingStack/react-easy-state?branch=master) [![Package size](https://img.shields.io/bundlephobia/minzip/react-easy-state.svg)](https://bundlephobia.com/result?p=react-easy-state) [![Version](https://img.shields.io/npm/v/react-easy-state.svg)](https://www.npmjs.com/package/react-easy-state) [![License](https://img.shields.io/npm/l/react-easy-state.svg)](https://www.npmjs.com/package/react-easy-state) <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 <a href="#platform-support"><img src="images/browser_support.png" alt="Browser support" width="450px" /></a>
 
@@ -20,24 +14,19 @@ Simple React state management. Made with :heart: and ES6 Proxies.
 
 <!-- toc -->
 
-- [React Easy State](#react-easy-state)
-  - [Introduction](#introduction)
-  - [Installation](#installation)
-  - [Usage](#usage)
-    - [Creating global stores](#creating-global-stores)
-    - [Creating reactive views](#creating-reactive-views)
-    - [Creating local stores](#creating-local-stores)
-      - [Local stores in function components](#local-stores-in-function-components)
-      - [Local stores in class components](#local-stores-in-class-components)
-  - [Examples with live demos](#examples-with-live-demos)
-      - [Beginner](#beginner)
-      - [Advanced](#advanced)
-  - [Articles](#articles)
-  - [Performance](#performance)
-  - [Platform support](#platform-support)
-  - [Alternative builds](#alternative-builds)
-  - [Contributing](#contributing)
-  - [Contributors ✨](#contributors-%e2%9c%a8)
+* [Introduction](#introduction)
+* [Installation](#installation)
+* [Usage](#usage)
+  + [Creating global stores](#creating-global-stores)
+  + [Creating reactive views](#creating-reactive-views)
+  + [Creating local stores](#creating-local-stores)
+* [Examples with live demos](#examples-with-live-demos)
+* [Articles](#articles)
+* [Performance](#performance)
+* [Platform support](#platform-support)
+* [Alternative builds](#alternative-builds)
+* [Contributing](#contributing)
+* [Contributors ✨](#contributors-%E2%9C%A8)
 
 <!-- tocstop -->
 

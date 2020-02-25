@@ -27,7 +27,3 @@ This project is using [ESLint](https://eslint.org/) for linting and [Prettier](h
 ## Tests
 
 To run our tests use `npm t` script. We are using [Jest](https://jestjs.io/) and [React Testing Library](https://github.com/testing-library/react-testing-library) for testing. Consider creating new test cases when necessary under the `__tests__` folder, we want to keep our test covarage above 90%. Use `.test.js` or `.test.jsx` suffix for test files and `.test.native.js` or `.test.native.jsx` for native tests.
-
-## Build process
-
-TODO
