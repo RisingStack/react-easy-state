@@ -12,6 +12,8 @@
     "func-names": "off",
     "max-classes-per-file": "off",
     "react/prefer-stateless-function": "off",
+    "react/destructuring-assignment": "off",
+    "react/state-in-constructor": "off",
     "react/prop-types": "off"
   },
   "globals": {
