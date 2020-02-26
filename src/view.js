@@ -17,7 +17,7 @@ import { hasHooks } from './utils';
 import { queue } from './queue';
 
 export let isInsideFunctionComponent = false;
-export let isInsideStatelessComp = false;
+export let isInsideClassComponent = false;
 const COMPONENT = Symbol('owner component');
 const TRIGGERRENDER = Symbol('trigger render');
 
@@ -36,7 +36,6 @@ export function view(Comp) {
   const isStatelessComp = !(
     Comp.prototype && Comp.prototype.isReactComponent
   );
-  isInsideStatelessComp = isStatelessComp;
 
   let ReactiveComp;
 
@@ -97,9 +96,14 @@ export function view(Comp) {
       };
 
       render() {
-        return isStatelessComp
-          ? Comp(this.props, this.context)
-          : super.render();
+        isInsideClassComponent = true;
+        try {
+          return isStatelessComp
+            ? Comp(this.props, this.context)
+            : super.render();
+        } finally {
+          isInsideClassComponent = false;
+        }
       }
 
       // react should trigger updates on prop changes, while easyState handles store changes

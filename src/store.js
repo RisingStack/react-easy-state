@@ -3,7 +3,7 @@ import { observable } from '@nx-js/observer-util';
 
 import {
   isInsideFunctionComponent,
-  isInsideStatelessComp,
+  isInsideClassComponent,
 } from './view';
 import { hasHooks } from './utils';
 
@@ -14,7 +14,7 @@ export function store(obj) {
   if (isInsideFunctionComponent) {
     return useMemo(() => observable(obj), []);
   }
-  if (!hasHooks && isInsideStatelessComp) {
+  if (!hasHooks && isInsideClassComponent) {
     throw new Error(
       'You cannot use state inside a function component with a pre-hooks version of React. Please update your React version to at least v16.8.0 to use this feature.',
     );
