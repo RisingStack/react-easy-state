@@ -1,5 +1,5 @@
 import path from 'path';
-import resolvePlugin from 'rollup-plugin-node-resolve';
+import resolvePlugin from '@rollup/plugin-node-resolve';
 import babelPlugin from 'rollup-plugin-babel';
 import externalsPlugin from 'rollup-plugin-auto-external';
 
