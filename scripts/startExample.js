@@ -77,20 +77,26 @@ exec('npm link react-easy-state', {
 
 // 3. START EXAMPLE
 console.customInfo(`Starting ${process.argv[2]} in the background.`);
-exec("nohup bash -c 'npm run start' >/dev/null 2>&1 &", {
-  cwd: exampleFolder,
-  stdio: 'inherit',
-});
+exec(
+  "nohup bash -c 'npm run start' 2>&1 > nohup.out & tail -f nohup.out &",
+  {
+    cwd: exampleFolder,
+    stdio: 'inherit',
+  },
+);
 
 const gracefullShutdown = () => {
   console.customInfo('Killing nodes.');
   exec('killall node', { stdio: 'inherit' });
+  exec('rm nohup.out', {
+    cwd: exampleFolder,
+    stdio: 'inherit',
+  });
   console.customInfo('Unlinking react-easy-state.');
   exec('npm unlink --no-save react-easy-state', {
     cwd: exampleFolder,
     stdio: 'inherit',
   });
-  exec('npm unlink', { stdio: 'inherit' });
   console.customInfo('Stoping bundle builder.');
   watcher.close();
 };
