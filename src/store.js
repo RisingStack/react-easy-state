@@ -3,9 +3,9 @@ import { observable } from '@nx-js/observer-util';
 
 import {
   isInsideFunctionComponent,
-  isInsideClassComponent,
+  isInsideClassComponentRender,
+  isInsideFunctionComponentWithoutHooks,
 } from './view';
-import { hasHooks } from './utils';
 
 export function store(obj) {
   // do not create new versions of the store on every render
@@ -14,9 +14,14 @@ export function store(obj) {
   if (isInsideFunctionComponent) {
     return useMemo(() => observable(obj), []);
   }
-  if (!hasHooks && isInsideClassComponent) {
+  if (isInsideFunctionComponentWithoutHooks) {
     throw new Error(
       'You cannot use state inside a function component with a pre-hooks version of React. Please update your React version to at least v16.8.0 to use this feature.',
+    );
+  }
+  if (isInsideClassComponentRender) {
+    throw new Error(
+      'You cannot use state inside a render of a class component. Please create your store outside of the render function.',
     );
   }
   return observable(obj);
