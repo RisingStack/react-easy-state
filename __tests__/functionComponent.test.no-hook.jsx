@@ -16,7 +16,7 @@ describe('Using an old react version', () => {
     );
   });
 
-  test('Using global state in a function component with a version of react that has no hooks should not throw an error', () => {
+  test('Using global state in a function component should not throw an error', () => {
     const person = store({ name: 'Bob' });
     const MyComp = view(() => {
       return <div>{person.name}</div>;
@@ -24,7 +24,7 @@ describe('Using an old react version', () => {
     expect(() => render(<MyComp />)).not.toThrow();
   });
 
-  test('Using global state in a class component with a version of react that has no hooks should not throw an error', () => {
+  test('Using global state in a class component should not throw an error', () => {
     const person = store({ name: 'Bob' });
     const MyComp = view(
       class extends Component {
@@ -36,7 +36,7 @@ describe('Using an old react version', () => {
     expect(() => render(<MyComp />)).not.toThrow();
   });
 
-  test('Using local state in a class component with a version of react that has no hooks should not throw an error', () => {
+  test('Using local state in a class component should not throw an error', () => {
     const MyComp = view(
       class extends Component {
         person = store({ name: 'Bob' });
@@ -48,5 +48,20 @@ describe('Using an old react version', () => {
     );
 
     expect(() => render(<MyComp />)).not.toThrow();
+  });
+
+  test('Using local state inside a render of a class component should throw an error', () => {
+    const MyComp = view(
+      class extends Component {
+        render() {
+          const person = store({ name: 'Bob' });
+          return <div>{person.name}</div>;
+        }
+      },
+    );
+
+    expect(() => render(<MyComp />)).toThrow(
+      'You cannot use state inside a render of a class component. Please create your store outside of the render function.',
+    );
   });
 });

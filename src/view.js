@@ -17,7 +17,8 @@ import { hasHooks } from './utils';
 import { queue } from './queue';
 
 export let isInsideFunctionComponent = false;
-export let isInsideClassComponent = false;
+export let isInsideClassComponentRender = false;
+export let isInsideFunctionComponentWithoutHooks = false;
 const COMPONENT = Symbol('owner component');
 const TRIGGERRENDER = Symbol('trigger render');
 
@@ -96,13 +97,15 @@ export function view(Comp) {
       };
 
       render() {
-        isInsideClassComponent = true;
+        isInsideClassComponentRender = !isStatelessComp;
+        isInsideFunctionComponentWithoutHooks = isStatelessComp;
         try {
           return isStatelessComp
             ? Comp(this.props, this.context)
             : super.render();
         } finally {
-          isInsideClassComponent = false;
+          isInsideClassComponentRender = false;
+          isInsideFunctionComponentWithoutHooks = false;
         }
       }
 
