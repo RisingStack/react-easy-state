@@ -14,28 +14,18 @@
     "test-web": "jest --config ./jest.web.json",
     "test-web-no-hook": "NOHOOK=true jest --config ./jest.no-hook.json",
     "test": "npm run test-web && npm run test-web-no-hook && npm run test-native",
-    "example-beer-finder": "node ./scripts/startExample.js ./examples/beer-finder",
-    "example-clock": "node ./scripts/startExample.js ./examples/clock",
-    "example-contacts": "node ./scripts/startExample.js ./examples/contacts",
-    "example-stop-watch": "node ./scripts/startExample.js ./examples/stop-watch",
-    "example-todo-mvc": "node ./scripts/startExample.js ./examples/todo-mvc",
-    "example-native-clock": "node ./scripts/startExample.js ./examples/native-clock",
+    "example": "node ./scripts/startExample.js",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "test-builds": "node ./scripts/testBuilds.js",
-    "lint": "eslint --max-warnings 0 --ext js,jsx src scripts",
-    "lint-fix": "eslint --max-warnings 0 --ext js,jsx src scripts --fix",
-    "lint-tests": "eslint --max-warnings 0 --ext js,jsx __tests__ __mocks__",
-    "lint-tests-fix": "eslint --max-warnings 0 --ext js,jsx __tests__ __mocks__ --fix",
+    "lint": "eslint --max-warnings 0 --ext js,jsx src scripts __tests__ __mocks__",
     "install-examples": "node ./scripts/installExamples.js",
     "build-examples": "node ./scripts/buildExamples.js",
-    "link-examples": "node ./scripts/linkExamples.js",
-    "unlink-examples": "node ./scripts/unlinkExamples.js",
     "build": "rollup --config",
     "build-toc": "node ./scripts/buildToc.js"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint && npm run lint-tests",
+      "pre-commit": "npm run lint",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-push": "npm t"
     }

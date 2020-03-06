@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 const path = require('path');
+const fs = require('fs');
 const { execSync: exec } = require('child_process');
 const rollup = require('rollup');
 const resolvePlugin = require('@rollup/plugin-node-resolve');
@@ -17,7 +18,21 @@ console.customInfo = args => {
   );
 };
 
-const exampleFolder = path.resolve(process.argv[2]);
+if (!process.argv[2]) {
+  console.customInfo(
+    'Please use the name of the example folder as an argument for the npm script. e.g. npm run example beer-finder',
+  );
+  process.exit(1);
+}
+
+const exampleFolder = path.resolve(
+  path.resolve('./examples/', process.argv[2]),
+);
+
+if (!fs.existsSync(exampleFolder)) {
+  console.customInfo('Requested example does not exists!');
+  process.exit(1);
+}
 
 // 1. BUILD EASY-STATE BUNDLE
 console.customInfo('Building react-easy-state in watch mode.');
