@@ -22,7 +22,7 @@ Every pull request will require an approved review before merging.
 
 ## Linters
 
-This project is using [ESLint](https://eslint.org/) for linting and [Prettier](https://prettier.io/) for code formatting. Please follow their standards on contributing. Your code is automatically formatted on saving a file when using [VSCode](https://code.visualstudio.com/) or [Atom](https://atom.io/). [Husky](https://github.com/typicode/husky) ensures that your changes are properly linted before making a commit. If you want to lint manually, you can use `lint` and `lint-fix` npm scripts to lint the source code and `lint-tests` or `lint-tests-fix` to lint the test files.
+This project is using [ESLint](https://eslint.org/) for linting and [Prettier](https://prettier.io/) for code formatting. Please follow their standards on contributing. Your code is automatically formatted on saving a file when using [VSCode](https://code.visualstudio.com/) or [Atom](https://atom.io/). [Husky](https://github.com/typicode/husky) ensures that your changes are properly linted before making a commit. If you want to lint manually, you can use `lint` and `lint --fix` npm scripts to lint the source code and the test files.
 
 ## Tests
 
