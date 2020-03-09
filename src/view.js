@@ -42,7 +42,7 @@ export function view(Comp) {
 
   if (isStatelessComp && hasHooks) {
     // use a hook based reactive wrapper when we can
-    ReactiveComp = memo(props => {
+    ReactiveComp = props => {
       // use a dummy setState to update the component
       const [, setState] = useState();
       const triggerRender = useCallback(() => setState({}), []);
@@ -73,7 +73,9 @@ export function view(Comp) {
       } finally {
         isInsideFunctionComponent = false;
       }
-    });
+    };
+    ReactiveComp.displayName = Comp.displayName || Comp.name;
+    ReactiveComp = memo(ReactiveComp);
   } else {
     const BaseComp = isStatelessComp ? Component : Comp;
     // a HOC which overwrites render, shouldComponentUpdate and componentWillUnmount
