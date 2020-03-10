@@ -2,7 +2,7 @@
 
 Simple React state management. Made with :heart: and ES6 Proxies.
 
-[![Build](https://img.shields.io/circleci/project/github/RisingStack/react-easy-state/master.svg)](https://circleci.com/gh/RisingStack/react-easy-state/tree/master) [![dependencies Status](https://david-dm.org/RisingStack/react-easy-state/status.svg)](https://david-dm.org/RisingStack/react-easy-state) [![Coverage Status](https://coveralls.io/repos/github/RisingStack/react-easy-state/badge.svg?branch=master&service=github)](https://coveralls.io/github/RisingStack/react-easy-state?branch=master) [![Package size](https://img.shields.io/bundlephobia/minzip/react-easy-state.svg)](https://bundlephobia.com/result?p=react-easy-state) [![Version](https://img.shields.io/npm/v/react-easy-state.svg)](https://www.npmjs.com/package/react-easy-state) [![License](https://img.shields.io/npm/l/react-easy-state.svg)](https://www.npmjs.com/package/react-easy-state) <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)<!-- ALL-CONTRIBUTORS-BADGE:END -->
+[![Build](https://img.shields.io/circleci/project/github/RisingStack/react-easy-state/master.svg)](https://circleci.com/gh/RisingStack/react-easy-state/tree/master) [![dependencies Status](https://david-dm.org/RisingStack/react-easy-state/status.svg)](https://david-dm.org/RisingStack/react-easy-state) [![Coverage Status](https://coveralls.io/repos/github/RisingStack/react-easy-state/badge.svg?branch=master&service=github)](https://coveralls.io/github/RisingStack/react-easy-state?branch=master) [![Package size](https://img.shields.io/bundlephobia/minzip/@risingstack/react-easy-state.svg)](https://bundlephobia.com/result?p=@risingstack/react-easy-state) [![Version](https://img.shields.io/npm/v/@risingstack/react-easy-state.svg)](https://www.npmjs.com/package/@risingstack/react-easy-state) [![License](https://img.shields.io/npm/l/@risingstack/react-easy-state.svg)](https://www.npmjs.com/package/@risingstack/react-easy-state) <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 <a href="#platform-support"><img src="images/browser_support.png" alt="Browser support" width="450px" /></a>
 
@@ -41,7 +41,7 @@ React Easy State is a practical state management library with two functions and 
 
 ```jsx
 import React from 'react';
-import { store, view } from 'react-easy-state';
+import { store, view } from '@risingstack/react-easy-state';
 
 const counter = store({ num: 0 });
 const increment = () => counter.num++;
@@ -57,7 +57,7 @@ Check this [TodoMVC codesandbox](https://codesandbox.io/s/github/RisingStack/rea
 
 ## Installation
 
-`npm install react-easy-state`
+`npm install @risingstack/react-easy-state`
 
 <details>
 <summary><strong>Setting up a quick project</strong></summary>
@@ -68,7 +68,7 @@ Easy State supports <a href="https://github.com/facebookincubator/create-react-a
 ```sh
 npx create-react-app my-app
 cd my-app
-npm install react-easy-state
+npm install @risingstack/react-easy-state
 npm start
 ```
 
@@ -83,7 +83,7 @@ _You need npm 5.2+ to use npx._
 `store` creates a state store from the passed object and returns it. A state store behaves just like the passed object. (To be precise, it is a transparent reactive proxy of the original object.)
 
 ```js
-import { store } from 'react-easy-state';
+import { store } from '@risingstack/react-easy-state';
 
 const user = store({ name: 'Rick' });
 // stores behave like normal JS objects
@@ -95,7 +95,7 @@ user.name = 'Bob';
 <p></p>
 
 ```js
-import { store } from 'react-easy-state';
+import { store } from '@risingstack/react-easy-state';
 
 // stores can include any valid JS structure
 // including nested data, arrays, Maps, Sets, getters, setters, inheritance, ...
@@ -126,7 +126,7 @@ user.friends.set('id', otherUser);
 <p></p>
 
 ```js
-import { store } from 'react-easy-state';
+import { store } from '@risingstack/react-easy-state';
 
 const userStore = store({
   user: {},
@@ -148,7 +148,7 @@ export default userStore;
 _userStore.js_
 
 ```js
-import { store } from 'react-easy-state';
+import { store } from '@risingstack/react-easy-state';
 
 const userStore = store({
   user: {},
@@ -163,7 +163,7 @@ export default userStore;
 _recipesStore.js_
 
 ```js
-import { store } from 'react-easy-state';
+import { store } from '@risingstack/react-easy-state';
 import userStore from './userStore';
 
 const recipesStore = store({
@@ -211,7 +211,7 @@ The first example wouldn't trigger re-renders on the `person.name = 'Ann'` mutat
 <p></p>
 
 ```jsx
-import { store, view } from 'react-easy-state';
+import { store, view } from '@risingstack/react-easy-state';
 
 const counter = store({
   num: 0,
@@ -238,7 +238,7 @@ Wrapping your components with `view` turns them into reactive views. A reactive 
 
 ```jsx
 import React from 'react';
-import { view, store } from 'react-easy-state';
+import { view, store } from '@risingstack/react-easy-state';
 
 // this is a global state store
 const user = store({ name: 'Bob' });
@@ -260,7 +260,7 @@ export default view(() => (
 <p></p>
 
 ```jsx
-import { view, store } from 'react-easy-state';
+import { view, store } from '@risingstack/react-easy-state';
 
 const appStore = store({
   user: { name: 'Ann' },
@@ -290,7 +290,7 @@ const Profile = ({ user }) => <p>Name: {user.name}</p>;
 
 ```jsx
 import React from 'react';
-import { view, store } from 'react-easy-state';
+import { view, store } from '@risingstack/react-easy-state';
 
 const user = store({ name: 'Bob' });
 const timeline = store({ posts: ['react-easy-state'] });
@@ -324,7 +324,7 @@ export default view(() => (
 
 ```jsx
 import React from 'react';
-import { view, store, batch } from 'react-easy-state';
+import { view, store, batch } from '@risingstack/react-easy-state';
 
 const user = store({ name: 'Bob', age: 30 });
 
@@ -346,7 +346,7 @@ If you mutate your stores multiple times synchronously from **exotic task source
 
 ```jsx
 import React from 'react';
-import { view, store, batch } from 'react-easy-state';
+import { view, store, batch } from '@risingstack/react-easy-state';
 
 const user = store({ name: 'Bob', age: 30 });
 
@@ -376,7 +376,7 @@ export default view(() => (
 <p></p>
 
 ```jsx
-import { view } from 'react-easy-state';
+import { view } from '@risingstack/react-easy-state';
 import { withRouter } from 'react-router-dom';
 import { withTheme } from 'styled-components';
 
@@ -415,7 +415,7 @@ Third party helpers - like data grids - may consist of many internal components 
 
 ```jsx
 import React from 'react';
-import { view, store } from 'react-easy-state';
+import { view, store } from '@risingstack/react-easy-state';
 import Table from 'rc-table';
 import cloneDeep from 'lodash/cloneDeep';
 
@@ -443,7 +443,7 @@ A singleton global store is perfect for something like the current user, but som
 
 ```jsx
 import React from 'react'
-import { view, store } from 'react-easy-state'
+import { view, store } from '@risingstack/react-easy-state'
 
 export default view(() => {
   const counter = store({ num: 0 })
@@ -460,7 +460,7 @@ export default view(() => {
 
 ```jsx
 import React from 'react';
-import { view, store } from 'react-easy-state';
+import { view, store } from '@risingstack/react-easy-state';
 
 export default view(() => {
   const [name, setName] = useState('Ann');
@@ -483,7 +483,7 @@ export default view(() => {
 
 ```jsx
 import React, { Component } from 'react';
-import { view, store } from 'react-easy-state';
+import { view, store } from '@risingstack/react-easy-state';
 
 class Counter extends Component {
   counter = store({ num: 0 });
@@ -505,7 +505,7 @@ export default view(Counter);
 
 ```jsx
 import React, { Component } from 'react';
-import { view, store } from 'react-easy-state';
+import { view, store } from '@risingstack/react-easy-state';
 
 class Profile extends Component {
   state = { name: 'Ann' };
@@ -536,7 +536,7 @@ export default view(Profile);
 
 ```jsx
 import React, { Component } from 'react';
-import { view, store } from 'react-easy-state';
+import { view, store } from '@risingstack/react-easy-state';
 
 class Profile extends Component {
   // DON'T DO THIS
@@ -558,7 +558,7 @@ Class components wrapped with `view` have an extra static `deriveStoresFromProps
 
 ```jsx
 import React, { Component } from 'react';
-import { view, store } from 'react-easy-state';
+import { view, store } from '@risingstack/react-easy-state';
 
 class NameCard extends Component {
   userStore = store({ name: 'Bob' });
@@ -623,12 +623,12 @@ _This library is based on non polyfillable ES6 Proxies. Because of this, it will
 
 This library detects if you use ES6 or commonJS modules and serve the right format to you. The default bundles use ES6 features, which may not yet be supported by some minifier tools. If you experience issues during the build process, you can switch to one of the ES5 builds from below.
 
-- `react-easy-state/dist/es.es6.js` exposes an ES6 build with ES6 modules.
-- `react-easy-state/dist/es.es5.js` exposes an ES5 build with ES6 modules.
-- `react-easy-state/dist/cjs.es6.js` exposes an ES6 build with commonJS modules.
-- `react-easy-state/dist/cjs.es5.js` exposes an ES5 build with commonJS modules.
+- `@risingstack/react-easy-state/dist/es.es6.js` exposes an ES6 build with ES6 modules.
+- `@risingstack/react-easy-state/dist/es.es5.js` exposes an ES5 build with ES6 modules.
+- `@risingstack/react-easy-state/dist/cjs.es6.js` exposes an ES6 build with commonJS modules.
+- `@risingstack/react-easy-state/dist/cjs.es5.js` exposes an ES5 build with commonJS modules.
 
-If you use a bundler, set up an alias for `react-easy-state` to point to your desired build. You can learn how to do it with webpack [here](https://webpack.js.org/configuration/resolve/#resolve-alias) and with rollup [here](https://github.com/rollup/rollup-plugin-alias#usage).
+If you use a bundler, set up an alias for `@risingstack/react-easy-state` to point to your desired build. You can learn how to do it with webpack [here](https://webpack.js.org/configuration/resolve/#resolve-alias) and with rollup [here](https://github.com/rollup/rollup-plugin-alias#usage).
 
 ## Contributing
 
