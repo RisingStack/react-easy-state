@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { render, cleanup, act } from '@testing-library/react/pure';
 // eslint-disable-next-line import/no-unresolved
-import { view, store, batch } from 'react-easy-state';
+import { view, store, batch } from '@risingstack/react-easy-state';
 
 describe('batching', () => {
   afterEach(cleanup);

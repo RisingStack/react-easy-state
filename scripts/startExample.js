@@ -75,7 +75,7 @@ exec('npm i', {
 console.customInfo('Deleting react dependency duplicates.');
 exec(
   `
-rm -rf ./node_modules/react-easy-state &&
+rm -rf ./node_modules/@risingstack/react-easy-state &&
 rm -rf ./node_modules/react &&
 rm -rf ./node_modules/react-dom
   `,
@@ -85,7 +85,7 @@ rm -rf ./node_modules/react-dom
   },
 );
 console.customInfo('Linking react-easy-state.');
-exec('npm link react-easy-state', {
+exec('npm link @risingstack/react-easy-state', {
   cwd: exampleFolder,
   stdio: 'inherit',
 });
@@ -108,7 +108,7 @@ const gracefullShutdown = () => {
     stdio: 'inherit',
   });
   console.customInfo('Unlinking react-easy-state.');
-  exec('npm unlink --no-save react-easy-state', {
+  exec('npm unlink --no-save @risingstack/react-easy-state', {
     cwd: exampleFolder,
     stdio: 'inherit',
   });

@@ -6,7 +6,7 @@ import {
   act,
 } from '@testing-library/react/pure';
 // eslint-disable-next-line import/no-unresolved
-import { view, store } from 'react-easy-state';
+import { view, store } from '@risingstack/react-easy-state';
 import {
   BrowserRouter as Router,
   Route,

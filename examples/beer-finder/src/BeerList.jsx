@@ -1,7 +1,7 @@
-import React from "react";
-import { view } from "react-easy-state";
-import appStore from "./appStore";
-import Beer from "./Beer";
+import React from 'react';
+import { view } from '@risingstack/react-easy-state';
+import appStore from './appStore';
+import Beer from './Beer';
 
 // this is re-rendered whenever the relevant parts of the used data stores change
 export default view(() => (

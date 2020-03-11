@@ -2,7 +2,7 @@
 /* eslint-disable no-multi-assign */
 import { Component } from 'react';
 // eslint-disable-next-line import/no-unresolved
-import { view } from 'react-easy-state';
+import { view } from '@risingstack/react-easy-state';
 
 describe('static props', () => {
   test('view() should proxy static properties from wrapped components', () => {

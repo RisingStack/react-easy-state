@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway');
 
 * {
-  font: 16px "Open Sans", sans-serif;
+  font: 16px 'Open Sans', sans-serif;
   color: #2c3e50;
 }
 
@@ -11,13 +11,16 @@ th {
   font-weight: bold;
 }
 
-th, td {
+th,
+td {
   height: 30px;
   text-align: center;
   vertical-align: middle;
 }
 
-table, th, td {
+table,
+th,
+td {
   padding: 5px;
   border: 1px solid black;
 }
@@ -28,7 +31,8 @@ table {
   box-shadow: 4px 4px 12px lightgrey;
 }
 
-input, span {
+input,
+span {
   padding: 0;
   margin: 0;
   border: none !important;
