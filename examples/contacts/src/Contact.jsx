@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { view, store } from "react-easy-state";
-import appStore from "./appStore";
+import React, { Component } from 'react';
+import { view, store } from '@risingstack/react-easy-state';
+import appStore from './appStore';
 
 class Contact extends Component {
   constructor({ contact }) {
@@ -10,8 +10,8 @@ class Contact extends Component {
     // editing is boolean meta flag, which indicates if the contact is currently edited
     // currentContact is a temporary state of the contact during editing, which can be saved or cancelled
     this.compStore = store({
-      currentContact: Object.assign({}, contact),
-      editing: false
+      currentContact: { ...contact },
+      editing: false,
     });
   }
 

@@ -1,10 +1,10 @@
-import { store } from "react-easy-state";
+import { store } from '@risingstack/react-easy-state';
 
 // a complex global store with a lot of derived data (getters and setters)
 // use 'todos' instead of 'this' in the store methods to make them passable as callbacks
 const todos = store({
   all: [],
-  filter: "all",
+  filter: 'all',
   get isEmpty() {
     return todos.all.length === 0;
   },
@@ -40,7 +40,7 @@ const todos = store({
   },
   clearCompleted() {
     todos.all = todos.active;
-  }
+  },
 });
 
 export default todos;

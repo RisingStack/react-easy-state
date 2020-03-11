@@ -1,5 +1,5 @@
 import React from 'react';
-import { view } from 'react-easy-state';
+import { view } from '@risingstack/react-easy-state';
 import appStore from './appStore';
 import Beer from './Beer';
 
