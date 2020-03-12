@@ -74,8 +74,6 @@ export function view(Comp) {
         isInsideFunctionComponent = false;
       }
     };
-    ReactiveComp.displayName = Comp.displayName || Comp.name;
-    ReactiveComp = memo(ReactiveComp);
   } else {
     const BaseComp = isStatelessComp ? Component : Comp;
     // a HOC which overwrites render, shouldComponentUpdate and componentWillUnmount
@@ -170,5 +168,7 @@ export function view(Comp) {
     });
   }
 
-  return ReactiveComp;
+  return isStatelessComp && hasHooks
+    ? memo(ReactiveComp)
+    : ReactiveComp;
 }
