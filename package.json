@@ -12,8 +12,9 @@
   "scripts": {
     "test-native": "NATIVE=true jest --config ./jest.native.json --silent",
     "test-web": "jest --config ./jest.web.json --silent",
+    "test-ts": "jest --config ./jest.ts.js --silent",
     "test-web-no-hook": "NOHOOK=true jest --config ./jest.no-hook.json --silent",
-    "test": "npm run test-web && npm run test-web-no-hook && npm run test-native",
+    "test": "npm run test-web && npm run test-web-no-hook && npm run test-native && npm run test-ts",
     "example": "node ./scripts/startExample.js",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "test-builds": "node ./scripts/testBuilds.js",
@@ -75,6 +76,7 @@
     "@rollup/plugin-node-resolve": "^7.1.1",
     "@testing-library/jest-dom": "^5.1.1",
     "@testing-library/react": "^10.0.1",
+    "@types/jest": "25.1.4",
     "@types/react": "^16.9.23",
     "babel-eslint": "^10.1.0",
     "classnames": "^2.2.6",
@@ -91,10 +93,10 @@
     "jest": "^25.1.0",
     "markdown-toc": "^1.2.0",
     "moment": "^2.24.0",
-    "nyc": "^15.0.0",
     "no-hook-react": "npm:react@16.7.0",
     "no-hook-react-dom": "npm:react-dom@16.7.0",
     "no-hook-react-testing-library": "npm:react-testing-library@5.4.4",
+    "nyc": "^15.0.0",
     "prettier": "^1.19.1",
     "react": "^16.12.0",
     "react-dom": "^16.13.0",
@@ -106,7 +108,9 @@
     "rollup-plugin-auto-external": "^2.0.0",
     "rollup-plugin-babel": "^4.4.0",
     "sinon": "^9.0.1",
-    "styled-components": "^5.0.1"
+    "styled-components": "^5.0.1",
+    "ts-jest": "25.2.1",
+    "typescript": "3.8.3"
   },
   "engines": {
     "node": ">=10.0.0",
