@@ -19,6 +19,7 @@ jobs:
       - run: npm install
       - run: npm run lint
       # run the tests on the original source to get coverage info
+      - run: npx commitlint --from HEAD~1 --to HEAD --verbose
       - run: npm test
       - run: npm run coveralls
       # test the final bundled builds
