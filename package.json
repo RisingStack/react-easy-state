@@ -1,6 +1,6 @@
 {
   "name": "@risingstack/react-easy-state",
-  "version": "6.1.3",
+  "version": "0.0.0-development",
   "description": "React state management with a minimal API. Made with ES6 Proxies.",
   "main": "dist/cjs.es6.js",
   "module": "dist/es.es6.js",
@@ -21,7 +21,8 @@
     "install-examples": "node ./scripts/installExamples.js",
     "build-examples": "node ./scripts/buildExamples.js",
     "build": "rollup --config",
-    "build-toc": "node ./scripts/buildToc.js"
+    "build-toc": "node ./scripts/buildToc.js",
+    "semantic-release": "semantic-release"
   },
   "husky": {
     "hooks": {
@@ -36,7 +37,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:RisingStack/react-easy-state.git"
+    "url": "https:git@github.com:RisingStack/react-easy-state.git"
   },
   "bugs": {
     "url": "https://github.com/RisingStack/react-easy-state/issues"
@@ -91,10 +92,10 @@
     "jest": "^25.1.0",
     "markdown-toc": "^1.2.0",
     "moment": "^2.24.0",
-    "nyc": "^15.0.0",
     "no-hook-react": "npm:react@16.7.0",
     "no-hook-react-dom": "npm:react-dom@16.7.0",
     "no-hook-react-testing-library": "npm:react-testing-library@5.4.4",
+    "nyc": "^15.0.0",
     "prettier": "^1.19.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
@@ -105,6 +106,7 @@
     "rollup": "^1.31.0",
     "rollup-plugin-auto-external": "^2.0.0",
     "rollup-plugin-babel": "^4.3.3",
+    "semantic-release": "^17.0.4",
     "sinon": "^8.1.1",
     "styled-components": "^5.0.1"
   },
