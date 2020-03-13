@@ -411,13 +411,11 @@ This is not necessary if you use React Router 4.4+. You can find more details an
 <summary>Usage with React Developer Tools.</summary>
 <p></p>
 
-If you want React Developer Tools to recognize your reactive view components with names, you have to pass a **named component** to the `view` wrapper function instead of an anonymous one.
+If you want React Developer Tools to recognize your reactive view components' names, you have to pass either a **named function** or an anonymous function with **name inference** to the `view` wrapper.
 
 ```jsx
 import React from 'react';
 import { view, store } from 'react-easy-state';
-import Table from 'rc-table';
-import cloneDeep from 'lodash/cloneDeep';
 
 const user = store({
   name: 'Rick',
