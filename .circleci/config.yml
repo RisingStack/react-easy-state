@@ -24,11 +24,6 @@ jobs:
       # test the final bundled builds
       - run: npm run build
       - run: npm run test-builds
-      # test with older react versions
-      # TODO: the lib works with older React versions but some tests
-      # rely on newer React features
-      # - run: npm i react@15 react-dom@15 --no-save
-      # - run: npm run test-builds
 
   release:
     docker:
