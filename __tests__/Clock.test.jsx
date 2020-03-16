@@ -12,9 +12,8 @@ describe('Clock App', () => {
   );
 
   const clearIntervalSpy = sinon.spy(global, 'clearInterval');
-
+  afterAll(cleanup);
   afterAll(() => {
-    cleanup();
     clock.restore();
     clearIntervalSpy.restore();
   });

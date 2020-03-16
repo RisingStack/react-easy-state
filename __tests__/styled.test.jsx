@@ -10,9 +10,7 @@ describe('withRouter interaction', () => {
     <ThemeProvider theme={theme}>{children}</ThemeProvider>
   );
 
-  afterEach(() => {
-    cleanup();
-  });
+  afterEach(cleanup);
 
   describe('function components', () => {
     test('should be reactive with withTheme(view(Comp))', () => {
