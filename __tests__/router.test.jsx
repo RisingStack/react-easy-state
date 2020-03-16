@@ -15,8 +15,8 @@ import {
 } from 'react-router-dom';
 
 describe('withRouter interaction', () => {
+  afterEach(cleanup);
   afterEach(() => {
-    cleanup();
     window.history.replaceState({}, '', '/');
   });
 
