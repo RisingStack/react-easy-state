@@ -15,6 +15,10 @@ import {
 } from 'react-router-dom';
 
 describe('withRouter interaction', () => {
+  /*
+    Please keep the cleanup in a separate afterEach.
+    Otherwise, it will lose the scope of the document, and it won't be able to clear the body.
+  */
   afterEach(cleanup);
   afterEach(() => {
     window.history.replaceState({}, '', '/');

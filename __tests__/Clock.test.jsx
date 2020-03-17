@@ -12,6 +12,10 @@ describe('Clock App', () => {
   );
 
   const clearIntervalSpy = sinon.spy(global, 'clearInterval');
+  /*
+    Please keep the cleanup in a separate afterAll.
+    Otherwise, it will lose the scope of the document, and it won't be able to clear the body.
+  */
   afterAll(cleanup);
   afterAll(() => {
     clock.restore();
