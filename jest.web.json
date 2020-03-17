@@ -3,7 +3,7 @@
   "testURL": "http://react-easy-state.com",
   "testRegex": "\\.test\\.jsx?$",
   "collectCoverage": true,
-  "coverageReporters": ["lcovonly", "text"],
+  "coverageReporters": ["json", "text"],
   "collectCoverageFrom": [
     "src/**/*.{js,jsx}",
     "examples/**/*.{js,jsx}",
@@ -13,5 +13,5 @@
     "!examples/beer-finder/**",
     "!examples/native-clock/**"
   ],
-  "coverageDirectory": "coverage"
+  "coverageDirectory": "coverage/web"
 }
