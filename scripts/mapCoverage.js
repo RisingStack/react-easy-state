@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 const { createCoverageMap } = require('istanbul-lib-coverage');
 const { createReporter } = require('istanbul-api');
 
