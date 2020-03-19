@@ -1,9 +1,9 @@
-import React from "react";
-import { view } from "react-easy-state";
-import pokedex from "../store";
-import Attack from "./Attack";
-import Type from "./Type";
-import Card from "./Card";
+import React from 'react';
+import { view } from 'react-easy-state';
+import pokedex from '../store';
+import Attack from './Attack';
+import Type from './Type';
+import Card from './Card';
 
 export default view(() => {
   if (!pokedex.selectedPokemon) return null;
@@ -22,12 +22,18 @@ export default view(() => {
     fleeRate,
     evolutions,
     evolutionRequirements,
-    attacks
+    attacks,
   } = pokedex.selectedPokemon;
 
   return (
-    <div className="modal-container" onClick={() => pokedex.hideModal()}>
-      <div className="modal-content" onClick={e => e.stopPropagation()}>
+    <div
+      className="modal-container"
+      onClick={() => pokedex.hideModal()}
+    >
+      <div
+        className="modal-content"
+        onClick={e => e.stopPropagation()}
+      >
         {pokedex.selectedPokemon && (
           <>
             {pokedex.isSelectedPokemonLoading ? (
@@ -89,17 +95,16 @@ export default view(() => {
                       <>
                         <h3>Evolution</h3>
                         <div className="evolution-container">
-                          {evolutions.map(item => {
-                            console.log(item);
-                            return <Card key={item.id} {...item} mini />;
-                          })}
+                          {evolutions.map(item => (
+                            <Card key={item.id} {...item} mini />
+                          ))}
                         </div>
                       </>
                     )}
                     {evolutionRequirements && (
                       <p>
                         <b>Evolution requirements: </b>
-                        {evolutionRequirements.amount}{" "}
+                        {evolutionRequirements.amount}{' '}
                         {evolutionRequirements.name}
                       </p>
                     )}
