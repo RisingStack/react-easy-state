@@ -283,8 +283,9 @@ body {
     margin: 2rem auto;
   }
 
-  .modal-content h2, .modal-content h3 {
-    margin-top: .5rem;
+  .modal-content h2,
+  .modal-content h3 {
+    margin-top: 0.5rem;
   }
 
   .modal-header {
