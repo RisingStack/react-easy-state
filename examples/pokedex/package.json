@@ -1,5 +1,6 @@
 {
   "name": "pokedex",
+  "homepage": "https://risingstack.github.io/react-easy-state/examples/pokedex/build/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
