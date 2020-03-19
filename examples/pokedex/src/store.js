@@ -1,5 +1,5 @@
-import { store } from "react-easy-state";
-import * as api from "./api";
+import { store } from 'react-easy-state';
+import * as api from './api';
 
 const pokedex = store({
   isModalOpen: false,
@@ -22,7 +22,7 @@ const pokedex = store({
   },
   showModal() {
     pokedex.isModalOpen = true;
-  }
+  },
 });
 
 export default pokedex;
