@@ -11,7 +11,8 @@
     "!examples/**/index.js",
     "!examples/stop-watch/**",
     "!examples/beer-finder/**",
-    "!examples/native-clock/**"
+    "!examples/native-clock/**",
+    "!examples/pokedex/**"
   ],
   "coverageDirectory": "coverage"
 }
