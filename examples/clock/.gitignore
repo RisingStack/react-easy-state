@@ -8,7 +8,6 @@
 
 # misc
 .DS_Store
-.env.local
 .env.test.local
 .env.production.local
 
