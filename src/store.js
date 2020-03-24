@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useRef } from 'react';
 import { observable } from '@nx-js/observer-util';
 
 import {
@@ -12,7 +12,13 @@ export function store(obj) {
   // if it is a local store in a function component
   // create a memoized store at the first call instead
   if (isInsideFunctionComponent) {
-    return useMemo(() => observable(obj), []);
+    // we have to use useRef instead of useMemo for local store persistence
+    // useMemo does not have the same guarantees about persistence as refs
+    // see this docs for more explanation: https://reactjs.org/docs/hooks-reference.html#usememo
+    const ref = useRef(obj);
+    // observable wrapping is idempotent
+    // wrapping the same object multiple times is the same as wrapping it once
+    return observable(ref.current);
   }
   if (isInsideFunctionComponentWithoutHooks) {
     throw new Error(
