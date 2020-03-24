@@ -618,6 +618,7 @@ Instead of returning an object, you should directly mutate the received stores. 
 - [TodoMVC](https://risingstack.github.io/react-easy-state/examples/todo-mvc/build) ([source](/examples/todo-mvc/)) ([codesandbox](https://codesandbox.io/s/github/RisingStack/react-easy-state/tree/master/examples/todo-mvc)): a classic TodoMVC implementation with a lot of computed data and implicit reactivity.
 - [Contacts Table](https://risingstack.github.io/react-easy-state/examples/contacts/build) ([source](/examples/contacts/)) ([codesandbox](https://codesandbox.io/s/github/RisingStack/react-easy-state/tree/master/examples/contacts)): a data grid implementation with a mix of global and local state.
 - [Beer Finder](https://risingstack.github.io/react-easy-state/examples/beer-finder/build) ([source](/examples/beer-finder/)) ([codesandbox](https://codesandbox.io/s/github/RisingStack/react-easy-state/tree/master/examples/beer-finder)) ([tutorial](https://medium.com/@solkimicreb/design-patterns-with-react-easy-state-830b927acc7c)): an app with async actions and a mix of local and global state, which finds matching beers for your meal.
+- [Using it with TypeScript](https://risingstack.github.io/react-easy-state/examples/typescript-usage/build) ([source](/examples/typescript-usage/)) ([codesandbox](https://codesandbox.io/s/github/RisingStack/react-easy-state/tree/master/examples/typescript-usage)) showcasing how to use react-easy-state with typescript
 
 ## Articles
 
