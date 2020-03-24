@@ -6,19 +6,16 @@ import { queue } from './queue';
 // this runs the passed function and delays all re-renders
 // until the function is finished running
 export function batch(fn, ctx, args) {
-  let result;
   if (queue.isInsideBatch) {
-    result = fn.apply(ctx, args);
-  } else {
-    try {
-      queue.on();
-      result = fn.apply(ctx, args);
-    } finally {
-      queue.flush();
-      queue.off();
-    }
+    return fn.apply(ctx, args);
   }
-  return result;
+  try {
+    queue.on();
+    return fn.apply(ctx, args);
+  } finally {
+    queue.flush();
+    queue.off();
+  }
 }
 
 // this creates and returns a batched version of the passed function
@@ -92,13 +89,19 @@ if (globalObj.Promise) {
   batchMethodsCallbacks(Promise.prototype, ['then', 'catch']);
 }
 
+// Event listener batching causes an input caret jumping bug:
+// https://github.com/RisingStack/react-easy-state/issues/92.
+// This part has to be commented out to prevent that bug.
+// React batches setStates in its event listeners anyways
+// so this commenting this part out is not a huge issue.
+
 // batch addEventListener calls
-if (globalObj.EventTarget) {
+/* if (globalObj.EventTarget) {
   batchMethodsCallbacks(EventTarget.prototype, [
     'addEventListener',
     'removeEventListener',
   ]);
-}
+} */
 
 // this batches websocket event handlers
 if (globalObj.WebSocket) {
