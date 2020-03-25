@@ -503,6 +503,26 @@ export default view(() => {
 
 </details>
 
+<p></p>
+<details>
+<summary>You can also pass a <code>function</code> to the store. In this case easy-state will create a state store from the function result.</summary>
+<p></p>
+
+```jsx
+import { store, view } from 'react-easy-state';
+
+const localStore = () => ({ name: 'Bob' });
+
+export default view(() => {
+  const person = store(localStore);
+  return <div>{person.name}</div>;
+});
+```
+
+This is useful for large local stores to avoid large object creation on every render.
+
+</details>
+
 #### Local stores in class components
 
 ```jsx
