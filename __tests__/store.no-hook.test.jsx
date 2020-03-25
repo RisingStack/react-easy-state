@@ -3,7 +3,7 @@ import { render, cleanup } from '@testing-library/react/pure';
 // eslint-disable-next-line import/no-unresolved
 import { view, store } from 'react-easy-state';
 
-describe('Using an old react version', () => {
+describe('Store edge cases and errors', () => {
   afterEach(cleanup);
 
   test(`Using local state in a function component ${
