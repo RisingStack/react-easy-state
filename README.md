@@ -479,7 +479,7 @@ export default view(() => {
 **Local stores in functions rely on React hooks. They require React and React DOM v16.8+ or React Native v0.59+ to work.**
 
 <details>
-<summary>You can use React hooks - including <code>useState</code> - in function components, Easy State won't interfere with them. Please use [autoEffect](#local-auto-effects-in-function-components) instead of the `useEffect` hook for the best experience though.</summary>
+<summary>You can use React hooks - including <code>useState</code> - in function components, Easy State won't interfere with them. Consider using <a href="#local-auto-effects-in-function-components">autoEffect</a> instead of the `useEffect` hook for the best experience though.</summary>
 <p></p>
 
 ```jsx
