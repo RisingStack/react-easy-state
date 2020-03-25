@@ -20,6 +20,7 @@ Simple React state management. Made with :heart: and ES6 Proxies.
   + [Creating global stores](#creating-global-stores)
   + [Creating reactive views](#creating-reactive-views)
   + [Creating local stores](#creating-local-stores)
+  + [Adding side effects](#adding-side-effects)
 * [Examples with live demos](#examples-with-live-demos)
 * [Articles](#articles)
 * [Performance](#performance)
