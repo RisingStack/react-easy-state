@@ -72,8 +72,7 @@ describe.only('autoEffect', () => {
       }, [name]);
       return (
         <div>
-          {name}
-          {app.name}
+          {name} {app.name}
         </div>
       );
     });
