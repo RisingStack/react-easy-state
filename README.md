@@ -479,7 +479,7 @@ export default view(() => {
 **Local stores in functions rely on React hooks. They require React and React DOM v16.8+ or React Native v0.59+ to work.**
 
 <details>
-<summary>You can use any React hook - including <code>useState</code> - in function components, Easy State won't interfere with them.</summary>
+<summary>You can use React hooks - including <code>useState</code> - in function components, Easy State won't interfere with them. Please use [autoEffect](#local-auto-effects-in-function-components) instead of the `useEffect` hook for the best experience though.</summary>
 <p></p>
 
 ```jsx
@@ -622,6 +622,105 @@ export default view(NameCard);
 Instead of returning an object, you should directly mutate the received stores. If you have multiple local stores on a single component, they are all passed as arguments - in their definition order - after the first props argument.
 
 </details>
+
+### Adding side effects
+
+Use `autoEffect` to react with automatic side effect to your store changes. Auto effects should contain end-of-chain logic - like changing the document title or saving data to LocalStorage. `view` is a special auto effect that does rendering.
+
+<details>
+<summary>Never use auto effects to derive data from other data. Use dynamic getters instead.</summary>
+<p></p>
+
+```jsx
+import { store, autoEffect } from 'react-easy-state';
+
+// DON'T DO THIS
+const store1 = store({ name: 'Store 1' })
+const store2 = store({ name: 'Store 2' })
+autoEffect(() => store2.name = store1.name)
+
+// DO THIS INSTEAD
+const store1 = store({ name: 'Store 1' })
+const store2 = store({ get name () { return store1.name } })
+```
+
+</details>
+<p></p>
+
+#### Global auto effects
+
+Global auto effects can be created with `autoEffect` and cleared up with `clearEffect`.
+
+```jsx
+import { store, autoEffect, clearEffect } from 'react-easy-state';
+
+const app = store({ name: 'My App' })
+const effect = autoEffect(() => document.title = app.name)
+
+// this also updates the document title
+app.name = 'My Awesome App'
+
+clearEffect(effect)
+// this won't update the document title, the effect is cleared
+app.name = 'My App'
+```
+
+#### Local auto effects in function components
+
+Use local auto effects in function components instead of the `useEffect` hook when reactive stores are used inside them. These local effects are automatically cleared when the component unmounts.
+
+```jsx
+import React from 'react'
+import { store, view, autoEffect } from 'react-easy-state';
+
+export default view(() => {
+  const app = store({ name: 'My App' })
+  // no need to clear the effect
+  autoEffect(() => document.title = app.name)
+})
+```
+
+<details>
+<summary>Explicitly pass none reactive dependencies - like vanillas props and state - to local auto effects in function components.</summary>
+<p></p>
+
+Because of the design of React hooks you have to explicitly pass all none reactive data to a hook-like dependency array. This makes sure that the effect also runs when the none reactive data changes.
+
+```jsx
+import React from 'react'
+import { store, view, autoEffect } from 'react-easy-state';
+
+export default view(({ greeting }) => {
+  const app = store({ name: 'My App' })
+  // pass `greeting` in the dependency array because it is not coming from a store
+  autoEffect(() => document.title = `${greeting} ${app.name}`, [greeting])
+})
+```
+
+</details>
+<p></p>
+
+#### Local auto effects in class components
+
+Local effects in class components must be cleared when the component unmounts.
+
+```jsx
+import React, { Component } from 'react'
+import { store, view, autoEffect } from 'react-easy-state';
+
+class App extends Component {
+  app = store({ name: 'My App' })
+
+  componentDidMount () {
+    this.effect = autoEffect(() => document.title = this.app.name)
+  }
+
+  componentWillUnmount () {
+    // local effects in class components must be cleared on unmount
+    clearEffect(this.effect)
+  }
+}
+```
 
 ---
 
