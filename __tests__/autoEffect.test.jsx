@@ -8,7 +8,7 @@ import {
   // eslint-disable-next-line import/no-unresolved
 } from 'react-easy-state';
 
-describe.only('autoEffect', () => {
+describe('autoEffect', () => {
   afterEach(cleanup);
 
   test('should auto run global effects', () => {
