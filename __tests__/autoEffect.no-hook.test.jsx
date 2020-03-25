@@ -12,9 +12,9 @@ describe('AutoEffect edge cases and errors', () => {
       : 'should not'
   } throw an error`, () => {
     const someEffect = () => {};
+    const person = store({ name: 'Bob' });
 
     const MyComp = view(() => {
-      const person = store({ name: 'Bob' });
       autoEffect(() => someEffect(person.name));
       return <div>{person.name}</div>;
     });
