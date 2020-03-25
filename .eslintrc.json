@@ -15,7 +15,8 @@
     "react/destructuring-assignment": "off",
     "react/state-in-constructor": "off",
     "react/jsx-props-no-spreading": "off",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "react/jsx-one-expression-per-line": "off"
   },
   "globals": {
     "window": true,
