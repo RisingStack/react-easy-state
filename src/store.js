@@ -8,6 +8,7 @@ import {
   isInsideFunctionComponentWithoutHooks,
 } from './view';
 
+// bind the `this` and batch mutations in store methods
 function processMethods(obj) {
   Object.getOwnPropertyNames(obj).forEach(key => {
     // do not try to bind getter/setter functions
@@ -15,8 +16,12 @@ function processMethods(obj) {
 
     // do not try to bind data properties
     if (typeof value === 'function') {
-      // bind the `this` and batch mutations in store methods
-      obj[key] = (...args) => batch(() => value.apply(obj, args));
+      // use a Proxy instead of function wrapping to keep the function name
+      obj[key] = new Proxy(value, {
+        apply(target, thisArg, args) {
+          return batch(() => Reflect.apply(target, obj, args));
+        },
+      });
     }
   });
   return obj;
