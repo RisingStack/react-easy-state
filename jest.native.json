@@ -5,10 +5,10 @@
     "^.+\\.(js|jsx)$": "react-native/jest/preprocessor.js"
   },
   "collectCoverage": true,
-  "coverageReporters": ["text"],
+  "coverageReporters": ["json", "text"],
   "collectCoverageFrom": [
     "src/**/*.{js,jsx}",
     "examples/native-clock/App.js"
   ],
-  "coverageDirectory": "coverage"
+  "coverageDirectory": "coverage/native"
 }

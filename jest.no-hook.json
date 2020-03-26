@@ -2,7 +2,7 @@
   "setupFilesAfterEnv": ["./scripts/testSetup.js"],
   "testRegex": "\\.no-hook\\.test\\.jsx?$",
   "collectCoverage": true,
-  "coverageReporters": ["text"],
+  "coverageReporters": ["json", "text"],
   "collectCoverageFrom": ["src/**/*.{js,jsx}"],
-  "coverageDirectory": "coverage"
+  "coverageDirectory": "coverage/no-hook"
 }
