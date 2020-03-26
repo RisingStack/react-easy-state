@@ -1,46 +1,43 @@
-import { store } from "react-easy-state";
+import { store } from 'react-easy-state';
 
 // a complex global store with a lot of derived data (getters and setters)
-// use 'todos' instead of 'this' in the store methods to make them passable as callbacks
-const todos = store({
+export default store({
   all: [],
-  filter: "all",
+  filter: 'all',
   get isEmpty() {
-    return todos.all.length === 0;
+    return this.all.length === 0;
   },
   get completed() {
-    return todos.all.filter(todo => todo.completed);
+    return this.all.filter(todo => todo.completed);
   },
   get hasCompleted() {
-    return todos.completed.length !== 0;
+    return this.completed.length !== 0;
   },
   get allCompleted() {
-    return todos.all.every(todo => todo.completed);
+    return this.all.every(todo => todo.completed);
   },
   set allCompleted(completed) {
-    todos.all.forEach(todo => {
+    this.all.forEach(todo => {
       todo.completed = completed;
     });
   },
   get active() {
-    return todos.all.filter(todo => !todo.completed);
+    return this.all.filter(todo => !todo.completed);
   },
   create(title) {
-    todos.all.push({ title });
+    this.all.push({ title });
   },
   remove(id) {
-    todos.all.splice(id, 1);
+    this.all.splice(id, 1);
   },
   toggle(id) {
-    const todo = todos.all[id];
+    const todo = this.all[id];
     todo.completed = !todo.completed;
   },
   toggleAll() {
-    todos.allCompleted = !todos.allCompleted;
+    this.allCompleted = !this.allCompleted;
   },
   clearCompleted() {
-    todos.all = todos.active;
-  }
+    this.all = this.active;
+  },
 });
-
-export default todos;

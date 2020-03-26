@@ -1,28 +1,26 @@
 import { store } from 'react-easy-state';
 import * as api from './api';
 
-const pokedex = store({
+export default store({
   isModalOpen: false,
   pokemons: [],
   isPokemonsLoading: true,
   selectedPokemon: null,
   isSelectedPokemonLoading: true,
   async fetchList() {
-    pokedex.isPokemonsLoading = true;
-    pokedex.pokemons = await api.fetchList();
-    pokedex.isPokemonsLoading = false;
+    this.isPokemonsLoading = true;
+    this.pokemons = await api.fetchList();
+    this.isPokemonsLoading = false;
   },
   async fetchPokemon(id) {
-    pokedex.isSelectedPokemonLoading = true;
-    pokedex.selectedPokemon = await api.fetchPokemon(id);
-    pokedex.isSelectedPokemonLoading = false;
+    this.isSelectedPokemonLoading = true;
+    this.selectedPokemon = await api.fetchPokemon(id);
+    this.isSelectedPokemonLoading = false;
   },
   hideModal() {
-    pokedex.isModalOpen = false;
+    this.isModalOpen = false;
   },
   showModal() {
-    pokedex.isModalOpen = true;
+    this.isModalOpen = true;
   },
 });
-
-export default pokedex;
