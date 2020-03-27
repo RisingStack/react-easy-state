@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import { render, cleanup, act } from '@testing-library/react/pure';
-// eslint-disable-next-line import/no-unresolved
-import { view, store, batch } from 'react-easy-state';
+import {
+  view,
+  store,
+  autoEffect,
+  clearEffect,
+  batch,
+  // eslint-disable-next-line import/no-unresolved
+} from 'react-easy-state';
 
 describe('batching', () => {
   afterEach(cleanup);
 
-  test('should batch state changes inside a batch() wrapper', () => {
+  test('should batch state changes inside a batch() wrapper for views', () => {
     let renderCount = 0;
     const person = store({ name: 'Bob' });
     const MyComp = view(() => {
@@ -24,6 +30,62 @@ describe('batching', () => {
       }),
     );
     expect(container).toHaveTextContent('Rick');
+    expect(renderCount).toBe(2);
+  });
+
+  test('should batch state changes inside a batch() wrapper for global autoEffects', () => {
+    let numOfRuns = 0;
+    let name = '';
+
+    const person = store({ name: 'Bob' });
+    const effect = autoEffect(() => {
+      numOfRuns += 1;
+      name = person.name;
+    });
+
+    expect(name).toBe('Bob');
+    expect(numOfRuns).toBe(1);
+
+    batch(() => {
+      person.name = 'Ann';
+      person.name = 'Rick';
+    });
+
+    expect(name).toBe('Rick');
+    expect(numOfRuns).toBe(2);
+
+    clearEffect(effect);
+  });
+
+  test('should batch state changes inside a batch() wrapper for local autoEffects', () => {
+    let effectCount = 0;
+    let renderCount = 0;
+    let name = '';
+
+    const person = store({ name: 'Bob' });
+    const MyComp = view(() => {
+      renderCount += 1;
+      autoEffect(() => {
+        effectCount += 1;
+        name = person.name;
+      });
+      return <div>{person.name}</div>;
+    });
+
+    const { container } = render(<MyComp />);
+    expect(container).toHaveTextContent('Bob');
+    expect(name).toBe('Bob');
+    expect(effectCount).toBe(1);
+    expect(renderCount).toBe(1);
+
+    batch(() => {
+      person.name = 'Ann';
+      person.name = 'Rick';
+    });
+
+    expect(name).toBe('Rick');
+    expect(container).toHaveTextContent('Rick');
+    expect(effectCount).toBe(2);
     expect(renderCount).toBe(2);
   });
 
