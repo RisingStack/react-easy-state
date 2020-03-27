@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { render, cleanup } from '@testing-library/react/pure';
-// eslint-disable-next-line import/no-unresolved
-import { view, store, autoEffect } from 'react-easy-state';
+import {
+  view,
+  store,
+  autoEffect,
+  // eslint-disable-next-line import/no-unresolved
+} from '@risingstack/react-easy-state';
 
 describe('AutoEffect edge cases and errors', () => {
   afterEach(cleanup);

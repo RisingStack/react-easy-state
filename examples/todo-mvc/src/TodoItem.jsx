@@ -1,7 +1,7 @@
-import React from "react";
-import classNames from "classnames";
-import { view } from "react-easy-state";
-import todos from "./todosStore";
+import React from 'react';
+import classNames from 'classnames';
+import { view } from '@risingstack/react-easy-state';
+import todos from './todosStore';
 
 // this is re-rendered whenever the relevant parts of the used data stores change
 export default view(({ id, title, completed = false }) => {
