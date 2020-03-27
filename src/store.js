@@ -12,14 +12,26 @@ import {
 function processMethods(obj) {
   Object.getOwnPropertyNames(obj).forEach(key => {
     // do not try to bind getter/setter functions
-    const { value } = Object.getOwnPropertyDescriptor(obj, key);
+    const { value, get, set } = Object.getOwnPropertyDescriptor(
+      obj,
+      key,
+    );
 
     // do not try to bind data properties
     if (typeof value === 'function') {
       // use a Proxy instead of function wrapping to keep the function name
       obj[key] = new Proxy(value, {
         apply(target, thisArg, args) {
-          return batch(() => Reflect.apply(target, obj, args));
+          return batch(target, obj, args);
+        },
+      });
+    } else if (get || set) {
+      Object.defineProperty(obj, key, {
+        get() {
+          return batch(get, obj);
+        },
+        set(newValue) {
+          return batch(set, obj, [newValue]);
         },
       });
     }
