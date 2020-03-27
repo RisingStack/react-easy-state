@@ -35,7 +35,7 @@ Simple React state management. Made with :heart: and ES6 Proxies.
 
 ## Introduction
 
-React Easy State is a practical state management library with two functions and two accompanying rules.
+React Easy State is a practical state management library with two primary functions and two accompanying rules.
 
 1.  Always wrap your components with `view()`.
 2.  Always wrap your state store objects with `store()`.
@@ -44,11 +44,13 @@ React Easy State is a practical state management library with two functions and 
 import React from 'react';
 import { store, view } from 'react-easy-state';
 
-const counter = store({ num: 0 });
-const increment = () => counter.num++;
+const counter = store({
+  num: 0,
+  increment: () => counter.num++;
+});
 
 export default view(() => (
-  <button onClick={increment}>{counter.num}</button>
+  <button onClick={counter.increment}>{counter.num}</button>
 ));
 ```
 
@@ -105,7 +107,7 @@ const user = store({
     firstName: 'Bob',
     lastName: 'Smith',
     get name() {
-      return `${user.firstName} ${user.lastName}`;
+      return `${this.firstName} ${this.lastName}`;
     },
   },
   hobbies: ['programming', 'sports'],
@@ -208,7 +210,7 @@ The first example wouldn't trigger re-renders on the `person.name = 'Ann'` mutat
 <p></p>
 
 <details>
-<summary>Avoid using the <code>this</code> keyword in the methods of your state stores.</summary>
+<summary>The <code>this</code> keyword in the store methods are automatically bound to the store.</summary>
 <p></p>
 
 ```jsx
@@ -217,9 +219,14 @@ import { store, view } from 'react-easy-state';
 const counter = store({
   num: 0,
   increment() {
-    // DON'T DO THIS
+    // both if these work for named methods
     this.num++;
-    // DO THIS INSTEAD
+    counter.num++;
+  },
+  increment2: () =>  {
+    // this does not work for arrow methods
+    this.num++;
+    // this does work
     counter.num++;
   },
 });
@@ -229,7 +236,7 @@ export default view(() => (
 ));
 ```
 
-`this.num++` won't work, because `increment` is passed as a callback and loses its `this`. You should use the direct object reference - `counter` - instead of `this`.
+Arrow methods do not have a `this` reference as normal methods. Always use the direct store reference instead of `this` inside arrow methods.
 
 </details>
 
@@ -367,7 +374,7 @@ export default view(() => (
 ));
 ```
 
-> **NOTE:** The React team plans to improve render batching in the future. The `batch` function and built-in batching may be deprecated and removed in the future in favor of React's own batching.
+> **NOTE:** The React team plans to improve render batching. The `batch` function and built-in batching may be deprecated and removed in the future in favor of React's own batching.
 
 </details>
 <p></p>
@@ -471,9 +478,11 @@ import React from 'react'
 import { view, store } from 'react-easy-state'
 
 export default view(() => {
-  const counter = store({ num: 0 })
-  const increment = () => counter.num++
-  return <button={increment}>{counter.num}</div>
+  const counter = store({
+    num: 0,
+    increment: () => counter.num++
+  })
+  return <button={counter.increment}>{counter.num}</div>
 })
 ```
 
@@ -506,13 +515,21 @@ export default view(() => {
 
 <p></p>
 <details>
-<summary>You can also pass a <code>function</code> to the store. In this case easy-state will create a state store from the function result.</summary>
+<summary>You can also pass a function to <code>store</code>. In this case easy-state will create a state store from the function's return value.</summary>
 <p></p>
+
+This is useful for large local stores to avoid heavy object creations on every render.
 
 ```jsx
 import { store, view } from 'react-easy-state';
 
-const localStore = () => ({ name: 'Bob' });
+const localStore = () => ({
+  name: 'Bob',
+  setName (newName) {
+    // always use `this` instead of a direct object reference in this case
+    this.name = newName;
+  }
+});
 
 export default view(() => {
   const person = store(localStore);
@@ -520,7 +537,7 @@ export default view(() => {
 });
 ```
 
-This is useful for large local stores to avoid large object creation on every render.
+Always use `this` instead of the direct object reference inside store methods in this case. `this` points to the reactive store and triggers automatic re-renders while a direct reference would point to the plain object and would not trigger re-renders.
 
 </details>
 
