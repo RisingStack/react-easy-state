@@ -1,5 +1,5 @@
-import { store } from "react-easy-state";
-import moment from "moment";
+import { store } from '@risingstack/react-easy-state';
+import moment from 'moment';
 
 // use 'clock' instead of 'this' in the store methods to make them passable as callbacks
 const clock = store({
@@ -14,8 +14,8 @@ const clock = store({
     const time = moment(0).millisecond(clock.ticks * 10);
 
     return {
-      seconds: time.format("mm:ss"),
-      fraction: time.format("SS")
+      seconds: time.format('mm:ss'),
+      fraction: time.format('SS'),
     };
   },
   get isTicking() {
@@ -27,7 +27,7 @@ const clock = store({
   reset() {
     clock.ticks = 0;
     clock.stop();
-  }
+  },
 });
 
 export default clock;
