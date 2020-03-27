@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { observe, unobserve } from '@nx-js/observer-util';
+import { queue } from './queue';
 
 import {
   isInsideFunctionComponent,
@@ -10,7 +11,9 @@ import {
 export function autoEffect(fn, deps = []) {
   if (isInsideFunctionComponent) {
     return useEffect(() => {
-      const observer = observe(fn);
+      const observer = observe(fn, {
+        scheduler: () => queue.add(observer),
+      });
       return () => unobserve(observer);
     }, deps);
   }
@@ -24,7 +27,11 @@ export function autoEffect(fn, deps = []) {
       'You cannot use autoEffect inside a render of a class component. Please use it in the constructor or lifecycle methods instead.',
     );
   }
-  return observe(fn);
+
+  const observer = observe(fn, {
+    scheduler: () => queue.add(observer),
+  });
+  return observer;
 }
 
 export { unobserve as clearEffect };
