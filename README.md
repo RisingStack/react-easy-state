@@ -416,7 +416,7 @@ If you want React Developer Tools to recognize your reactive view components' na
 
 ```jsx
 import React from 'react';
-import { view, store } from 'react-easy-state';
+import { view, store } from '@risingstack/react-easy-state';
 
 const user = store({
   name: 'Rick',
@@ -510,7 +510,7 @@ export default view(() => {
 <p></p>
 
 ```jsx
-import { store, view } from 'react-easy-state';
+import { store, view } from '@risingstack/react-easy-state';
 
 const localStore = () => ({ name: 'Bob' });
 
@@ -633,7 +633,7 @@ Use `autoEffect` to react with automatic side effect to your store changes. Auto
 <p></p>
 
 ```jsx
-import { store, autoEffect } from 'react-easy-state';
+import { store, autoEffect } from '@risingstack/react-easy-state';
 
 // DON'T DO THIS
 const store1 = store({ name: 'Store 1' })
@@ -653,7 +653,7 @@ const store2 = store({ get name () { return store1.name } })
 Global auto effects can be created with `autoEffect` and cleared up with `clearEffect`.
 
 ```jsx
-import { store, autoEffect, clearEffect } from 'react-easy-state';
+import { store, autoEffect, clearEffect } from '@risingstack/react-easy-state';
 
 const app = store({ name: 'My App' })
 const effect = autoEffect(() => document.title = app.name)
@@ -672,7 +672,7 @@ Use local auto effects in function components instead of the `useEffect` hook wh
 
 ```jsx
 import React from 'react'
-import { store, view, autoEffect } from 'react-easy-state';
+import { store, view, autoEffect } from '@risingstack/react-easy-state';
 
 export default view(() => {
   const app = store({ name: 'My App' })
@@ -689,7 +689,7 @@ Because of the design of React hooks you have to explicitly pass all none reacti
 
 ```jsx
 import React from 'react'
-import { store, view, autoEffect } from 'react-easy-state';
+import { store, view, autoEffect } from '@risingstack/react-easy-state';
 
 export default view(({ greeting }) => {
   const app = store({ name: 'My App' })
@@ -707,7 +707,7 @@ Local effects in class components must be cleared when the component unmounts.
 
 ```jsx
 import React, { Component } from 'react'
-import { store, view, autoEffect } from 'react-easy-state';
+import { store, view, autoEffect } from '@risingstack/react-easy-state';
 
 class App extends Component {
   app = store({ name: 'My App' })
