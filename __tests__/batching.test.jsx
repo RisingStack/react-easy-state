@@ -7,7 +7,7 @@ import {
   clearEffect,
   batch,
   // eslint-disable-next-line import/no-unresolved
-} from 'react-easy-state';
+} from '@risingstack/react-easy-state';
 
 describe('batching', () => {
   afterEach(cleanup);

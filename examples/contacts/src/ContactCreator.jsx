@@ -1,18 +1,18 @@
-import React, { Component } from "react";
-import { view, store } from "react-easy-state";
-import appStore from "./appStore";
+import React, { Component } from 'react';
+import { view, store } from '@risingstack/react-easy-state';
+import appStore from './appStore';
 
 class ContactCreator extends Component {
   // save internal utility data in component store, instead of the app store
   // newContact is the skeleton for the next contact before it is added to the list
   compStore = store({
-    newContact: { name: "", email: "" }
+    newContact: { name: '', email: '' },
   });
 
   // transfer finalized contact from the component store to the app store
   addContact = () => {
     appStore.addContact(this.compStore.newContact);
-    this.compStore.newContact = { name: "", email: "" };
+    this.compStore.newContact = { name: '', email: '' };
   };
 
   onChange = ev => {

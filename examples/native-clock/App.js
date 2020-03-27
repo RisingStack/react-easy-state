@@ -1,24 +1,24 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { view, store } from "react-easy-state";
-import moment from "moment";
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { view, store } from '@risingstack/react-easy-state';
+import moment from 'moment';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   text: {
-    fontSize: 40
-  }
+    fontSize: 40,
+  },
 });
 
 function getFormattedTime() {
   return moment()
     .utc()
-    .format("hh:mm:ss A");
+    .format('hh:mm:ss A');
 }
 
 class App extends React.Component {
@@ -27,7 +27,7 @@ class App extends React.Component {
   componentDidMount() {
     this.interval = setInterval(
       () => (this.clock.time = getFormattedTime()),
-      1000
+      1000,
     );
   }
 

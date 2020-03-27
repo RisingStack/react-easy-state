@@ -1,8 +1,8 @@
-import React from "react";
-import classNames from "classnames";
-import { view } from "react-easy-state";
-import TodoItem from "./TodoItem";
-import todos from "./todosStore";
+import React from 'react';
+import classNames from 'classnames';
+import { view } from '@risingstack/react-easy-state';
+import TodoItem from './TodoItem';
+import todos from './todosStore';
 
 // these functions mutate the global store
 // abstracting away events and view specific details here is a nice practice
@@ -15,7 +15,7 @@ function changeFilter(ev) {
 function createTodo(ev) {
   if (ev.keyCode === 13 && ev.target.value) {
     todos.create(ev.target.value);
-    ev.target.value = "";
+    ev.target.value = '';
   }
 }
 
@@ -28,12 +28,14 @@ export default view(() => {
     active,
     filter,
     toggleAll,
-    clearCompleted
+    clearCompleted,
   } = todos;
 
-  const todosClass = classNames({ selected: filter === "all" });
-  const completedClass = classNames({ selected: filter === "completed" });
-  const activeClass = classNames({ selected: filter === "active" });
+  const todosClass = classNames({ selected: filter === 'all' });
+  const completedClass = classNames({
+    selected: filter === 'completed',
+  });
+  const activeClass = classNames({ selected: filter === 'active' });
 
   return (
     <div className="todoapp">
@@ -66,9 +68,15 @@ export default view(() => {
 
       {!isEmpty && (
         <footer className="footer">
-          <span className="todo-count">{active.length} items left</span>
+          <span className="todo-count">
+            {active.length} items left
+          </span>
           <div className="filters">
-            <button className={todosClass} value="all" onClick={changeFilter}>
+            <button
+              className={todosClass}
+              value="all"
+              onClick={changeFilter}
+            >
               All
             </button>
             <button
@@ -87,7 +95,10 @@ export default view(() => {
             </button>
           </div>
           {hasCompleted && (
-            <button className="clear-completed" onClick={clearCompleted}>
+            <button
+              className="clear-completed"
+              onClick={clearCompleted}
+            >
               Clear completed
             </button>
           )}
