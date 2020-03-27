@@ -4,10 +4,10 @@
 #
 version: 2
 jobs:
-  build:
+  test:
     docker:
       # specify the version you desire here
-      - image: circleci/node:8.12.0
+      - image: circleci/node:10
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -19,13 +19,48 @@ jobs:
       - run: npm install
       - run: npm run lint
       # run the tests on the original source to get coverage info
+      - run: npx commitlint --from HEAD~1 --to HEAD --verbose
       - run: npm test
       - run: npm run coveralls
       # test the final bundled builds
       - run: npm run build
       - run: npm run test-builds
-      # test with older react versions
-      # TODO: the lib works with older React versions but some tests
-      # rely on newer React features
-      # - run: npm i react@15 react-dom@15 --no-save
-      # - run: npm run test-builds
+
+  release:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - run:
+          # Decrypt the git_deploy_key.enc key into /tmp/git_deploy_key
+          - openssl aes-256-cbc -d -K $REPO_ENC_KEY -iv $REPO_ENC_IV -in git_deploy_key.enc -out /tmp/git_deploy_key
+          # Make sure only the current user can read the private key
+          - chmod 600 /tmp/git_deploy_key
+          # Create a script to return the passphrase environment variable to ssh-add
+          - echo 'echo ${SSL_PASSPHRASE}' > /tmp/askpass && chmod +x /tmp/askpass
+          # Start the authentication agent
+          - eval "$(ssh-agent -s)"
+          # Add the key to the authentication agent
+          - DISPLAY=":0.0" SSH_ASKPASS="/tmp/askpass" setsid ssh-add /tmp/git_deploy_key </dev/null
+      - checkout
+      - run:
+          name: Install dependencies
+          command: |
+            npm install
+      - run:
+          name: Build /dist folder
+          command: npm run build
+      - run:
+          name: Release to NPM
+          command: npm run semantic-release
+
+workflows:
+  version: 2
+  test_and_release:
+    jobs:
+      - test
+      - release:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
