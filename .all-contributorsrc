@@ -11,7 +11,10 @@
       "avatar_url": "https://avatars3.githubusercontent.com/u/6956014?v=4",
       "profile": "https://bertalan-miklos.now.sh/",
       "contributions": [
-        "code"
+        "code",
+        "test",
+        "doc",
+        "blog"
       ]
     },
     {
@@ -20,7 +23,20 @@
       "avatar_url": "https://avatars3.githubusercontent.com/u/14181908?v=4",
       "profile": "https://github.com/rolandszoke",
       "contributions": [
-        "code"
+        "code",
+        "test",
+        "doc"
+      ]
+    },
+    {
+      "login": "danielgrgly",
+      "name": "Daniel Gergely",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/22714514?s=460&u=cbbc2326d5f671693a1f33671d9eadad902d5191&v=4",
+      "profile": "https://github.com/danielgrgly",
+      "contributions": [
+        "code",
+        "design",
+        "example"
       ]
     }
   ],
@@ -29,5 +45,6 @@
   "projectOwner": "RisingStack",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "skipCi": true
+  "skipCi": true,
+  "badgeTemplate": "[![All Contributors](https://img.shields.io/badge/all_contributors-<%= contributors.length %>-blue.svg)](#contributors)"
 }
