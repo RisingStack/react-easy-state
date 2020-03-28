@@ -22,7 +22,8 @@
     "build-examples": "node ./scripts/buildExamples.js",
     "build": "rollup --config",
     "build-toc": "node ./scripts/buildToc.js",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "contributors": "all-contributors generate"
   },
   "husky": {
     "hooks": {
@@ -77,6 +78,7 @@
     "@testing-library/jest-dom": "^5.1.1",
     "@testing-library/react": "^10.0.1",
     "@types/react": "^16.9.23",
+    "all-contributors-cli": "^6.14.0",
     "babel-eslint": "^10.1.0",
     "classnames": "^2.2.6",
     "coveralls": "^3.0.9",
