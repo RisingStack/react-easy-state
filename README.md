@@ -1,12 +1,14 @@
-# React Easy State
+<p align="center">
+  <img src="images/logo.svg" width="600px" height="auto" />
+</p>
 
-Simple React state management. Made with :heart: and ES6 Proxies.
+## React Easy State - by [RisingStack](https://risingstack.com/)
 
-[![Build](https://img.shields.io/circleci/project/github/RisingStack/react-easy-state/master.svg)](https://circleci.com/gh/RisingStack/react-easy-state/tree/master) [![dependencies Status](https://david-dm.org/RisingStack/react-easy-state/status.svg)](https://david-dm.org/RisingStack/react-easy-state) [![Coverage Status](https://coveralls.io/repos/github/RisingStack/react-easy-state/badge.svg?branch=master&service=github)](https://coveralls.io/github/RisingStack/react-easy-state?branch=master) [![Package size](https://img.shields.io/bundlephobia/minzip/@risingstack/react-easy-state.svg)](https://bundlephobia.com/result?p=@risingstack/react-easy-state) [![Version](https://img.shields.io/npm/v/@risingstack/react-easy-state.svg)](https://www.npmjs.com/package/@risingstack/react-easy-state) [![License](https://img.shields.io/npm/l/@risingstack/react-easy-state.svg)](https://www.npmjs.com/package/@risingstack/react-easy-state) <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)<!-- ALL-CONTRIBUTORS-BADGE:END -->
+[![Build](https://img.shields.io/circleci/project/github/RisingStack/react-easy-state/master.svg)](https://circleci.com/gh/RisingStack/react-easy-state/tree/master) [![dependencies Status](https://david-dm.org/RisingStack/react-easy-state/status.svg)](https://david-dm.org/RisingStack/react-easy-state) [![Coverage Status](https://coveralls.io/repos/github/RisingStack/react-easy-state/badge.svg?branch=master&service=github)](https://coveralls.io/github/RisingStack/react-easy-state?branch=master) [![Package size](https://img.shields.io/bundlephobia/minzip/@risingstack/react-easy-state.svg)](https://bundlephobia.com/result?p=@risingstack/react-easy-state) [![Version](https://img.shields.io/npm/v/@risingstack/react-easy-state.svg)](https://www.npmjs.com/package/@risingstack/react-easy-state) [![License](https://img.shields.io/npm/l/@risingstack/react-easy-state.svg)](https://www.npmjs.com/package/@risingstack/react-easy-state) <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->[![All Contributors](https://img.shields.io/badge/all_contributors-2-blue.svg)](#contributors-)<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-<a href="#platform-support"><img src="images/browser_support.png" alt="Browser support" width="450px" /></a>
+<a href="#platform-support"><img src="images/browser_support.png" alt="Browser support" width="450px" height="auto" /></a>
 
-**NEWS:** v6.1.2 fixed a nasty memory leak. Please upgrade to v6.1.2+ if you use a v6.x version already. Thanks!
+**NEWS:** `react-easy-state` is moved under `@risingstack/react-easy-state` on npm with **no breaking changes**. Please switch to the new package to get the latest features and bug fixes. Thanks!
 
 <details>
 <summary><strong>Table of Contents</strong></summary>
