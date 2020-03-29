@@ -52,11 +52,13 @@ React Easy State is a practical state management library with two functions and 
 import React from 'react';
 import { store, view } from '@risingstack/react-easy-state';
 
-const counter = store({ num: 0 });
-const increment = () => counter.num++;
+const counter = store({
+  num: 0,
+  increment: () => counter.num++
+});
 
 export default view(() => (
-  <button onClick={increment}>{counter.num}</button>
+  <button onClick={counter.increment}>{counter.num}</button>
 ));
 ```
 
