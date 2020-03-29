@@ -16,33 +16,32 @@
 
 <!-- toc -->
 
-* [Introduction](#introduction)
-* [Installation](#installation)
-* [Everyday Usage](#everyday-usage)
+* [Introduction :wave:](#introduction-wave)
+* [Installation :cd:](#installation-cd)
+* [Everyday Usage :sunglasses:](#everyday-usage-sunglasses)
   + [Creating global stores](#creating-global-stores)
   + [Creating reactive views](#creating-reactive-views)
   + [Creating local stores](#creating-local-stores)
-* [Advanced Usage](#advanced-usage)
+* [Advanced Usage :nerd_face:](#advanced-usage-nerd_face)
   + [Adding side effects](#adding-side-effects)
-* [API Summary](#api-summary)
+* [API Summary :book:](#api-summary-book)
   + [store(obj)](#storeobj)
   + [view(Comp)](#viewcomp)
   + [batch(fn)](#batchfn)
   + [autoEffect(fn)](#autoeffectfn)
   + [clearEffect(fn)](#cleareffectfn)
-* [Examples with live demos](#examples-with-live-demos)
-* [Articles](#articles)
-* [Performance](#performance)
-* [Platform support](#platform-support)
-* [Alternative builds](#alternative-builds)
-* [Contributing](#contributing)
-* [Contributors ✨](#contributors-%E2%9C%A8)
+* [Examples with live demos :tv:](#examples-with-live-demos-tv)
+* [Articles :loudspeaker:](#articles-loudspeaker)
+* [Performance :rocket:](#performance-rocket)
+* [Platform support :computer:](#platform-support-computer)
+* [Alternative builds :wrench:](#alternative-builds-wrench)
+* [Contributors :sparkles:](#contributors-sparkles)
 
 <!-- tocstop -->
 
 </details>
 
-## Introduction
+## Introduction :wave:
 
 React Easy State is a practical state management library with two functions and two accompanying rules.
 
@@ -65,7 +64,7 @@ This is enough for it to automatically update your views when needed. It doesn't
 
 Check this [TodoMVC codesandbox](https://codesandbox.io/s/github/RisingStack/react-easy-state/tree/master/examples/todo-mvc?module=%2Fsrc%2FtodosStore.js) or [raw code](/examples/todo-mvc/src/todosStore.js) for a more exciting example with nested data, arrays and computed values.
 
-## Installation
+## Installation :cd:
 
 `npm install @risingstack/react-easy-state`
 
@@ -86,7 +85,7 @@ _You need npm 5.2+ to use npx._
 
 </details>
 
-## Everyday Usage
+## Everyday Usage :sunglasses:
 
 ### Creating global stores
 
@@ -633,7 +632,7 @@ Instead of returning an object, you should directly mutate the received stores. 
 
 </details>
 
-## Advanced Usage
+## Advanced Usage :nerd_face:
 
 ### Adding side effects
 
@@ -734,9 +733,7 @@ class App extends Component {
 }
 ```
 
----
-
-## API Summary
+## API Summary :book:
 
 ### store(obj)
 
@@ -808,9 +805,7 @@ const effect = autoEffect(() => document.title = user.name)
 clearEffect(effect)
 ```
 
----
-
-## Examples with live demos
+## Examples with live demos :tv:
 
 #### Beginner
 
@@ -824,20 +819,20 @@ clearEffect(effect)
 - [Contacts Table](https://risingstack.github.io/react-easy-state/examples/contacts/build) ([source](/examples/contacts/)) ([codesandbox](https://codesandbox.io/s/github/RisingStack/react-easy-state/tree/master/examples/contacts)): a data grid implementation with a mix of global and local state.
 - [Beer Finder](https://risingstack.github.io/react-easy-state/examples/beer-finder/build) ([source](/examples/beer-finder/)) ([codesandbox](https://codesandbox.io/s/github/RisingStack/react-easy-state/tree/master/examples/beer-finder)) ([tutorial](https://medium.com/@solkimicreb/design-patterns-with-react-easy-state-830b927acc7c)): an app with async actions and a mix of local and global state, which finds matching beers for your meal.
 
-## Articles
+## Articles :loudspeaker:
 
 - [Introducing React Easy State](https://blog.risingstack.com/introducing-react-easy-state/): making a simple stopwatch.
 - [Stress Testing React Easy State](https://medium.com/@solkimicreb/stress-testing-react-easy-state-ac321fa3becf): demonstrating Easy State's reactivity with increasingly exotic state mutations.
 - [Design Patterns with React Easy State](https://medium.com/@solkimicreb/design-patterns-with-react-easy-state-830b927acc7c): demonstrating async actions and local and global state management through a beer finder app.
 - [The Ideas Behind React Easy State](https://medium.com/dailyjs/the-ideas-behind-react-easy-state-901d70e4d03e): a deep dive under the hood of Easy State.
 
-## Performance
+## Performance :rocket:
 
 You can compare Easy State with plain React and other state management libraries with the below benchmarks. It performs a bit better than MobX and similarly to Redux.
 
 - [js-framework-benchmark](https://github.com/krausest/js-framework-benchmark) ([source](https://github.com/krausest/js-framework-benchmark/tree/master/react-v16.1.0-easy-state-v4.0.1-keyed)) ([results](https://rawgit.com/krausest/js-framework-benchmark/master/webdriver-ts-results/table.html))
 
-## Platform support
+## Platform support :computer:
 
 - Node: 6 and above
 - Chrome: 49 and above
@@ -849,7 +844,7 @@ You can compare Easy State with plain React and other state management libraries
 
 _This library is based on non polyfillable ES6 Proxies. Because of this, it will never support IE._
 
-## Alternative builds
+## Alternative builds :wrench:
 
 This library detects if you use ES6 or commonJS modules and serve the right format to you. The default bundles use ES6 features, which may not yet be supported by some minifier tools. If you experience issues during the build process, you can switch to one of the ES5 builds from below.
 
@@ -860,11 +855,9 @@ This library detects if you use ES6 or commonJS modules and serve the right form
 
 If you use a bundler, set up an alias for `@risingstack/react-easy-state` to point to your desired build. You can learn how to do it with webpack [here](https://webpack.js.org/configuration/resolve/#resolve-alias) and with rollup [here](https://github.com/rollup/rollup-plugin-alias#usage).
 
-## Contributing
+## Contributors :sparkles:
 
-Contributions are always welcome. Please read our [contributing documentation](CONTRIBUTING.md). Thanks!
-
-## Contributors ✨
+Contributions are always welcome, please read our [contributing documentation](CONTRIBUTING.md).
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
