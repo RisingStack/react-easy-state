@@ -488,7 +488,7 @@ export default view(() => {
 **Local stores in functions rely on React hooks. They require React and React DOM v16.8+ or React Native v0.59+ to work.**
 
 <details>
-<summary>You can use React hooks - including <code>useState</code> - in function components, Easy State won't interfere with them. Consider using <a href="#local-auto-effects-in-function-components">autoEffect</a> instead of the `useEffect` hook for the best experience though.</summary>
+<summary>You can use React hooks - including <code>useState</code> - in function components, Easy State won't interfere with them. Consider using <a href="#local-auto-effects-in-function-components">autoEffect</a> instead of the <code>useEffect</code> hook for the best experience though.</summary>
 <p></p>
 
 ```jsx
@@ -509,26 +509,6 @@ export default view(() => {
   );
 });
 ```
-
-</details>
-
-<p></p>
-<details>
-<summary>You can also pass a <code>function</code> to the store. In this case easy-state will create a state store from the function result.</summary>
-<p></p>
-
-```jsx
-import { store, view } from '@risingstack/react-easy-state';
-
-const localStore = () => ({ name: 'Bob' });
-
-export default view(() => {
-  const person = store(localStore);
-  return <div>{person.name}</div>;
-});
-```
-
-This is useful for large local stores to avoid large object creation on every render.
 
 </details>
 
