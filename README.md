@@ -18,11 +18,18 @@
 
 * [Introduction](#introduction)
 * [Installation](#installation)
-* [Usage](#usage)
+* [Everyday Usage](#everyday-usage)
   + [Creating global stores](#creating-global-stores)
   + [Creating reactive views](#creating-reactive-views)
   + [Creating local stores](#creating-local-stores)
+* [Advanced Usage](#advanced-usage)
   + [Adding side effects](#adding-side-effects)
+* [API Summary](#api-summary)
+  + [store(obj)](#storeobj)
+  + [view(Comp)](#viewcomp)
+  + [batch(fn)](#batchfn)
+  + [autoEffect(fn)](#autoeffectfn)
+  + [clearEffect(fn)](#cleareffectfn)
 * [Examples with live demos](#examples-with-live-demos)
 * [Articles](#articles)
 * [Performance](#performance)
@@ -79,7 +86,7 @@ _You need npm 5.2+ to use npx._
 
 </details>
 
-## Usage
+## Everyday Usage
 
 ### Creating global stores
 
@@ -327,7 +334,7 @@ export default view(() => (
 
 ```jsx
 import React from 'react';
-import { view, store, batch } from '@risingstack/react-easy-state';
+import { view, store } from '@risingstack/react-easy-state';
 
 const user = store({ name: 'Bob', age: 30 });
 
@@ -626,6 +633,8 @@ Instead of returning an object, you should directly mutate the received stores. 
 
 </details>
 
+## Advanced Usage
+
 ### Adding side effects
 
 Use `autoEffect` to react with automatic side effect to your store changes. Auto effects should contain end-of-chain logic - like changing the document title or saving data to LocalStorage. `view` is a special auto effect that does rendering.
@@ -723,6 +732,80 @@ class App extends Component {
     clearEffect(this.effect)
   }
 }
+```
+
+---
+
+## API Summary
+
+### store(obj)
+
+Creates an observable store from the passed object and returns it. Can be used outside components for [global stores](#creating-global-stores) and inside components for [local stores]((#creating-local-stores)).
+
+```js
+import { store } from '@risingstack/react-easy-state';
+
+const user = store({ name: 'Rick' });
+```
+
+### view(Comp)
+
+Creates a [reactive view](#creating-reactive-views) from the passed component and returns it. A reactive view re-renders whenever any store data used inside it is mutated.
+
+```jsx
+import React from 'react';
+import { view, store } from '@risingstack/react-easy-state';
+
+const user = store({ name: 'Bob' });
+
+export default view(() => (
+  <div>Hello {user.name}!</div>
+));
+```
+
+### batch(fn)
+
+Immediately executes the passed function and batches all store mutations inside it. Batched mutations are guaranteed to not trigger unnecessary double renders. Most task sources are batched automatically, only  use `batch` if you encounter performance issues.
+
+```jsx
+import React from 'react';
+import { view, store } from '@risingstack/react-easy-state';
+
+const user = store({ name: 'Bob' });
+
+function setName() {
+  batch(() => {
+    user.name = 'Rick'
+    user.name = 'Ann'
+  })
+}
+```
+
+### autoEffect(fn)
+
+Creates a reactive function from the passed one, immediately executes it, and returns it. A reactive function automatically re-reruns whenever any store data used inside it is mutated.
+
+Can be used both [outside](#global-auto-effects) and [inside](#local-auto-effects-in-function-components) components.
+
+```js
+import { store, autoEffect } from '@risingstack/react-easy-state';
+
+const user = store({ name: 'Bob' })
+
+autoEffect(() => document.title = user.name)
+```
+
+### clearEffect(fn)
+
+Takes a reactive function (returned by `autoEffect`) and clears the reactivity from it. Cleared reactive functions will no longer re-rerun on related store mutations. Reactive functions created inside function components are automatically cleared when the component unmounts.
+
+```js
+import { store, autoEffect, clearEffect } from '@risingstack/react-easy-state';
+
+const user = store({ name: 'Bob' })
+
+const effect = autoEffect(() => document.title = user.name)
+clearEffect(effect)
 ```
 
 ---
