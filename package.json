@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "test-native": "NATIVE=true jest --config ./jest.native.json --silent",
-    "test-web": "jest --config ./jest.web.json --silent",
+    "test-web": "jest --config ./jest.web.json",
     "test-web-no-hook": "NOHOOK=true jest --config ./jest.no-hook.json --silent",
     "test": "npm run test-web && npm run test-web-no-hook && npm run test-native",
     "example": "node ./scripts/startExample.js",

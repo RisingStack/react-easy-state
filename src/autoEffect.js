@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
-import { observe, unobserve } from '@nx-js/observer-util';
+import { unobserve } from '@nx-js/observer-util';
 import { queue } from './queue';
+import observe from './observe';
 
 import {
   isInsideFunctionComponent,

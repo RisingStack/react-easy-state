@@ -6,12 +6,8 @@ import {
   memo,
   useCallback,
 } from 'react';
-import {
-  observe,
-  unobserve,
-  raw,
-  isObservable,
-} from '@nx-js/observer-util';
+import { unobserve, raw, isObservable } from '@nx-js/observer-util';
+import observe from './observe';
 
 import { hasHooks } from './utils';
 import { queue } from './queue';
