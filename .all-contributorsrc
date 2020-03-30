@@ -38,10 +38,19 @@
         "design",
         "example"
       ]
+    },
+    {
+      "login": "peteyycz",
+      "name": "Peter Czibik",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/7130689?v=4",
+      "profile": "https://github.com/peteyycz",
+      "contributions": [
+        "infra"
+      ]
     }
   ],
   "contributorsPerLine": 7,
-  "projectName": "@risingstack/react-easy-state",
+  "projectName": "react-easy-state",
   "projectOwner": "RisingStack",
   "repoType": "github",
   "repoHost": "https://github.com",
