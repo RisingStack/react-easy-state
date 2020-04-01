@@ -117,7 +117,7 @@ const user = store({
     firstName: 'Bob',
     lastName: 'Smith',
     get name() {
-      return `${user.firstName} ${user.lastName}`;
+      return `${user.profile.firstName} ${user.profile.lastName}`;
     },
   },
   hobbies: ['programming', 'sports'],
