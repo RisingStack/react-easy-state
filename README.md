@@ -8,7 +8,7 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-4-blue.svg)](#contributors)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-<a href="#platform-support"><img src="images/browser_support.png" alt="Browser support" width="450px" height="auto" /></a>
+<a href="#platform-support-computer"><img src="images/browser_support.png" alt="Browser support" width="450px" height="auto" /></a>
 
 **NEWS:** `react-easy-state` is moved under `@risingstack/react-easy-state` on npm with **no breaking changes**. Please switch to the new package to get the latest features and bug fixes. Thanks!
 
