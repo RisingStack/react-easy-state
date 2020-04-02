@@ -66,7 +66,7 @@ export default view(() => (
 
 This is enough for it to automatically update your views when needed. It doesn't matter how you structure or mutate your state stores, any syntactically valid code works.
 
-Check this [TodoMVC codesandbox](https://codesandbox.io/s/github/RisingStack/react-easy-state/tree/master/examples/todo-mvc?module=%2Fsrc%2FtodosStore.js) or [raw code](/examples/todo-mvc/src/todosStore.js) for a more exciting example with nested data, arrays and computed values.
+Check this [TodoMVC codesandbox](https://codesandbox.io/s/github/RisingStack/react-easy-state/tree/master/examples/todo-mvc?module=%2Fsrc%2FtodosStore.js) or [raw code](/examples/todo-mvc/src/todosStore.js) for a more exciting example with nested data, arrays and getter properties.
 
 ## Installation :cd:
 
@@ -794,12 +794,12 @@ clearEffect(effect)
 #### Beginner
 
 - [Clock Widget](https://risingstack.github.io/react-easy-state/examples/clock/build) ([source](/examples/clock/)) ([codesandbox](https://codesandbox.io/s/github/RisingStack/react-easy-state/tree/master/examples/clock)) ([react-native source](/examples/native-clock/)) ([react-native sandbox](https://snack.expo.io/@git/github.com/RisingStack/react-easy-state:examples/native-clock)): a reusable clock widget with a tiny local state store.
-- [Stopwatch](https://risingstack.github.io/react-easy-state/examples/stop-watch/build) ([source](/examples/stop-watch/)) ([codesandbox](https://codesandbox.io/s/github/RisingStack/react-easy-state/tree/master/examples/stop-watch)) ([tutorial](https://hackernoon.com/introducing-react-easy-state-1210a156fa16)): a stopwatch with a mix of normal and computed state properties.
+- [Stopwatch](https://risingstack.github.io/react-easy-state/examples/stop-watch/build) ([source](/examples/stop-watch/)) ([codesandbox](https://codesandbox.io/s/github/RisingStack/react-easy-state/tree/master/examples/stop-watch)) ([tutorial](https://hackernoon.com/introducing-react-easy-state-1210a156fa16)): a stopwatch with a mix of normal and getter state properties.
 
 #### Advanced
 
 - [Pokédex](https://risingstack.github.io/react-easy-state/examples/pokedex/build) ([source](/examples/pokedex/)) ([codesandbox](https://codesandbox.io/s/github/RisingStack/react-easy-state/tree/master/examples/pokedex)): a Pokédex app build with Apollo GraphQL, async actions and a global state.
-- [TodoMVC](https://risingstack.github.io/react-easy-state/examples/todo-mvc/build) ([source](/examples/todo-mvc/)) ([codesandbox](https://codesandbox.io/s/github/RisingStack/react-easy-state/tree/master/examples/todo-mvc)): a classic TodoMVC implementation with a lot of computed data and implicit reactivity.
+- [TodoMVC](https://risingstack.github.io/react-easy-state/examples/todo-mvc/build) ([source](/examples/todo-mvc/)) ([codesandbox](https://codesandbox.io/s/github/RisingStack/react-easy-state/tree/master/examples/todo-mvc)): a classic TodoMVC implementation with a lot of getters/setters and implicit reactivity.
 - [Contacts Table](https://risingstack.github.io/react-easy-state/examples/contacts/build) ([source](/examples/contacts/)) ([codesandbox](https://codesandbox.io/s/github/RisingStack/react-easy-state/tree/master/examples/contacts)): a data grid implementation with a mix of global and local state.
 - [Beer Finder](https://risingstack.github.io/react-easy-state/examples/beer-finder/build) ([source](/examples/beer-finder/)) ([codesandbox](https://codesandbox.io/s/github/RisingStack/react-easy-state/tree/master/examples/beer-finder)) ([tutorial](https://medium.com/@solkimicreb/design-patterns-with-react-easy-state-830b927acc7c)): an app with async actions and a mix of local and global state, which finds matching beers for your meal.
 
