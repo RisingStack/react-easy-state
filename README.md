@@ -271,6 +271,8 @@ export default view(() => (
 <details>
 <summary><strong>Wrap ALL of your components with <code>view</code> - including class and function ones - even if they don't seem to directly use a store.</strong></summary>
 <p></p>
+  
+Every component that is using a store or part of a store inside its render must be wrapped with `view`. Sometimes store usage is not so explicit and easy to to miss.
 
 ```jsx
 import { view, store } from '@risingstack/react-easy-state';
@@ -293,6 +295,20 @@ const Profile = view(({ user }) => <p>Name: {user.name}</p>);
 // This won't re-render on appStore.user.name = 'newName' like mutations
 const Profile = ({ user }) => <p>Name: {user.name}</p>;
 ```
+
+If you are **100% sure** that your component is not using any stores you can skip the `view` wrapper.
+
+```jsx
+import React from 'react';
+
+// you don't have to wrap this component with `view`
+export default (() => <p>This is just plain text</p>);
+```
+
+`view` wrapping is advised even in these cases though.
+
+- It saves you from future headaches as your project grows and you start to use stores inside these components.
+- `view` is pretty much equivalent to `memo` if you don't use any stores. That is nearly always nice to have.
 
 </details>
 <p></p>
