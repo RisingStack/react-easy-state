@@ -1,5 +1,5 @@
 declare module '@risingstack/react-easy-state' {
-  import { ComponentType } from 'react';
+  import { ComponentType, DependencyList } from 'react';
 
   // takes an object (optionally), wraps it in a transparent proxy and returns the proxy
   function store<Store extends object>(obj?: Store): Store;
