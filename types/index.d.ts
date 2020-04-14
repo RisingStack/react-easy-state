@@ -11,4 +11,9 @@ declare module '@risingstack/react-easy-state' {
     ctx?: any,
     args?: any[],
   ): T;
+  function autoEffect(
+    effect: () => void,
+    deps?: DependencyList,
+  ): () => void | undefined;
+  function clearEffect(effect: () => void): void;
 }
