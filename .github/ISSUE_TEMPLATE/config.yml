@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Question
+    url: https://stackoverflow.com/questions/ask?tags=react-easy-state+reactjs+react-state-management
+    about: Stack Overflow questions with the (prefilled) react-easy-state tag will be answered by the team 
+  - name: Chat
+    url: https://gitter.im/RisingStack/react-easy-state
+    about: Chat about ideas and patterns with the community
