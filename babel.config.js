@@ -2,6 +2,7 @@ const development = {
   plugins: [
     '@babel/plugin-proposal-export-default-from',
     '@babel/plugin-proposal-class-properties',
+    '@babel/plugin-proposal-object-rest-spread',
   ],
 };
 const test = {
@@ -11,6 +12,7 @@ const test = {
     '@babel/plugin-proposal-class-properties',
     '@babel/plugin-transform-async-to-generator',
     '@babel/plugin-transform-modules-commonjs',
+    '@babel/plugin-proposal-object-rest-spread',
   ],
 };
 

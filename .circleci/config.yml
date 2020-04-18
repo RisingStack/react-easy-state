@@ -1,21 +1,11 @@
-# Javascript Node CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
 version: 2
 jobs:
-  test:
+  test-and-build:
+    working_directory: ~/repo
     docker:
-      # specify the version you desire here
-      - image: circleci/node:10
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-
+      - image: circleci/node:12
     steps:
       - checkout
-      - run: sudo npm install -g npm@6.13.7
       - run: npm install
       - run: npm run lint
       # run the tests on the original source to get coverage info
@@ -25,31 +15,42 @@ jobs:
       # test the final bundled builds
       - run: npm run build
       - run: npm run test-builds
+      - persist_to_workspace:
+          root: ~/repo
+          paths: .
+
+  test-node-support:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:6
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      # test the final build in Node 6 for platform support
+      - run: npm run test-node-support
 
   release:
+    working_directory: ~/repo
     docker:
-      - image: circleci/node:10
+      - image: circleci/node:12
     steps:
-      - checkout
-      - run:
-          name: Install dependencies
-          command: |
-            npm install
-      - run:
-          name: Build /dist folder
-          command: npm run build
-      - run:
-          name: Release to NPM
-          command: npm run semantic-release
+      - attach_workspace:
+          at: ~/repo
+      # test the final bundled builds again right before release
+      - run: npm run test-builds
+      - run: npm run semantic-release
 
 workflows:
   version: 2
   test_and_release:
     jobs:
-      - test
+      - test-and-build
+      - test-node-support:
+          requires:
+            - test-and-build
       - release:
           requires:
-            - test
+            - test-node-support
           filters:
             branches:
               only: master
