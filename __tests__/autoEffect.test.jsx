@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, cleanup, act } from '@testing-library/react/pure';
+import { render, cleanup } from '@testing-library/react/pure';
 import {
   view,
   store,
@@ -20,15 +20,11 @@ describe('autoEffect', () => {
     });
     expect(documentTitle).toBe('Online Store');
 
-    act(() => {
-      app.name = 'Learning Platform';
-    });
+    app.name = 'Learning Platform';
     expect(documentTitle).toBe('Learning Platform');
 
     clearEffect(effect);
-    act(() => {
-      app.name = 'Social Platform';
-    });
+    app.name = 'Social Platform';
     expect(documentTitle).toBe('Learning Platform');
   });
 
@@ -48,16 +44,12 @@ describe('autoEffect', () => {
     expect(container).toHaveTextContent('Online Store');
     expect(documentTitle).toBe('Online Store');
 
-    act(() => {
-      app.name = 'Learning Platform';
-    });
+    app.name = 'Learning Platform';
     expect(container).toHaveTextContent('Learning Platform');
     expect(documentTitle).toBe('Learning Platform');
 
     unmount();
-    act(() => {
-      app.name = 'Social Platform';
-    });
+    app.name = 'Social Platform';
     expect(documentTitle).toBe('Learning Platform');
   });
 
@@ -85,9 +77,7 @@ describe('autoEffect', () => {
     expect(container).toHaveTextContent('Awesome Store');
     expect(documentTitle).toBe('Awesome Store');
 
-    act(() => {
-      app.name = 'Page';
-    });
+    app.name = 'Page';
     expect(container).toHaveTextContent('Awesome Page');
     expect(documentTitle).toBe('Awesome Page');
   });
