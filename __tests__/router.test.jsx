@@ -3,7 +3,6 @@ import {
   render,
   cleanup,
   fireEvent,
-  act,
 } from '@testing-library/react/pure';
 // eslint-disable-next-line import/no-unresolved
 import { view, store } from '@risingstack/react-easy-state';
@@ -35,9 +34,7 @@ describe('withRouter interaction', () => {
         </Router>,
       );
       expect(container).toHaveTextContent('0');
-      act(() => {
-        counter.num += 1;
-      });
+      counter.num += 1;
       expect(container).toHaveTextContent('1');
     });
 
@@ -84,9 +81,7 @@ describe('withRouter interaction', () => {
         </Router>,
       );
       expect(container).toHaveTextContent('0');
-      act(() => {
-        counter.num += 1;
-      });
+      counter.num += 1;
       expect(container).toHaveTextContent('1');
     });
 

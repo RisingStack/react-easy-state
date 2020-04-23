@@ -1,5 +1,5 @@
 import React, { StrictMode } from 'react';
-import { render, cleanup, act } from '@testing-library/react/pure';
+import { render, cleanup } from '@testing-library/react/pure';
 import sinon from 'sinon';
 import App from '../examples/clock/src/App';
 
@@ -25,14 +25,10 @@ describe('Clock App', () => {
   test('should update to display the current time every second', () => {
     expect(container).toHaveTextContent('12:00:00 AM');
 
-    act(() => {
-      clock.tick(2000);
-    });
+    clock.tick(2000);
     expect(container).toHaveTextContent('12:00:02 AM');
 
-    act(() => {
-      clock.tick(8500);
-    });
+    clock.tick(8500);
     expect(container).toHaveTextContent('12:00:10 AM');
   });
 

@@ -3,7 +3,6 @@ import {
   render,
   cleanup,
   fireEvent,
-  act,
 } from '@testing-library/react/pure';
 import {
   view,
@@ -28,12 +27,10 @@ describe('batching', () => {
     const { container } = render(<MyComp />);
     expect(renderCount).toBe(1);
     expect(container).toHaveTextContent('Bob');
-    act(() =>
-      batch(() => {
-        person.name = 'Ann';
-        person.name = 'Rick';
-      }),
-    );
+    batch(() => {
+      person.name = 'Ann';
+      person.name = 'Rick';
+    });
     expect(container).toHaveTextContent('Rick');
     expect(renderCount).toBe(2);
   });
@@ -128,12 +125,8 @@ describe('batching', () => {
     const { container } = render(<MyComp />);
     expect(renderCount).toBe(1);
     expect(container).toHaveTextContent('Bob');
-    act(() => {
-      person.name = 'Ann';
-    });
-    act(() => {
-      person.name = 'Rick';
-    });
+    person.name = 'Ann';
+    person.name = 'Rick';
     expect(container).toHaveTextContent('Rick');
     expect(renderCount).toBe(3);
   });
@@ -149,17 +142,15 @@ describe('batching', () => {
     const { container } = render(<MyComp />);
     expect(renderCount).toBe(1);
     expect(container).toHaveTextContent('Bob');
-    act(() =>
+    batch(() => {
       batch(() => {
-        batch(() => {
-          person.name = 'Rob';
-          person.name = 'David';
-        });
-        expect(container).toHaveTextContent('Bob');
-        person.name = 'Ann';
-        person.name = 'Rick';
-      }),
-    );
+        person.name = 'Rob';
+        person.name = 'David';
+      });
+      expect(container).toHaveTextContent('Bob');
+      person.name = 'Ann';
+      person.name = 'Rick';
+    });
     expect(container).toHaveTextContent('Rick');
     expect(renderCount).toBe(2);
   });
@@ -177,13 +168,11 @@ describe('batching', () => {
     expect(container).toHaveTextContent('Bob');
 
     try {
-      act(() =>
-        batch(() => {
-          person.name = 'Ann';
-          person.name = 'Rick';
-          throw new Error('Totally Expected Error');
-        }),
-      );
+      batch(() => {
+        person.name = 'Ann';
+        person.name = 'Rick';
+        throw new Error('Totally Expected Error');
+      });
     } catch (e) {
       expect(e.message).toBe('Totally Expected Error');
     }
@@ -231,10 +220,10 @@ describe('batching', () => {
     const { container } = render(<MyComp />);
     expect(renderCount).toBe(1);
     expect(container).toHaveTextContent('Bob');
-    const handler = act(() => {
+    function handler() {
       person.name = 'Ann';
       person.name = 'Rick';
-    });
+    }
     document.body.addEventListener('click', handler);
     document.body.dispatchEvent(new Event('click'));
     expect(container).toHaveTextContent('Rick');
@@ -255,17 +244,14 @@ describe('batching', () => {
     const { container } = render(<MyComp />);
     expect(renderCount).toBe(1);
     expect(container).toHaveTextContent('Bob');
-    await act(
-      () =>
-        new Promise(
-          resolve =>
-            setTimeout(() => {
-              person.name = 'Ann';
-              person.name = 'Rick';
-              resolve();
-            }),
-          100,
-        ),
+    await new Promise(
+      resolve =>
+        setTimeout(() => {
+          person.name = 'Ann';
+          person.name = 'Rick';
+          resolve();
+        }),
+      100,
     );
     expect(container).toHaveTextContent('Rick');
     expect(renderCount).toBe(2);
@@ -282,16 +268,13 @@ describe('batching', () => {
     const { container } = render(<MyComp />);
     expect(renderCount).toBe(1);
     expect(container).toHaveTextContent('Bob');
-    await act(
-      () =>
-        new Promise(resolve =>
-          // eslint-disable-next-line
-          requestAnimationFrame(() => {
-            person.name = 'Ann';
-            person.name = 'Rick';
-            resolve();
-          }),
-        ),
+    await new Promise(resolve =>
+      // eslint-disable-next-line
+      requestAnimationFrame(() => {
+        person.name = 'Ann';
+        person.name = 'Rick';
+        resolve();
+      }),
     );
     expect(container).toHaveTextContent('Rick');
     expect(renderCount).toBe(2);
@@ -308,21 +291,17 @@ describe('batching', () => {
     const { container } = render(<MyComp />);
     expect(renderCount).toBe(1);
     expect(container).toHaveTextContent('Bob');
-    await act(() =>
-      Promise.resolve().then(() => {
-        person.name = 'Ann';
-        person.name = 'Rick';
-      }),
-    );
+    await Promise.resolve().then(() => {
+      person.name = 'Ann';
+      person.name = 'Rick';
+    });
     expect(container).toHaveTextContent('Rick');
     expect(renderCount).toBe(2);
 
-    await act(() =>
-      Promise.reject(new Error()).catch(() => {
-        person.name = 'Ben';
-        person.name = 'Morty';
-      }),
-    );
+    await Promise.reject(new Error()).catch(() => {
+      person.name = 'Ben';
+      person.name = 'Morty';
+    });
     expect(container).toHaveTextContent('Morty');
     expect(renderCount).toBe(3);
   });
@@ -338,11 +317,11 @@ describe('batching', () => {
     const { container } = render(<MyComp />);
     expect(renderCount).toBe(1);
     expect(container).toHaveTextContent('Bob');
-    await act(() => Promise.resolve());
+    await Promise.resolve();
     person.name = 'Ann';
     person.name = 'Rick';
     // ISSUE -> here it is not yet updated!!! -> the then block is not over I guess
-    await act(() => Promise.resolve());
+    await Promise.resolve();
     expect(container).toHaveTextContent('Rick');
     expect(renderCount).toBe(2);
   });
