@@ -131,28 +131,55 @@ describe('batching', () => {
     expect(renderCount).toBe(3);
   });
 
-  test('should work with nested batch() calls', () => {
-    let renderCount = 0;
-    const person = store({ name: 'Bob' });
-    const MyComp = view(() => {
-      renderCount += 1;
-      return <div>{person.name}</div>;
+  describe('nested batch()', () => {
+    test('should work with renders', () => {
+      let renderCount = 0;
+      const person = store({ name: 'Bob' });
+      const MyComp = view(() => {
+        renderCount += 1;
+        return <div>{person.name}</div>;
+      });
+
+      const { container } = render(<MyComp />);
+      expect(renderCount).toBe(1);
+      expect(container).toHaveTextContent('Bob');
+      batch(() => {
+        batch(() => {
+          person.name = 'Rob';
+          person.name = 'David';
+        });
+        expect(container).toHaveTextContent('Bob');
+        person.name = 'Ann';
+        person.name = 'Rick';
+      });
+      expect(container).toHaveTextContent('Rick');
+      expect(renderCount).toBe(2);
     });
 
-    const { container } = render(<MyComp />);
-    expect(renderCount).toBe(1);
-    expect(container).toHaveTextContent('Bob');
-    batch(() => {
-      batch(() => {
-        person.name = 'Rob';
-        person.name = 'David';
+    test('should work with autoEffect', () => {
+      let name;
+      let numOfRuns = 0;
+      const person = store({ name: 'Bob' });
+
+      const effect = autoEffect(() => {
+        numOfRuns += 1;
+        name = person.name;
       });
-      expect(container).toHaveTextContent('Bob');
-      person.name = 'Ann';
-      person.name = 'Rick';
+
+      batch(() => {
+        batch(() => {
+          person.name = 'Rob';
+          person.name = 'David';
+        });
+        expect(name).toBe('Bob');
+        person.name = 'Ann';
+        person.name = 'Rick';
+      });
+      expect(name).toBe('Rick');
+      expect(numOfRuns).toBe(2);
+
+      clearEffect(effect);
     });
-    expect(container).toHaveTextContent('Rick');
-    expect(renderCount).toBe(2);
   });
 
   test('should recover when error thrown inside batch', () => {

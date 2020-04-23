@@ -182,8 +182,7 @@ describe('edge cases', () => {
     expect(container).toHaveTextContent('1');
   });
 
-  // TODO: fix zombie updates
-  describe.skip('reactive renders should run in parent - child order with no duplicate child runs from props', () => {
+  describe('reactive renders should run in parent - child order with no duplicate child runs from props', () => {
     test('should work with function components', () => {
       const appStore = store({ num: 1, nested: { num: 12 } });
 

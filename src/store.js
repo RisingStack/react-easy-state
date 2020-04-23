@@ -1,36 +1,12 @@
 import { useMemo } from 'react';
 import { observable } from '@nx-js/observer-util';
 
-import { batch } from './scheduler';
+import { batchMethods } from './batch';
 import {
   isInsideFunctionComponent,
   isInsideClassComponentRender,
   isInsideFunctionComponentWithoutHooks,
 } from './view';
-
-function batchMethods(obj) {
-  Object.getOwnPropertyNames(obj).forEach(key => {
-    const { value, set } = Object.getOwnPropertyDescriptor(obj, key);
-
-    // batch store methods
-    if (typeof value === 'function') {
-      // use a Proxy instead of function wrapper to keep the method name
-      obj[key] = new Proxy(value, {
-        apply(target, thisArg, args) {
-          return batch(target, thisArg, args);
-        },
-      });
-    } else if (set) {
-      // batch property setters
-      Object.defineProperty(obj, key, {
-        set(newValue) {
-          return batch(set, obj, [newValue]);
-        },
-      });
-    }
-  });
-  return obj;
-}
 
 function createStore(obj) {
   return batchMethods(
