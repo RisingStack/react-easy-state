@@ -1,11 +1,4 @@
-import {
-  Component,
-  useState,
-  useEffect,
-  useMemo,
-  memo,
-  useCallback,
-} from 'react';
+import { Component, useState, useEffect, useMemo, memo } from 'react';
 import {
   observe,
   unobserve,
@@ -14,13 +7,11 @@ import {
 } from '@nx-js/observer-util';
 
 import { hasHooks } from './utils';
-import { queue } from './queue';
 
 export let isInsideFunctionComponent = false;
 export let isInsideClassComponentRender = false;
 export let isInsideFunctionComponentWithoutHooks = false;
 const COMPONENT = Symbol('owner component');
-const TRIGGERRENDER = Symbol('trigger render');
 
 function mapStateToStores(state) {
   // find store properties and map them to their none observable raw value
@@ -45,13 +36,12 @@ export function view(Comp) {
     ReactiveComp = props => {
       // use a dummy setState to update the component
       const [, setState] = useState();
-      const triggerRender = useCallback(() => setState({}), []);
       // create a memoized reactive wrapper of the original component (render)
       // at the very first run of the component function
       const render = useMemo(
         () =>
           observe(Comp, {
-            scheduler: () => queue.add(triggerRender),
+            scheduler: () => setState({}),
             lazy: true,
           }),
         // Adding the original Comp here is necessary to make React Hot Reload work
@@ -87,14 +77,10 @@ export function view(Comp) {
 
         // create a reactive render for the component
         this.render = observe(this.render, {
-          scheduler: () => queue.add(this[TRIGGERRENDER]),
+          scheduler: () => this.setState({}),
           lazy: true,
         });
       }
-
-      [TRIGGERRENDER] = () => {
-        this.setState({});
-      };
 
       render() {
         isInsideClassComponentRender = !isStatelessComp;

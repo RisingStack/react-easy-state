@@ -3,9 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const { execSync: exec } = require('child_process');
 const rollup = require('rollup');
-const resolvePlugin = require('@rollup/plugin-node-resolve');
-const babelPlugin = require('rollup-plugin-babel');
-const externalsPlugin = require('rollup-plugin-auto-external');
+const { defaultBuild } = require('../rollup.config');
 
 console.customInfo = args => {
   console.info(
@@ -36,24 +34,14 @@ if (!fs.existsSync(exampleFolder)) {
 
 // 1. BUILD EASY-STATE BUNDLE
 console.customInfo('Building react-easy-state in watch mode.');
-const watchOptions = {
-  input: path.resolve('src/index.js'),
-  plugins: [
-    resolvePlugin(),
-    babelPlugin({ exclude: 'node_modules/**' }),
-    externalsPlugin({ dependencies: true, peerDependecies: true }),
-  ],
-  output: {
-    format: 'es',
-    dir: 'dist',
-    entryFileNames: 'es.es6.js',
-    sourcemap: true,
-  },
-  watch: {
-    include: 'src/**',
-  },
-};
-const watcher = rollup.watch(watchOptions);
+const watcher = rollup.watch(
+  defaultBuild.map(config => ({
+    ...config,
+    watch: {
+      include: 'src/**',
+    },
+  })),
+);
 watcher.on('event', ({ code }) => {
   if (code === 'START') {
     console.customInfo('Building bundle.');
