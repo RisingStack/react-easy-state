@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import { render, cleanup, act } from '@testing-library/react/pure';
+import {
+  render,
+  cleanup,
+  fireEvent,
+  act,
+} from '@testing-library/react/pure';
 import {
   view,
   store,
@@ -187,7 +192,35 @@ describe('batching', () => {
     expect(renderCount).toBe(2);
   });
 
-  test('should batch state changes inside native event listeners', () => {
+  test('should batch state changes in react event listeners', () => {
+    let renderCount = 0;
+    const counter = store({ num: 0 });
+    const MyComp = view(() => {
+      renderCount += 1;
+      return (
+        <button
+          type="button"
+          onClick={() => {
+            counter.num += 1;
+            counter.num += 1;
+          }}
+        >
+          {counter.num}
+        </button>
+      );
+    });
+
+    const { container } = render(<MyComp />);
+    const button = container.querySelector('button');
+    expect(renderCount).toBe(1);
+    expect(container).toHaveTextContent('0');
+    fireEvent.click(button);
+    expect(container).toHaveTextContent('2');
+    expect(renderCount).toBe(2);
+  });
+
+  // TODO: batching native event handlers causes in input caret jumping bug
+  test.skip('should batch state changes inside native event listeners', () => {
     let renderCount = 0;
     const person = store({ name: 'Bob' });
     const MyComp = view(() => {
@@ -198,15 +231,15 @@ describe('batching', () => {
     const { container } = render(<MyComp />);
     expect(renderCount).toBe(1);
     expect(container).toHaveTextContent('Bob');
-    const batched = act(() => {
+    const handler = act(() => {
       person.name = 'Ann';
       person.name = 'Rick';
     });
-    document.body.addEventListener('click', batched);
+    document.body.addEventListener('click', handler);
     document.body.dispatchEvent(new Event('click'));
     expect(container).toHaveTextContent('Rick');
     expect(renderCount).toBe(2);
-    document.body.removeEventListener('click', batched);
+    document.body.removeEventListener('click', handler);
   });
 
   // async/await is only batched when it is transpiled to promises and/or generators
@@ -312,6 +345,69 @@ describe('batching', () => {
     await act(() => Promise.resolve());
     expect(container).toHaveTextContent('Rick');
     expect(renderCount).toBe(2);
+  });
+
+  test('should batch changes in store methods', () => {
+    let numOfRuns = 0;
+    let name = '';
+
+    const myStore = store({
+      firstName: 'My',
+      lastName: 'Store',
+      setName(firstName, lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+      },
+    });
+
+    const effect = autoEffect(() => {
+      name = `${myStore.firstName} ${myStore.lastName}`;
+      numOfRuns += 1;
+    });
+    expect(name).toBe('My Store');
+    expect(numOfRuns).toBe(1);
+
+    myStore.setName('Awesome', 'Stuff');
+    expect(name).toBe('Awesome Stuff');
+    expect(numOfRuns).toBe(2);
+
+    clearEffect(effect);
+  });
+
+  test('should batch changes in store setters', () => {
+    let numOfRuns = 0;
+    let name = '';
+
+    const myStore = store({
+      firstName: 'My',
+      middleName: 'Little',
+      lastName: 'Store',
+      get name() {
+        return `${this.firstName} ${this.middleName} ${this.lastName}`;
+      },
+      set name(newName) {
+        const [firstName, middleName, lastName] = newName.split(' ');
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+      },
+    });
+
+    const effect = autoEffect(() => {
+      name = myStore.name;
+      numOfRuns += 1;
+    });
+    expect(name).toBe('My Little Store');
+    expect(numOfRuns).toBe(1);
+
+    myStore.name = 'Awesome JS Stuff';
+    expect(name).toBe('Awesome JS Stuff');
+    expect(myStore.name).toBe('Awesome JS Stuff');
+    // the reactions runs two times once for the setter call
+    // and once for all the mutations inside the setter (alltogether)
+    expect(numOfRuns).toBe(3);
+
+    clearEffect(effect);
   });
 
   test('should not break Promises', async () => {
