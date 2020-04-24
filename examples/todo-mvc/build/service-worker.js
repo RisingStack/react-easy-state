@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/react-easy-state/examples/todo-mvc/build/precache-manifest.ca3e57fd9b2a24ec8bae14a3e691c931.js"
+  "/react-easy-state/examples/todo-mvc/build/precache-manifest.26149ee14246be0cd24ca1cacab4b9e5.js"
 );
 
 self.addEventListener('message', (event) => {
@@ -35,5 +35,5 @@ workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
 workbox.routing.registerNavigationRoute(workbox.precaching.getCacheKeyForURL("/react-easy-state/examples/todo-mvc/build/index.html"), {
   
-  blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
+  blacklist: [/^\/_/,/\/[^/?]+\.[^/]+$/],
 });

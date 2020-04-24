@@ -1,15 +1,22 @@
 {
   "files": {
     "main.css": "/react-easy-state/examples/beer-finder/build/static/css/main.150d374a.chunk.css",
-    "main.js": "/react-easy-state/examples/beer-finder/build/static/js/main.6b394069.chunk.js",
-    "main.js.map": "/react-easy-state/examples/beer-finder/build/static/js/main.6b394069.chunk.js.map",
-    "runtime~main.js": "/react-easy-state/examples/beer-finder/build/static/js/runtime~main.3f67b5d9.js",
-    "runtime~main.js.map": "/react-easy-state/examples/beer-finder/build/static/js/runtime~main.3f67b5d9.js.map",
-    "static/js/2.aca84a35.chunk.js": "/react-easy-state/examples/beer-finder/build/static/js/2.aca84a35.chunk.js",
-    "static/js/2.aca84a35.chunk.js.map": "/react-easy-state/examples/beer-finder/build/static/js/2.aca84a35.chunk.js.map",
+    "main.js": "/react-easy-state/examples/beer-finder/build/static/js/main.1d6354db.chunk.js",
+    "main.js.map": "/react-easy-state/examples/beer-finder/build/static/js/main.1d6354db.chunk.js.map",
+    "runtime-main.js": "/react-easy-state/examples/beer-finder/build/static/js/runtime-main.5a628cab.js",
+    "runtime-main.js.map": "/react-easy-state/examples/beer-finder/build/static/js/runtime-main.5a628cab.js.map",
+    "static/js/2.1dd53533.chunk.js": "/react-easy-state/examples/beer-finder/build/static/js/2.1dd53533.chunk.js",
+    "static/js/2.1dd53533.chunk.js.map": "/react-easy-state/examples/beer-finder/build/static/js/2.1dd53533.chunk.js.map",
     "index.html": "/react-easy-state/examples/beer-finder/build/index.html",
-    "precache-manifest.e3fd8ba2bbd42ce11c87f707569901bf.js": "/react-easy-state/examples/beer-finder/build/precache-manifest.e3fd8ba2bbd42ce11c87f707569901bf.js",
+    "precache-manifest.a4f816da9af78d1eb5360e0a1c648d69.js": "/react-easy-state/examples/beer-finder/build/precache-manifest.a4f816da9af78d1eb5360e0a1c648d69.js",
     "service-worker.js": "/react-easy-state/examples/beer-finder/build/service-worker.js",
-    "static/css/main.150d374a.chunk.css.map": "/react-easy-state/examples/beer-finder/build/static/css/main.150d374a.chunk.css.map"
-  }
+    "static/css/main.150d374a.chunk.css.map": "/react-easy-state/examples/beer-finder/build/static/css/main.150d374a.chunk.css.map",
+    "static/js/2.1dd53533.chunk.js.LICENSE.txt": "/react-easy-state/examples/beer-finder/build/static/js/2.1dd53533.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5a628cab.js",
+    "static/js/2.1dd53533.chunk.js",
+    "static/css/main.150d374a.chunk.css",
+    "static/js/main.1d6354db.chunk.js"
+  ]
 }

@@ -1,15 +1,22 @@
 {
   "files": {
     "main.css": "/react-easy-state/examples/stop-watch/build/static/css/main.fd6ed756.chunk.css",
-    "main.js": "/react-easy-state/examples/stop-watch/build/static/js/main.76359ea1.chunk.js",
-    "main.js.map": "/react-easy-state/examples/stop-watch/build/static/js/main.76359ea1.chunk.js.map",
-    "runtime~main.js": "/react-easy-state/examples/stop-watch/build/static/js/runtime~main.15e9bd6d.js",
-    "runtime~main.js.map": "/react-easy-state/examples/stop-watch/build/static/js/runtime~main.15e9bd6d.js.map",
-    "static/js/2.4558d602.chunk.js": "/react-easy-state/examples/stop-watch/build/static/js/2.4558d602.chunk.js",
-    "static/js/2.4558d602.chunk.js.map": "/react-easy-state/examples/stop-watch/build/static/js/2.4558d602.chunk.js.map",
+    "main.js": "/react-easy-state/examples/stop-watch/build/static/js/main.2b566411.chunk.js",
+    "main.js.map": "/react-easy-state/examples/stop-watch/build/static/js/main.2b566411.chunk.js.map",
+    "runtime-main.js": "/react-easy-state/examples/stop-watch/build/static/js/runtime-main.20fc4f37.js",
+    "runtime-main.js.map": "/react-easy-state/examples/stop-watch/build/static/js/runtime-main.20fc4f37.js.map",
+    "static/js/2.b8c53d56.chunk.js": "/react-easy-state/examples/stop-watch/build/static/js/2.b8c53d56.chunk.js",
+    "static/js/2.b8c53d56.chunk.js.map": "/react-easy-state/examples/stop-watch/build/static/js/2.b8c53d56.chunk.js.map",
     "index.html": "/react-easy-state/examples/stop-watch/build/index.html",
-    "precache-manifest.d242ce06cdba4c4111f4a4d093c2dd2c.js": "/react-easy-state/examples/stop-watch/build/precache-manifest.d242ce06cdba4c4111f4a4d093c2dd2c.js",
+    "precache-manifest.6b37882d68213d8df9217f6268a59a8d.js": "/react-easy-state/examples/stop-watch/build/precache-manifest.6b37882d68213d8df9217f6268a59a8d.js",
     "service-worker.js": "/react-easy-state/examples/stop-watch/build/service-worker.js",
-    "static/css/main.fd6ed756.chunk.css.map": "/react-easy-state/examples/stop-watch/build/static/css/main.fd6ed756.chunk.css.map"
-  }
+    "static/css/main.fd6ed756.chunk.css.map": "/react-easy-state/examples/stop-watch/build/static/css/main.fd6ed756.chunk.css.map",
+    "static/js/2.b8c53d56.chunk.js.LICENSE.txt": "/react-easy-state/examples/stop-watch/build/static/js/2.b8c53d56.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.20fc4f37.js",
+    "static/js/2.b8c53d56.chunk.js",
+    "static/css/main.fd6ed756.chunk.css",
+    "static/js/main.2b566411.chunk.js"
+  ]
 }

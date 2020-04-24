@@ -10,7 +10,7 @@
 
 <a href="#platform-support-computer"><img src="images/browser_support.png" alt="Browser support" width="450px" height="auto" /></a>
 
-**NEWS:** `react-easy-state` is moved under `@risingstack/react-easy-state` on npm with **no breaking changes**. Please switch to the new package to get the latest features and bug fixes. Thanks!
+**NEWS:** v6.3.0 fixed a nasty bug that could render [zombie children](https://react-redux.js.org/api/hooks#stale-props-and-zombie-children). Please update to this version at least to save yourself some headaches. Thanks!
 
 <details>
 <summary><strong>Table of Contents</strong></summary>
@@ -271,7 +271,7 @@ export default view(() => (
 <details>
 <summary><strong>Wrap ALL of your components with <code>view</code> - including class and function ones - even if they don't seem to directly use a store.</strong></summary>
 <p></p>
-  
+
 Every component that is using a store or part of a store inside its render must be wrapped with `view`. Sometimes store usage is not so explicit and easy to to miss.
 
 ```jsx
