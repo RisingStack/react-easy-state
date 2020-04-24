@@ -1,15 +1,22 @@
 {
   "files": {
     "main.css": "/react-easy-state/examples/clock/build/static/css/main.784e650b.chunk.css",
-    "main.js": "/react-easy-state/examples/clock/build/static/js/main.f34af289.chunk.js",
-    "main.js.map": "/react-easy-state/examples/clock/build/static/js/main.f34af289.chunk.js.map",
-    "runtime~main.js": "/react-easy-state/examples/clock/build/static/js/runtime~main.7c39ef5b.js",
-    "runtime~main.js.map": "/react-easy-state/examples/clock/build/static/js/runtime~main.7c39ef5b.js.map",
-    "static/js/2.ef2db6ea.chunk.js": "/react-easy-state/examples/clock/build/static/js/2.ef2db6ea.chunk.js",
-    "static/js/2.ef2db6ea.chunk.js.map": "/react-easy-state/examples/clock/build/static/js/2.ef2db6ea.chunk.js.map",
+    "main.js": "/react-easy-state/examples/clock/build/static/js/main.b6e52aff.chunk.js",
+    "main.js.map": "/react-easy-state/examples/clock/build/static/js/main.b6e52aff.chunk.js.map",
+    "runtime-main.js": "/react-easy-state/examples/clock/build/static/js/runtime-main.7a0176cc.js",
+    "runtime-main.js.map": "/react-easy-state/examples/clock/build/static/js/runtime-main.7a0176cc.js.map",
+    "static/js/2.8c9aba9e.chunk.js": "/react-easy-state/examples/clock/build/static/js/2.8c9aba9e.chunk.js",
+    "static/js/2.8c9aba9e.chunk.js.map": "/react-easy-state/examples/clock/build/static/js/2.8c9aba9e.chunk.js.map",
     "index.html": "/react-easy-state/examples/clock/build/index.html",
-    "precache-manifest.70b2f260234691dacb287271a61e7320.js": "/react-easy-state/examples/clock/build/precache-manifest.70b2f260234691dacb287271a61e7320.js",
+    "precache-manifest.944539b1d3ec5c7adac335c6191c3169.js": "/react-easy-state/examples/clock/build/precache-manifest.944539b1d3ec5c7adac335c6191c3169.js",
     "service-worker.js": "/react-easy-state/examples/clock/build/service-worker.js",
-    "static/css/main.784e650b.chunk.css.map": "/react-easy-state/examples/clock/build/static/css/main.784e650b.chunk.css.map"
-  }
+    "static/css/main.784e650b.chunk.css.map": "/react-easy-state/examples/clock/build/static/css/main.784e650b.chunk.css.map",
+    "static/js/2.8c9aba9e.chunk.js.LICENSE.txt": "/react-easy-state/examples/clock/build/static/js/2.8c9aba9e.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.7a0176cc.js",
+    "static/js/2.8c9aba9e.chunk.js",
+    "static/css/main.784e650b.chunk.css",
+    "static/js/main.b6e52aff.chunk.js"
+  ]
 }

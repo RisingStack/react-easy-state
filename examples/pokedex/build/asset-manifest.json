@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/react-easy-state/examples/pokedex/build/static/css/main.fa36d99a.chunk.css",
-    "main.js": "/react-easy-state/examples/pokedex/build/static/js/main.5c09b4e9.chunk.js",
-    "main.js.map": "/react-easy-state/examples/pokedex/build/static/js/main.5c09b4e9.chunk.js.map",
-    "runtime-main.js": "/react-easy-state/examples/pokedex/build/static/js/runtime-main.2c2f56d0.js",
-    "runtime-main.js.map": "/react-easy-state/examples/pokedex/build/static/js/runtime-main.2c2f56d0.js.map",
-    "static/js/2.a25105c7.chunk.js": "/react-easy-state/examples/pokedex/build/static/js/2.a25105c7.chunk.js",
-    "static/js/2.a25105c7.chunk.js.map": "/react-easy-state/examples/pokedex/build/static/js/2.a25105c7.chunk.js.map",
+    "main.js": "/react-easy-state/examples/pokedex/build/static/js/main.e598af00.chunk.js",
+    "main.js.map": "/react-easy-state/examples/pokedex/build/static/js/main.e598af00.chunk.js.map",
+    "runtime-main.js": "/react-easy-state/examples/pokedex/build/static/js/runtime-main.a5f6e24d.js",
+    "runtime-main.js.map": "/react-easy-state/examples/pokedex/build/static/js/runtime-main.a5f6e24d.js.map",
+    "static/js/2.3b66ce7e.chunk.js": "/react-easy-state/examples/pokedex/build/static/js/2.3b66ce7e.chunk.js",
+    "static/js/2.3b66ce7e.chunk.js.map": "/react-easy-state/examples/pokedex/build/static/js/2.3b66ce7e.chunk.js.map",
     "index.html": "/react-easy-state/examples/pokedex/build/index.html",
-    "precache-manifest.70d10fd8801fd8649b2fc4b6bcfc3db7.js": "/react-easy-state/examples/pokedex/build/precache-manifest.70d10fd8801fd8649b2fc4b6bcfc3db7.js",
+    "precache-manifest.50aa9b6a6daa5023f091e137a8390794.js": "/react-easy-state/examples/pokedex/build/precache-manifest.50aa9b6a6daa5023f091e137a8390794.js",
     "service-worker.js": "/react-easy-state/examples/pokedex/build/service-worker.js",
     "static/css/main.fa36d99a.chunk.css.map": "/react-easy-state/examples/pokedex/build/static/css/main.fa36d99a.chunk.css.map",
-    "static/js/2.a25105c7.chunk.js.LICENSE.txt": "/react-easy-state/examples/pokedex/build/static/js/2.a25105c7.chunk.js.LICENSE.txt"
+    "static/js/2.3b66ce7e.chunk.js.LICENSE.txt": "/react-easy-state/examples/pokedex/build/static/js/2.3b66ce7e.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.2c2f56d0.js",
-    "static/js/2.a25105c7.chunk.js",
+    "static/js/runtime-main.a5f6e24d.js",
+    "static/js/2.3b66ce7e.chunk.js",
     "static/css/main.fa36d99a.chunk.css",
-    "static/js/main.5c09b4e9.chunk.js"
+    "static/js/main.e598af00.chunk.js"
   ]
 }
