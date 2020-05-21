@@ -73,29 +73,4 @@ describe('Store edge cases and errors', () => {
       'You cannot use state inside a render of a class component. Please create your store outside of the render function.',
     );
   });
-
-  test('Using function parameter for store should use the returned object', () => {
-    const person = store(() => ({ name: 'Bob' }));
-    const MyComp = view(
-      class extends Component {
-        render() {
-          return <div>{person.name}</div>;
-        }
-      },
-    );
-    const { container } = render(<MyComp />);
-    expect(container).toHaveTextContent('Bob');
-  });
-
-  if (!process.env.NOHOOK) {
-    test('Using function parameter for store inside function component should use the returned object', () => {
-      const localStore = () => ({ name: 'Bob' });
-      const MyComp = view(() => {
-        const person = store(localStore);
-        return <div>{person.name}</div>;
-      });
-      const { container } = render(<MyComp />);
-      expect(container).toHaveTextContent('Bob');
-    });
-  }
 });
