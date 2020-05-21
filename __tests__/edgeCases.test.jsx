@@ -57,7 +57,7 @@ describe('edge cases', () => {
         state = { counter: 0 };
 
         handleIncrement = () => {
-          this.setState(prevState => ({
+          this.setState((prevState) => ({
             counter: prevState.counter + 1,
           }));
         };
@@ -84,7 +84,7 @@ describe('edge cases', () => {
         state = { counter: 0 };
 
         handleIncrement = () => {
-          this.setState(prevState => ({
+          this.setState((prevState) => ({
             counter: prevState.counter + 1,
           }));
         };

@@ -62,7 +62,7 @@ function batchMethodCallbacks(obj, method) {
 
 // batched obj.addEventListener(cb) like callbacks
 function batchMethodsCallbacks(obj, methods) {
-  methods.forEach(method => batchMethodCallbacks(obj, method));
+  methods.forEach((method) => batchMethodCallbacks(obj, method));
 }
 
 function batchMethod(obj, method) {
@@ -85,7 +85,7 @@ function batchMethod(obj, method) {
 // batches obj.onevent = fn like calls and store methods
 export function batchMethods(obj, methods) {
   methods = methods || Object.getOwnPropertyNames(obj);
-  methods.forEach(method => batchMethod(obj, method));
+  methods.forEach((method) => batchMethod(obj, method));
   return obj;
 }
 

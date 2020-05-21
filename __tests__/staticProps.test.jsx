@@ -26,7 +26,7 @@ describe('static props', () => {
   });
 
   test('view() should proxy defaultProps for functional components', () => {
-    const MyCustomCompName = props => {
+    const MyCustomCompName = (props) => {
       return <div>{props.name}</div>;
     };
 
@@ -54,7 +54,7 @@ describe('static props', () => {
 
     const errorSpy = jest
       .spyOn(console, 'error')
-      .mockImplementation(message =>
+      .mockImplementation((message) =>
         expect(message.indexOf('Failed prop type')).not.toBe(-1),
       );
     render(<ViewComp number="Bob" />);
@@ -63,7 +63,7 @@ describe('static props', () => {
   });
 
   test('view() should proxy propTypes for functional components', () => {
-    const MyCustomCompName = props => {
+    const MyCustomCompName = (props) => {
       return <div>{props.number}</div>;
     };
 
@@ -75,7 +75,7 @@ describe('static props', () => {
 
     const errorSpy = jest
       .spyOn(console, 'error')
-      .mockImplementation(message =>
+      .mockImplementation((message) =>
         expect(message.indexOf('Failed prop type')).not.toBe(-1),
       );
     render(<ViewComp number="Bob" />);

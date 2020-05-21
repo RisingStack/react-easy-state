@@ -2,7 +2,7 @@ import React from 'react';
 import { view } from '@risingstack/react-easy-state';
 import Type from './Type';
 
-export const Attack = view(attack => {
+export const Attack = view((attack) => {
   const { name, damage, type } = attack.attack;
   return (
     <div className="attack">

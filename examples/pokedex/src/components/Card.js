@@ -18,7 +18,7 @@ export default view(
         <>
           <p className="classification">{classification}</p>
           <div className="type-container">
-            {types.map(type => (
+            {types.map((type) => (
               <Type key={type} type={type} />
             ))}
           </div>

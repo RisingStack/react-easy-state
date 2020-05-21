@@ -30,7 +30,7 @@ export const fetchList = async () => {
   return result.data.pokemons;
 };
 
-export const fetchPokemon = async id => {
+export const fetchPokemon = async (id) => {
   const result = await client.query({
     query: gql`
         {

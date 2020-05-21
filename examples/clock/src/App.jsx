@@ -3,9 +3,7 @@ import moment from 'moment';
 import { view, store } from '@risingstack/react-easy-state';
 
 function getFormattedTime() {
-  return moment()
-    .utc()
-    .format('hh:mm:ss A');
+  return moment().utc().format('hh:mm:ss A');
 }
 
 // this is re-rendered whenever the relevant parts of the used data stores change

@@ -32,7 +32,7 @@ export default view(() => {
     >
       <div
         className="modal-content"
-        onClick={e => e.stopPropagation()}
+        onClick={(e) => e.stopPropagation()}
       >
         {pokedex.selectedPokemon && (
           <>
@@ -46,7 +46,7 @@ export default view(() => {
                     <h2>{name}</h2>
                     <p>{`max. ${maxCP} CP | max. ${maxHP} HP`}</p>
                     <div className="type-container">
-                      {types.map(type => (
+                      {types.map((type) => (
                         <Type key={type} type={type} />
                       ))}
                     </div>
@@ -75,7 +75,7 @@ export default view(() => {
                     <div className="modal-type-container">
                       <div className="type-container">
                         <b>Resistancy: </b>
-                        {resistant.map(type => (
+                        {resistant.map((type) => (
                           <Type key={type} type={type} />
                         ))}
                       </div>
@@ -84,7 +84,7 @@ export default view(() => {
                     <div className="modal-type-container">
                       <div className="type-container">
                         <b>Weaknesses: </b>
-                        {weaknesses.map(type => (
+                        {weaknesses.map((type) => (
                           <Type key={type} type={type} />
                         ))}
                       </div>
@@ -95,7 +95,7 @@ export default view(() => {
                       <>
                         <h3>Evolution</h3>
                         <div className="evolution-container">
-                          {evolutions.map(item => (
+                          {evolutions.map((item) => (
                             <Card key={item.id} {...item} mini />
                           ))}
                         </div>
@@ -110,12 +110,12 @@ export default view(() => {
                     )}
 
                     <h3>Attacks - fast</h3>
-                    {attacks.fast.map(attack => (
+                    {attacks.fast.map((attack) => (
                       <Attack key={attack.name} attack={attack} />
                     ))}
 
                     <h3>Attacks - special</h3>
-                    {attacks.special.map(attack => (
+                    {attacks.special.map((attack) => (
                       <Attack key={attack.name} attack={attack} />
                     ))}
                   </div>

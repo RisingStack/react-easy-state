@@ -10,7 +10,7 @@ const scheduler = {
     }
   },
   flush() {
-    taskQueue.forEach(task => task());
+    taskQueue.forEach((task) => task());
     taskQueue.clear();
   },
   on() {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { view } from '@risingstack/react-easy-state';
 
-export default view(evolution => {
+export default view((evolution) => {
   const { image, name } = evolution.evolution;
 
   return (
