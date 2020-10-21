@@ -214,7 +214,7 @@ person.name = 'Ann';
 export default person;
 ```
 
-The first example wouldn't trigger re-renders on the `person.name = 'Ann'` mutation, because it is targeted at the raw object. Mutating the raw - none `store`-wrapped object - won't schedule renders.
+The first example wouldn't trigger re-renders on the `person.name = 'Ann'` mutation, because it is targeted at the raw object. Mutating the raw - non-`store`-wrapped object - won't schedule renders.
 
 </details>
 <p></p>
@@ -692,10 +692,10 @@ export default view(() => {
 ```
 
 <details>
-<summary>Explicitly pass none reactive dependencies - like vanillas props and state - to local auto effects in function components.</summary>
+<summary>Explicitly pass non-reactive dependencies - like vanillas props and state - to local auto effects in function components.</summary>
 <p></p>
 
-Because of the design of React hooks you have to explicitly pass all none reactive data to a hook-like dependency array. This makes sure that the effect also runs when the none reactive data changes.
+Because of the design of React hooks you have to explicitly pass all non-reactive data to a hook-like dependency array. This makes sure that the effect also runs when the non-reactive data changes.
 
 ```jsx
 import React from 'react'

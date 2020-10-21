@@ -14,8 +14,8 @@ export let isInsideFunctionComponentWithoutHooks = false;
 const COMPONENT = Symbol('owner component');
 
 function mapStateToStores(state) {
-  // find store properties and map them to their none observable raw value
-  // to do not trigger none static this.setState calls
+  // find store properties and map them to their non-observable raw value
+  // to do not trigger non-static this.setState calls
   // from the static getDerivedStateFromProps lifecycle method
   const component = state[COMPONENT];
   return Object.keys(component)
