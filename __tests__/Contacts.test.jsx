@@ -7,10 +7,12 @@ import {
 import App from '../examples/contacts/src/App';
 
 describe('Contacts App', () => {
-  const { container } = render(
-    <StrictMode>
-      <App />
-    </StrictMode>,
+  const { container } = easyAct(() =>
+    render(
+      <StrictMode>
+        <App />
+      </StrictMode>,
+    ),
   );
   afterAll(cleanup);
 
@@ -21,19 +23,26 @@ describe('Contacts App', () => {
     const emailField = container.querySelector('input[name="email"]');
     const createButton = container.querySelector('button');
 
-    fireEvent.change(nameField, {
-      target: { name: 'name', value: 'Test Contact' },
+    easyAct(() => {
+      fireEvent.change(nameField, {
+        target: { name: 'name', value: 'Test Contact' },
+      });
     });
     expect(container).toMatchSnapshot('02. Create Test Contact name');
 
-    fireEvent.change(emailField, {
-      target: { name: 'email', value: 'test.contact@gmail.com' },
+    easyAct(() => {
+      fireEvent.change(emailField, {
+        target: { name: 'email', value: 'test.contact@gmail.com' },
+      });
     });
     expect(container).toMatchSnapshot(
       '03. Create Test Contact email',
     );
 
-    fireEvent.click(createButton);
+    easyAct(() => {
+      fireEvent.click(createButton);
+    });
+
     expect(container).toMatchSnapshot('04. Add Test Contact');
 
     fireEvent.change(nameField, {
@@ -100,7 +109,9 @@ describe('Contacts App', () => {
       '.contact-display .zmdi-delete',
     )[1];
 
-    fireEvent.click(deleteButton);
+    easyAct(() => {
+      fireEvent.click(deleteButton);
+    });
     expect(container).toMatchSnapshot(
       '12. Delete Placeholder Contact',
     );

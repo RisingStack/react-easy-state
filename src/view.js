@@ -31,21 +31,25 @@ export function view(Comp) {
 
   let ReactiveComp;
 
+  // We batch all updates to the view until the end of the current task. This
+  // is to prevent excessive rendering in situations where updates can occur
+  // outside of React's built-in batching. e.g. after resolving a promise,
+  // in a setTimeout callback, in an event handler.
   let batchPending = false;
+  let unMounted = false;
   function batchSetState(fn) {
     if (!batchPending) {
-      // console.log('Batching setState');
+      console.log('Batching setState');
       batchPending = true;
-      // TODO: this should be a microtask so that we don't wait for other events
-      // before executing. jest is not working with queueMicrotask.
-      // queueMicrotask(() => {
-      setTimeout(() => {
-        // console.log('Running setState');
+      queueMicrotask(() => {
         batchPending = false;
-        fn();
+        if (!unMounted) {
+          console.log('Running setState');
+          fn();
+        }
       });
     } else {
-      // console.log('Already batched setState');
+      console.log('Already batched setState');
     }
   }
 
@@ -69,7 +73,10 @@ export function view(Comp) {
 
       // cleanup the reactive connections after the very last render of the component
       useEffect(() => {
-        return () => unobserve(render);
+        return () => {
+          unMounted = true;
+          unobserve(render);
+        };
       }, []);
 
       // the isInsideFunctionComponent flag is used to toggle `store` behavior
@@ -155,6 +162,7 @@ export function view(Comp) {
         if (super.componentWillUnmount) {
           super.componentWillUnmount();
         }
+        unMounted = true;
         // clean up memory used by Easy State
         unobserve(this.render);
       }

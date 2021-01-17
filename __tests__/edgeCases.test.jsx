@@ -26,7 +26,9 @@ describe('edge cases', () => {
 
     const { container } = render(<MyComp />);
     expect(container).toHaveTextContent('Bob');
-    person.name = 'Ann';
+    easyAct(() => {
+      person.name = 'Ann';
+    });
     expect(container).toHaveTextContent('Bob');
   });
 
@@ -203,10 +205,15 @@ describe('edge cases', () => {
       expect(container).toHaveTextContent('12, 1');
       expect(parentCalls).toBe(1);
       expect(childCalls).toBe(1);
-      batch(() => {
-        appStore.num = 0;
-        appStore.nested = undefined;
-      });
+      easyAct(() =>
+        batch(() => {
+          // The order of these updates is significant here. The child update
+          // is triggered first, but we must update the parent first so that
+          // the child is not rendered once appStore.nested is undefined.
+          appStore.num = 0;
+          appStore.nested = undefined;
+        }),
+      );
       expect(container).toHaveTextContent('');
       expect(parentCalls).toBe(2);
       expect(childCalls).toBe(1);
@@ -242,10 +249,12 @@ describe('edge cases', () => {
       expect(container).toHaveTextContent('12, 1');
       expect(parentCalls).toBe(1);
       expect(childCalls).toBe(1);
-      batch(() => {
-        appStore.num = 0;
-        appStore.nested = undefined;
-      });
+      easyAct(() =>
+        batch(() => {
+          appStore.num = 0;
+          appStore.nested = undefined;
+        }),
+      );
       expect(container).toHaveTextContent('');
       expect(parentCalls).toBe(2);
       expect(childCalls).toBe(1);

@@ -13,8 +13,6 @@ import {
   // eslint-disable-next-line import/no-unresolved
 } from '@risingstack/react-easy-state';
 
-jest.useFakeTimers();
-
 describe('batching', () => {
   afterEach(cleanup);
 
@@ -29,11 +27,12 @@ describe('batching', () => {
     const { container } = render(<MyComp />);
     expect(renderCount).toBe(1);
     expect(container).toHaveTextContent('Bob');
-    batch(() => {
-      person.name = 'Ann';
-      person.name = 'Rick';
+    easyAct(() => {
+      batch(() => {
+        person.name = 'Ann';
+        person.name = 'Rick';
+      });
     });
-    jest.runAllTimers();
     expect(container).toHaveTextContent('Rick');
     expect(renderCount).toBe(2);
   });
@@ -78,17 +77,18 @@ describe('batching', () => {
     });
 
     const { container } = render(<MyComp />);
-    jest.runAllTimers();
+
     expect(container).toHaveTextContent('Bob');
     expect(name).toBe('Bob');
     expect(effectCount).toBe(1);
     expect(renderCount).toBe(1);
 
-    batch(() => {
-      person.name = 'Ann';
-      person.name = 'Rick';
-    });
-    jest.runAllTimers();
+    easyAct(() =>
+      batch(() => {
+        person.name = 'Ann';
+        person.name = 'Rick';
+      }),
+    );
 
     expect(name).toBe('Rick');
     expect(container).toHaveTextContent('Rick');
@@ -111,11 +111,13 @@ describe('batching', () => {
     const { container } = render(<MyComp />);
     expect(renderCount).toBe(1);
     expect(container).toHaveTextContent('Bob');
-    batch(() => {
-      person.name = 'Ann';
-      person.name = 'Rick';
-    });
-    jest.runAllTimers();
+    easyAct(() =>
+      batch(() => {
+        person.name = 'Ann';
+        person.name = 'Rick';
+      }),
+    );
+
     expect(container).toHaveTextContent('Rick');
     expect(renderCount).toBe(2);
   });
@@ -129,12 +131,12 @@ describe('batching', () => {
     });
 
     const { container } = render(<MyComp />);
-    jest.runAllTimers();
     expect(renderCount).toBe(1);
     expect(container).toHaveTextContent('Bob');
-    person.name = 'Ann';
-    person.name = 'Rick';
-    jest.runAllTimers();
+    easyAct(() => {
+      person.name = 'Ann';
+      person.name = 'Rick';
+    });
     expect(container).toHaveTextContent('Rick');
     expect(renderCount).toBe(2);
   });
@@ -151,16 +153,18 @@ describe('batching', () => {
       const { container } = render(<MyComp />);
       expect(renderCount).toBe(1);
       expect(container).toHaveTextContent('Bob');
-      batch(() => {
+      easyAct(() =>
         batch(() => {
-          person.name = 'Rob';
-          person.name = 'David';
-        });
-        expect(container).toHaveTextContent('Bob');
-        person.name = 'Ann';
-        person.name = 'Rick';
-      });
-      jest.runAllTimers();
+          batch(() => {
+            person.name = 'Rob';
+            person.name = 'David';
+          });
+          expect(container).toHaveTextContent('Bob');
+          person.name = 'Ann';
+          person.name = 'Rick';
+        }),
+      );
+
       expect(container).toHaveTextContent('Rick');
       expect(renderCount).toBe(2);
     });
@@ -203,16 +207,17 @@ describe('batching', () => {
     expect(renderCount).toBe(1);
     expect(container).toHaveTextContent('Bob');
 
-    try {
-      batch(() => {
-        person.name = 'Ann';
-        person.name = 'Rick';
-        throw new Error('Totally Expected Error');
-      });
-    } catch (e) {
-      expect(e.message).toBe('Totally Expected Error');
-    }
-    jest.runAllTimers();
+    easyAct(() => {
+      try {
+        batch(() => {
+          person.name = 'Ann';
+          person.name = 'Rick';
+          throw new Error('Totally Expected Error');
+        });
+      } catch (e) {
+        expect(e.message).toBe('Totally Expected Error');
+      }
+    });
 
     expect(container).toHaveTextContent('Rick');
     expect(renderCount).toBe(2);
@@ -240,14 +245,16 @@ describe('batching', () => {
     const button = container.querySelector('button');
     expect(renderCount).toBe(1);
     expect(container).toHaveTextContent('0');
-    fireEvent.click(button);
-    jest.runAllTimers();
+    easyAct(() => fireEvent.click(button));
+
     expect(container).toHaveTextContent('2');
     expect(renderCount).toBe(2);
 
-    fireEvent.click(button);
-    fireEvent.click(button);
-    jest.runAllTimers();
+    easyAct(() => {
+      fireEvent.click(button);
+      fireEvent.click(button);
+    });
+
     expect(container).toHaveTextContent('6');
     expect(renderCount).toBe(3);
   });
@@ -268,9 +275,11 @@ describe('batching', () => {
       person.name = 'Ann';
       person.name = 'Rick';
     }
-    document.body.addEventListener('click', handler);
-    document.body.dispatchEvent(new Event('click'));
-    jest.runAllTimers();
+    easyAct(() => {
+      document.body.addEventListener('click', handler);
+      document.body.dispatchEvent(new Event('click'));
+    });
+
     expect(container).toHaveTextContent('Rick');
     expect(renderCount).toBe(2);
     document.body.removeEventListener('click', handler);
@@ -289,17 +298,19 @@ describe('batching', () => {
     const { container } = render(<MyComp />);
     expect(renderCount).toBe(1);
     expect(container).toHaveTextContent('Bob');
-    setTimeout(() => {
-      person.name = 'Ann';
-      person.name = 'Rick';
+    easyAct(() => {
+      setTimeout(() => {
+        person.name = 'Ann';
+        person.name = 'Rick';
+      });
     });
-    jest.runAllTimers();
 
     expect(container).toHaveTextContent('Rick');
     expect(renderCount).toBe(2);
   });
 
   test('should batch changes in requestAnimationFrame and requestIdleCallback', async () => {
+    easyFakeTimers();
     let renderCount = 0;
     const person = store({ name: 'Bob' });
     const MyComp = view(() => {
@@ -310,6 +321,7 @@ describe('batching', () => {
     const { container } = render(<MyComp />);
     expect(renderCount).toBe(1);
     expect(container).toHaveTextContent('Bob');
+
     await new Promise(resolve =>
       // eslint-disable-next-line
       requestAnimationFrame(() => {
@@ -318,13 +330,14 @@ describe('batching', () => {
         resolve();
       }),
     );
-    jest.runAllTimers();
+    easyRunTimers();
 
     expect(container).toHaveTextContent('Rick');
     expect(renderCount).toBe(2);
   });
 
   test('should batch changes in Promise.then and Promise.catch', async () => {
+    easyFakeTimers();
     let renderCount = 0;
     const person = store({ name: 'Bob' });
     const MyComp = view(() => {
@@ -339,7 +352,7 @@ describe('batching', () => {
       person.name = 'Ann';
       person.name = 'Rick';
     });
-    jest.runAllTimers();
+    easyRunTimers();
 
     expect(container).toHaveTextContent('Rick');
     expect(renderCount).toBe(2);
@@ -348,13 +361,14 @@ describe('batching', () => {
       person.name = 'Ben';
       person.name = 'Morty';
     });
-    jest.runAllTimers();
+    easyRunTimers();
 
     expect(container).toHaveTextContent('Morty');
     expect(renderCount).toBe(3);
   });
 
   test('should batch changes in async function parts', async () => {
+    easyFakeTimers();
     let renderCount = 0;
     const person = store({ name: 'Bob' });
     const MyComp = view(() => {
@@ -370,7 +384,7 @@ describe('batching', () => {
     person.name = 'Rick';
     // ISSUE -> here it is not yet updated!!! -> the then block is not over I guess
     await Promise.resolve();
-    jest.runAllTimers();
+    easyRunTimers();
     expect(container).toHaveTextContent('Rick');
     expect(renderCount).toBe(2);
   });
@@ -438,6 +452,7 @@ describe('batching', () => {
     clearEffect(effect);
   });
 
+  /* TODO: tests are irrelevant since we are not patching any more.
   test('should not break Promises', async () => {
     await Promise.resolve(12)
       .then(value => {
@@ -450,7 +465,6 @@ describe('batching', () => {
       });
   });
 
-  /* TODO: tests are irrelevant since we are not patching any more.
   test('should not break setTimeout', async () => {
     await new Promise((resolve) => {
       setTimeout(
