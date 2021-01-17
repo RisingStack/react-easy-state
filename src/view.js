@@ -1,4 +1,5 @@
 import { Component, useState, useEffect, useMemo, memo } from 'react';
+import { unstable_batchedUpdates } from 'react-platform';
 import {
   observe,
   unobserve,
@@ -24,34 +25,42 @@ function mapStateToStores(state) {
     .map(raw);
 }
 
+// We batch all updates to the view until the end of the current task. This
+// is to prevent excessive rendering in situations where updates can occur
+// outside of React's built-in batching. e.g. after resolving a promise,
+// in a setTimeout callback, in an event handler.
+let batchesPending = {};
+let taskPending = false;
+let viewIndexCounter = 0;
+function batchSetState(viewIndex, fn) {
+  batchesPending[viewIndex] = fn;
+  if (!taskPending) {
+    console.log('Batching setState');
+    taskPending = true;
+    queueMicrotask(() => {
+      console.log('Running setState');
+      const batchesToRun = batchesPending;
+      taskPending = false;
+      batchesPending = {};
+      unstable_batchedUpdates(() =>
+        Object.values(batchesToRun).forEach(fn => fn()),
+      );
+    });
+  } else {
+    console.log('Already batched setState');
+  }
+}
+function clearBatch(viewIndex) {
+  delete batchesPending[viewIndex];
+}
+
 export function view(Comp) {
+  const viewIndex = viewIndexCounter++;
   const isStatelessComp = !(
     Comp.prototype && Comp.prototype.isReactComponent
   );
 
   let ReactiveComp;
-
-  // We batch all updates to the view until the end of the current task. This
-  // is to prevent excessive rendering in situations where updates can occur
-  // outside of React's built-in batching. e.g. after resolving a promise,
-  // in a setTimeout callback, in an event handler.
-  let batchPending = false;
-  let unMounted = false;
-  function batchSetState(fn) {
-    if (!batchPending) {
-      console.log('Batching setState');
-      batchPending = true;
-      queueMicrotask(() => {
-        batchPending = false;
-        if (!unMounted) {
-          console.log('Running setState');
-          fn();
-        }
-      });
-    } else {
-      console.log('Already batched setState');
-    }
-  }
 
   if (isStatelessComp && hasHooks) {
     // use a hook based reactive wrapper when we can
@@ -63,7 +72,8 @@ export function view(Comp) {
       const render = useMemo(
         () =>
           observe(Comp, {
-            scheduler: () => batchSetState(() => setState({})),
+            scheduler: () =>
+              batchSetState(viewIndex, () => setState({})),
             lazy: true,
           }),
         // Adding the original Comp here is necessary to make React Hot Reload work
@@ -74,7 +84,7 @@ export function view(Comp) {
       // cleanup the reactive connections after the very last render of the component
       useEffect(() => {
         return () => {
-          unMounted = true;
+          clearBatch(viewIndex);
           unobserve(render);
         };
       }, []);
@@ -102,7 +112,8 @@ export function view(Comp) {
 
         // create a reactive render for the component
         this.render = observe(this.render, {
-          scheduler: () => batchSetState(() => this.setState({})),
+          scheduler: () =>
+            batchSetState(viewIndex, () => this.setState({})),
           lazy: true,
         });
       }
@@ -162,7 +173,7 @@ export function view(Comp) {
         if (super.componentWillUnmount) {
           super.componentWillUnmount();
         }
-        unMounted = true;
+        clearBatch(viewIndex);
         // clean up memory used by Easy State
         unobserve(this.render);
       }
