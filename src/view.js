@@ -31,6 +31,24 @@ export function view(Comp) {
 
   let ReactiveComp;
 
+  let batchPending = false;
+  function batchSetState(fn) {
+    if (!batchPending) {
+      // console.log('Batching setState');
+      batchPending = true;
+      // TODO: this should be a microtask so that we don't wait for other events
+      // before executing. jest is not working with queueMicrotask.
+      // queueMicrotask(() => {
+      setTimeout(() => {
+        // console.log('Running setState');
+        batchPending = false;
+        fn();
+      });
+    } else {
+      // console.log('Already batched setState');
+    }
+  }
+
   if (isStatelessComp && hasHooks) {
     // use a hook based reactive wrapper when we can
     ReactiveComp = props => {
@@ -41,7 +59,7 @@ export function view(Comp) {
       const render = useMemo(
         () =>
           observe(Comp, {
-            scheduler: () => setState({}),
+            scheduler: () => batchSetState(() => setState({})),
             lazy: true,
           }),
         // Adding the original Comp here is necessary to make React Hot Reload work
@@ -77,7 +95,7 @@ export function view(Comp) {
 
         // create a reactive render for the component
         this.render = observe(this.render, {
-          scheduler: () => this.setState({}),
+          scheduler: () => batchSetState(() => this.setState({})),
           lazy: true,
         });
       }

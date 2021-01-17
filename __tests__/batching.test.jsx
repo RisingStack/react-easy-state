@@ -13,6 +13,8 @@ import {
   // eslint-disable-next-line import/no-unresolved
 } from '@risingstack/react-easy-state';
 
+jest.useFakeTimers();
+
 describe('batching', () => {
   afterEach(cleanup);
 
@@ -31,6 +33,7 @@ describe('batching', () => {
       person.name = 'Ann';
       person.name = 'Rick';
     });
+    jest.runAllTimers();
     expect(container).toHaveTextContent('Rick');
     expect(renderCount).toBe(2);
   });
@@ -75,6 +78,7 @@ describe('batching', () => {
     });
 
     const { container } = render(<MyComp />);
+    jest.runAllTimers();
     expect(container).toHaveTextContent('Bob');
     expect(name).toBe('Bob');
     expect(effectCount).toBe(1);
@@ -84,6 +88,7 @@ describe('batching', () => {
       person.name = 'Ann';
       person.name = 'Rick';
     });
+    jest.runAllTimers();
 
     expect(name).toBe('Rick');
     expect(container).toHaveTextContent('Rick');
@@ -110,11 +115,12 @@ describe('batching', () => {
       person.name = 'Ann';
       person.name = 'Rick';
     });
+    jest.runAllTimers();
     expect(container).toHaveTextContent('Rick');
     expect(renderCount).toBe(2);
   });
 
-  test('should not batch state changes outside a batch() wrapper', () => {
+  test('should batch state changes even outside a batch() wrapper', () => {
     let renderCount = 0;
     const person = store({ name: 'Bob' });
     const MyComp = view(() => {
@@ -123,12 +129,14 @@ describe('batching', () => {
     });
 
     const { container } = render(<MyComp />);
+    jest.runAllTimers();
     expect(renderCount).toBe(1);
     expect(container).toHaveTextContent('Bob');
     person.name = 'Ann';
     person.name = 'Rick';
+    jest.runAllTimers();
     expect(container).toHaveTextContent('Rick');
-    expect(renderCount).toBe(3);
+    expect(renderCount).toBe(2);
   });
 
   describe('nested batch()', () => {
@@ -152,6 +160,7 @@ describe('batching', () => {
         person.name = 'Ann';
         person.name = 'Rick';
       });
+      jest.runAllTimers();
       expect(container).toHaveTextContent('Rick');
       expect(renderCount).toBe(2);
     });
@@ -203,6 +212,7 @@ describe('batching', () => {
     } catch (e) {
       expect(e.message).toBe('Totally Expected Error');
     }
+    jest.runAllTimers();
 
     expect(container).toHaveTextContent('Rick');
     expect(renderCount).toBe(2);
@@ -231,8 +241,15 @@ describe('batching', () => {
     expect(renderCount).toBe(1);
     expect(container).toHaveTextContent('0');
     fireEvent.click(button);
+    jest.runAllTimers();
     expect(container).toHaveTextContent('2');
     expect(renderCount).toBe(2);
+
+    fireEvent.click(button);
+    fireEvent.click(button);
+    jest.runAllTimers();
+    expect(container).toHaveTextContent('6');
+    expect(renderCount).toBe(3);
   });
 
   // TODO: batching native event handlers causes in input caret jumping bug
@@ -253,6 +270,7 @@ describe('batching', () => {
     }
     document.body.addEventListener('click', handler);
     document.body.dispatchEvent(new Event('click'));
+    jest.runAllTimers();
     expect(container).toHaveTextContent('Rick');
     expect(renderCount).toBe(2);
     document.body.removeEventListener('click', handler);
@@ -271,15 +289,12 @@ describe('batching', () => {
     const { container } = render(<MyComp />);
     expect(renderCount).toBe(1);
     expect(container).toHaveTextContent('Bob');
-    await new Promise(
-      resolve =>
-        setTimeout(() => {
-          person.name = 'Ann';
-          person.name = 'Rick';
-          resolve();
-        }),
-      100,
-    );
+    setTimeout(() => {
+      person.name = 'Ann';
+      person.name = 'Rick';
+    });
+    jest.runAllTimers();
+
     expect(container).toHaveTextContent('Rick');
     expect(renderCount).toBe(2);
   });
@@ -303,6 +318,8 @@ describe('batching', () => {
         resolve();
       }),
     );
+    jest.runAllTimers();
+
     expect(container).toHaveTextContent('Rick');
     expect(renderCount).toBe(2);
   });
@@ -322,6 +339,8 @@ describe('batching', () => {
       person.name = 'Ann';
       person.name = 'Rick';
     });
+    jest.runAllTimers();
+
     expect(container).toHaveTextContent('Rick');
     expect(renderCount).toBe(2);
 
@@ -329,6 +348,8 @@ describe('batching', () => {
       person.name = 'Ben';
       person.name = 'Morty';
     });
+    jest.runAllTimers();
+
     expect(container).toHaveTextContent('Morty');
     expect(renderCount).toBe(3);
   });
@@ -349,6 +370,7 @@ describe('batching', () => {
     person.name = 'Rick';
     // ISSUE -> here it is not yet updated!!! -> the then block is not over I guess
     await Promise.resolve();
+    jest.runAllTimers();
     expect(container).toHaveTextContent('Rick');
     expect(renderCount).toBe(2);
   });
@@ -428,8 +450,9 @@ describe('batching', () => {
       });
   });
 
+  /* TODO: tests are irrelevant since we are not patching any more.
   test('should not break setTimeout', async () => {
-    await new Promise(resolve => {
+    await new Promise((resolve) => {
       setTimeout(
         (arg1, arg2, arg3) => {
           expect(arg1).toBe('Hello');
@@ -459,10 +482,10 @@ describe('batching', () => {
     expect(callCount).toBe(1);
   });
 
-  test('should not break method this value and args', done => {
+  test('should not break method this value and args', (done) => {
     const socket = new WebSocket('ws://www.example.com');
 
-    socket.onclose = function(ev) {
+    socket.onclose = function (ev) {
       expect(ev).toBeDefined();
       expect(this).toBe(socket);
       done();
@@ -471,11 +494,11 @@ describe('batching', () => {
     socket.close();
   });
 
-  test('should not break callback this value and args', done => {
+  test('should not break callback this value and args', (done) => {
     const ctx = {};
 
     setTimeout(
-      function(arg1, arg2) {
+      function (arg1, arg2) {
         expect(arg1).toBe('Test');
         expect(arg2).toBe('Test2');
         expect(this).toBe(ctx);
@@ -486,6 +509,7 @@ describe('batching', () => {
       'Test2',
     );
   });
+  */
 
   test('should not break return value', () => {
     const result = batch(() => 12);
