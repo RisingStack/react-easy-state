@@ -5,6 +5,7 @@ import {
   fireEvent,
 } from '@testing-library/react/pure';
 import App from '../examples/contacts/src/App';
+import { easyAct } from './testHelpers';
 
 describe('Contacts App', () => {
   const { container } = easyAct(() =>

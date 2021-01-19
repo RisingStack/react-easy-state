@@ -2,6 +2,7 @@ import React, { StrictMode } from 'react';
 import { render, cleanup } from '@testing-library/react/pure';
 import sinon from 'sinon';
 import App from '../examples/clock/src/App';
+import { easyFakeTimers, easyRunTimers } from './testHelpers';
 
 describe('Clock App', () => {
   const clock = sinon.useFakeTimers();

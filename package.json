@@ -1,6 +1,6 @@
 {
   "name": "@aha-app/react-easy-state",
-  "version": "0.0.3-development",
+  "version": "0.0.9-development",
   "description": "React state management with a minimal API. Made with ES6 Proxies.",
   "main": "dist/cjs.es6.js",
   "module": "dist/es.es6.js",

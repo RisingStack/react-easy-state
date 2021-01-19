@@ -12,6 +12,7 @@ import {
   Link,
   withRouter,
 } from 'react-router-dom';
+import { easyAct } from './testHelpers';
 
 describe('withRouter interaction', () => {
   /*

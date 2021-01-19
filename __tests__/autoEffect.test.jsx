@@ -7,6 +7,7 @@ import {
   clearEffect,
   // eslint-disable-next-line import/no-unresolved
 } from '@risingstack/react-easy-state';
+import { easyAct } from './testHelpers';
 
 describe('autoEffect', () => {
   afterEach(cleanup);

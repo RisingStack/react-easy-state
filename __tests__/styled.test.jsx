@@ -3,6 +3,7 @@ import { render, cleanup } from '@testing-library/react/pure';
 // eslint-disable-next-line import/no-unresolved
 import { view, store } from '@risingstack/react-easy-state';
 import { withTheme, ThemeProvider } from 'styled-components';
+import { easyAct } from './testHelpers';
 
 describe('withRouter interaction', () => {
   const theme = { color: 'red' };

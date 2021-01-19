@@ -12,6 +12,11 @@ import {
   batch,
   // eslint-disable-next-line import/no-unresolved
 } from '@risingstack/react-easy-state';
+import {
+  easyAct,
+  easyFakeTimers,
+  easyRunTimers,
+} from './testHelpers';
 
 describe('batching', () => {
   afterEach(cleanup);

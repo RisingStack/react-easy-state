@@ -1,4 +1,7 @@
+/* eslint camelcase: 0 */
+
 import { Component, useState, useEffect, useMemo, memo } from 'react';
+// eslint-disable-next-line import/no-unresolved
 import { unstable_batchedUpdates } from 'react-platform';
 import {
   observe,
@@ -35,27 +38,26 @@ let viewIndexCounter = 0;
 function batchSetState(viewIndex, fn) {
   batchesPending[viewIndex] = fn;
   if (!taskPending) {
-    console.log('Batching setState');
     taskPending = true;
     queueMicrotask(() => {
-      console.log('Running setState');
       const batchesToRun = batchesPending;
       taskPending = false;
       batchesPending = {};
       unstable_batchedUpdates(() =>
-        Object.values(batchesToRun).forEach(fn => fn()),
+        Object.values(batchesToRun).forEach(setStateFn =>
+          setStateFn(),
+        ),
       );
     });
-  } else {
-    console.log('Already batched setState');
   }
 }
+
+// No need to trigger an update for this view since it has been removed.
 function clearBatch(viewIndex) {
   delete batchesPending[viewIndex];
 }
 
 export function view(Comp) {
-  const viewIndex = viewIndexCounter++;
   const isStatelessComp = !(
     Comp.prototype && Comp.prototype.isReactComponent
   );
@@ -65,6 +67,9 @@ export function view(Comp) {
   if (isStatelessComp && hasHooks) {
     // use a hook based reactive wrapper when we can
     ReactiveComp = props => {
+      // Unique ID for each view instance.
+      viewIndexCounter += 1;
+      const viewIndex = viewIndexCounter;
       // use a dummy setState to update the component
       const [, setState] = useState();
       // create a memoized reactive wrapper of the original component (render)
@@ -73,7 +78,9 @@ export function view(Comp) {
         () =>
           observe(Comp, {
             scheduler: () =>
-              batchSetState(viewIndex, () => setState({})),
+              batchSetState(viewIndex, () => {
+                setState({});
+              }),
             lazy: true,
           }),
         // Adding the original Comp here is necessary to make React Hot Reload work
@@ -84,6 +91,7 @@ export function view(Comp) {
       // cleanup the reactive connections after the very last render of the component
       useEffect(() => {
         return () => {
+          // We don't need to trigger a render after the component is removed.
           clearBatch(viewIndex);
           unobserve(render);
         };
@@ -107,13 +115,16 @@ export function view(Comp) {
       constructor(props, context) {
         super(props, context);
 
+        // Unique ID for each class insance.
+        viewIndexCounter += 1;
+        this.viewIndex = viewIndexCounter;
         this.state = this.state || {};
         this.state[COMPONENT] = this;
 
         // create a reactive render for the component
         this.render = observe(this.render, {
           scheduler: () =>
-            batchSetState(viewIndex, () => this.setState({})),
+            batchSetState(this.viewIndex, () => this.setState({})),
           lazy: true,
         });
       }
@@ -173,7 +184,8 @@ export function view(Comp) {
         if (super.componentWillUnmount) {
           super.componentWillUnmount();
         }
-        clearBatch(viewIndex);
+        // We don't need to trigger a render.
+        clearBatch(this.viewIndex);
         // clean up memory used by Easy State
         unobserve(this.render);
       }

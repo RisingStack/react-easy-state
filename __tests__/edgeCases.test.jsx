@@ -6,6 +6,7 @@ import {
 } from '@testing-library/react/pure';
 // eslint-disable-next-line import/no-unresolved
 import { view, store, batch } from '@risingstack/react-easy-state';
+import { easyAct } from './testHelpers';
 
 describe('edge cases', () => {
   afterEach(cleanup);

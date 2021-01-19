@@ -5,6 +5,7 @@ import {
   fireEvent,
 } from '@testing-library/react/pure';
 import App from '../examples/todo-mvc/src/App';
+import { easyAct } from './testHelpers';
 
 describe('TodoMVC App', () => {
   const { container } = render(
