@@ -1,6 +1,6 @@
 {
-  "name": "@aha-app/react-easy-state",
-  "version": "0.0.9-development",
+  "name": "@risingstack/react-easy-state",
+  "version": "0.0.0-development",
   "description": "React state management with a minimal API. Made with ES6 Proxies.",
   "main": "dist/cjs.es6.js",
   "module": "dist/es.es6.js",
@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "test-native": "NATIVE=true jest --config ./jest.native.json --silent",
-    "test-web": "jest --config ./jest.web.json --verbose=false",
+    "test-web": "jest --config ./jest.web.json --silent",
     "test-web-no-hook": "NOHOOK=true jest --config ./jest.no-hook.json --silent",
     "test": "npm run test-web && npm run test-web-no-hook && npm run test-native",
     "example": "node ./scripts/startExample.js",
