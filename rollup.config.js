@@ -4,8 +4,8 @@ const resolvePlugin = require('@rollup/plugin-node-resolve');
 const babelPlugin = require('rollup-plugin-babel');
 const externalsPlugin = require('rollup-plugin-auto-external');
 
-// this is also used in watch mode by the startExample script
-const defaultBuild = [
+module.exports = [
+  // First two elements are also used in watch mode by the startExample script
   {
     input: path.resolve('src/platforms/dom.js'),
     external: ['react-dom'],
@@ -38,10 +38,6 @@ const defaultBuild = [
       sourcemap: true,
     },
   },
-];
-
-const allBuilds = [
-  ...defaultBuild,
   {
     input: path.resolve('src/platforms/native.js'),
     external: ['react-native'],
@@ -113,9 +109,3 @@ const allBuilds = [
     },
   },
 ];
-
-module.exports = {
-  defaultBuild,
-  // this has to be exported as default for rollup CLI to pick it up
-  default: allBuilds,
-};
