@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const { execSync: exec } = require('child_process');
 const rollup = require('rollup');
-const { defaultBuild } = require('../rollup.config');
+const builds = require('../rollup.config');
 
 console.customInfo = args => {
   console.info(
@@ -35,7 +35,7 @@ if (!fs.existsSync(exampleFolder)) {
 // 1. BUILD EASY-STATE BUNDLE
 console.customInfo('Building react-easy-state in watch mode.');
 const watcher = rollup.watch(
-  defaultBuild.map(config => ({
+  builds.slice(0, 2).map(config => ({
     ...config,
     watch: {
       include: 'src/**',
