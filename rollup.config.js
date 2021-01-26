@@ -1,6 +1,6 @@
 const path = require('path');
 const replacePlugin = require('rollup-plugin-replace');
-const resolvePlugin = require('@rollup/plugin-node-resolve');
+const { nodeResolve } = require('@rollup/plugin-node-resolve');
 const babelPlugin = require('rollup-plugin-babel');
 const externalsPlugin = require('rollup-plugin-auto-external');
 
@@ -27,7 +27,7 @@ module.exports = [
     external: ['./react-platform'],
     plugins: [
       replacePlugin({ 'react-platform': './react-platform' }),
-      resolvePlugin(),
+      nodeResolve(),
       babelPlugin({ exclude: 'node_modules/**' }),
       externalsPlugin({ dependencies: true, peerDependecies: true }),
     ],
@@ -59,7 +59,7 @@ module.exports = [
     external: ['./react-platform'],
     plugins: [
       replacePlugin({ 'react-platform': './react-platform' }),
-      resolvePlugin(),
+      nodeResolve(),
       babelPlugin({
         exclude: 'node_modules/**',
         presets: ['@babel/preset-env'],
@@ -78,7 +78,7 @@ module.exports = [
     external: ['./react-platform.cjs'],
     plugins: [
       replacePlugin({ 'react-platform': './react-platform.cjs' }),
-      resolvePlugin(),
+      nodeResolve(),
       babelPlugin({ exclude: 'node_modules/**' }),
       externalsPlugin({ dependencies: true, peerDependecies: true }),
     ],
@@ -94,7 +94,7 @@ module.exports = [
     external: ['./react-platform.cjs'],
     plugins: [
       replacePlugin({ 'react-platform': './react-platform.cjs' }),
-      resolvePlugin(),
+      nodeResolve(),
       babelPlugin({
         exclude: 'node_modules/**',
         presets: ['@babel/preset-env'],
