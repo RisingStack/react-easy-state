@@ -26,7 +26,7 @@ function mapStateToStores(state) {
   // from the static getDerivedStateFromProps lifecycle method
   const component = state[COMPONENT];
   return Object.keys(component)
-    .map(key => component[key])
+    .map((key) => component[key])
     .filter(isObservable)
     .map(raw);
 }
@@ -40,7 +40,7 @@ export function view(Comp) {
 
   if (isStatelessComp && hasHooks) {
     // use a hook based reactive wrapper when we can
-    ReactiveComp = props => {
+    ReactiveComp = (props) => {
       // use a dummy setState to update the component
       const [, setState] = useState();
       // use a ref to store the reaction
@@ -142,7 +142,7 @@ export function view(Comp) {
         const nextKeys = Object.keys(nextProps);
         return (
           nextKeys.length !== keys.length ||
-          nextKeys.some(key => props[key] !== nextProps[key])
+          nextKeys.some((key) => props[key] !== nextProps[key])
         );
       }
 
@@ -177,7 +177,7 @@ export function view(Comp) {
   // static props are inherited by class components,
   // but have to be copied for function components
   if (isStatelessComp) {
-    Object.keys(Comp).forEach(key => {
+    Object.keys(Comp).forEach((key) => {
       ReactiveComp[key] = Comp[key];
     });
   }

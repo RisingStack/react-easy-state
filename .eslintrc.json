@@ -1,9 +1,30 @@
 {
   "parser": "babel-eslint",
-  "extends": ["airbnb", "prettier"],
-  "plugins": ["prettier"],
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "env": {
+    "browser": true,
+    "amd": true,
+    "node": true,
+    "es6": true
+  },
+  "extends": [
+    "airbnb",
+    "eslint:recommended",
+    "plugin:prettier/recommended"
+  ],
   "rules": {
-    "prettier/prettier": ["error"],
+    "prettier/prettier": ["error", {}, { "usePrettierrc": true }],
     "import/prefer-default-export": "off",
     "import/no-extraneous-dependencies": "off",
     "import/no-mutable-exports": "off",
@@ -16,7 +37,8 @@
     "react/state-in-constructor": "off",
     "react/jsx-props-no-spreading": "off",
     "react/prop-types": "off",
-    "react/jsx-one-expression-per-line": "off"
+    "react/jsx-one-expression-per-line": "off",
+    "react/jsx-closing-bracket-location": "off"
   },
   "globals": {
     "window": true,
