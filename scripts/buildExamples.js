@@ -7,12 +7,12 @@ const examplesPath = path.resolve('examples');
 const examples = fs
   .readdirSync(examplesPath)
   .filter(
-    dir =>
+    (dir) =>
       dir.indexOf('native') === -1 &&
       fs.statSync(path.join(examplesPath, dir)).isDirectory(),
   );
 
-examples.forEach(example => {
+examples.forEach((example) => {
   example = path.join(examplesPath, example);
   exec('npm run build', {
     cwd: example,

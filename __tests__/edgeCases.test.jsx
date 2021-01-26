@@ -64,7 +64,7 @@ describe('edge cases', () => {
         state = { counter: 0 };
 
         handleIncrement = () => {
-          this.setState(prevState => ({
+          this.setState((prevState) => ({
             counter: prevState.counter + 1,
           }));
         };
@@ -91,7 +91,7 @@ describe('edge cases', () => {
         state = { counter: 0 };
 
         handleIncrement = () => {
-          this.setState(prevState => ({
+          this.setState((prevState) => ({
             counter: prevState.counter + 1,
           }));
         };
@@ -127,7 +127,7 @@ describe('edge cases', () => {
         <StrictMode>
           <div>
             <button
-              onClick={() => setChild(value => !value)}
+              onClick={() => setChild((value) => !value)}
               type="button"
             >
               Toggle Child
