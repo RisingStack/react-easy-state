@@ -26,7 +26,7 @@ describe('static props', () => {
   });
 
   test('view() should proxy defaultProps for functional components', () => {
-    const MyCustomCompName = props => {
+    const MyCustomCompName = (props) => {
       return <div>{props.name}</div>;
     };
 
@@ -50,20 +50,25 @@ describe('static props', () => {
       name: PropTypes.string.isRequired,
     };
 
-    const ViewComp = view(MyCustomCompName);
+    const ViewComp = MyCustomCompName;
 
     const errorSpy = jest
       .spyOn(console, 'error')
-      .mockImplementation(message =>
-        expect(message.indexOf('Failed prop type')).not.toBe(-1),
-      );
+      .mockImplementation((warning, prop, error) => {
+        expect(warning).toBe('Warning: Failed %s type: %s%s');
+        expect(prop).toBe('prop');
+        expect(error).toBe(
+          'The prop `name` is marked as required in `MyCustomCompName`, but its value is `undefined`.',
+        );
+      });
+    expect(1).toBe(1);
     render(<ViewComp number="Bob" />);
     expect(errorSpy).toHaveBeenCalled();
     errorSpy.mockRestore();
   });
 
   test('view() should proxy propTypes for functional components', () => {
-    const MyCustomCompName = props => {
+    const MyCustomCompName = (props) => {
       return <div>{props.number}</div>;
     };
 
@@ -75,9 +80,13 @@ describe('static props', () => {
 
     const errorSpy = jest
       .spyOn(console, 'error')
-      .mockImplementation(message =>
-        expect(message.indexOf('Failed prop type')).not.toBe(-1),
-      );
+      .mockImplementation((warning, prop, error) => {
+        expect(warning).toBe('Warning: Failed %s type: %s%s');
+        expect(prop).toBe('prop');
+        expect(error).toBe(
+          'Invalid prop `number` of type `string` supplied to `MyCustomCompName`, expected `number`.',
+        );
+      });
     render(<ViewComp number="Bob" />);
     expect(errorSpy).toHaveBeenCalled();
     errorSpy.mockRestore();

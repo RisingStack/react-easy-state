@@ -1,11 +1,11 @@
 const path = require('path');
 const replacePlugin = require('rollup-plugin-replace');
-const resolvePlugin = require('@rollup/plugin-node-resolve');
+const { nodeResolve } = require('@rollup/plugin-node-resolve');
 const babelPlugin = require('rollup-plugin-babel');
 const externalsPlugin = require('rollup-plugin-auto-external');
 
-// this is also used in watch mode by the startExample script
-const defaultBuild = [
+module.exports = [
+  // First two elements are also used in watch mode by the startExample script
   {
     input: path.resolve('src/platforms/dom.js'),
     external: ['react-dom'],
@@ -27,7 +27,7 @@ const defaultBuild = [
     external: ['./react-platform'],
     plugins: [
       replacePlugin({ 'react-platform': './react-platform' }),
-      resolvePlugin(),
+      nodeResolve(),
       babelPlugin({ exclude: 'node_modules/**' }),
       externalsPlugin({ dependencies: true, peerDependecies: true }),
     ],
@@ -38,10 +38,6 @@ const defaultBuild = [
       sourcemap: true,
     },
   },
-];
-
-const allBuilds = [
-  ...defaultBuild,
   {
     input: path.resolve('src/platforms/native.js'),
     external: ['react-native'],
@@ -63,7 +59,7 @@ const allBuilds = [
     external: ['./react-platform'],
     plugins: [
       replacePlugin({ 'react-platform': './react-platform' }),
-      resolvePlugin(),
+      nodeResolve(),
       babelPlugin({
         exclude: 'node_modules/**',
         presets: ['@babel/preset-env'],
@@ -82,7 +78,7 @@ const allBuilds = [
     external: ['./react-platform.cjs'],
     plugins: [
       replacePlugin({ 'react-platform': './react-platform.cjs' }),
-      resolvePlugin(),
+      nodeResolve(),
       babelPlugin({ exclude: 'node_modules/**' }),
       externalsPlugin({ dependencies: true, peerDependecies: true }),
     ],
@@ -98,7 +94,7 @@ const allBuilds = [
     external: ['./react-platform.cjs'],
     plugins: [
       replacePlugin({ 'react-platform': './react-platform.cjs' }),
-      resolvePlugin(),
+      nodeResolve(),
       babelPlugin({
         exclude: 'node_modules/**',
         presets: ['@babel/preset-env'],
@@ -113,9 +109,3 @@ const allBuilds = [
     },
   },
 ];
-
-module.exports = {
-  defaultBuild,
-  // this has to be exported as default for rollup CLI to pick it up
-  default: allBuilds,
-};

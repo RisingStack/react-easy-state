@@ -1,4 +1,11 @@
-import { Component, useState, useEffect, useMemo, memo } from 'react';
+import {
+  Component,
+  useState,
+  useEffect,
+  useMemo,
+  memo,
+  useRef,
+} from 'react';
 import {
   observe,
   unobserve,
@@ -14,12 +21,12 @@ export let isInsideFunctionComponentWithoutHooks = false;
 const COMPONENT = Symbol('owner component');
 
 function mapStateToStores(state) {
-  // find store properties and map them to their none observable raw value
-  // to do not trigger none static this.setState calls
+  // find store properties and map them to their non-observable raw value
+  // to do not trigger non-static this.setState calls
   // from the static getDerivedStateFromProps lifecycle method
   const component = state[COMPONENT];
   return Object.keys(component)
-    .map(key => component[key])
+    .map((key) => component[key])
     .filter(isObservable)
     .map(raw);
 }
@@ -33,25 +40,46 @@ export function view(Comp) {
 
   if (isStatelessComp && hasHooks) {
     // use a hook based reactive wrapper when we can
-    ReactiveComp = props => {
+    ReactiveComp = (props) => {
       // use a dummy setState to update the component
       const [, setState] = useState();
+      // use a ref to store the reaction
+      const reaction = useRef();
       // create a memoized reactive wrapper of the original component (render)
       // at the very first run of the component function
       const render = useMemo(
-        () =>
-          observe(Comp, {
-            scheduler: () => setState({}),
+        () => {
+          reaction.current = observe(Comp, {
+            scheduler: () => {
+              // trigger a new rerender if the component has been mounted
+              if (reaction.current.mounted) setState({});
+              // mark it as changed if the component has not been mounted yet
+              else reaction.current.changedBeforeMounted = true;
+            },
             lazy: true,
-          }),
+          });
+          // initilalize a flag to know if the component was finally mounted
+          reaction.current.mounted = false;
+          // initilalize a flag to know if the was reaction was invalidated
+          // before the component was mounted
+          reaction.current.changedBeforeMounted = false;
+          return reaction.current;
+        },
         // Adding the original Comp here is necessary to make React Hot Reload work
         // it does not affect behavior otherwise
         [Comp],
       );
 
-      // cleanup the reactive connections after the very last render of the component
       useEffect(() => {
-        return () => unobserve(render);
+        // mark the component as mounted.
+        reaction.current.mounted = true;
+
+        // if there was a change before the component was mounted, trigger a
+        // new rerender
+        if (reaction.current.changedBeforeMounted) setState({});
+
+        // cleanup the reactive connections after the very last render of the
+        return () => unobserve(reaction.current);
       }, []);
 
       // the isInsideFunctionComponent flag is used to toggle `store` behavior
@@ -114,7 +142,7 @@ export function view(Comp) {
         const nextKeys = Object.keys(nextProps);
         return (
           nextKeys.length !== keys.length ||
-          nextKeys.some(key => props[key] !== nextProps[key])
+          nextKeys.some((key) => props[key] !== nextProps[key])
         );
       }
 
@@ -149,7 +177,7 @@ export function view(Comp) {
   // static props are inherited by class components,
   // but have to be copied for function components
   if (isStatelessComp) {
-    Object.keys(Comp).forEach(key => {
+    Object.keys(Comp).forEach((key) => {
       ReactiveComp[key] = Comp[key];
     });
   }

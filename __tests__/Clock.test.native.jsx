@@ -1,20 +1,20 @@
 import React, { StrictMode } from 'react';
-import {
-  render,
-  flushMicrotasksQueue,
-} from 'react-native-testing-library';
+
+import renderer from 'react-test-renderer';
+
 import sinon from 'sinon';
 import App from '../examples/native-clock/App';
 
 describe('Clock App', () => {
   const clock = sinon.useFakeTimers();
-  const { getByText, unmount } = render(
+
+  const app = renderer.create(
     <StrictMode>
       <App />
     </StrictMode>,
   );
-  // flush the inital didMount effect
-  flushMicrotasksQueue();
+
+  const { unmount } = app;
 
   const clearIntervalSpy = sinon.spy(global, 'clearInterval');
 
@@ -23,14 +23,16 @@ describe('Clock App', () => {
     clearIntervalSpy.restore();
   });
 
-  test('should update to display the current time every second', () => {
-    expect(getByText('12:00:00 AM')).toBeDefined();
+  test('should update to display the current time every second', async () => {
+    const textElement = app.root.findByType('Text');
+
+    expect(textElement.children[0]).toEqual('12:00:00 AM');
 
     clock.tick(2000);
-    expect(getByText('12:00:02 AM')).toBeDefined();
+    expect(textElement.children[0]).toEqual('12:00:02 AM');
 
     clock.tick(8500);
-    expect(getByText('12:00:10 AM')).toBeDefined();
+    expect(textElement.children[0]).toEqual('12:00:10 AM');
   });
 
   test('should clean up the interval timer when the component is unmounted', () => {
