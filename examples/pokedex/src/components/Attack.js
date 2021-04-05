@@ -1,5 +1,5 @@
 import React from 'react';
-import { view } from '@risingstack/react-easy-state';
+import { view } from '@frontity/react-easy-state';
 import Type from './Type';
 
 export const Attack = view((attack) => {

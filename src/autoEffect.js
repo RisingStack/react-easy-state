@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { observe, unobserve } from '@nx-js/observer-util';
+import { observe, unobserve } from '@frontity/observer-util';
 import scheduler from './scheduler';
 
 import {

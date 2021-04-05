@@ -1,5 +1,5 @@
 import React from 'react';
-import { view } from '@risingstack/react-easy-state';
+import { view } from '@frontity/react-easy-state';
 import clock from './clock';
 
 // this is re-rendered whenever the relevant parts of the used data stores change

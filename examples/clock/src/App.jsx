@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import moment from 'moment';
-import { view, store } from '@risingstack/react-easy-state';
+import { view, store } from '@frontity/react-easy-state';
 
 function getFormattedTime() {
   return moment().utc().format('hh:mm:ss A');

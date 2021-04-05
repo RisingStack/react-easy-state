@@ -1,4 +1,4 @@
-import { store } from '@risingstack/react-easy-state';
+import { store } from '@frontity/react-easy-state';
 
 // store the central data and logic of the application in a global app store
 // use 'appStore' instead of 'this' in the store methods to make them passable as callbacks

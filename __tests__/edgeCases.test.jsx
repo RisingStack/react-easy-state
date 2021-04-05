@@ -12,7 +12,7 @@ import {
   act,
 } from '@testing-library/react/pure';
 // eslint-disable-next-line import/no-unresolved
-import { view, store, batch } from '@risingstack/react-easy-state';
+import { view, store, batch } from '@frontity/react-easy-state';
 
 describe('edge cases', () => {
   afterEach(cleanup);
@@ -127,7 +127,7 @@ describe('edge cases', () => {
         <StrictMode>
           <div>
             <button
-              onClick={() => setChild(value => !value)}
+              onClick={() => setChild((value) => !value)}
               type="button"
             >
               Toggle Child

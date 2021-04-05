@@ -6,7 +6,7 @@ import {
   autoEffect,
   clearEffect,
   // eslint-disable-next-line import/no-unresolved
-} from '@risingstack/react-easy-state';
+} from '@frontity/react-easy-state';
 
 describe('autoEffect', () => {
   afterEach(cleanup);

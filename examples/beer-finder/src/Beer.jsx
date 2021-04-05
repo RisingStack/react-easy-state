@@ -1,5 +1,5 @@
 import React from 'react';
-import { view, store } from '@risingstack/react-easy-state';
+import { view, store } from '@frontity/react-easy-state';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';

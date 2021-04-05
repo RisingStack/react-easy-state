@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import { view } from '@risingstack/react-easy-state';
+import { view } from '@frontity/react-easy-state';
 import todos from './todosStore';
 
 // this is re-rendered whenever the relevant parts of the used data stores change

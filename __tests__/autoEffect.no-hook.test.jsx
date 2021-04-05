@@ -5,7 +5,7 @@ import {
   store,
   autoEffect,
   // eslint-disable-next-line import/no-unresolved
-} from '@risingstack/react-easy-state';
+} from '@frontity/react-easy-state';
 
 describe('AutoEffect edge cases and errors', () => {
   afterEach(cleanup);
