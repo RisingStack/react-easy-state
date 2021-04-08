@@ -29,7 +29,7 @@ const Beer = ({
           <p>{description}</p>
         ) : (
           <ul>
-            {foodPairing.map(food => (
+            {foodPairing.map((food) => (
               <li key={food}>{food}</li>
             ))}
           </ul>

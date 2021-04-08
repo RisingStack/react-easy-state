@@ -15,7 +15,7 @@ class ContactCreator extends Component {
     this.compStore.newContact = { name: '', email: '' };
   };
 
-  onChange = ev => {
+  onChange = (ev) => {
     const { newContact } = this.compStore;
     newContact[ev.target.name] = ev.target.value;
   };

@@ -16,9 +16,7 @@ const styles = StyleSheet.create({
 });
 
 function getFormattedTime() {
-  return moment()
-    .utc()
-    .format('hh:mm:ss A');
+  return moment().utc().format('hh:mm:ss A');
 }
 
 class App extends React.Component {

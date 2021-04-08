@@ -9,14 +9,6 @@ import {
 } from './view';
 
 export function autoEffect(fn, deps = []) {
-  if (isInsideFunctionComponent) {
-    return useEffect(() => {
-      const observer = observe(fn, {
-        scheduler: () => scheduler.add(observer),
-      });
-      return () => unobserve(observer);
-    }, deps);
-  }
   if (isInsideFunctionComponentWithoutHooks) {
     throw new Error(
       'You cannot use autoEffect inside a function component with a pre-hooks version of React. Please update your React version to at least v16.8.0 to use this feature.',
@@ -28,10 +20,18 @@ export function autoEffect(fn, deps = []) {
     );
   }
 
-  const observer = observe(fn, {
-    scheduler: () => scheduler.add(observer),
+  if (isInsideFunctionComponent) {
+    return useEffect(() => {
+      const reaction = observe(fn, {
+        scheduler: scheduler.add,
+      });
+      return () => unobserve(reaction);
+    }, deps);
+  }
+
+  return observe(fn, {
+    scheduler: scheduler.add,
   });
-  return observer;
 }
 
 export { unobserve as clearEffect };

@@ -6,7 +6,7 @@ import Card from './Card';
 export default view(() => {
   return (
     <>
-      {pokedex.pokemons.map(pokemon => (
+      {pokedex.pokemons.map((pokemon) => (
         <Card key={pokemon.id} {...pokemon} />
       ))}
     </>

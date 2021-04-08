@@ -1,8 +1,12 @@
 /* eslint-disable no-console */
 
 const assert = require('assert');
-/* eslint-disable-next-line import/no-unresolved */
-const { store, autoEffect, clearEffect } = require('../dist/cjs.es6');
+const {
+  store,
+  autoEffect,
+  clearEffect,
+  /* eslint-disable-next-line import/no-unresolved */
+} = require('../dist/bundle.cjs');
 
 console.info('Checking Node platfrom support');
 

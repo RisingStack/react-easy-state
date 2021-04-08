@@ -37,7 +37,7 @@ class Contact extends Component {
     this.compStore.editing = false;
   };
 
-  onChange = ev => {
+  onChange = (ev) => {
     this.compStore.currentContact[ev.target.name] = ev.target.value;
   };
 

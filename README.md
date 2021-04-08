@@ -36,7 +36,6 @@
 * [Articles :loudspeaker:](#articles-loudspeaker)
 * [Performance :rocket:](#performance-rocket)
 * [Platform support :computer:](#platform-support-computer)
-* [Alternative builds :wrench:](#alternative-builds-wrench)
 * [Contributors :sparkles:](#contributors-sparkles)
 
 <!-- tocstop -->
@@ -843,17 +842,6 @@ You can compare Easy State with plain React and other state management libraries
 - React Native: 0.59 and above
 
 _This library is based on non polyfillable ES6 Proxies. Because of this, it will never support IE._
-
-## Alternative builds :wrench:
-
-This library detects if you use ES6 or commonJS modules and serve the right format to you. The default bundles use ES6 features, which may not yet be supported by some minifier tools. If you experience issues during the build process, you can switch to one of the ES5 builds from below.
-
-- `@risingstack/react-easy-state/dist/es.es6.js` exposes an ES6 build with ES6 modules.
-- `@risingstack/react-easy-state/dist/es.es5.js` exposes an ES5 build with ES6 modules.
-- `@risingstack/react-easy-state/dist/cjs.es6.js` exposes an ES6 build with commonJS modules.
-- `@risingstack/react-easy-state/dist/cjs.es5.js` exposes an ES5 build with commonJS modules.
-
-If you use a bundler, set up an alias for `@risingstack/react-easy-state` to point to your desired build. You can learn how to do it with webpack [here](https://webpack.js.org/configuration/resolve/#resolve-alias) and with rollup [here](https://github.com/rollup/rollup-plugin-alias#usage).
 
 ## Contributors :sparkles:
 

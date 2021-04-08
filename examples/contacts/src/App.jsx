@@ -16,7 +16,7 @@ export default view(() => {
         </tr>
       </thead>
       <tbody>
-        {appStore.contacts.map(contact => (
+        {appStore.contacts.map((contact) => (
           <Contact contact={contact} key={contact.email} />
         ))}
         <ContactCreator />

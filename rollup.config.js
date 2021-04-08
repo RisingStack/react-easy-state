@@ -1,6 +1,8 @@
 const path = require('path');
 const replacePlugin = require('rollup-plugin-replace');
-const resolvePlugin = require('@rollup/plugin-node-resolve');
+const {
+  default: resolvePlugin,
+} = require('@rollup/plugin-node-resolve');
 const babelPlugin = require('rollup-plugin-babel');
 const externalsPlugin = require('rollup-plugin-auto-external');
 
@@ -34,7 +36,7 @@ const defaultBuild = [
     output: {
       format: 'es',
       dir: 'dist',
-      entryFileNames: 'es.es6.js',
+      entryFileNames: 'bundle.js',
       sourcemap: true,
     },
   },
@@ -60,25 +62,6 @@ const allBuilds = [
   },
   {
     input: path.resolve('src/index.js'),
-    external: ['./react-platform'],
-    plugins: [
-      replacePlugin({ 'react-platform': './react-platform' }),
-      resolvePlugin(),
-      babelPlugin({
-        exclude: 'node_modules/**',
-        presets: ['@babel/preset-env'],
-      }),
-      externalsPlugin({ dependencies: true, peerDependecies: true }),
-    ],
-    output: {
-      format: 'es',
-      dir: 'dist',
-      entryFileNames: 'es.es5.js',
-      sourcemap: true,
-    },
-  },
-  {
-    input: path.resolve('src/index.js'),
     external: ['./react-platform.cjs'],
     plugins: [
       replacePlugin({ 'react-platform': './react-platform.cjs' }),
@@ -89,33 +72,13 @@ const allBuilds = [
     output: {
       format: 'cjs',
       dir: 'dist',
-      entryFileNames: 'cjs.es6.js',
-      sourcemap: true,
-    },
-  },
-  {
-    input: path.resolve('src/index.js'),
-    external: ['./react-platform.cjs'],
-    plugins: [
-      replacePlugin({ 'react-platform': './react-platform.cjs' }),
-      resolvePlugin(),
-      babelPlugin({
-        exclude: 'node_modules/**',
-        presets: ['@babel/preset-env'],
-      }),
-      externalsPlugin({ dependencies: true, peerDependecies: true }),
-    ],
-    output: {
-      format: 'cjs',
-      dir: 'dist',
-      entryFileNames: 'cjs.es5.js',
+      entryFileNames: 'bundle.cjs.js',
       sourcemap: true,
     },
   },
 ];
 
-module.exports = {
-  defaultBuild,
-  // this has to be exported as default for rollup CLI to pick it up
-  default: allBuilds,
-};
+// this is used by the runExample script
+allBuilds.defaultBuild = defaultBuild;
+// this has to be exported as default for rollup CLI to pick it up
+module.exports = allBuilds;
