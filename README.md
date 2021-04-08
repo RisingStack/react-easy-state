@@ -431,7 +431,7 @@ view(withTheme(Comp));
 
 - The order of the HOCs matter, always use `withRouter(view(Comp))`.
 
-This is not necessary if you use React Router 4.4+. You can find more details and some reasoning about this in [this react-router docs page](https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/guides/blocked-updates.md).
+This is not necessary if you use React Router 4.4+.
 
 </details>
 <p></p>
@@ -737,7 +737,7 @@ class App extends Component {
 
 ### store(obj)
 
-Creates an observable store from the passed object and returns it. Can be used outside components for [global stores](#creating-global-stores) and inside components for [local stores]((#creating-local-stores)).
+Creates an observable store from the passed object and returns it. Can be used outside components for [global stores](#creating-global-stores) and inside components for [local stores](#creating-local-stores).
 
 ```js
 import { store } from '@risingstack/react-easy-state';
@@ -830,7 +830,7 @@ clearEffect(effect)
 
 You can compare Easy State with plain React and other state management libraries with the below benchmarks. It performs a bit better than MobX and similarly to Redux.
 
-- [js-framework-benchmark](https://github.com/krausest/js-framework-benchmark) ([source](https://github.com/krausest/js-framework-benchmark/tree/master/react-v16.1.0-easy-state-v4.0.1-keyed)) ([results](https://rawgit.com/krausest/js-framework-benchmark/master/webdriver-ts-results/table.html))
+- [js-framework-benchmark](https://github.com/krausest/js-framework-benchmark) ([source](https://github.com/krausest/js-framework-benchmark/tree/master/frameworks/keyed/react-easy-state/src)) ([results](https://rawgit.com/krausest/js-framework-benchmark/master/webdriver-ts-results/table.html))
 
 ## Platform support :computer:
 
@@ -868,7 +868,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://bertalan-miklos.now.sh/"><img src="https://avatars3.githubusercontent.com/u/6956014?v=4" width="100px;" alt=""/><br /><sub><b>Miklos Bertalan</b></sub></a><br /><a href="https://github.com/RisingStack/react-easy-state/commits?author=solkimicreb" title="Code">💻</a> <a href="https://github.com/RisingStack/react-easy-state/commits?author=solkimicreb" title="Tests">⚠️</a> <a href="https://github.com/RisingStack/react-easy-state/commits?author=solkimicreb" title="Documentation">📖</a> <a href="#blog-solkimicreb" title="Blogposts">📝</a></td>
     <td align="center"><a href="https://github.com/rolandszoke"><img src="https://avatars3.githubusercontent.com/u/14181908?v=4" width="100px;" alt=""/><br /><sub><b>Roland</b></sub></a><br /><a href="https://github.com/RisingStack/react-easy-state/commits?author=rolandszoke" title="Code">💻</a> <a href="https://github.com/RisingStack/react-easy-state/commits?author=rolandszoke" title="Tests">⚠️</a> <a href="https://github.com/RisingStack/react-easy-state/commits?author=rolandszoke" title="Documentation">📖</a></td>
-    <td align="center"><a href="https://github.com/danielgrgly"><img src="https://avatars3.githubusercontent.com/u/22714514?s=460&u=cbbc2326d5f671693a1f33671d9eadad902d5191&v=4" width="100px;" alt=""/><br /><sub><b>Daniel Gergely</b></sub></a><br /><a href="https://github.com/RisingStack/react-easy-state/commits?author=danielgrgly" title="Code">💻</a> <a href="#design-danielgrgly" title="Design">🎨</a> <a href="#example-danielgrgly" title="Examples">💡</a></td>
+    <td align="center"><a href="https://github.com/dnlgrgly"><img src="https://avatars3.githubusercontent.com/u/22714514?s=460&u=cbbc2326d5f671693a1f33671d9eadad902d5191&v=4" width="100px;" alt=""/><br /><sub><b>Daniel Gergely</b></sub></a><br /><a href="https://github.com/RisingStack/react-easy-state/commits?author=danielgrgly" title="Code">💻</a> <a href="#design-danielgrgly" title="Design">🎨</a> <a href="#example-danielgrgly" title="Examples">💡</a></td>
     <td align="center"><a href="https://github.com/peteyycz"><img src="https://avatars1.githubusercontent.com/u/7130689?v=4" width="100px;" alt=""/><br /><sub><b>Peter Czibik</b></sub></a><br /><a href="#infra-peteyycz" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
   </tr>
 </table>
