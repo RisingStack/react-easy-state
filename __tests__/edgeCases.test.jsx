@@ -1,8 +1,15 @@
-import React, { Component, useState } from 'react';
+import React, {
+  Component,
+  useState,
+  StrictMode,
+  useEffect,
+  useRef,
+} from 'react';
 import {
   render,
   cleanup,
   fireEvent,
+  act,
 } from '@testing-library/react/pure';
 // eslint-disable-next-line import/no-unresolved
 import { view, store, batch } from '@risingstack/react-easy-state';
@@ -109,6 +116,55 @@ describe('edge cases', () => {
     expect(RawChild.mock.calls.length).toBe(1);
     fireEvent.click(container.querySelector('button'));
     expect(RawChild.mock.calls.length).toBe(1);
+  });
+
+  test('should not perform an update on an unmounted component (Strict Mode)', () => {
+    const person = store({ name: 'Bob' });
+
+    function MyComp() {
+      const [showChild, setChild] = useState(true);
+      return (
+        <StrictMode>
+          <div>
+            <button
+              onClick={() => setChild(value => !value)}
+              type="button"
+            >
+              Toggle Child
+            </button>
+            {showChild && <Child />}
+          </div>
+        </StrictMode>
+      );
+    }
+
+    const RawChild = jest.fn().mockImplementation(function Child() {
+      const isMouted = useRef(false);
+      useEffect(() => {
+        isMouted.current = true;
+      }, []);
+      return <p>{person.name}</p>;
+    });
+    const Child = view(RawChild);
+
+    jest.spyOn(global.console, 'error');
+
+    const { container } = render(<MyComp />);
+
+    // Hide the Child component.
+    act(() => {
+      fireEvent.click(container.querySelector('button'));
+    });
+    // Show the Child component again.
+    act(() => {
+      fireEvent.click(container.querySelector('button'));
+    });
+    // Trigger Child update.
+    act(() => {
+      person.name = 'Ann';
+    });
+
+    expect(global.console.error.mock.calls.length).toBe(0);
   });
 
   test('view() should respect custom deriveStoresFromProps', () => {
