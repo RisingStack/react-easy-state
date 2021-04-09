@@ -1,6 +1,6 @@
 {
-  "name": "@risingstack/react-easy-state",
-  "version": "0.0.0-development",
+  "name": "@frontity/react-easy-state",
+  "version": "7.0.0-beta.0",
   "description": "React state management with a minimal API. Made with ES6 Proxies.",
   "main": "dist/bundle.cjs.js",
   "module": "dist/bundle.js",
@@ -53,7 +53,7 @@
     "es6 proxy"
   ],
   "dependencies": {
-    "@nx-js/observer-util": "^4.3.0-alpha.2"
+    "@frontity/observer-util": "^4.3.0-beta.0"
   },
   "peerDependencies": {
     "react": "*"

@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { render, cleanup } from '@testing-library/react/pure';
 // eslint-disable-next-line import/no-unresolved
-import { view } from '@risingstack/react-easy-state';
+import { view } from '@frontity/react-easy-state';
 import PropTypes from 'prop-types';
 
 describe('static props', () => {

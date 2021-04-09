@@ -1,4 +1,4 @@
-import { store } from '@risingstack/react-easy-state';
+import { store } from '@frontity/react-easy-state';
 
 // a complex global store with a lot of derived data (getters and setters)
 // use 'todos' instead of 'this' in the store methods to make them passable as callbacks

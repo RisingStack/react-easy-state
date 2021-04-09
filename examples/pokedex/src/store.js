@@ -1,4 +1,4 @@
-import { store } from '@risingstack/react-easy-state';
+import { store } from '@frontity/react-easy-state';
 import * as api from './api';
 
 const pokedex = store({

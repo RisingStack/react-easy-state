@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { view, store } from '@risingstack/react-easy-state';
+import { view, store } from '@frontity/react-easy-state';
 import appStore from './appStore';
 
 class ContactCreator extends Component {

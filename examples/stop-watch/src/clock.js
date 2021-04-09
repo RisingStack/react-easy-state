@@ -1,4 +1,4 @@
-import { store } from '@risingstack/react-easy-state';
+import { store } from '@frontity/react-easy-state';
 import moment from 'moment';
 
 // use 'clock' instead of 'this' in the store methods to make them passable as callbacks

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { view } from '@risingstack/react-easy-state';
+import { view } from '@frontity/react-easy-state';
 import pokedex from './store';
 import List from './components/List';
 import Modal from './components/Modal';

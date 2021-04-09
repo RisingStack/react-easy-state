@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { view, store } from '@risingstack/react-easy-state';
+import { view, store } from '@frontity/react-easy-state';
 import moment from 'moment';
 
 const styles = StyleSheet.create({

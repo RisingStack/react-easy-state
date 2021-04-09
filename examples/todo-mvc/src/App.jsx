@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import { view } from '@risingstack/react-easy-state';
+import { view } from '@frontity/react-easy-state';
 import TodoItem from './TodoItem';
 import todos from './todosStore';
 
