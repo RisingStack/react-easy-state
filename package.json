@@ -1,6 +1,6 @@
 {
   "name": "@frontity/react-easy-state",
-  "version": "7.0.0-beta.0",
+  "version": "7.0.0",
   "description": "React state management with a minimal API. Made with ES6 Proxies.",
   "main": "dist/bundle.cjs.js",
   "module": "dist/bundle.js",
