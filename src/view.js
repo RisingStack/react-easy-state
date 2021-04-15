@@ -5,6 +5,7 @@ import {
   useMemo,
   memo,
   useRef,
+  forwardRef,
 } from 'react';
 import {
   observe,
@@ -35,12 +36,14 @@ export function view(Comp) {
   const isStatelessComp = !(
     Comp.prototype && Comp.prototype.isReactComponent
   );
+  const isForwardRef =
+    Comp.$$typeof === Symbol.for('react.forward_ref');
 
   let ReactiveComp;
 
   if (isStatelessComp && hasHooks) {
     // use a hook based reactive wrapper when we can
-    ReactiveComp = (props) => {
+    ReactiveComp = (props, ref) => {
       // use a dummy setState to update the component
       const [, setState] = useState();
       // use a ref to store the reaction
@@ -87,11 +90,15 @@ export function view(Comp) {
       isInsideFunctionComponent = true;
       try {
         // run the reactive render instead of the original one
-        return render(props);
+        return render(props, ref);
       } finally {
         isInsideFunctionComponent = false;
       }
     };
+
+    if (isForwardRef) {
+      ReactiveComp = forwardRef(ReactiveComp);
+    }
   } else {
     const BaseComp = isStatelessComp ? Component : Comp;
     // a HOC which overwrites render, shouldComponentUpdate and componentWillUnmount
