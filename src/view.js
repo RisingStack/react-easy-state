@@ -10,7 +10,7 @@ import {
   isObservable,
 } from '@nx-js/observer-util';
 
-import { hasHooks } from './utils';
+import { globalObj, hasHooks } from './utils';
 
 export let isInsideFunctionComponent = false;
 export let isInsideClassComponentRender = false;
@@ -32,10 +32,25 @@ function mapStateToStores(state) {
 // is to prevent excessive rendering in situations where updates can occur
 // outside of React's built-in batching. e.g. after resolving a promise,
 // in a setTimeout callback, in an event handler.
+//
+// NOTE: This should be revisited after React improves batching for
+// Suspense / etc.
 let batchesPending = {};
 let taskPending = false;
 let viewIndexCounter = 0;
+let inEventLoop = false;
+
 function batchSetState(viewIndex, fn) {
+  if (inEventLoop) {
+    // If we are in the main event loop, React handles the batching
+    // automatically, so we run the change immediately. Deferring the
+    // update can cause unexpected cursor shifts in input elements,
+    // since the change can't be tied back to the action:
+    // https://github.com/facebook/react/issues/5386
+    fn();
+    return;
+  }
+
   batchesPending[viewIndex] = fn;
   if (!taskPending) {
     taskPending = true;
@@ -55,6 +70,66 @@ function batchSetState(viewIndex, fn) {
 // No need to trigger an update for this view since it has been removed.
 function clearBatch(viewIndex) {
   delete batchesPending[viewIndex];
+}
+
+// this creates and returns a wrapped version of the passed function
+// the cache is necessary to always map the same thing to the same function
+// which makes sure that addEventListener/removeEventListener pairs don't break
+const cache = new WeakMap();
+function wrapFn(fn, wrapper) {
+  if (typeof fn !== 'function') {
+    return fn;
+  }
+  let wrapped = cache.get(fn);
+  if (!wrapped) {
+    wrapped = function(...args) {
+      return wrapper(fn, this, args);
+    };
+    cache.set(fn, wrapped);
+  }
+  return wrapped;
+}
+
+function wrapMethodCallbacks(obj, method, wrapper) {
+  const descriptor = Object.getOwnPropertyDescriptor(obj, method);
+  if (
+    descriptor &&
+    descriptor.writable &&
+    typeof descriptor.value === 'function'
+  ) {
+    obj[method] = new Proxy(descriptor.value, {
+      apply(target, ctx, args) {
+        return Reflect.apply(
+          target,
+          ctx,
+          args.map(f => wrapFn(f, wrapper)),
+        );
+      },
+    });
+  }
+}
+
+// wrapped obj.addEventListener(cb) like callbacks
+function wrapMethodsCallbacks(obj, methods, wrapper) {
+  methods.forEach(method =>
+    wrapMethodCallbacks(obj, method, wrapper),
+  );
+}
+
+// batch addEventListener calls
+if (globalObj.EventTarget) {
+  wrapMethodsCallbacks(
+    EventTarget.prototype,
+    ['addEventListener', 'removeEventListener'],
+    (fn, ctx, args) => {
+      inEventLoop = true;
+      try {
+        fn.apply(ctx, args);
+      } finally {
+        inEventLoop = false;
+      }
+    },
+  );
 }
 
 export function view(Comp) {

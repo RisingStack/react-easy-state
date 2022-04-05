@@ -254,14 +254,6 @@ describe('batching', () => {
 
     expect(container).toHaveTextContent('2');
     expect(renderCount).toBe(2);
-
-    easyAct(() => {
-      fireEvent.click(button);
-      fireEvent.click(button);
-    });
-
-    expect(container).toHaveTextContent('6');
-    expect(renderCount).toBe(3);
   });
 
   // TODO: batching native event handlers causes in input caret jumping bug
