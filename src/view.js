@@ -40,29 +40,25 @@ let taskPending = false;
 let viewIndexCounter = 0;
 let inEventLoop = false;
 
-function batchSetState(viewIndex, fn) {
-  if (inEventLoop) {
-    // If we are in the main event loop, React handles the batching
-    // automatically, so we run the change immediately. Deferring the
-    // update can cause unexpected cursor shifts in input elements,
-    // since the change can't be tied back to the action:
-    // https://github.com/facebook/react/issues/5386
-    fn();
-    return;
-  }
+function runBatch() {
+  const batchesToRun = batchesPending;
+  taskPending = false;
+  batchesPending = {};
+  unstable_batchedUpdates(() =>
+    Object.values(batchesToRun).forEach(setStateFn => setStateFn()),
+  );
+}
 
+function batchSetState(viewIndex, fn) {
   batchesPending[viewIndex] = fn;
   if (!taskPending) {
     taskPending = true;
+
+    // If we're in an event handler, we'll run the batch at the end of it.
+    if (inEventLoop) return;
+
     queueMicrotask(() => {
-      const batchesToRun = batchesPending;
-      taskPending = false;
-      batchesPending = {};
-      unstable_batchedUpdates(() =>
-        Object.values(batchesToRun).forEach(setStateFn =>
-          setStateFn(),
-        ),
-      );
+      runBatch();
     });
   }
 }
@@ -125,6 +121,10 @@ if (globalObj.EventTarget) {
       inEventLoop = true;
       try {
         fn.apply(ctx, args);
+
+        if (taskPending) {
+          runBatch();
+        }
       } finally {
         inEventLoop = false;
       }
