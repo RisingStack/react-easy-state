@@ -50,12 +50,16 @@ function runBatch() {
 }
 
 function batchSetState(viewIndex, fn) {
+  // If we're in an event handler, we're already batching. Just run
+  // the function.
+  if (inEventLoop) {
+    fn();
+    return;
+  }
+
   batchesPending[viewIndex] = fn;
   if (!taskPending) {
     taskPending = true;
-
-    // If we're in an event handler, we'll run the batch at the end of it.
-    if (inEventLoop) return;
 
     queueMicrotask(() => {
       runBatch();
@@ -120,11 +124,33 @@ if (globalObj.EventTarget) {
     (fn, ctx, args) => {
       inEventLoop = true;
       try {
-        fn.apply(ctx, args);
-
-        if (taskPending) {
-          runBatch();
-        }
+        // When react-easy-state changes are triggered from the main
+        // event loop, they must run inside the main event loop,
+        // instead of being batched in the microtask. Otherwise, the
+        // cursor will jump to the end of input elements, since the
+        // change can't be tied back to the action taken.
+        //
+        // React batches changes caused inside an event loop, so we
+        // can rely on the normal React setState batching for React
+        // events. However, it does its batching inside the event
+        // handler. If we then run setState again outside of the
+        // handler, it will not correctly handle the update and will
+        // put the cursor in the wrong place. This only happens in
+        // production builds of React. But since non-React event
+        // handlers don't batch, we can't assume batching will happen
+        // automatically. So we can't defer batching to the end of the
+        // handler, and can't assume batching will happen inside the
+        // handler -- at least without a way to determine if it's a
+        // React event handler, and I haven't found a way to do that.
+        //
+        // Wrapping each handler in unstable_batchedUpdates is a
+        // sledgehammer, but we don't have a better option. It's
+        // possible this could be narrowed to particular event types
+        // that show a problem. Performance is a concern, but
+        // batchedUpdates doesn't seem to do much if it's not needed.
+        unstable_batchedUpdates(() => {
+          fn.apply(ctx, args);
+        });
       } finally {
         inEventLoop = false;
       }
