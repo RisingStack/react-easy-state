@@ -1,4 +1,8 @@
+/* eslint camelcase: 0 */
+
 import { Component, useState, useEffect, useMemo, memo } from 'react';
+// eslint-disable-next-line import/no-unresolved
+import { unstable_batchedUpdates } from 'react-platform';
 import {
   observe,
   unobserve,
@@ -6,7 +10,7 @@ import {
   isObservable,
 } from '@nx-js/observer-util';
 
-import { hasHooks } from './utils';
+import { globalObj, hasHooks } from './utils';
 
 export let isInsideFunctionComponent = false;
 export let isInsideClassComponentRender = false;
@@ -24,6 +28,110 @@ function mapStateToStores(state) {
     .map(raw);
 }
 
+// We batch all updates to the view until the end of the current task. This
+// is to prevent excessive rendering in situations where updates can occur
+// outside of React's built-in batching. e.g. after resolving a promise,
+// in a setTimeout callback, in an event handler.
+//
+// NOTE: This should be revisited after React improves batching for
+// Suspense / etc.
+let batchesPending = {};
+let taskPending = false;
+let viewIndexCounter = 0;
+let inEventLoop = false;
+
+function runBatch() {
+  const batchesToRun = batchesPending;
+  taskPending = false;
+  batchesPending = {};
+  unstable_batchedUpdates(() =>
+    Object.values(batchesToRun).forEach(setStateFn => setStateFn()),
+  );
+}
+
+function batchSetState(viewIndex, fn) {
+  batchesPending[viewIndex] = fn;
+  if (!taskPending) {
+    taskPending = true;
+
+    // If we're in an event handler, we'll run the batch at the end of it.
+    if (inEventLoop) return;
+
+    queueMicrotask(() => {
+      runBatch();
+    });
+  }
+}
+
+// No need to trigger an update for this view since it has been removed.
+function clearBatch(viewIndex) {
+  delete batchesPending[viewIndex];
+}
+
+// this creates and returns a wrapped version of the passed function
+// the cache is necessary to always map the same thing to the same function
+// which makes sure that addEventListener/removeEventListener pairs don't break
+const cache = new WeakMap();
+function wrapFn(fn, wrapper) {
+  if (typeof fn !== 'function') {
+    return fn;
+  }
+  let wrapped = cache.get(fn);
+  if (!wrapped) {
+    wrapped = function(...args) {
+      return wrapper(fn, this, args);
+    };
+    cache.set(fn, wrapped);
+  }
+  return wrapped;
+}
+
+function wrapMethodCallbacks(obj, method, wrapper) {
+  const descriptor = Object.getOwnPropertyDescriptor(obj, method);
+  if (
+    descriptor &&
+    descriptor.writable &&
+    typeof descriptor.value === 'function'
+  ) {
+    obj[method] = new Proxy(descriptor.value, {
+      apply(target, ctx, args) {
+        return Reflect.apply(
+          target,
+          ctx,
+          args.map(f => wrapFn(f, wrapper)),
+        );
+      },
+    });
+  }
+}
+
+// wrapped obj.addEventListener(cb) like callbacks
+function wrapMethodsCallbacks(obj, methods, wrapper) {
+  methods.forEach(method =>
+    wrapMethodCallbacks(obj, method, wrapper),
+  );
+}
+
+// batch addEventListener calls
+if (globalObj.EventTarget) {
+  wrapMethodsCallbacks(
+    EventTarget.prototype,
+    ['addEventListener', 'removeEventListener'],
+    (fn, ctx, args) => {
+      inEventLoop = true;
+      try {
+        fn.apply(ctx, args);
+
+        if (taskPending) {
+          runBatch();
+        }
+      } finally {
+        inEventLoop = false;
+      }
+    },
+  );
+}
+
 export function view(Comp) {
   const isStatelessComp = !(
     Comp.prototype && Comp.prototype.isReactComponent
@@ -34,6 +142,9 @@ export function view(Comp) {
   if (isStatelessComp && hasHooks) {
     // use a hook based reactive wrapper when we can
     ReactiveComp = props => {
+      // Unique ID for each view instance.
+      viewIndexCounter += 1;
+      const viewIndex = viewIndexCounter;
       // use a dummy setState to update the component
       const [, setState] = useState();
       // create a memoized reactive wrapper of the original component (render)
@@ -41,7 +152,10 @@ export function view(Comp) {
       const render = useMemo(
         () =>
           observe(Comp, {
-            scheduler: () => setState({}),
+            scheduler: () =>
+              batchSetState(viewIndex, () => {
+                setState({});
+              }),
             lazy: true,
           }),
         // Adding the original Comp here is necessary to make React Hot Reload work
@@ -51,7 +165,11 @@ export function view(Comp) {
 
       // cleanup the reactive connections after the very last render of the component
       useEffect(() => {
-        return () => unobserve(render);
+        return () => {
+          // We don't need to trigger a render after the component is removed.
+          clearBatch(viewIndex);
+          unobserve(render);
+        };
       }, []);
 
       // the isInsideFunctionComponent flag is used to toggle `store` behavior
@@ -72,12 +190,16 @@ export function view(Comp) {
       constructor(props, context) {
         super(props, context);
 
+        // Unique ID for each class insance.
+        viewIndexCounter += 1;
+        this.viewIndex = viewIndexCounter;
         this.state = this.state || {};
         this.state[COMPONENT] = this;
 
         // create a reactive render for the component
         this.render = observe(this.render, {
-          scheduler: () => this.setState({}),
+          scheduler: () =>
+            batchSetState(this.viewIndex, () => this.setState({})),
           lazy: true,
         });
       }
@@ -137,6 +259,8 @@ export function view(Comp) {
         if (super.componentWillUnmount) {
           super.componentWillUnmount();
         }
+        // We don't need to trigger a render.
+        clearBatch(this.viewIndex);
         // clean up memory used by Easy State
         unobserve(this.render);
       }

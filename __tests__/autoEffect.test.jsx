@@ -7,6 +7,7 @@ import {
   clearEffect,
   // eslint-disable-next-line import/no-unresolved
 } from '@risingstack/react-easy-state';
+import { easyAct } from './testHelpers';
 
 describe('autoEffect', () => {
   afterEach(cleanup);
@@ -44,7 +45,9 @@ describe('autoEffect', () => {
     expect(container).toHaveTextContent('Online Store');
     expect(documentTitle).toBe('Online Store');
 
-    app.name = 'Learning Platform';
+    easyAct(() => {
+      app.name = 'Learning Platform';
+    });
     expect(container).toHaveTextContent('Learning Platform');
     expect(documentTitle).toBe('Learning Platform');
 
@@ -77,7 +80,9 @@ describe('autoEffect', () => {
     expect(container).toHaveTextContent('Awesome Store');
     expect(documentTitle).toBe('Awesome Store');
 
-    app.name = 'Page';
+    easyAct(() => {
+      app.name = 'Page';
+    });
     expect(container).toHaveTextContent('Awesome Page');
     expect(documentTitle).toBe('Awesome Page');
   });

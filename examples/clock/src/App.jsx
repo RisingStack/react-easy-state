@@ -20,7 +20,10 @@ export default view(() => {
       () => (clock.time = getFormattedTime()),
       1000,
     );
-    return () => clearInterval(id);
+    return () => {
+      console.log('unmounting');
+      clearInterval(id);
+    };
   }, []);
 
   return <div>{clock.time}</div>;

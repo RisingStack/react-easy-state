@@ -3,7 +3,6 @@
 // react-platform is set to either react-dom or react-native during test and execution
 // eslint-disable-next-line import/no-unresolved
 import { unstable_batchedUpdates } from 'react-platform';
-import { globalObj } from './utils';
 import scheduler from './scheduler';
 
 // this runs the passed function and delays all re-renders
@@ -45,26 +44,6 @@ function batchFn(fn) {
   return batched;
 }
 
-function batchMethodCallbacks(obj, method) {
-  const descriptor = Object.getOwnPropertyDescriptor(obj, method);
-  if (
-    descriptor &&
-    descriptor.writable &&
-    typeof descriptor.value === 'function'
-  ) {
-    obj[method] = new Proxy(descriptor.value, {
-      apply(target, ctx, args) {
-        return Reflect.apply(target, ctx, args.map(batchFn));
-      },
-    });
-  }
-}
-
-// batched obj.addEventListener(cb) like callbacks
-function batchMethodsCallbacks(obj, methods) {
-  methods.forEach(method => batchMethodCallbacks(obj, method));
-}
-
 function batchMethod(obj, method) {
   const descriptor = Object.getOwnPropertyDescriptor(obj, method);
   if (!descriptor) {
@@ -88,44 +67,3 @@ export function batchMethods(obj, methods) {
   methods.forEach(method => batchMethod(obj, method));
   return obj;
 }
-
-// do a sync batching for the most common task sources
-// this should be removed when React's own batching is improved in the future
-
-// batch timer functions
-batchMethodsCallbacks(globalObj, [
-  'setTimeout',
-  'setInterval',
-  'requestAnimationFrame',
-  'requestIdleCallback',
-]);
-
-if (globalObj.Promise) {
-  batchMethodsCallbacks(Promise.prototype, ['then', 'catch']);
-}
-
-// Event listener batching causes an input caret jumping bug:
-// https://github.com/RisingStack/react-easy-state/issues/92.
-// This part has to be commented out to prevent that bug.
-// React batches setStates in its event listeners anyways
-// so this commenting this part out is not a huge issue.
-
-// batch addEventListener calls
-/* if (globalObj.EventTarget) {
-  batchMethodsCallbacks(EventTarget.prototype, [
-    'addEventListener',
-    'removeEventListener',
-  ]);
-} */
-
-// this batches websocket event handlers
-if (globalObj.WebSocket) {
-  batchMethods(WebSocket.prototype, [
-    'onopen',
-    'onmessage',
-    'onerror',
-    'onclose',
-  ]);
-}
-
-// HTTP event handlers are usually wrapped by Promises, which is covered above

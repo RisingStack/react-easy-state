@@ -2,6 +2,7 @@ import React, { StrictMode } from 'react';
 import { render, cleanup } from '@testing-library/react/pure';
 import sinon from 'sinon';
 import App from '../examples/clock/src/App';
+import { easyFakeTimers, easyRunTimers } from './testHelpers';
 
 describe('Clock App', () => {
   const clock = sinon.useFakeTimers();
@@ -11,6 +12,7 @@ describe('Clock App', () => {
     </StrictMode>,
   );
 
+  easyFakeTimers();
   const clearIntervalSpy = sinon.spy(global, 'clearInterval');
   /*
     Please keep the cleanup in a separate afterAll.
@@ -26,9 +28,11 @@ describe('Clock App', () => {
     expect(container).toHaveTextContent('12:00:00 AM');
 
     clock.tick(2000);
+    easyRunTimers();
     expect(container).toHaveTextContent('12:00:02 AM');
 
     clock.tick(8500);
+    easyRunTimers();
     expect(container).toHaveTextContent('12:00:10 AM');
   });
 

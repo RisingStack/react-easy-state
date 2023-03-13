@@ -5,6 +5,7 @@ import {
   fireEvent,
 } from '@testing-library/react/pure';
 import App from '../examples/todo-mvc/src/App';
+import { easyAct } from './testHelpers';
 
 describe('TodoMVC App', () => {
   const { container } = render(
@@ -19,25 +20,31 @@ describe('TodoMVC App', () => {
 
     const input = container.querySelector('.new-todo');
 
-    fireEvent.keyUp(input, {
-      keyCode: 13,
-      target: { value: 'Test Todo' },
+    easyAct(() => {
+      fireEvent.keyUp(input, {
+        keyCode: 13,
+        target: { value: 'Test Todo' },
+      });
     });
     expect(container).toMatchSnapshot('02. Add Test Todo');
 
-    fireEvent.keyUp(input, {
-      keyCode: 13,
-      target: { value: 'Other Todo' },
+    easyAct(() => {
+      fireEvent.keyUp(input, {
+        keyCode: 13,
+        target: { value: 'Other Todo' },
+      });
     });
     expect(container).toMatchSnapshot('03. Add Other Todo');
 
-    fireEvent.keyUp(input, {
-      keyCode: 27,
-      target: { value: 'Final Tod' },
-    });
-    fireEvent.keyUp(input, {
-      keyCode: 13,
-      target: { value: 'Final Todo' },
+    easyAct(() => {
+      fireEvent.keyUp(input, {
+        keyCode: 27,
+        target: { value: 'Final Tod' },
+      });
+      fireEvent.keyUp(input, {
+        keyCode: 13,
+        target: { value: 'Final Todo' },
+      });
     });
     expect(container).toMatchSnapshot('04. Add Final Todo');
   });
@@ -45,17 +52,23 @@ describe('TodoMVC App', () => {
   test('should toggle todo status', () => {
     const toggles = container.querySelectorAll('.todo-list .toggle');
 
-    fireEvent.click(toggles[0]);
+    easyAct(() => {
+      fireEvent.click(toggles[0]);
+    });
     expect(container).toMatchSnapshot(
       '05. Toggle Test Todo to completed',
     );
 
-    fireEvent.click(toggles[1]);
+    easyAct(() => {
+      fireEvent.click(toggles[1]);
+    });
     expect(container).toMatchSnapshot(
       '06. Toggle Other Todo to completed',
     );
 
-    fireEvent.click(toggles[0]);
+    easyAct(() => {
+      fireEvent.click(toggles[0]);
+    });
     expect(container).toMatchSnapshot(
       '07. Toggle Test Todo to active',
     );
@@ -70,13 +83,19 @@ describe('TodoMVC App', () => {
     );
     const allFilter = container.querySelector('button[value="all"]');
 
-    fireEvent.click(completedFilter);
+    easyAct(() => {
+      fireEvent.click(completedFilter);
+    });
     expect(container).toMatchSnapshot('08. Filter completed');
 
-    fireEvent.click(activeFilter);
+    easyAct(() => {
+      fireEvent.click(activeFilter);
+    });
     expect(container).toMatchSnapshot('09. Filter active');
 
-    fireEvent.click(allFilter);
+    easyAct(() => {
+      fireEvent.click(allFilter);
+    });
     expect(container).toMatchSnapshot('10. Filter all');
   });
 
@@ -85,24 +104,32 @@ describe('TodoMVC App', () => {
       '.clear-completed',
     );
 
-    fireEvent.click(clearCompleted);
+    easyAct(() => {
+      fireEvent.click(clearCompleted);
+    });
     expect(container).toMatchSnapshot('11. Clear completed');
   });
 
   test('should toggle all todo state at once', () => {
     const toggleAll = container.querySelector('.toggle-all');
 
-    fireEvent.click(toggleAll);
+    easyAct(() => {
+      fireEvent.click(toggleAll);
+    });
     expect(container).toMatchSnapshot('12. Toggle all to completed');
 
-    fireEvent.click(toggleAll);
+    easyAct(() => {
+      fireEvent.click(toggleAll);
+    });
     expect(container).toMatchSnapshot('13. Toggle all to active');
   });
 
   test('should delete todo', () => {
     const deleter = container.querySelector('.todo-list .destroy');
 
-    fireEvent.click(deleter);
+    easyAct(() => {
+      fireEvent.click(deleter);
+    });
     expect(container).toMatchSnapshot('14. Delete Test Todo');
   });
 });

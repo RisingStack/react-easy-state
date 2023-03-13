@@ -5,6 +5,7 @@ import {
 } from 'react-native-testing-library';
 import sinon from 'sinon';
 import App from '../examples/native-clock/App';
+import { easyFakeTimers, easyRunTimers } from './testHelpers';
 
 describe('Clock App', () => {
   const clock = sinon.useFakeTimers();
@@ -15,7 +16,7 @@ describe('Clock App', () => {
   );
   // flush the inital didMount effect
   flushMicrotasksQueue();
-
+  easyFakeTimers();
   const clearIntervalSpy = sinon.spy(global, 'clearInterval');
 
   afterAll(() => {
@@ -27,9 +28,11 @@ describe('Clock App', () => {
     expect(getByText('12:00:00 AM')).toBeDefined();
 
     clock.tick(2000);
+    easyRunTimers();
     expect(getByText('12:00:02 AM')).toBeDefined();
 
     clock.tick(8500);
+    easyRunTimers();
     expect(getByText('12:00:10 AM')).toBeDefined();
   });
 

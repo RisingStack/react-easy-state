@@ -12,6 +12,7 @@ import {
   Link,
   withRouter,
 } from 'react-router-dom';
+import { easyAct } from './testHelpers';
 
 describe('withRouter interaction', () => {
   /*
@@ -34,7 +35,9 @@ describe('withRouter interaction', () => {
         </Router>,
       );
       expect(container).toHaveTextContent('0');
-      counter.num += 1;
+      easyAct(() => {
+        counter.num += 1;
+      });
       expect(container).toHaveTextContent('1');
     });
 
@@ -75,13 +78,18 @@ describe('withRouter interaction', () => {
         ),
       );
 
-      const { container } = render(
-        <Router>
-          <MyComp />
-        </Router>,
+      const { container } = easyAct(() =>
+        render(
+          <Router>
+            <MyComp />
+          </Router>,
+        ),
       );
       expect(container).toHaveTextContent('0');
-      counter.num += 1;
+
+      easyAct(() => {
+        counter.num += 1;
+      });
       expect(container).toHaveTextContent('1');
     });
 

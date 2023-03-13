@@ -5,12 +5,15 @@ import {
   fireEvent,
 } from '@testing-library/react/pure';
 import App from '../examples/contacts/src/App';
+import { easyAct } from './testHelpers';
 
 describe('Contacts App', () => {
-  const { container } = render(
-    <StrictMode>
-      <App />
-    </StrictMode>,
+  const { container } = easyAct(() =>
+    render(
+      <StrictMode>
+        <App />
+      </StrictMode>,
+    ),
   );
   afterAll(cleanup);
 
@@ -21,28 +24,37 @@ describe('Contacts App', () => {
     const emailField = container.querySelector('input[name="email"]');
     const createButton = container.querySelector('button');
 
-    fireEvent.change(nameField, {
-      target: { name: 'name', value: 'Test Contact' },
+    easyAct(() => {
+      fireEvent.change(nameField, {
+        target: { name: 'name', value: 'Test Contact' },
+      });
     });
     expect(container).toMatchSnapshot('02. Create Test Contact name');
 
-    fireEvent.change(emailField, {
-      target: { name: 'email', value: 'test.contact@gmail.com' },
+    easyAct(() => {
+      fireEvent.change(emailField, {
+        target: { name: 'email', value: 'test.contact@gmail.com' },
+      });
     });
     expect(container).toMatchSnapshot(
       '03. Create Test Contact email',
     );
 
-    fireEvent.click(createButton);
+    easyAct(() => {
+      fireEvent.click(createButton);
+    });
+
     expect(container).toMatchSnapshot('04. Add Test Contact');
 
-    fireEvent.change(nameField, {
-      target: { name: 'name', value: '' },
+    easyAct(() => {
+      fireEvent.change(nameField, {
+        target: { name: 'name', value: '' },
+      });
+      fireEvent.change(emailField, {
+        target: { name: 'email', value: '' },
+      });
+      fireEvent.click(createButton);
     });
-    fireEvent.change(emailField, {
-      target: { name: 'email', value: '' },
-    });
-    fireEvent.click(createButton);
     expect(container).toMatchSnapshot('05. Add Placeholder Contact');
   });
 
@@ -54,7 +66,9 @@ describe('Contacts App', () => {
     display = container.querySelector('.contact-display');
     editButton = display.querySelector('.zmdi-edit');
 
-    fireEvent.click(editButton);
+    easyAct(() => {
+      fireEvent.click(editButton);
+    });
     expect(container).toMatchSnapshot(
       '06. Switch Test Contact to Edit Mode',
     );
@@ -63,18 +77,24 @@ describe('Contacts App', () => {
     const nameField = editor.querySelector('input[name="name"]');
     const cancelButton = editor.querySelector('.zmdi-close');
 
-    fireEvent.change(nameField, {
-      target: { name: 'name', value: 'Edited Test Contact' },
+    easyAct(() => {
+      fireEvent.change(nameField, {
+        target: { name: 'name', value: 'Edited Test Contact' },
+      });
     });
     expect(container).toMatchSnapshot('07. Edit Test Contact name');
 
-    fireEvent.click(cancelButton);
+    easyAct(() => {
+      fireEvent.click(cancelButton);
+    });
     expect(container).toMatchSnapshot('08. Cancel Test Contact edit');
 
     display = container.querySelector('.contact-display');
     editButton = display.querySelector('.zmdi-edit');
 
-    fireEvent.click(editButton);
+    easyAct(() => {
+      fireEvent.click(editButton);
+    });
     expect(container).toMatchSnapshot(
       '09. Switch Test Contact to edit Mode',
     );
@@ -83,15 +103,19 @@ describe('Contacts App', () => {
     const emailField = editor.querySelector('input[name="email"]');
     const saveButton = editor.querySelector('.zmdi-save');
 
-    fireEvent.change(emailField, {
-      target: {
-        name: 'email',
-        value: 'test.contact.edited@gmail.com',
-      },
+    easyAct(() => {
+      fireEvent.change(emailField, {
+        target: {
+          name: 'email',
+          value: 'test.contact.edited@gmail.com',
+        },
+      });
     });
     expect(container).toMatchSnapshot('10. Edit Test Contact email');
 
-    fireEvent.click(saveButton);
+    easyAct(() => {
+      fireEvent.click(saveButton);
+    });
     expect(container).toMatchSnapshot('11. Save Test Contact edit');
   });
 
@@ -100,7 +124,9 @@ describe('Contacts App', () => {
       '.contact-display .zmdi-delete',
     )[1];
 
-    fireEvent.click(deleteButton);
+    easyAct(() => {
+      fireEvent.click(deleteButton);
+    });
     expect(container).toMatchSnapshot(
       '12. Delete Placeholder Contact',
     );
@@ -109,7 +135,9 @@ describe('Contacts App', () => {
       '.contact-display .zmdi-delete',
     );
 
-    fireEvent.click(deleteButton);
+    easyAct(() => {
+      fireEvent.click(deleteButton);
+    });
     expect(container).toMatchSnapshot('13. Delete Test Contact');
   });
 });
